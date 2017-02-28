@@ -1,0 +1,2 @@
+Host=github.com
+ProxyCommand=socat - PROXY:10.116.16.3:%h:%p,proxyport=3128,proxyauth=haund:fpttoshiba
