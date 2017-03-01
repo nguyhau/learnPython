@@ -1,0 +1,263 @@
+1. Kerneld consists of two components:
++ sending request to the daemon requesting a module for a certain task
++ A user-space daemon that can figure out what module must be loaded to fulfill the request from the kernel
+# /etc/rc.d/rc.S -> /etc/rc.d/rc.sysinit.-> 
+2. Manage kernel module: (device driver, network driver, file system, ..)
++ modprobe (/etc/conf.modules)
++ insmod
++ lsmod: list all currently loaded modules
++ depmod -a: build a list of all available modules and analyzes their inter-dependencies
++ genksysm
+The requests that the kerneld daemon gets from kernel: 
++ block-device driver
++ character-device driver 
++ binary format 
++ tty line discripline 
++ filesystem
++ network device 
++ network service 
++ network protocol
+
+//===========================================
+At kernel initialization time, there is an absolutely minimal filesystem registered, called rootfs. The code that implements this filesystem can be found in fs/ramfs/inode.c, which also happens to contain the code for the ramfs filesystem. rootfs is basically identical to ramfs, except for the specification of the MS_NOUSER flag. This is interpreted by the routine graft_tree in fs/namespace.c, and I think it prevents userland processes doing their own mounts of rootfs
+
+// check mount device: http://unix.stackexchange.com/questions/24182/how-to-get-the-complete-and-exact-list-of-mounted-filesystems-in-linux
+1. df -h
+2. /proc/mounts
+// check partition
+-fdisk -l <device> /dev/hda.
+//
+
+/**********************************
+ * citrix
+ **********************************/
+ t0533950:Tsdv2016
+ t2364950:Abcd1234
+/**********************************
+ * vmware
+ **********************************/ 
+ xdesktopuser1@training:Tdsv#2015
+ 
+// Enable webcam
+ go to 
+ Multimedia support:
+ MEDIA_SUPPORT
+ Media USB Adapter:
+ MEDIA_USB_SUPPORT
+ Camera/video grabber support:
+ MEDIA_CAMERA_SUPPORT
+ VIDEO_V4L2
+ USB Video Class:
+ USB_VIDEO_CLASS
+ 
+/************************************************
+ * Enable for a device (example for USB)
+ ************************************************/ 
+ 1. find vendor id and product id 
+  Use "lsusb" command to query the connected USB device -> VendorID:ProductID
+  or use 
+  lsusb -v | grep -E '\<(Bus|iProduct|bDeviceClass|bDeviceProtocol)' 2>/dev/null
+  for some other information 
+  (lsusb get from usbutils package)
+  Use dmesg (device message which enable from kernel)
+ 2. how-to-find-unknown-device-drivers-by-their-vendor-device-id/
+ 
+/* Get all parent processes and all subprocesses */ 
+pstree -p -s PID
+ 
+ 
+/* Show description of a command */
+man -f command.
+/* Check a package */
+dpkg -L package name
+/* */
+sudo fdisk -l
+/**********************************************************
+ * kernel package
+ **********************************************************/
+ Acl: administrator control list 
+ Attr: administrator extend attribute 
+ Autoconf: 
+ Automake 
+ Bash
+ Bc: based calculator 
+ Binutils: Binary utility  
+ Bison: generate and parser 
+ Bzip 
+ Check : unit test frame work  
+ Coreutils: Core utility: view, edit, list, ...
+ DejaGNU
+ Eudev: package contains programs for dynamic creation of device nodes.
+ E2fsprogs: package contains the utilities for handling the ext2 file system.
+ Expat: XML parser library in C.
+ Expect: is tool for automating interactive applications such as telnet, ftp, passwd, fsck, rlogin, ..
+ File : package contains a utility for deterniming the type of a given file or files.
+ Findutils: package contains programs to find files.
+ Gawk: package contains programs for manipulating text files.
+ Glibc: package contains the main C library.
+ GDBM: package contains the BUN Database Manager.
+ Grep: package contains programs for searching through files.
+ GRUB: Gran Unified Bootloader, 
+ Kbd: package contains key-table files, console fonts, and keyboard utilities.
+ Kmod: package contains libraries and utilities for loading kernel modules.
+ LFS-Bootscripts package contains a set of scripts to start/stop the LFS system at bootup/shutdown.
+ Libtool: package contains the GNU generic library support script.
+ pkg-config: package contains a tool for passing the include path and library paths to build tools during the configure and make file execution.
+ Procps-ng: package contains programs for monitoring processes.
+ Sysvinit: package contains programs for controlling the startup, running, and shutdown of the system.
+ Coreutils: package contains utilities for showing and setting the basic system characteristics.
+ /***************************************************
+  * fstab
+  ***************************************************/
+  # <file system>         <mount point>   <type>  <options>       <dump>  <pass>
+   proc                    /proc           proc    defaults        0       0
+   sysfs                   /sys            sysfs   defaults        0       0
+   tmpfs                   /dev/shm        tmpfs   defaults        0       0
+   devpts                  /dev/pts        devpts  defaults        0       0
+
+ /*********************************************************************
+  *
+  *********************************************************************/
+  export HOME=/root; \
+ 79         /etc/init.d/udev start; \
+ 80         /etc/init.d/dev_install.sh; \
+ 81         /etc/init.d/pango_modules.sh; \
+ 82         /etc/init.d/acpid start; \
+ 83         /etc/init.d/dbus start; \
+ 84         /etc/init.d/synaptics-dbus start; \
+ 85         ./var/tmp/linuxreggen; \
+ 86         rm SynPD.inf; \
+ 87         Touchpad_ini; \
+ 88         start-pulse; \
+ 89         setPcm.sh; \
+ 90         amixer set Master 100% unmute; \
+ 91         amixer set Capture 100% cap; \
+ 92         hwclock --hctosys --localtime; \
+ 93         hwclock --systohc --localtime; \
+ 94         locale-gen; \
+ 95         save_power.sh; \
+ 96         startx
+
+ udev: a device manage for the Linux kernel.
+ acpid: designed to notify user-space programs of ACPI event.(started during the system boot, and will run as background process. It will open an events file and attempt to read whole lines: /proc/acpi/event.) (ACPI: Advanced Configuration and Power Interface)
+ dbus: is message bus system that provides an easy way for inter-process communication. ()
+ 
+ synaptics-dbus: newd evdev and synaptics as input devices (touchpad)
+ 
+ ///////////////////////////////////////////////////
+ sed -i '/DontVTSwitch/c\#       Option \"DontVTSwitch\" \"true\"' /etc/X11/xorg.conf; \
+ sed -i '/xterm/c\key \"Alt+Ctrl+t\"                        xterm' /usr/share/icewm/keys; \
+ 
+ . Indicator: Monitor panel, Network, Other, TouchPad
+ VGA&HDMI
+ luyen1.tranminh@toshiba.co.jp
+ Abcd1234
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ loadkmap < /etc/keymaps/..
+ 
+ 
+ GMT: Greenwich MEan Time 
+ UTC: Coordinated Universal Time 
+ 
+ /usr/share/zoneinfo/
+  /etc/sysconfig/clock
+  hwclock --utc --systohc 
+  hwclock 
+ ~/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-tzcs/controlpanel/controlpanel
+~/TZCS/build-bigcore-citrix/tmp/work/x86_64-debian-linux/busybox/git-r0deb0/git/coreutils
+~/TZCS/poky/meta-tzcs/meta-common/recipes-tzcs/tzcslib/files/tzcslib
+
+IOCTL_TVALZ_GHCI,
+
+    localtime_r(&ts.tv_sec, &tm_time);
+    tzset();
+    tm_time = tm_time - timezone; 
+    
+    
+~/TZCS/build-bigcore-citrix/tmp/work/x86_64-debian-linux/controlpanel/1.0-r0/src/    
+sys/time.h
+
+typedef long time_t;
+struct timeval{
+    time_t   tv_sec;
+    long     tv_nsec;
+}
+struct tm{
+        int tm_sec;
+        int tm_min;
+        int tm_hour;
+        int tm_mday;
+        int tm_mon;
+        int tm_year;        // from 1900
+        int tm_wday;        //0->6: Sunday -> Saturday
+        int tm_yeady;
+        int tm_isdst;
+    //
+        long tm_gmtoff;
+        const char *tm_zone;        
+    //
+   } 
+ Get current time of day: 
+    time_t t;
+    printf ("%ld", (long) time(&t));
+    
+    struct timeval tv;
+    int ret;
+    ret = gettimeofday(&tv, NULL);
+    
+ Set time: (struct timezone *tz)
+    time_t t=2;
+    ret = stime(&t);
+    if (ret)
+        perror("stime");
+        
+    struct timeval tv = { .tv_sec = 111,
+                          . tv_usec = 112
+                        };
+    int ret;
+    ret = settimeofday(&tv, NULL)
+    if (ret)
+        perror("stime");
+        
+  Convert time to string: 
+    char* asctime (const struct tm *tm)
+    char* asctime_r (const struct tm *tm, char *buf) //buf must be at least 26 characters in length
+    char * ctime(const time_t *timep): convert to string from time_t 
+    char * ctime_r(const time_t *timep, char *buf)
+    
+   time_t mktime(struct tm *tm): convert to time_t from struct tm 
+   struct tm * gmtime (const time_t * timep): convert time_t to struct tm 
+   struct tm * localtime (const time_t *timep): convert time_t to struct tm (used user's time zone) : it call tzset() and initializes the time zozne.
+   
+   
+tzset function initializes the tzname variable from the value of the TZ environment variable.
+   
+   
+   double difftime(time_t time1, time_t time0): returns the number of seconds that have elapsed between two time_t
+   
+   
+/*************************************************************************************
+ *   add package : tzdata
+ *************************************************************************************/   
+ /** timezone list **/
+ ~/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-tzcs/controlpanel/controlpanel/resource/timezonelist
+ /****/
+ 1. src poky
+   - recipe: ~/TZCS/poky/meta/recipes-extended/tzdata$
+     -> update new recipe file, update package for tzdata.
+   
+ 2. build  
+   list all package: ~/TZCS/build-bigcore-citrix/tmp/work/all-debian-linux/tzdata/2013i-r0/packages-split$
+ 3. add package  
+   - add package to citrix: ~/TZCS/poky/meta-tzcs/meta-intel-vdi-citrix/recipes-core$ vi packagegroups/packagegroup-base-intel-vdi.bbappend   
+   - add package to citrix&vmware ~/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-core/packagegroups$ vi packagegroup-base-intel-vdi.bb
+   
+   

@@ -1,0 +1,110 @@
+/** Start-app-**/
+nguyhau@Server:~/TZCS/poky/meta-tzcs/meta-intel-vdi-citrix/recipes-core/images/files/init.d
+nguyhau@Server:~/TZCS/poky/meta-tzcs/meta-common/recipes-tzcs/acpid/acpid
+
+
+/*****/
+1. src file: ~/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-tzcs/controlpanel
+    .
+    ├── controlpanel
+    │   ├── resource
+    │   │   ├── logview.png
+    │   │   ├── timezonelist
+    │   │   ├── unity-datetime-panel.png
+    │   │   └── unity-display-panel.png
+    │   └── src
+    │       ├── ExecDisplay
+    │       ├── ExecEula
+    │       ├── ExecTimeZone
+    │       ├── TzcsControlPanelMain.c
+    │       └── TzcsCPTimeZone.c
+    └── controlpanel_1.0.bb
+
+
+2. recipe file:
+    DESCRIPTION = "Control Panel to EULA, Timezone, Display Settings"
+    SECTION = "util"
+    LICENSE = "Proprietary"
+    LIC_FILES_CHKSUM = "file://src/TzcsControlPanelMain.c;beginline=1;endline=2;md5=a6a03c100c94329b0ecd5964aa6be70d"
+    PR = "r0"
+        SRC_URI = "file://src/TzcsControlPanelMain.c \
+            file://src/TzcsCPTimeZone.c \
+            file://src/ExecDisplay \
+            file://src/ExecEula \
+            file://src/ExecTimeZone \
+            file://resource/* \
+            "   
+    
+    DEPENDS = "gtk+ tzcslib"
+    RDEPENDS_${PN} = "gtk+"
+    S = "${WORKDIR}"
+    
+    inherit pkgconfig
+    
+    do_compile() {
+            cd ${S}/src
+            ${CC} TzcsControlPanelMain.c -o TzcsControlPanelMain `pkg-config --cflags --libs gtk+-2.0` 
+            // `pkg-config --cflags --libs gtk+-2.0` to search link to lib gtk+-2.0
+            ${CC} TzcsCPTimeZone.c -o TzcsCPTimeZone -ltzcs `pkg-config --cflags --libs gtk+-2.0`
+    }
+    
+    do_install() {
+            install -d ${D}${bindir}
+            install -m 0755 ${S}/src/TzcsControlPanelMain ${D}${bindir}/TzcsControlPanelMain
+            install -m 0755 ${S}/src/TzcsCPTimeZone ${D}${bindir}/TzcsCPTimeZone
+            install -m 0755 ${S}/src/ExecDisplay ${D}${bindir}/ExecDisplay
+            install -m 0755 ${S}/src/ExecEula ${D}${bindir}/ExecEula
+            install -m 0755 ${S}/src/ExecTimeZone ${D}${bindir}/ExecTimeZone
+            install -d ${D}/usr/share/${PN}
+            cp -r ${S}/resource ${D}/usr/share/${PN}
+    }
+
+3. register to package group: ~/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-core/packagegroups$packagegroup-base-intel-vdi.bb
+
+4. Call by build big core: bitbake core-image-base
+~/TZCS/poky/meta-tzcs$
+                ├──/meta-intel-wifi/recipes-core/images/core-image-base.bbappend
+                ├──/meta-intel-vdi-common/recipes-core/packagegroups/packagegroup-base-intel-vdi.bb
+                ├──/meta-intel-vdi-vmware/recipes-core
+                │                                     ├──/images/core-image-base.bbappend (IMAGE_INSTALL += "packagegroup-base-intel-vdi" )
+                │                                     ├──/ packagegroups/packagegroup-base-intel-vdi.bbappend
+                ├──/meta-intel-vdi-citrix/recipes-core
+                                                      ├──/images/core-image-base.bbappend (IMAGE_INSTALL += "packagegroup-base-intel-vdi"  )
+                                                      ├──/packagegroups/packagegroup-base-intel-vdi.bbappend  
+                
+5. Check package in core-image-base:
+ ~/TZCS/build-bigcore-citrix/tmp/work/intel-debian-linux/core-image-base/1.0-r0$ cat installed_pkgs.txt    
+6. other 
+ ~/TZCS/poky/meta-tzcs$ vi meta-intel-vdi-citrix/recipes-core/images/core-image-base.bbappend (contain PROVIDES += "core-image-base-citrix")
+ /TZCS/poky/meta-tzcs$ vi meta-intel-vdi-citrix/recipes-core/images/core-image-base.bbappend 
+/*****************************************************************
+ *  improve Control panel 
+ *****************************************************************/
+ Fn+F2 to open Control panel.-> Switch Eula, ExecDisplay, Timezone.
+ Adjust Display position: /usr/share/icewm/winoptions. (xprop)
+/*
+ * startx: https://www.debian.org/doc/manuals/debian-reference/ch07.en.html
+ * http://www.danzig.jct.ac.il/tcp-ip-lab/ibm-tutorial/3376fm.html
+ * https://www.x.org/wiki/guide/concepts/
+ *********************************/
+ PARALLEL_MAKE -> parallel build.
+ 
+ old: 137328590 Byte.
+ new: 137433747 Byte.
+ 
+ 
+ 
+ http://www.makeuseof.com/tag/choose-switch-linux-display-managers/
+ check DESKTOP_SESSION: env|grep DESKTOP_SESSION: http://askubuntu.com/questions/125062/how-can-i-find-which-desktop-enviroment-i-am-using
+ 
+ 
+ event=video/brightnessdown
+ action=/etc/acpi/handlers/bl -
+
+ event=video/brightnessup
+ action=/etc/acpi/handlers/bl +
+ 
+ event=button/battery
+ action=/etc/acpi/handlers/license
+
+http://www.iconarchive.com/search?q=info

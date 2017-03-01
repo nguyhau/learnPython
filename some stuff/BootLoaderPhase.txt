@@ -1,0 +1,18 @@
+/* 1. Boot Loader Phase */
+- Hardware Initialization 
+    1. Configuring the CPU speed
+    2. Memory initialization, such as setting up the registers, clearing the memory,
+    and determining the size of the onboard memory
+    3. Turning on the caches
+    4. Setting up the serial port for the boot console
+    5. Doing the hardware diagnostics or the POST (Power On Self-Test diagnostics)
+- Downloading Kernel Image and Initial Ram Disk: 
+    1. Read ELF header of Kernel Image
+    2. Load kernel image into memory
+    3. Load image of initial Ram Disk into memory
+- Setting Up Argument
+    The boot loader has to set up a memory area for argument passing, initialize it with the required data
+    structures (that can be identified by the Linux kernel), and then fill them up with the required values.
+- Jumping to Kernel Entry Point
+    The kernel entry point is decided by the linker script when building the kernel
+    Once the boot loader jumps to the kernel entry point, its job is done and it is of no use.

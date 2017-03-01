@@ -1,0 +1,129 @@
+/*======================================= Write Recipe ===========================================*/
+/**************************************************************
+ * Fetch source 
+ *************************************************************/
+/* IF specifying source is from an SCM */
+  SRCREV = "d6918c8832793b4205ed3bfede78c2f915c23385"  //
+  PR = "r6"
+  PV = "1.0.5+git${SRCPV}"
+ /****** End *******************/
+
+SRC_URI = "git://git.kernel.dk/blktrace.git \   /* get from repository */
+            file://ldflags.patch"               /* get from local */
+/* Provide checksum method if need */            
+  SRC_URI[tarball.md5sum] = "b1e6309e8331e0f4e6efd311c2d97fa8"
+  SRC_URI[tarball.sha256sum] = "7f7d9f60b7766b852881d40b8ff91d8e39fccb0d1d913102a5c75a2dbb52332d"
+ /******* End ******/  
+ 
+/**************************************************************
+ * LICENSING
+ *************************************************************/
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=xxx"
+ 
+/**************************************************************
+ * CONFIGURE RECIPE
+ *************************************************************/ 
+ inherit autotools cmake
+ /* Add DEPENDS, 
+    RDEPENDS    
+    RRECOMMENDS
+    RCONFLICTS
+    RREPLACES */ 
+ 
+/**************************************************************
+ * COMPILATION
+ *************************************************************/
+ do-compile
+ 
+/**************************************************************
+ * INSTALLING
+ *************************************************************/
+ do_install
+ 
+/**************************************************************
+ * ENABLE SERVICE
+ *************************************************************/
+ do_install_append
+ /*  INITSCRIPT_PACKAGES, INITSCRIPT_NAME, and INITSCRIPT_PARAMS */
+ 
+/**************************************************************
+ * PACKING
+ *************************************************************/ 
+ do_package
+ /*  PACKAGES, FILES,  ${WORKDIR} S = "${WORKDIR}/${PN}-${PV}"*/ 
+ 
+/**************************************************************
+ * POST-INSTALLATION SCRIPT
+ *************************************************************/  
+ pkg_postinst_PACKAGENAME () {
+     #!/bin/sh -e
+     # Commands to carry out
+     }
+/*======================================= Example ===========================================*/ 
+/******************** Ex1: Single file ******************/
+SUMMARY = "Simple helloworld application"
+SECTION = "examples"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+SRC_URI = "file://helloworld.c"
+
+S = "${WORKDIR}"
+
+do_compile(){
+                ${CC} helloworld.c -o helloworld
+            }
+
+do_install(){
+                install -d ${D}${bindir}
+                install -m 0755 helloworld ${D}${bindir}
+            }
+            
+/****************** Ex2 Source archive listed in SRC_URI, use autoconf and automake to buil *****************/
+SUMMARY = "GNU Helloworld application"
+SECTION = "examples"
+LICENSE = "GPLv2+"
+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+
+SRC_URI = "${GNU_MIRROR}/hello/hello-${PV}.tar.gz"
+
+inherit autotools gettext
+
+/****************** Ex2 Source archive listed in SRC_URI, use autoconf and automake to buil *****************/
+SUMMARY = "Tools for managing memory technology devices."
+SECTION = "base"
+DEPENDS = "zlib lzo e2fsprogs util-linux"
+HOMEPAGE = "http://www.linux-mtd.infradead.org/"
+LICENSE = "GPLv2+"
+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+               file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
+
+SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=995cfe51b0a3cf32f381c140bf72b21bf91cef1b \
+       file://add-exclusion-to-mkfs-jffs2-git-2.patch"
+
+S = "${WORKDIR}/git/"
+
+PR = "r1"
+
+EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' \
+   'CFLAGS=${CFLAGS} -I${S}/include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
+
+do_install () {
+    oe_runmake install DESTDIR=${D} SBINDIR=${sbindir} MANDIR=${mandir} \
+       INCLUDEDIR=${includedir}
+    install -d ${D}${includedir}/mtd/
+    for f in ${S}/include/mtd/*.h; do
+       install -m 0644 $f ${D}${includedir}/mtd/
+    done
+}
+
+PARALLEL_MAKE = ""
+
+BBCLASSEXTEND = "native"
+
+
+bitbake -ccleanall <recipe name >: clean core image.
+
+find -name ''
+grep -nr "" .

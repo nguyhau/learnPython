@@ -1,0 +1,7 @@
+- Operating system: A group of programs and function that provide basic functionality on a computer; The software that manages access to a system's hardware and other resources.
+- multi-user: The ability of a computer system to allow multiple users to access the system at once.
+- Multi-tasking: The process by which a computer system is able to maintain multiple programs in memory and to switch fast enough to appear as if all programs are being run simultaneously.
+- Event: An occurrence on the system. For the kernel this might be that a device is ready to provide requested data. For X-Windows this can be keystrokes, mouse movement, or resizing windows.
+- Daemon: A process that performs a service for the system. Normally, daemon process are in the background and are writing for something to occur that they must react to.
+- metacharacter: A special character that is replaced by character strings by the shell.
+- Shell: THe program that controls the user interaction with the operating system.

@@ -1,0 +1,103 @@
+1. Setup environment
+The following list shows the required packages by function given a supported Ubuntu or Debian Linux distribution:
+    Essentials: Packages needed to build an image on a headless system:
+         $ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath
+    Graphical and Eclipse Plug-In Extras: Packages recommended if the host system has graphics support or if you are going to use the Eclipse IDE:
+         $ sudo apt-get install libsdl1.2-dev xterm
+    Documentation: Packages needed if you are going to build out the Yocto Project documentation manuals:
+
+         $ sudo apt-get install make xsltproc docbook-utils fop dblatex xmlto
+    ADT Installer Extras: Packages needed if you are going to be using the Application Development Toolkit (ADT) Installer:
+
+         $ sudo apt-get install autoconf automake libtool libglib2.0-dev
+
+2. config:
+    wget: Most source fetching by the OpenEmbedded build system is done by wget and you therefore need to specify the proxy settings in a .wgetrc file
+    
+2. Get start
+         
+Git:
+git clone: remote repository -> local repository ?
+git init: local repository -> work directory.
+git add/rm/mv: work directory -> staged file.
+git status: show working status 
+git checkout: discard change to file, check out a branch to working tree 
+git diff: show changes working status to staged file.
+git commit: record change to local repository.
+git push: update remote repository 
+git fetch:fetch head from repository
+git pull: fetch and merge from repository
+         
+         
+Acquire::http::Proxy "http://haund:fpttoshiba@proxy1.tsdv.com.vn:3128"
+mkdir /run/shm
+adduser haund 
+adduser haund sudo 
+-> gant 
+nano /etc/apt/apt.conf (config proxy: shrek)
+apt-get install vim
+apt install sudo 
+sudo apt-get install qemu
+http://unix.stackexchange.com/questions/108746/i-cant-login-to-the-graphical-interface-after-a-fresh-installation-of-debian
+#poky
+sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat
+
+ git clone https://git.yoctoproject.org/git/poky
+ git://git.yoctoproject.org/poky.git
+ https://git.yoctoproject.org/git/poky
+ cd poky
+ git clone https://github.com/meta-debian/meta-debian.git
+ cd meta-debian
+
+ 
+ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath
+ 
+ 
+ 
+ //
+ bitbake -ccleanall linux-base base-files core-image-base && bitbake linux-base
+ // create account
+ ssh locnp@10.116.41.72
+ sudo adduser haund
+ 
+ // access account 
+ ssh haund@10.116.41.72
+ // copy to boot 
+ scp bzImage-initramfs-intel.bin haund@10.116.41.72:bootX64.efi
+ 
+ scp haund@10.116.41.102:~/* .
+
+ // 
+ vim meta-intel-wifi/recipes-core/base-files/files/.bashrc: comment #tzcs-main
+/*****************************************************************
+ * TZCS
+ *****************************************************************/
+ boot small core.
+ connect network: 1. wifi: ./wifi: select API network, pws 1-> 0
+                  2. wire: udhcpc eth0 
+ get bigcore:
+            - get start script: wget ftp://trungpl:1@10.116.41.72/start-app-citrix.sh
+            - run script sh start-app-citrix.sh
+ change root: export HOME = /root 
+              startx.
+              exit chroot: exit return
+ light https://10.116.41.242/Citrix/StoreWeb               
+ 
+/*****************************************************************
+ * remote desktop
+ *****************************************************************/
+ 1. rdesktop -u -p -d TOSHIBA -f Ip 
+ 2. Quit remote mode: Ctrl Alt Return 
+ 
+ 
+ 
+ 
+///===========
+scp haund@10.116.41.
+
+g h n n m h d n q t 
+scp-> :
+wget -> / 
+
+http://www.howtogeek.com/189974/how-to-share-your-computers-files-with-a-virtual-machine/
+http://www.howtogeek.com/187535/how-to-copy-and-paste-between-a-virtualbox-host-machine-and-a-guest-machine/

@@ -1,0 +1,32 @@
+Layer: 
+ Network Transports-Client-Server Connections
+ X-Window Server-Display Hardware Management (Xorg)
+ Display Manager- Local X Server Startup and User Authentication (gdm, kdm, xdm) Some Display Managers are started in /etc/inittab file, others are started by startup scripts 
+ Session Manager (gnome-session, ksmserver)
+ Window and Compositions Manager-Placement and Controls of Windows (Metacity, kwin,Icewm)
+ Desktop Environment- Application and File Management (Gnome/KDE )
+ Application Clients- User Productivity (OpenOffice, Firefox, ..)
+1. X-Window Component:
+ - X Server.
+ - Window Manager
+ - Desktop Environment.
+ 
+2. X Server: (Xorg) 
+ - Set of graphics display. (Screen)
+ - Track of mouse movements and keystrokes (mouse and keyboard)
+ - Communicate with X-client
+ 
+3. Window Manager (KWM, Icewm, ..) 
+ - Provides windows features: Layout, Menu, boder,..
+ - Mechanism to react with windows event: minimize, maximize, ..
+ - Window and Icon Placement
+ - Virtual Desktop.
+ 
+4. Desktop Environment (Gnome, KDE, Xfce):
+ -  Provides Icon, Folder, toolbar
+ 
+ https://murraysaul.wordpress.com/xwn740-notes/
+ 
+E:\Project\Skerlet\VMs\Debian8.0\Debian8.0
+
+http://www.iconarchive.com/search?q=info

@@ -1,0 +1,37 @@
+1. Scala Variable
+    $msg="Hello"
+2. Array
+    @mylst=(1,2,3,4) -> $msg[0]..$msg[3]
+    @strlst=("one", "two", "three");
+    @cpstr=@strlst[0,2]-> @cpstr=("one", "three");
+    //===========
+    $firt ="one";
+    $second = "two";
+    ($firt,$second) = ($second,$firt) -> swap $firt and $second.
+3. Hash
+    %phone = ("A" => 1,
+              "B" => 2,
+              "C" => 3)
+    -> $phone("A") = 1
+4. I/O
+    print "Hello world\n";
+5. Operation and function
+ String: + concatenate: '.'
+         + x: 
+         + chop -> remove latest character of string
+         + chomp -> remove "\n" at end of string
+         + split
+         + joint
+         + substr
+         + length
+         + ucfirst and lcfirst, uc, lc: upper case and lower case
+  $_: default variable for function.
+  Ex:
+  $_ = "one two three \n"
+  chomp($_);
+  chop($_);
+  @a=split; -> @a =(one, two, three)
+  $pass=joint ":", @a; -> $pass = "one:two:three"
+  @msg = split ":", $pass; -> @msg =(one, two, three)
+  print substr($pass, 8); -> print three
+  

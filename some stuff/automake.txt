@@ -1,0 +1,131 @@
+1. Generating configure.ac
+    + autoscan: create autoscan.log and configure.scan
+    + mv configure.scan configure.ac
+    + vim configure.ac : 
+        + AC_INIT
+        + Integrating the checking (autoconf) part and the building (automake) part: AM_INIT_AUTOMAKE(pippo, 2.6), AC_OUTPUT(Makefile src/Makefile)
+2. Generating suitable Makefiles    
+    + $ vim Makefile.am: AUTOMAKE_OPTIONS, SUBDIRS 
+    + $ vim src/Makefile.am: bin_PROGRAMS = targetbinary1
+                             targetbinary1_SOURCES = targetbinary1.c myheader.h [...]
+3. Making tools output the configure script and Makefile templates
+    + $ aclocal: generates a file aclocal.m4
+    + $ autoheader: create config.h.in file
+    + $ automake --add-missing: for each Makefile.am produces a Makefile.in
+                will add a generic version of the INSTALL file as well as the COPYING file containing the text of the current version of the GNU General Public License existing at the time of this Automake
+                (autoreconf -vfi)
+    + $ autoconf: autom4te.cache and configure 
+4. Use
+    + $ ./configure: for each Makefile requested in AC_OUTPUT(), translate the Makefile.in template for generating the final Makefile
+    + $ make: The target all from the main Makefile will be worked
+    + # make install
+    
+//============================================================================================
+AC_INIT([hellochao], [2.0], [abcd])
+AC_CONFIG_SRCDIR([src/hello.c])
+AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE([foreign])
+
+AC_OUTPUT(Makefile src/Makefile)
+
+  AC_INIT  
+  AC_CONFIG_SRCDIR
+  AC_CONFIG_HEADER
+  AM_INIT_AUTOMAKE
+  
+  AC_PROG_CC
+  AC_OUTPUT
+//====================================
+AC_INIT (package, version, [bug-report], [tarname], [url])
+   The following M4 macros (e.g., AC_PACKAGE_NAME), output variables (e.g., PACKAGE_NAME), and preprocessor symbols (e.g., PACKAGE_NAME), are defined by AC_INIT:
+    AC_PACKAGE_NAME, PACKAGE_NAME
+        Exactly package.
+    AC_PACKAGE_TARNAME, PACKAGE_TARNAME
+        Exactly tarname, possibly generated from package.
+    AC_PACKAGE_VERSION, PACKAGE_VERSION
+        Exactly version.
+    AC_PACKAGE_STRING, PACKAGE_STRING
+        Exactly ‘package version’.
+    AC_PACKAGE_BUGREPORT, PACKAGE_BUGREPORT
+        Exactly bug-report, if one was provided. Typically an email address, or URL to a bug management web page.
+    AC_PACKAGE_URL, PACKAGE_URL
+        Exactly url, if one was provided. If url was empty, but package begins with ‘GNU ’, then this defaults to ‘http://www.gnu.org/software/tarname/’
+AC_CONFIG_SRCDIR (unique-file-in-source-dir): unique-file-in-source-dir is some file that is in the package's source directory;
+
+AC_CONFIG_HEADERS (header ..., [cmds], [init-cmds]): 4.6 Performing Configuration Actions
+AM_INIT_AUTOMAKE([OPTIONS]): Runs many macros required for proper operation of the generated Makefiles
+AC_OUTPUT ([file]..., [extra-cmds], [init-cmds]): Generate config.status. config.status performs all the configuration actions: all the output files (AC_CONFIG_FILES), header files (AC_CONFIG_HEADERS), commands (AC_CONFIG_COMMANDS), links (AC_CONFIG_LINKS), subdirectories to configure (AC_CONFIG_SUBDIRS) are honored. 
+
+    The use of AC_OUTPUT with arguments is deprecated. This obsoleted interface is equivalent to:
+
+              AC_CONFIG_FILES(file...)
+              AC_CONFIG_COMMANDS([default],
+                                 extra-cmds, init-cmds)
+              AC_OUTPUT
+
+//=============================================================
+    your source files --> [autoscan*] --> [configure.scan] --> configure.ac
+     
+     configure.ac --.
+                    |   .------> autoconf* -----> configure
+     [aclocal.m4] --+---+
+                    |   `-----> [autoheader*] --> [config.h.in]
+     [acsite.m4] ---'
+     
+     Makefile.in              
+     
+     
+     [acinclude.m4] --.
+                      |
+     [local macros] --+--> aclocal* --> aclocal.m4
+                      |
+     configure.ac ----'
+     
+     configure.ac --.
+                    +--> automake* --> Makefile.in
+     Makefile.am ---'
+     
+                            .-------------> [config.cache]
+     configure* ------------+-------------> config.log
+                            |
+     [config.h.in] -.       v            .-> [config.h] -.
+                    +--> config.status* -+               +--> make*
+     Makefile.in ---'                    `-> Makefile ---'
+     
+     
+     Autoconf Language:
+     - There must not be any white space between the macro name and the open parenthesis
+     - Arguments should be enclosed within the quote characters ‘[’ and ‘]’, and be separated by commas. This rule applies recursively for every macro call, including macros called from other macros.
+     - Some macros take optional arguments, which this documentation represents as [arg]. You may just leave them empty, or use ‘[]’ to make the emptiness of the argument explicit, or you may simply omit the trailing commas.
+     Standard configure.ac Layout:
+       Autoconf requirements
+       AC_INIT(package, version, bug-report-address)
+       information on the package
+       checks for programs
+       checks for libraries
+       checks for header files
+       checks for types
+       checks for structures
+       checks for compiler characteristics
+       AM_PROG_CC: This is an obsolescent macro that checks that the C compiler supports the -c and -o options together
+       checks for library functions
+       checks for system services
+       AC_CONFIG_FILES([file...])
+       AC_OUTPUT
+       
+       The one real requirement of Automake is that your configure.ac call AM_INIT_AUTOMAKE
+       
+       
+3. Making tools output the configure script and Makefile templates
+    + $ aclocal: 
+            Configuration requirements, configure.ac contain: AM_INIT_AUTOMAKE, AC_CONFIG_FILES, AC_OUTPUT
+            
+    + $ autoheader: create config.h.in file
+    + $ automake --add-missing: for each Makefile.am produces a Makefile.in
+                will add a generic version of the INSTALL file as well as the COPYING file containing the text of the current version of the GNU General Public License existing at the time of this Automake
+                (autoreconf -vfi)
+    + $ autoconf: autom4te.cache and configure 
+4. Use
+    + $ ./configure: for each Makefile requested in AC_OUTPUT(), translate the Makefile.in template for generating the final Makefile
+    + $ make: The target all from the main Makefile will be worked
+    + # make install       

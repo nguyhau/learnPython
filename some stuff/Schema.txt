@@ -1,0 +1,32 @@
+1. Linux from scratch (6 days)
+* Refer:https://www.tutorialspoint.com/operating_system/os_process_scheduling_algorithms.htm
+         http://free-electrons.com/docs/elfs/
+* Product:
+ Summary about Operation system slides, presentation to all members. 
+ Create a Linux from scratch and success to boot by QEMUx86.
+* Milestone: 10/11
+
+2. Booting sequence of a Linux Operation system (2 days)
+* Refer: http://www.thegeekstuff.com/2011/02/linux-boot-process/
+* Product:
+ Create slide about Linux booting sequence Success. Success to install debian6.0 and debian8.0 by a virtual PC (VMWare player or VirtualBox)
+* Milestone: 16/11
+
+3. Create app source code use Autotools (Make.am, configure.ac ) (1 days)
+* Refer: http://mij.oltrelinux.com/devel/autoconf-automake/
+* Product:
+ Create "hello world" C program an using autotools to create Makefile
+* Milestone: 16/11
+
+4. Debian-jessie and build package (4 days)
+* Refer: https://github.com/meta-debian/meta-debian/blob/daisy/README
+         http://www.yoctoproject.org/docs/1.6/bitbake-user-manual/bitbake-user-manual.html
+* Product:
+ Slide introduce poky, meta-debian
+* Milestone: 23/11
+
+5. Git command
+* Refer: Investigate and research from github 
+* Product:
+ Create slide about github command
+* Milestone: 23/11

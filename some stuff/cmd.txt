@@ -1,0 +1,292 @@
+    1  ifconfig
+    2  dpgk --get-selections
+    3  dpkg-query -l
+    4  apt-get -y install vim-nox nano
+    5  sudo apt-get -y install vim-nox nano
+    6  su
+    7  ls
+    8  top
+    9  ifconfig
+   10  sudo ifconfig
+   11  su ifconfig
+   12  ls
+   13  sh autorun.sh 
+   14  sh .VBoxLinuxAdditions.run
+   15  sh VBoxLinuxAdditions.run
+   16  sudo sh VBoxLinuxAdditions.run
+   17  sudo reboot
+   18  su -
+   19  sudo apt-get install dkms
+   20  sudo sh VBoxLinuxAdditions.run
+   21  sudo reboot
+   22  ls
+   23  sudo sh VBoxLinuxAdditions.run
+   24  nano /var/log/VBoxGuestAdditions.log 
+   25  sudo apt-get install gcc
+   26  sudo sh VBoxLinuxAdditions.run
+   27  nano /var/log/VBoxGuestAdditions.log 
+   28  su
+   29  ifconfig
+   30  su
+   31  sudo apt-get gnome
+   32  sudo apt-get install gnome
+   33  sudo apt-get install Cinnamon
+   34  vim /etc/apt/sources.list
+   35  gedit /etc/apt/sources.list
+   36  nano /etc/apt/sources.list
+   37  sudo nano /etc/apt/sources.list
+   38  sudo apt-get install Cinnamon
+   39  reboot
+   40  restart
+   41  shutdown-r now
+   42  ls
+   43  cd Downloads/
+   44  ls
+   45  cd ..
+   46  dpkg --list
+   47  gsettings set org.gnome.desktop.wm.preferences button-layout appmenu:minimize,maximize,close
+   48  sudo apt-get install Advanced Packaging Tool
+   49  gedit /etc/apt/sources.list
+   50  cd /etc/apt
+   51  ls
+   52  ls -l
+   53  chmod 777 sources.list
+   54  sudo chmod 777 sources.list
+   55  ls -l
+   56  sudo chmod 333 sources.list
+   57  ls -l
+   58  gedit sources.list
+   59  sudo gedit sources.list
+   60  sudo apt-get install Advanced Packaging Tool
+   61  cd ..
+   62  cd 
+   63  ls
+   64  cd Downloads/
+   65  ls
+   66  cd /home/
+   67  ls
+   68  cd nguyhau/
+   69  ls
+   70  tar -xvf /home/nguyhau/Downloads/linux-4.8.6.tar.xz -C /home/nguyhau/Downloads/Linux
+   71  cd /home/nguyhau/Downloads/
+   72  mkdir Linux
+   73  ls
+   74  tar -xvf /home/nguyhau/Downloads/linux-4.8.6.tar.xz -C /home/nguyhau/Downloads/Linux
+   75  ps z
+   76  ps a
+   77  rm -r ./Linux/*
+   78  tar -xvf /home/nguyhau/Downloads/linux-4.8.6.tar.xz -C /home/nguyhau/Downloads/Linux
+   79  bg
+   80  rm -r ./Linux/*
+   81  tar -xvf /home/nguyhau/Downloads/linux-4.8.6.tar.xz -C /home/nguyhau/Downloads/Linux
+   82  bg %1
+   83  cd Linux/
+   84  ls
+   85  cd ..
+   86  ls
+   87  tar -xvf linux-4.8.6.tar.xz 
+   88  sudo apt-get install vim
+   89  ls
+   90  cd linux-4.8.6/
+   91  make allnoconfig
+   92  ls
+   93  make xconfig
+   94  make menuconfig
+   95  make menuconfig 
+   96  sudo apt-get install ncurses
+   97  sudo apt-get install libncurses5-dev linbcursesw5-dev
+   98  sudo apt-get install libncurses5-dev
+   99  make menuconfig 
+  100  make
+  101  ls
+  102  cd ar
+  103  cd arch/
+  104  ls
+  105  cd x86
+  106  ls
+  107  cd boot
+  108  ls
+  109  
+  110  cd ../..
+  111  cd ..
+  112  ls
+  113  cd ..
+  114  ls
+  115  dd if=/dev/zero of=rootfs.img bs=1k count=400
+  116  ls
+  117  ls -l
+  118  mkfs.ext2 -i 1024 -F rootfs.img
+  119  ls /etc.fs
+  120  ls /etc/fs
+  121  ls /etc
+  122  ls /sbin
+  123  ls mkfs*
+  124  cd /sbin
+  125  ls mkfs*
+  126  cd /home/nguyhau/Downloads/
+  127  cd linux-4.8.6/
+  128  ls
+  129  cd ..
+  130  ls
+  131  /sbin/mkfs.ext2 i 1024 F rootfs.img 
+  132  ls -l
+  133  /sbin/mkfs.ext2 -i 1024 -F rootfs.img 
+  134  ls
+  135  mkdir Busybox
+  136  tar -xvf busybox-1.25.1.tar.bz2 -C ./Busybox/
+  137  ls ./Busybox/
+  138  tar -xvf busybox-1.25.1.tar.bz2 
+  139  cd busybox-1.25.1/
+  140  make menuconfig
+  141  make
+  142  ls
+  143  make install 
+  144  ls
+  145  cd _install/
+  146  ls
+  147  cd sbin/
+  148  ls
+  149  cd ../..
+  150  cd ..
+  151  ls
+  152  cd linux-4.8.6/arch/x86/boot/
+  153  ls
+  154  cd ../../..
+  155  cd ..
+  156  ls
+  157  mkdir /mnt/rootfs
+  158  sudo mkdir /mnt/rootfs
+  159  ls /mnt
+  160  ls
+  161  mount -o loop rootfs.img /mnt/rootfs/
+  162  sudo mount -o loop rootfs.img /mnt/rootfs/
+  163  sudo rsync -a busybox-1.25.1/_install/ /mnt/rootfs/
+  164  sudo /usr/bin/rsync -a busybox-1.25.1/_install/ /mnt/rootfs/
+  165  which rsync
+  166  ls /usr/bin/
+  167  ls
+  168  tar -xvf rsync-3.1.2.tar.gz 
+  169  ls
+  170  cd rsync-3.1.2/
+  171  groupadd -g 48 rsyncd &&
+  172  ps a
+  173  ls /home/
+  174  ls
+  175  ./configure --prefix=/usr --without-included-zlib &&make
+  176  make install
+  177  sudo make install
+  178  cd ..
+  179  ls
+  180  sudo /usr/bin/rsync -a busybox-1.25.1/_install/ /mnt/rootfs/
+  181  rsync -a busybox-1.25.1/_install/ /mnt/rootfs/
+  182  ls busybox-1.25.1/_install/
+  183  ls /mnt/rootfs
+  184  unmount -help
+  185  unmount -a /mnt/rootfs/
+  186  umount -a /mnt/rootfs/
+  187  sudo umount -a /mnt/rootfs/
+  188  sudo umount -a busybox-1.25.1/
+  189  df -h
+  190  ls
+  191  rm rootfs.img 
+  192  dd if=/dev/zero of=rootfs.img bs=1k count=4000
+  193  mkfs.ext2 ­-i 1024 ­-F rootfs.img
+  194  /sbin/mkfs.ext2 ­-i 1024 ­-F rootfs.img
+  195  /sbin/mkfs.ext2 -i 1024 -F rootfs.img 
+  196  rsync -a busybox-1.25.1/_install/ /mnt/rootfs/
+  197  sudo rsync -a busybox-1.25.1/_install/ /mnt/rootfs/
+  198  chown ­-R root:root /mnt/rootfs/
+  199  chown -R root:root /mnt/rootfs/
+  200  sudo chown -R root:root /mnt/rootfs/
+  201  sync
+  202  sudo apt-get install qemu
+  203  qemu -m 32 -hda rootfs.img -kernel linux-4.8.6/arch/x86/boot/bzImage -append "root=/dev/hda"
+  204  ls /usr/bin/
+  205  which qemu-system-x86_64 
+  206  which qemu
+  207  qemu-system-x86_64 -m 32 -hda rootfs.img -kernel linux-4.8.6/arch/x86/boot/bzImage -append "root=/dev/hda"
+  208  qemu-system-x86_64 -m 32 -hda rootfs.img -kernel linux-4.8.6/arch/x86/boot/bzImage -append "root=/dev/hda console=ttyS0" -nographic
+  209  cd linux-4.8.6/arch/x86/boot/
+  210  ls -l
+  211  cd ../.../
+  212  ls
+  213  cd ../
+  214  ls
+  215  cd ../
+  216  ls
+  217  cd x86_64/
+  218  kls
+  219  ls
+  220  cd boot/
+  221  ls
+  222  ls -l
+  223  lscd ../../..
+  224  cd ../../..
+  225  cd ..
+  226  qemu-system-x86_64 -m 32 -hda rootfs.img -kernel linux-4.8.6/arch/x86/boot/bzImage -append "root=/dev/hda"
+  227  df -h
+  228  qemu-system-x86_64 -m 32 -hda rootfs.img -kernel linux-4.8.6/arch/x86/boot/bzImage -append "root=/dev/sda console=ttyS0" -nographic
+  229  ls
+  230  qemu-system-x86_64 -m 32 -hda rootfs.img -kernel linux-4.8.6/arch/x86/boot/bzImage -append "root=/dev/sda console=ttyS0" -nographic
+  231  qemu-system-x86_64 -hda rootfs.img -kernel linux-4.8.6/arch/x86/boot/bzImage -append "root=/dev/sda console=ttyS0" -nographic
+  232  ls
+  233  mkdir test
+  234  sudo mount rootfs.img test/
+  235  ls -la test/
+  236  ls
+  237  sudo umount test/
+  238* 
+  239  ls -la busybox-1.25.1/_install/
+  240  mkdir test
+  241  sudo mount rootfs.img test/
+  242  sudo cp -rf busybox-1.25.1/_install/* test/
+  243  sudo umount test/
+  244  qemu-system-x86_64 -hda rootfs.img -kernel linux-4.8.6/arch/x86/boot/bzImage -append "root=/dev/sda console=ttyS0" -nographic
+  245  qemu-system-x86_64 -hda rootfs.img -kernel /boot/vmlinuz-3.16.0-4-amd64 -append "root=/dev/sda console=ttyS0" -nographic
+  246  ls
+  247  df -h
+  248  ls
+  249  dd if=/dev/zero of=mfs.img bs=1k count=4000
+  250  sudo apt-get install e2fsprogs
+  251  sudo mkfs.ext4 mfs.img 
+  252  ls
+  253  ls -la test/
+  254  sudo mount mfs.img test/
+  255  cp -rf busybox-1.25.1/_install/* test/
+  256  sudo cp -rf busybox-1.25.1/_install/* test/
+  257  ls -la test/
+  258  qemu-system-x86_64 -hda mfs.img -kernel /boot/vmlinuz-3.16.0-4-amd64 -append "root=/dev/sda console=ttyS0" -nographic
+  259  cd busybox-1.25.1/
+  260  make clean
+  261  make menuconfig
+  262  make
+  263  make install 
+  264  cd ..
+  265  dd if=/dev/zero of=mfs2.img bs=1k count=4000
+  266  sudo mkfs.ext2 mfs2.img 
+  267  df -h
+  268  sudo mount mfs2.img /mnt/
+  269  ls mnt
+  270  ls /mnt
+  271  sudo cp -rf busybox-1.25.1/_install/* /mnt
+  272  qemu-system-x86_64 -hda mfs2.img -kernel /boot/vmlinuz-3.16.0-4-amd64 -append "root=/dev/sda console=ttyS0" -nographic
+  273  qemu-system-i386 -hda mfs2.img -kernel /boot/vmlinuz-3.16.0-4-amd64 -append "root=/dev/sda console=ttyS0" -nographic
+  274  qemu-system-x86_64 -hda mfs2.img -kernel /boot/vmlinuz-3.16.0-4-amd64 -append "root=/dev/sda console=ttyS0" -nographic
+  275  sudo umount /mnt 
+  276  ls
+  277  dd if=/dev/zero of=mfs3.img bs=1k count=4000
+  278  sudo mkfs.ext3 mfs3.img 
+  279  sudo mount mfs3.img /mnt/
+  280  cp -rf busybox-1.25.1/_install/* /mnt/
+  281  sudo cp -rf busybox-1.25.1/_install/* /mnt/
+  282  qemu-system-x86_64 -hda mfs3.img -kernel /boot/vmlinuz-3.16.0-4-amd64 -append "root=/dev/sda console=ttyS0" -nographic
+  283  file mfs3.img 
+  284  ls /mnt
+  285  cd busybox-1.25.1/
+  286  make menuconfig
+  287  ls -l
+  288  cd ..
+  289  ls -l
+  290  file mfs2.img 
+  291  qemu-system-x86_64 -hda mfs2.img -kernel /boot/vmlinuz-3.16.0-4-amd64 -append "root=/dev/sda console=ttyS0" -nographic
+  292  history > cmd.txt

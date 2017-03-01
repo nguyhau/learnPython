@@ -1,0 +1,14 @@
+/* 2. Kernel Start Up */
+- CPU/Platform-Specific Initialization
+- Subsystem Initialization 
+    1. Scheduler initialization
+    2. Memory manager initialization
+    3. Virtual File Systems initialization
+- Driver Initialization 
+- Mount Root File System 
+    1. The initial ram disk: initrd
+    2. Network-based file system using NFS
+    3. Flash-based file system:  the kernel will mount a root file system loaded on
+       initrd. The file systems normally used are romfs and ext2 file systems.
+- Doing Initcall and Freeing Initial Memory 
+- Moving to User Space

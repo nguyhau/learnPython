@@ -1,0 +1,111 @@
+/**************************************************
+ * Invest OS
+ **************************************************/
+ Following are some of important functions of an operating System:
+ 1.Memory Management
+ 2.Processor Management
+ 3.Device Management
+ 4.File Management
+ 5.Other Activities: Security , Control over system performance, Job accounting, Error detecting aids, Coordination between other softwares and users
+/**********
+ * 1.Memory Management
+ ***********/
+ 1.
+ Every computer has some main memory that it uses to hold executing programs. In a very simple operating system, only one program at a time is in memory. To run a second program, the first one has to be removed and the second one placed in memory.
+
+More sophisticated operating systems allow multiple programs to be in memory at the same time. To keep them from interfering with one another (and with the operating system), some kind of protection mechanism is needed. While this mechanism has to be in the hardware, it is controlled by the operating system.
+  
+ 2. Virtual Memory Basics
+
+One interesting aspect about modern operating systems is the fact that they can run programs that require more memory than the system actually has. 
+
+When a program starts, Linux does not load all of it, just the portion it takes to get started. One aspect of virtual memory is keeping parts of the program that are not needed on the hard disk. As the process runs, when it finds it needs other parts of the program, it goes and gets them.If you have more data than physical memory, the system might store it temporarily on the hard disk should it not be needed at the moment.
+- The process of moving data to and from the hard disk like this is called swapping, as the data is "swapped" in and out. 
+
+ /**********
+ * 2.Processor Management
+ ***********/
+ 1. Concept
+ A process is basically a program in execution. Associated with each process is its address space, a list of memory locations from some minimum (usually 0) to some maximum, which the process can read and write. The address space contains the executable program, the program’s data, and its stack. Also associated with each process is some set of registers, including the program counter, stack pointer, and other hardware registers, and all the other information needed to run the program.
+
+ A process is more than just a program. Especially in a multi-user, multi-tasking operating system such as UNIX, there is much more to consider. Each program has a set of data that it uses to do what it needs. Often, this data is not part of the program. For example, if you are using a text editor, the file you are editing is not part of the program on disk, but is part of the process in memory. If someone else were to be using the same editor, both of you would be using the same program. However, each of you would have a different process in memory.
+ 
+  Under UNIX, many different users can be on the system at the same time. In other words, they have processes that are in memory all at the same time. The system needs to keep track of what user is running what process, which terminal the process is running on, and what other resources the process has (such as open files). All of this is part of the process.
+
+With the exception of the init process (PID 1) every process is the child of another process. In general, every process has the potential to be the parent of another process. Perhaps the program is coded in such a way that it will never start another process. However, this is a limitation of that programm and not the operating system.
+
+When you log onto a UNIX system, you usually get access to a command line interpreter, or shell. This takes your input and runs programs for you. If you are familiar with DOS, you already have used a command line interpreter: the COMMAND.COM program. Under DOS, your shell gives you the C:> prompt (or something similar). Under UNIX, the prompt is usually something like $, #, or %. This shell is a process and it belongs to you. That is, the in-memory (or in-core) copy of the shell program belongs to you.
+
+If you were to start up an editor, your file would be loaded and you could edit your file. The interesting thing is that the shell has not gone away. It is still in memory. Unlike what operating systems like DOS do with some programs, the shell remains in memory. The editor is simply another process that belongs to you. Because it was started by the shell, the editor is considered a "child" process of the shell. The shell is the parent process of the editor. (A process has only one parent, but may have many children.)
+
+As you continue to edit, you delete words, insert new lines, sort your text and write it out occasionally to the disk. During this time, the backup is continuing. Someone else on the system may be adding figures to a spreadsheet, while a fourth person may be inputting orders into a database. No one seems to notice that there are other people on the system. For them, it appears as though the processor is working for them alone. 
+ 
+ Application -> Filesystem Driver -> Buffer Cache -> Disk Device Driver -> Physical Device.
+ 
+ When your process is running and you make a request to read from the hard disk, you typically cannot do anything until you have completed the write to the disk. If you haven't completed your time slice yet, it would be a waste not to let someone else have a turn. That's exactly what the system does. If you decide you need access to some resource that the system cannot immediately give to you, you are "put to sleep" to wait. It is said that you are put to sleep waiting on an event, the event being the disk access. This is the second case in which you may not get your full time on the CPU. 
+ 
+ There are certain things that the operating system keeps track of as a process is running. The information the operating system is keeping track of is referred to as the process context. This might be the terminal you are running on or what files you have open. The context even includes the internal state of the CPU, that is, what the content of each register is.
+ 
+ What happens when a process's time slice has run out or for some other reason another process gets to run? If things go right (and they usually do), eventually that process gets a turn again. However, to do things right, the process must be allowed to return to the exact place where it left off. Any difference could result in disaster. 
+ 
+ In addition to user processes, such as shells, text editors, and databases, there are system processes running. These are processes that were started by the system. Several of these deal with managing memory and scheduling turns on the CPU. Others deal with delivering mail, printing, and other tasks that we take for granted. In principle, both of these kinds of processes are identical. However, system processes can run at much higher priorities and therefore run more often than user processes.
+
+Typically a system process of this kind is referred to as a daemon process or background process because they run behind the scenes (i.e. in the background) without user intervention. It is also possible for a user to put one of his or her processes in the background. This is done by using the ampersand (&) metacharacter at the end of the command line. (I'll talk more about metacharacters in the section on shells .)
+
+What normally happens when you enter a command is that the shell will wait for that command to finish before it accepts a new command. By putting a command in the background, the shell does not wait, but rather is ready immediately for the next command. If you wanted, you could put the next command in the background as well.
+ /**********
+ * 3.Device Management
+ ***********/
+ /**********
+ * 4.File Management 
+ ***********/
+ 1. File
+ A file is nothing more than a related set of bytes on disk or other media. These bytes are labeled with a name, which is then used as a means of referring to that set of bytes. 
+ There are three kinds of files with which most people are familiar: programs, text files, and data files. However, on a UNIX system, there are other kinds of files. One of the most common is a 'device file'. These are often referred to as device files or device nodes. Under UNIX, every device is treated as a file.
+ Another kind of file is a 'pipe'. Like a real pipe, stuff goes in one end and out the other.
+ In fact, you can use any character in a file name except for "/" and NULL.
+ To list content of directories, used ls command. ls -a 
+ 2. Directory
+ - Linux, along with other operating systems, enables you to group the files into a directory.
+ - Under Linux, a directory is actually nothing more than a file itself with a special format. It contains the names of the files associated with it and some pointers or other information to tell the system where the data for the file actually reside on the hard disk.
+ - Directories do not actually "contain" the files that are associated with them. Physically (that is, how they exist on the disk), directories are just files in a certain format. The directory structure is imposed on them by the program you use, such as 'ls'.
+
+ - The directories have information that points to where the real files are.  A directory has information: the names of files and their numbers, there is an information node number, or 'inode' number. 
+ - Directories are logical groupings of files. In fact, directories are nothing more than files that have a particular structure imposed on them.
+ One kind of file is a directory. What this kind of file can contain are files and more directories. These, in turn, can contain still more files and directories.
+ 
+ Movement up and down the tree is accomplished by the means of the 'cd' (change directory) command, which is part of your shell. You are not actually moving anywhere. One of the things that the operating system keeps track of within the context of each process is the process's current directory, also referred to as the 'current working directory'. This is merely the name of a directory on the system. Your process has no physical contact with this directory; it is just keeping the directory name in memory. 
+ 
+ Although there can be many files with the same name, each combination of directories and file name must be unique. This is because the operating system refers to every file on the system by this unique combination of directories and file name. 
+ 
+ A situation where both names point to the same physical locations on the hard disk. Because both files are referencing the same bits on the disk, they must therefore be the same file.
+This is accomplished through the concept of a 'link'. Like a chain link, a file link connects two pieces together.
+A file has its 'inode'. This number actually points to a special place on the disk called the 'inode table', with the inode number being the offset into this table. Each entry in this table not only contains the file's physical location on this disk, but the owner of the file, the access permissions, and the number of links, as well as many other things. In the case where the two files are referencing the same entry in the inode table, these are referred to as hard links. A soft link or 'symbolic link' is where a file is created that contains the 'path' of the other file.
+An inode does not contain the name of a file. The name is only contained within the directory. Therefore, it is possible to have multiple directory entries that have the same inode.
+3. Filesystems (partition)
+Under Linux, files and directories are grouped into units called filesystems. A filesystem is a portion of your hard disk that is administered as a single unit. Filesystems exist within a section of the hard disk called a partition. Each hard disk can be broken down into multiple partitions and the filesystem is created within the partition. Each has specific starting and ending points that are managed by the system.
+4. Addition
+ When you create a filesystem under Linux, this is comparable to formatting the partition under DOS. The filesystem structure is laid out and a table is created to tell you where the actual data are located. This table, called the inode table in UNIX, is where almost all the information related to the file is kept.
+
+In an operating system such as Linux, a file is more than just the basic unit of data. Instead, almost everything is either treated as a file or is only accessed through files. For example, to read the contents of a data file, the operating system must access the hard disk. Linux treats the hard disk as if it were a file. It opens it like a file, reads it like a file, and closes it like a file. The same applies to other hardware such as tape drives and printers. Even memory is treated as a file. The files used to access the physical hardware are the device files that I mentioned earlier.
+
+When the operating system wants to access any hardware device, it first opens a file that "points" toward that device (the device node). Based on information it finds in the inode, the operating system determines what kind of device it is and can therefore access it in the proper manner. This includes opening, reading, and closing, just like any other file.
+
+If, for example, you are reading a file from the hard disk, not only do you have the file open that you are reading, but the operating system has opened the file that relates to the filesystem within the partition, the partition on the hard disk, and the hard disk itself (more about these later). Three additional files are opened every time you log in or start a shell. These are the files that relate to input, output, and error messages.
+
+Normally, when you login, you get to a shell prompt. When you type a command on the keyboard and press enter, a moment later something comes onto your screen. If you made a mistake or the program otherwise encountered an error, there will probably be some message on your screen to that effect. The keyboard where you are typing in your data is the input, referred to as standard input (standard in or stdin) and that is where input comes from by default. The program displays a message on your screen, which is the output, referred to as standard output (standard out or stdout). Although it appears on that same screen, the error message appears on standard error (stderr).
+
+Although stdin and stdout appear to be separate physical devices (keyboard and monitor), there is only one connection to the system. This is one of those device files I talked about a moment ago. When you log in, the file (device) is opened for both reading, so you can get data from the keyboard, and writing, so that output can go to the screen and you can see the error messages.
+
+These three concepts (standard in, standard out, and standard error) may be somewhat difficult to understand at first. At this point, it suffices to understand that these represent input, output, and error messages. We'll get into the details a bit later. 
+ /**********
+ * 5.Other Activities:
+ ***********/
+ 
+/**************
+ * Operating System Layers
+ */
+  Conceptually, the Linux operating system is similar to an onion. It consists of many layers, one on top of the other. At the very core is the interface with the hardware. The operating system must know how to communicate with the hardware or nothing can get done. This is the most privileged aspect of the operating system.
+
+Because it needs to access the hardware directly, this part of the operating system is the most powerful as well as the most dangerous. What accesses the hardware is a set of functions within the operating system itself (the kernel) called device drivers. If it does not behave correctly, a device driver has the potential of wiping out data on your hard disk or "crashing" your system. Because a device driver needs to be sure that it has properly completed its task (such as accurately writing or reading from the hard disk), it cannot quit until it has finished. For this reason, once a driver has started, very little can get it to stop. We'll talk about what can stop it in the section on the kernel. 
+ - If you are running Linux with a graphical interface (e.g. the X Windowing System), you have an additional layer. Your shell might start the graphical interface, which then starts the other programs and applications as we discussed.

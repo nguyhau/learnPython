@@ -1,0 +1,107 @@
+1. Declare variable
+ $xinchao = "Hello" --> after '=' if you want used space, the value must contain in "".
+ echo $xinchao.
+2. 
+ echo "msg: $xinchao" -> msg: Hello 
+ echo 'msg: $xinchao' -> msg: $xinchao
+3.
+ $1, $2, $3, ..: parameter from left to right.
+ $0: name application.
+ $*: list of parameter separated by $IFS.
+ $@: list of parameter 
+ Exp:  $IFS="^"
+       set foo bar baam
+       echo "$@" -> foo bar baam 
+       echo "$*" -> foo^bar^baam 
+4. test ([])
+    if test expression          ([expression])
+     then 
+        command
+    fi    
+    + Compare string: =, !=, -n (not null), -z (null). string 1
+    + operation: -eq, -ne, -gt, -ge, -lt, -le
+    + test file: -d, -e, -f, -g, -r, -s, -u, -w, -x
+    + expr: |, &, = ,> , *,... Ex: 
+    x= "12"
+    x=`expr $x +1 ` \\ $(($x +1))
+5.  
+    if []; then 
+        command 
+    elif []; then 
+        command
+    else
+        command 
+    fi 
+
+6.
+    for variable in values
+    do
+        statements
+    done 
+    #!/bin/sh
+    1_tmp="Hello"
+    2_tmp="World"
+    for i in 1 2
+    do 
+        echo ${i}_tmp
+    done
+    //============
+    until condition
+    do 
+        statements
+    done    
+        
+7 I/O:
+   read timeofday -> input value to $timeofday    
+   echo
+   printf 
+8. case
+    case variable in
+        pattern [] ) statements;;
+        pattern [] ) statements;;
+    esac
+    
+    case "$timeofday" in 
+        "yes") echo "Good Morning";;
+        "no") echo "Good Afternoon";;
+    esac
+    
+9. Function 
+    function_name() {
+        statements
+    }
+    
+10. 
+    + break:
+    + continue
+    + : -> null command 
+    + . -> execute
+    + exec : execute outside shell
+    + exit n: exit with error code "n"
+    + export: set a environment variable.ex: export bar="This is bar"; echo "$bar" -> This is bar.
+    + printf: print string with format. Ex: printf "It's %d a.m" 8; -> It's 8 a.m  //format: %s, %d, %c
+    + set: set environment parameter: set This is one -> $1 = "This", $2 = "is", $3 = "one"
+    + $(command): return result of a command or a function. Ex: $(date) -> Wednesday December 14 9:26:22 EST 2016
+    
+11.     
+//=======================================================
+#!/bin/bash
+calculate()
+{
+if [ $1 -eq 1 ]
+then
+        return 1
+else
+        cur=`expr $1 - 1`;
+#       temp=$(calculate $cur );
+#       echo "cur: $cur";
+        calculate $cur;
+        temp=`expr $1 \* $?`;
+#       echo "temp: $temp";
+#       nt=`expr $1 \* $temp`;
+        return $temp
+fi
+}
+calculate $1
+echo $?
+echo $(date)
