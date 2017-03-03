@@ -1,0 +1,112 @@
+/*
+ * Complie
+ **********************************************/
+// Header file
+Both user and system header file are included using the preprocessing directive '#include':
++ #include <file> is used for system header files. It searches for a file named 'file' in a standard list of system directory. You can prepend directories to this list with the '-I dir' option.
++ #include "" is used for header files of your own program. You cans prepend directories to the list of quote directories with the '-iquote ' option.
+* Search Path: the preprocessor looks for header files included by quote form firt relative to the directory of the current file, and then in a preconfigured list of standard system directories. The most commonly-used option is -Idir, which cases dir to be searched after the current directory and ahead of the standard system directories. You can also prevent the preprocessor from searching any of the default system header directories with the -nostdinc option.
+
+Once-Only Headers: If a header file happens to be included twice, the compiler will process its contents twice. This can cause an error and waste time.
+-> The standard way to prevent this is to enclose the entire real contents of the file in a conditionl:
+/* File foo */
+#ifndef FILE_FOO
+#define FILE_FOO 
+...
+#endif /* !FILE_FOO */
+
+A alternatives to Wrapper #ifdef is used '#import' instead of '#include'
+
+Sometimes it is necessary to select one of several different header files to be included into your program:
+#if SYSTEM_1
+# include "system1.h"
+#elsif SYSTEM_2
+# include "system2.h"
+#endif 
+
+/*
+ * Build options
+ */
+ -D name: Predefine name as a macro, with definition 1.
+ -D name=definition.
+ -include file: Process 'file' as if #include "file"
+ -imacros file: Exactly lie -include.
+ -pthread : Define additional macros required for using the POSIX threads library.
+ -g : enables it to be debugged with gdb debugger.
+ -Wall : generate warning about syntactically correct
+ -lX11: to link Xlib graphics.
+ 
+ Environment Variable
+ CPATH
+ C_INCLUDE_PATH
+ CPLUS_INCLUDE_PATH
+ OBJC_INCLUDE_PATH: is a list of directories in which to look for header files.
+ DEPENDENCIES_OUTPUT
+ 
+ 
+ g++ -Wall -g -o myprogram myprogram.cc
+For c programs:
+# gcc -o <output name> <your-source.c>
+
+For c++ programs:
+# g++ <your-source.cpp> -o <output name>
+/***** Inheritance ****/
+ios is input output stream base.
+					  ios
+                       |
+		  +------------+---------------+
+          |							   |
+		  v                            v
+	   istream                      ostream
+        |   |					     |   |      
+		|   +------------+-----------+   |             
+        |                |               |
+        v                v               v
+      istream         iostream        osream
+        |                                |        
+        +----------------+---------------+
+                         |
+					     v					   
+                      fstream 
+mode of open file:
+- ios::app  Opens the file in append mode
+- ios::ate  Opens the file and set the cursor at end of the file
+- ios::binary Opens the file in binary mode
+- ios::in  Opens the file for reading
+- ios::out  Opens the file for writing
+- ios::trunc Opens the file and truncates all the contents from it
+Ex: ifstream in("myimage.jpg",ios::binary);
+https://www.codingunit.com/cplusplus-tutorial-file-io-in-cplusplus-text-and-binary-files
+
+/****** type casting *****/
+http://stackoverflow.com/questions/833034/how-to-convert-const-char-to-char
+1. static_cast: The static_cast can be used for all these types of conversion. Ex
+ int a = 5;
+	int b = 2;
+	double out;
+
+	// typecast a to double
+	out = static_cast<double>(a)/b;
+	
+2. Reinterpret_cast: The reinterpret_cast is used for casts that are not safe:
+    Between integers and pointers
+    Between pointers and pointers
+    Between function-pointers and function-pointers. Ex:
+  char *ptr_my = 0;
+	int *ptr_my_second = reinterpret_cast<int *>(ptr_my);
+	
+3. Const_cast: The only way to cast away the const properties of an object is to use const_cast. Ex:
+	void a(Person* b);
+	int main()
+	{
+		const Person *ptr_my = new Person("Joe");
+		a( const_cast<Person *>(ptr_my) );
+	}
+	
+4. Dynamic_cast: The dynamic_cast can only be used with pointers and references to objects. It makes sure that the result of the type conversion is valid and complete object of the requested class.
+The dynamic_cast statement will work when we cast from derived to base. Ex:
+	class Base_Class { };
+	class Derived_Class: public Base_Class { };	
+	Base_Class a; Base_Class * ptr_a;
+	Derived_Class b; Derived_Class * ptr_b;
+	ptr_a = dynamic_cast<Base_Class *>(&b);
