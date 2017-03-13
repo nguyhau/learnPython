@@ -1,0 +1,27 @@
+1. django-admin startproject newproject
+2. cd newproject
+3. python manage.py startapp polls
+// model
+4. add 'polls.apps.PollsConfig', to INSTALLED_APPS list in settings.py
+5. run 'python manage.py makemigrations polls' to notify configuring change
+6. run 'python manage.py migrate' to apply new DB
+7.1 query data
+>>> from polls.models import Question, Choice
+>>> Question.objects.all()
+7.2 add data
+>>> from django.utils import timezone
+>>> q = Question(question_text="What's new?", pub_date=timezone.now())
+>>> q.save()
+7.3. access data 
+>>> q.question_text
+What's new?
+>>> q.question_text = "What's up?"
+>>> q.save()
+
+//setting speech to text  https://ggulati.wordpress.com/2016/02/24/coding-jarvis-in-python-3-in-2016/
+sudo apt-get install python3-all-dev 
+sudo apt-get install portaudio19-dev 
+pip install pyaudio  
+pip install google-api-python-client 
+pip install monotonic 
+pip install SpeechRecognition  

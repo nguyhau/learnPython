@@ -7,11 +7,11 @@ def loginView(request):
 	if request.method == "POST":
 	   MyLoginForm = LoginForm(request.POST)
 	   if MyLoginForm.is_valid():
-		if MyLoginForm.cleaned_data['username'] == 'admin':
-		  if MyLoginForm.cleaned_data['password'] == '123':
-			username = MyLoginForm.cleaned_data['username']
-			request.session['username'] = username
-			request.session.set_expiry(15);
+		   if MyLoginForm.cleaned_data['username'] == 'admin':
+			   if MyLoginForm.cleaned_data['password'] == '123':
+				   username = MyLoginForm.cleaned_data['username']
+				   request.session['username'] = username
+				   request.session.set_expiry(15);
 	else:
 	   MyLoginForm = LoginForm()
 	return render(request, 'loggedin.html', {'username':username})
@@ -22,7 +22,7 @@ def formView(request):
 	else:
 		return render(reuqest, 'login.html', {})
 def logoutView(request):
-	try: 
+	try:
 		del request.session['username']
 	except:
 		pass
