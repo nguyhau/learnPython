@@ -5,7 +5,8 @@
  #         url(r'^admin/', admin.site.urls),
  # ]
 from django.conf.urls import url
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -17,4 +18,5 @@ urlpatterns = [
     url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
     # ex: /polls/5/vote/
     url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+    # url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
 ]

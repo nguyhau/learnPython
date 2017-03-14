@@ -25,7 +25,8 @@ def results(request, question_id):
 from .crawl import termBrief
 def vote(request, question_id):
     selected_choice = request.POST['FirstName']
-    para = termBrief(selected_choice)
+    # para = termBrief(selected_choice)
+    para = "Welcome "+ selected_choice
     template = loader.get_template('polls/results.html')
     context = {
         'content': para,
