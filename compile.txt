@@ -110,3 +110,48 @@ The dynamic_cast statement will work when we cast from derived to base. Ex:
 	Base_Class a; Base_Class * ptr_a;
 	Derived_Class b; Derived_Class * ptr_b;
 	ptr_a = dynamic_cast<Base_Class *>(&b);
+//=============== git ===========
+git pull discard local changes:
+1. git reset --hard
+2. git pull 
+1*: git clean -xdf:  remove untracked or ignored files or directories
+1**:to keep the local modifications somehow, you'd use stash to hide them away before pulling, then reapply them afterwards: 
+    git stash
+    git pull
+    git stash pop
+//=============== urls ===========
+1. url(regex, view, kwargs=None, name=None)
+    The regex parameter should be a string or gettext_lazy()
+    The view parameter is a view function or the result of as_view() for class-based views. It can also be an include().
+    The kwargs parameter allows you to pass additional arguments to the view function or method
+2. include(module, namespace=None)
+   include(pattern_list)
+   include((pattern_list, app_namespace), namespace=None)    
+        module – URLconf module (or module name)
+        namespace (string) – Instance namespace for the URL entries being included
+        pattern_list – Iterable of django.conf.urls.url() instances
+        app_namespace (string) – Application namespace for the URL entries being included
+        instance_namespace (string) – Instance namespace for the URL entries being included
+//=============== regex in urls and view define ===========
+1.
+    In Python regular expressions, the syntax for named regular-expression groups is (?P<name>pattern), where name is the name of the group and pattern is some pattern to match.    
+    Ex:
+    url(r'^articles/(?P<year>[0-9]{4})/$', views.year_archive), -> the year argument passed to views.year_archive() will be a string,
+        not an integer, even though the [0-9]{4} will only match integer strings.
+
+2. Specifying defaults for view arguments    
+    # URLconf
+    from django.conf.urls import url
+
+    from . import views
+
+    urlpatterns = [
+        url(r'^blog/$', views.page),
+        url(r'^blog/page(?P<num>[0-9]+)/$', views.page),
+    ]
+    ------------------------------------------------
+    # View (in blog/views.py)
+    def page(request, num="1"):
+        # Output the appropriate page of blog entries, according to num.
+        
+    In the above example, both URL patterns point to the same view – views.page – but the first pattern doesn’t capture anything from the URL. If the first pattern matches, the page() function will use its default argument for num, "1". If the second pattern matches, page() will use whatever num value was captured by the regex    
