@@ -1,0 +1,815 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="generator" content="MediaWiki 1.15.1">
+		<meta name="keywords" content="Google Mock Dummy,Google Mock CheetSheet,Google Mock Cookbook">
+		<link rel="stylesheet" type="text/css" href="Google%20Mock%20Dummy%20-%20TsdvWiki_files/CategoryTree.css">
+		<link rel="shortcut icon" href="http://shrek.tsdv.com.vn/favicon.ico">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://shrek.tsdv.com.vn/wiki/opensearch_desc.php" title="TsdvWiki (en)">
+		<link title="Creative Commons" type="application/rdf+xml" href="http://shrek.tsdv.com.vn/wiki/index.php?title=Google_Mock_Dummy&amp;action=creativecommons" rel="meta">
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html">
+		<link rel="alternate" type="application/rss+xml" title="TsdvWiki RSS Feed" href="http://shrek.tsdv.com.vn/wiki/index.php?title=Special:RecentChanges&amp;feed=rss">
+		<link rel="alternate" type="application/atom+xml" title="TsdvWiki Atom Feed" href="http://shrek.tsdv.com.vn/wiki/index.php?title=Special:RecentChanges&amp;feed=atom">
+		<title>Google Mock Dummy - TsdvWiki</title>
+		<link rel="stylesheet" href="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shared.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="Google%20Mock%20Dummy%20-%20TsdvWiki_files/commonPrint.css" type="text/css" media="print">
+		<link rel="stylesheet" href="Google%20Mock%20Dummy%20-%20TsdvWiki_files/main.css" type="text/css" media="screen">
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE50Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE55Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/monobook/IE60Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/monobook/IE70Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="Google%20Mock%20Dummy%20-%20TsdvWiki_files/index_003.css" type="text/css">
+		<link rel="stylesheet" href="Google%20Mock%20Dummy%20-%20TsdvWiki_files/index_002.css" type="text/css" media="print">
+		<link rel="stylesheet" href="Google%20Mock%20Dummy%20-%20TsdvWiki_files/index.css" type="text/css">
+		<link rel="stylesheet" href="Google%20Mock%20Dummy%20-%20TsdvWiki_files/index_004.css" type="text/css">
+		<!--[if lt IE 7]><script type="text/javascript" src="/wiki/skins/common/IEFixes.js?207"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/wiki/skins";
+		var wgArticlePath = "/wiki/index.php/$1";
+		var wgScriptPath = "/wiki";
+		var wgScript = "/wiki/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://shrek.tsdv.com.vn";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Google_Mock_Dummy";
+		var wgTitle = "Google Mock Dummy";
+		var wgAction = "view";
+		var wgArticleId = "413";
+		var wgIsArticle = true;
+		var wgUserName = null;
+		var wgUserGroups = null;
+		var wgUserLanguage = "en";
+		var wgContentLanguage = "en";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = 1705;
+		var wgVersion = "1.15.1";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = ["", ""];
+		var wgDigitTransformTable = ["", ""];
+		var wgMWSuggestTemplate = "http://shrek.tsdv.com.vn/wiki/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest";
+		var wgDBname = "wikidb";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["with suggestions", "no suggestions"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/wikibits.js"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/CategoryTree.js"></script>
+			<script type="text/javascript">
+			var categoryTreeCollapseMsg = "collapse";
+			var categoryTreeExpandMsg = "expand";
+			var categoryTreeCollapseBulletMsg = "[\x3cb\x3e−\x3c/b\x3e]";
+			var categoryTreeExpandBulletMsg = "[\x3cb\x3e+\x3c/b\x3e]";
+			var categoryTreeLoadMsg = "load";
+			var categoryTreeLoadingMsg = "loading…";
+			var categoryTreeNothingFoundMsg = "nothing found";
+			var categoryTreeNoSubcategoriesMsg = "no subcategories";
+			var categoryTreeNoParentCategoriesMsg = "no parent categories";
+			var categoryTreeNoPagesMsg = "no pages or subcategories";
+			var categoryTreeErrorMsg = "Problem loading data.";
+			var categoryTreeRetryMsg = "Please wait a moment and try again.";
+			</script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/ajax.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/mwsuggest.js"></script>
+		<link rel="stylesheet" type="text/css" href="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shCore.css">
+		<link rel="stylesheet" type="text/css" href="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shThemeDefault.css">
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shCore.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushAS3.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushBash.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushCpp.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushCSharp.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushColdFusion.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushCss.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushDelphi.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushDiff.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushErlang.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushGroovy.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushJava.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushJavaFX.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushJScript.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushPerl.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushPhp.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushPlain.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushPowerShell.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushPython.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushRuby.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushScala.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushSql.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushVb.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/shBrushXml.js"></script>
+		<script type="text/javascript">SyntaxHighlighter.all();</script>
+		<script type="text/javascript" src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/index.php"><!-- site js --></script>
+	</head>
+<body class="mediawiki ltr ns-0 ns-subject page-Google_Mock_Dummy skin-monobook">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+				<h1 id="firstHeading" class="firstHeading">Google Mock Dummy</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">From TsdvWiki</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>			<!-- start content -->
+			<table id="toc" class="toc" summary="Contents"><tbody><tr><td><div id="toctitle"><h2>Contents</h2> <span class="toctoggle">[<a id="togglelink" class="internal" href="javascript:toggleToc()">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="#What_Is_Google_C.2B.2B_Mocking_Framework.3F"><span class="tocnumber">1</span> <span class="toctext">What Is Google C++ Mocking Framework?</span></a></li>
+<li class="toclevel-1"><a href="#Why_Google_Mock.3F"><span class="tocnumber">2</span> <span class="toctext">Why Google Mock?</span></a></li>
+<li class="toclevel-1"><a href="#Getting_Started"><span class="tocnumber">3</span> <span class="toctext">Getting Started</span></a></li>
+<li class="toclevel-1"><a href="#A_Case_for_Mock_Turtles"><span class="tocnumber">4</span> <span class="toctext">A Case for Mock Turtles</span></a></li>
+<li class="toclevel-1"><a href="#Writing_the_Mock_Class"><span class="tocnumber">5</span> <span class="toctext">Writing the Mock Class</span></a>
+<ul>
+<li class="toclevel-2"><a href="#How_to_Define_It"><span class="tocnumber">5.1</span> <span class="toctext">How to Define It</span></a></li>
+<li class="toclevel-2"><a href="#Where_to_Put_It"><span class="tocnumber">5.2</span> <span class="toctext">Where to Put It</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Using_Mocks_in_Tests"><span class="tocnumber">6</span> <span class="toctext">Using Mocks in Tests</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Using_Google_Mock_with_Any_Testing_Framework"><span class="tocnumber">6.1</span> <span class="toctext">Using Google Mock with Any Testing Framework</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Setting_Expectations"><span class="tocnumber">7</span> <span class="toctext">Setting Expectations</span></a>
+<ul>
+<li class="toclevel-2"><a href="#General_Syntax"><span class="tocnumber">7.1</span> <span class="toctext">General Syntax</span></a></li>
+<li class="toclevel-2"><a href="#Matchers:_What_Arguments_Do_We_Expect.3F"><span class="tocnumber">7.2</span> <span class="toctext">Matchers: What Arguments Do We Expect?</span></a></li>
+<li class="toclevel-2"><a href="#Cardinalities:_How_Many_Times_Will_It_Be_Called.3F"><span class="tocnumber">7.3</span> <span class="toctext">Cardinalities: How Many Times Will It Be Called?</span></a></li>
+<li class="toclevel-2"><a href="#Actions:_What_Should_It_Do.3F"><span class="tocnumber">7.4</span> <span class="toctext">Actions: What Should It Do?</span></a></li>
+<li class="toclevel-2"><a href="#Using_Multiple_Expectations"><span class="tocnumber">7.5</span> <span class="toctext">Using Multiple Expectations</span></a></li>
+<li class="toclevel-2"><a href="#Ordered_vs_Unordered_Calls"><span class="tocnumber">7.6</span> <span class="toctext">Ordered vs Unordered Calls</span></a></li>
+<li class="toclevel-2"><a href="#All_Expectations_Are_Sticky_.28Unless_Said_Otherwise.29"><span class="tocnumber">7.7</span> <span class="toctext">All Expectations Are Sticky (Unless Said Otherwise)</span></a></li>
+<li class="toclevel-2"><a href="#Uninteresting_Calls"><span class="tocnumber">7.8</span> <span class="toctext">Uninteresting Calls</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#What_Now.3F"><span class="tocnumber">8</span> <span class="toctext">What Now?</span></a></li>
+</ul>
+</td></tr></tbody></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<a name="What_Is_Google_C.2B.2B_Mocking_Framework.3F" id="What_Is_Google_C.2B.2B_Mocking_Framework.3F"></a><h1> <span class="mw-headline"> What Is Google C++ Mocking Framework? </span></h1>
+<p>When you write a prototype or test, often it's not feasible or wise to rely on real objects entirely. A <b>mock object</b>
+ implements the same interface as a real object (so it can be used as 
+one), but lets you specify at run time how it will be used and what it 
+should do (which methods will be called? in which order? how many times?
+ with what arguments? what will they return? etc).
+</p><p><b>Note:</b> It is easy to confuse the term <i>fake objects</i> with mock objects. Fakes and mocks actually mean very different things in the Test-Driven Development (TDD) community:
+</p>
+<ul><li> <b>Fake</b> objects have working implementations, but usually 
+take some shortcut (perhaps to make the operations less expensive), 
+which makes them not suitable for production. An in-memory file system 
+would be an example of a fake.
+</li><li> <b>Mocks</b> are objects pre-programmed with <i>expectations</i>, which form a specification of the calls they are expected to receive.
+</li></ul>
+<p>If all this seems too abstract for you, don't worry - the most 
+important thing to remember is that a mock allows you to check the <i>interaction</i>
+ between itself and code that uses it. The difference between fakes and 
+mocks will become much clearer once you start to use mocks.
+</p><p><b>Google C++ Mocking Framework</b> (or <b>Google Mock</b> for 
+short) is a library (sometimes we also call it a "framework" to make it 
+sound cool) for creating mock classes and using them. It does to C++ 
+what <a href="http://www.jmock.org/" class="external text" title="http://www.jmock.org/" rel="nofollow">jMock</a> and <a href="http://www.easymock.org/" class="external text" title="http://www.easymock.org/" rel="nofollow">EasyMock</a> do to Java.
+</p><p>Using Google Mock involves three basic steps:
+</p>
+<ol><li> Use some simple macros to describe the interface you want to 
+mock, and they will expand to the implementation of your mock class;
+</li><li> Create some mock objects and specify its expectations and behavior using an intuitive syntax;
+</li><li> Exercise code that uses the mock objects. Google Mock will catch any violation of the expectations as soon as it arises.
+</li></ol>
+<a name="Why_Google_Mock.3F" id="Why_Google_Mock.3F"></a><h1> <span class="mw-headline"> Why Google Mock? </span></h1>
+<p>While mock objects help you remove unnecessary dependencies in tests 
+and make them fast and reliable, using mocks manually in C++ is <i>hard</i>:
+</p>
+<ul><li> Someone has to implement the mocks. The job is usually tedious and error-prone. No wonder people go great distance to avoid it.
+</li><li> The quality of those manually written mocks is a bit, uh, 
+unpredictable. You may see some really polished ones, but you may also 
+see some that were hacked up in a hurry and have all sorts of ad hoc 
+restrictions.
+</li><li> The knowledge you gained from using one mock doesn't transfer to the next.
+</li></ul>
+<p>In contrast, Java and Python programmers have some fine mock 
+frameworks, which automate the creation of mocks. As a result, mocking 
+is a proven effective technique and widely adopted practice in those 
+communities. Having the right tool absolutely makes the difference.
+</p><p>Google Mock was built to help C++ programmers. It was inspired by <a href="http://www.jmock.org/" class="external text" title="http://www.jmock.org/" rel="nofollow">jMock</a> and <a href="http://www.easymock.org/" class="external text" title="http://www.easymock.org/" rel="nofollow">EasyMock</a>, but designed with C++'s specifics in mind. It is your friend if any of the following problems is bothering you:
+</p>
+<ul><li> You are stuck with a sub-optimal design and wish you had done 
+more prototyping before it was too late, but prototyping in C++ is by no
+ means "rapid".
+</li><li> Your tests are slow as they depend on too many libraries or use expensive resources (e.g. a database).
+</li><li> Your tests are brittle as some resources they use are unreliable (e.g. the network).
+</li><li> You want to test how your code handles a failure (e.g. a file checksum error), but it's not easy to cause one.
+</li><li> You need to make sure that your module interacts with other 
+modules in the right way, but it's hard to observe the interaction; 
+therefore you resort to observing the side effects at the end of the 
+action, which is awkward at best.
+</li><li> You want to "mock out" your dependencies, except that they 
+don't have mock implementations yet; and, frankly, you aren't thrilled 
+by some of those hand-written mocks.
+</li></ul>
+<p>We encourage you to use Google Mock as:
+</p>
+<ul><li> a <i>design</i> tool, for it lets you experiment with your interface design early and often. More iterations lead to better designs!
+</li><li> a <i>testing</i> tool to cut your tests' outbound dependencies and probe the interaction between your module and its collaborators.
+</li></ul>
+<a name="Getting_Started" id="Getting_Started"></a><h1> <span class="mw-headline"> Getting Started </span></h1>
+<p>Using Google Mock is easy! Inside your C++ source file, just <code>#include</code> <code>"gtest/gtest.h"</code> and <code>"gmock/gmock.h"</code>, and you are ready to go.
+</p>
+<a name="A_Case_for_Mock_Turtles" id="A_Case_for_Mock_Turtles"></a><h1> <span class="mw-headline"> A Case for Mock Turtles </span></h1>
+<p>Let's look at an example. Suppose you are developing a graphics 
+program that relies on a LOGO-like API for drawing. How would you test 
+that it does the right thing? Well, you can run it and compare the 
+screen with a golden screen snapshot, but let's admit it: tests like 
+this are expensive to run and fragile (What if you just upgraded to a 
+shiny new graphics card that has better anti-aliasing? Suddenly you have
+ to update all your golden images.). It would be too painful if all your
+ tests are like this. Fortunately, you learned about Dependency 
+Injection and know the right thing to do: instead of having your 
+application talk to the drawing API directly, wrap the API in an 
+interface (say, <code>Turtle</code>) and code to that interface:
+</p>
+<div><div id="highlighter_97996" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">class</code> <code class="cpp plain">Turtle {</code></div><div class="line number2 index1 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">...</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp plain">~Turtle() {}</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp keyword bold">void</code> <code class="cpp plain">PenUp() = 0;</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp keyword bold">void</code> <code class="cpp plain">PenDown() = 0;</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp keyword bold">void</code> <code class="cpp plain">Forward(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">distance) = 0;</code></div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp keyword bold">void</code> <code class="cpp plain">Turn(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">degrees) = 0;</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp keyword bold">void</code> <code class="cpp plain">GoTo(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">x, </code><code class="cpp color1 bold">int</code> <code class="cpp plain">y) = 0;</code></div><div class="line number9 index8 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp color1 bold">int</code> <code class="cpp plain">GetX() </code><code class="cpp keyword bold">const</code> <code class="cpp plain">= 0;</code></div><div class="line number10 index9 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp color1 bold">int</code> <code class="cpp plain">GetY() </code><code class="cpp keyword bold">const</code> <code class="cpp plain">= 0;</code></div><div class="line number11 index10 alt2"><code class="cpp plain">};</code></div></div></td></tr></tbody></table></div></div>
+<p>(Note that the destructor of <code>Turtle</code> <b>must</b> be virtual, as is the case for <b>all</b>
+ classes you intend to inherit from - otherwise the destructor of the 
+derived class will not be called when you delete an object through a 
+base pointer, and you'll get corrupted program states like memory 
+leaks.)
+</p><p>You can control whether the turtle's movement will leave a trace using <code>PenUp()</code> and <code>PenDown()</code>, and control its movement using <code>Forward()</code>, <code>Turn()</code>, and <code>GoTo()</code>. Finally, <code>GetX()</code> and <code>GetY()</code> tell you the current position of the turtle.
+</p><p>Your program will normally use a real implementation of this 
+interface. In tests, you can use a mock implementation instead. This 
+allows you to easily check what drawing primitives your program is 
+calling, with what arguments, and in which order. Tests written this way
+ are much more robust (they won't break because your new machine does 
+anti-aliasing differently), easier to read and maintain (the intent of a
+ test is expressed in the code, not in some binary images), and run <i>much, much faster</i>.
+</p>
+<a name="Writing_the_Mock_Class" id="Writing_the_Mock_Class"></a><h1> <span class="mw-headline"> Writing the Mock Class </span></h1>
+<p>If you are lucky, the mocks you need to use have already been 
+implemented by some nice people. If, however, you find yourself in the 
+position to write a mock class, relax - Google Mock turns this task into
+ a fun game! (Well, almost.)
+</p>
+<a name="How_to_Define_It" id="How_to_Define_It"></a><h2> <span class="mw-headline"> How to Define It </span></h2>
+<p>Using the <code>Turtle</code> interface as example, here are the simple steps you need to follow:
+</p>
+<ol><li> Derive a class <code>MockTurtle</code> from <code>Turtle</code>.
+</li><li> Take a <i>virtual</i> function of <code>Turtle</code> (while it's possible to <a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_Cookbook" title="Google Mock Cookbook">mock non-virtual methods using templates</a>, it's much more involved). Count how many arguments it has.
+</li><li> In the <code>public:</code> section of the child class, write <code>MOCK_METHODn();</code> (or <code>MOCK_CONST_METHODn();</code> if you are mocking a <code>const</code> method), where <code>n</code> is the number of the arguments; if you counted wrong, shame on you, and a compiler error will tell you so.
+</li><li> Now comes the fun part: you take the function signature, cut-and-paste the <i>function name</i> as the <i>first</i> argument to the macro, and leave what's left as the <i>second</i> argument (in case you're curious, this is the <i>type of the function</i>).
+</li><li> Repeat until all virtual functions you want to mock are done.
+</li></ol>
+<p>After the process, you should have something like:
+</p>
+<div><div id="highlighter_740496" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp preprocessor">#include "gmock/gmock.h"&nbsp; // Brings in Google Mock.</code></div><div class="line number2 index1 alt1"><code class="cpp keyword bold">class</code> <code class="cpp plain">MockTurtle&nbsp;: </code><code class="cpp keyword bold">public</code> <code class="cpp plain">Turtle {</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;</code><code class="cpp keyword bold">public</code><code class="cpp plain">:</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">...</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_METHOD0(PenUp, </code><code class="cpp keyword bold">void</code><code class="cpp plain">());</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_METHOD0(PenDown, </code><code class="cpp keyword bold">void</code><code class="cpp plain">());</code></div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_METHOD1(Forward, </code><code class="cpp keyword bold">void</code><code class="cpp plain">(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">distance));</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_METHOD1(Turn, </code><code class="cpp keyword bold">void</code><code class="cpp plain">(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">degrees));</code></div><div class="line number9 index8 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_METHOD2(GoTo, </code><code class="cpp keyword bold">void</code><code class="cpp plain">(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">x, </code><code class="cpp color1 bold">int</code> <code class="cpp plain">y));</code></div><div class="line number10 index9 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_CONST_METHOD0(GetX, </code><code class="cpp color1 bold">int</code><code class="cpp plain">());</code></div><div class="line number11 index10 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_CONST_METHOD0(GetY, </code><code class="cpp color1 bold">int</code><code class="cpp plain">());</code></div><div class="line number12 index11 alt1"><code class="cpp plain">};</code></div></div></td></tr></tbody></table></div></div>
+<p>You don't need to define these mock methods somewhere else - the <code>MOCK_METHOD*</code>
+ macros will generate the definitions for you. It's that simple! Once 
+you get the hang of it, you can pump out mock classes faster than your 
+source-control system can handle your check-ins.
+</p><p><b>Tip:</b> If even this is too much work for you, you'll find the <code>gmock_gen.py</code> tool in Google Mock's <code>scripts/generator/</code> directory (courtesy of the <a href="http://code.google.com/p/cppclean/" class="external text" title="http://code.google.com/p/cppclean/" rel="nofollow">cppclean</a>
+ project) useful. This command-line tool requires that you have Python 
+2.4 installed. You give it a C++ file and the name of an abstract class 
+defined in it, and it will print the definition of the mock class for 
+you. Due to the complexity of the C++ language, this script may not 
+always work, but it can be quite handy when it does. For more details, 
+read the <b>../scripts/generator/README</b>.
+</p>
+<a name="Where_to_Put_It" id="Where_to_Put_It"></a><h2> <span class="mw-headline"> Where to Put It </span></h2>
+<p>When you define a mock class, you need to decide where to put its definition. Some people put it in a <code>*_test.cc</code>. This is fine when the interface being mocked (say, <code>Foo</code>) is owned by the same person or team. Otherwise, when the owner of <code>Foo</code> changes it, your test could break. (You can't really expect <code>Foo</code>'s maintainer to fix every test that uses <code>Foo</code>, can you?)
+</p><p>So, the rule of thumb is: if you need to mock <code>Foo</code> and it's owned by others, define the mock class in <code>Foo</code>'s package (better, in a <code>testing</code> sub-package such that you can clearly separate production code and testing utilities), and put it in a <code>mock_foo.h</code>. Then everyone can reference <code>mock_foo.h</code> from their tests. If <code>Foo</code> ever changes, there is only one copy of <code>MockFoo</code> to change, and only tests that depend on the changed methods need to be fixed.
+</p><p>Another way to do it: you can introduce a thin layer <code>FooAdaptor</code> on top of <code>Foo</code> and code to this new interface. Since you own <code>FooAdaptor</code>, you can absorb changes in <code>Foo</code>
+ much more easily. While this is more work initially, carefully choosing
+ the adaptor interface can make your code easier to write and more 
+readable (a net win in the long run), as you can choose <code>FooAdaptor</code> to fit your specific domain much better than <code>Foo</code> does.
+</p>
+<a name="Using_Mocks_in_Tests" id="Using_Mocks_in_Tests"></a><h1> <span class="mw-headline"> Using Mocks in Tests </span></h1>
+<p>Once you have a mock class, using it is easy. The typical work flow is:
+</p>
+<ol><li> Import the Google Mock names from the <code>testing</code> 
+namespace such that you can use them unqualified (You only have to do it
+ once per file. Remember that namespaces are a good idea and good for 
+your health.).
+</li><li> Create some mock objects.
+</li><li> Specify your expectations on them (How many times will a method be called? With what arguments? What should it do? etc.).
+</li><li> Exercise some code that uses the mocks; optionally, check the 
+result using Google Test assertions. If a mock method is called more 
+than expected or with wrong arguments, you'll get an error immediately.
+</li><li> When a mock is destructed, Google Mock will automatically check whether all expectations on it have been satisfied.
+</li></ol>
+<p>Here's an example:
+</p>
+<div><div id="highlighter_172150" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp preprocessor">#include "path/to/mock-turtle.h"</code></div><div class="line number2 index1 alt1"><code class="cpp preprocessor">#include "gmock/gmock.h"</code></div><div class="line number3 index2 alt2"><code class="cpp preprocessor">#include "gtest/gtest.h"</code></div><div class="line number4 index3 alt1"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::AtLeast;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// #1</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="cpp plain">TEST(PainterTest, CanDrawSomething) {</code></div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MockTurtle turtle;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// #2</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(turtle, PenDown())&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// #3</code></div><div class="line number9 index8 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.Times(AtLeast(1));</code></div><div class="line number10 index9 alt1">&nbsp;</div><div class="line number11 index10 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">Painter painter(&amp;turtle);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// #4</code></div><div class="line number12 index11 alt1">&nbsp;</div><div class="line number13 index12 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_TRUE(painter.DrawCircle(0, 0, 10));</code></div><div class="line number14 index13 alt1"><code class="cpp plain">}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// #5</code></div><div class="line number15 index14 alt2">&nbsp;</div><div class="line number16 index15 alt1"><code class="cpp color1 bold">int</code> <code class="cpp plain">main(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">argc, </code><code class="cpp color1 bold">char</code><code class="cpp plain">** argv) {</code></div><div class="line number17 index16 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp comments">// The following line must be executed to initialize Google Mock</code></div><div class="line number18 index17 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp comments">// (and Google Test) before running the tests.</code></div><div class="line number19 index18 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">::testing::InitGoogleMock(&amp;argc, argv);</code></div><div class="line number20 index19 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">return</code> <code class="cpp plain">RUN_ALL_TESTS();</code></div><div class="line number21 index20 alt2"><code class="cpp plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>As you might have guessed, this test checks that <code>PenDown()</code> is called at least once. If the <code>painter</code> object didn't call this method, your test will fail with a message like this:
+</p>
+<div><div id="highlighter_944368" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp plain">path/to/my_test.cc:119: Failure</code></div><div class="line number2 index1 alt1"><code class="cpp plain">Actual function call count doesn't match </code><code class="cpp keyword bold">this</code> <code class="cpp plain">expectation:</code></div><div class="line number3 index2 alt2"><code class="cpp plain">Actually: never called;</code></div><div class="line number4 index3 alt1"><code class="cpp plain">Expected: called at least once.</code></div></div></td></tr></tbody></table></div></div>
+<p><b>Tip 1:</b> If you run the test from an Emacs buffer, you can hit <code>&lt;Enter&gt;</code> on the line number displayed in the error message to jump right to the failed expectation.
+</p><p><b>Tip 2:</b> If your mock objects are never deleted, the final 
+verification won't happen. Therefore it's a good idea to use a heap leak
+ checker in your tests when you allocate mocks on the heap.
+</p><p><b>Important note:</b> Google Mock requires expectations to be set <b>before</b> the mock functions are called, otherwise the behavior is <b>undefined</b>. In particular, you mustn't interleave <code>EXPECT_CALL()</code>s and calls to the mock functions.
+</p><p>This means <code>EXPECT_CALL()</code> should be read as expecting that a call will occur <i>in the future</i>,
+ not that a call has occurred. Why does Google Mock work like that? 
+Well, specifying the expectation beforehand allows Google Mock to report
+ a violation as soon as it arises, when the context (stack trace, etc) 
+is still available. This makes debugging much easier.
+</p><p>Admittedly, this test is contrived and doesn't do much. You can 
+easily achieve the same effect without using Google Mock. However, as we
+ shall reveal soon, Google Mock allows you to do <i>much more</i> with the mocks.
+</p>
+<a name="Using_Google_Mock_with_Any_Testing_Framework" id="Using_Google_Mock_with_Any_Testing_Framework"></a><h2> <span class="mw-headline"> Using Google Mock with Any Testing Framework </span></h2>
+<p>If you want to use something other than Google Test (e.g. <a href="http://sourceforge.net/projects/cppunit/" class="external text" title="http://sourceforge.net/projects/cppunit/" rel="nofollow">CppUnit</a> or <a href="http://cxxtest.tigris.org/" class="external text" title="http://cxxtest.tigris.org/" rel="nofollow">CxxTest</a>) as your testing framework, just change the <code>main()</code> function in the previous section to:
+</p>
+<div><div id="highlighter_893728" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp color1 bold">int</code> <code class="cpp plain">main(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">argc, </code><code class="cpp color1 bold">char</code><code class="cpp plain">** argv) {</code></div><div class="line number2 index1 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp comments">// The following line causes Google Mock to throw an exception on failure,</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp comments">// which will be interpreted by your testing framework as a test failure.</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">::testing::GTEST_FLAG(throw_on_failure) = </code><code class="cpp keyword bold">true</code><code class="cpp plain">;</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">::testing::InitGoogleMock(&amp;argc, argv);</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">... whatever your testing framework requires ...</code></div><div class="line number7 index6 alt2"><code class="cpp plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>This approach has a catch: it makes Google Mock throw an exception 
+from a mock object's destructor sometimes. With some compilers, this 
+sometimes causes the test program to crash. You'll still be able to 
+notice that the test has failed, but it's not a graceful failure.
+</p><p>A better solution is to use Google Test's <b>../../googletest/docs/AdvancedGuide.md#extending-google-test-by-handling-test-events</b> to report a test failure to your testing framework properly. You'll need to implement the <code>OnTestPartResult()</code> method of the event listener interface, but it should be straightforward.
+</p><p>If this turns out to be too much work, we suggest that you stick 
+with Google Test, which works with Google Mock seamlessly (in fact, it 
+is technically part of Google Mock.). If there is a reason that you 
+cannot use Google Test, please let us know.
+</p>
+<a name="Setting_Expectations" id="Setting_Expectations"></a><h1> <span class="mw-headline"> Setting Expectations </span></h1>
+<p>The key to using a mock object successfully is to set the <i>right expectations</i>
+ on it. If you set the expectations too strict, your test will fail as 
+the result of unrelated changes. If you set them too loose, bugs can 
+slip through. You want to do it just right such that your test can catch
+ exactly the kind of bugs you intend it to catch. Google Mock provides 
+the necessary means for you to do it "just right."
+</p>
+<a name="General_Syntax" id="General_Syntax"></a><h2> <span class="mw-headline"> General Syntax </span></h2>
+<p>In Google Mock we use the <code>EXPECT_CALL()</code> macro to set an expectation on a mock method. The general syntax is:
+</p>
+<div><div id="highlighter_464484" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp plain">EXPECT_CALL(mock_object, method(matchers))</code></div><div class="line number2 index1 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.Times(cardinality)</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(action)</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillRepeatedly(action);</code></div></div></td></tr></tbody></table></div></div>
+<p>The macro has two arguments: first the mock object, and then the 
+method and its arguments. Note that the two are separated by a comma (<code>,</code>), not a period (<code>.</code>). (Why using a comma? The answer is that it was necessary for technical reasons.)
+</p><p>The macro can be followed by some optional <i>clauses</i> that provide more information about the expectation. We'll discuss how each clause works in the coming sections.
+</p><p>This syntax is designed to make an expectation read like English. For example, you can probably guess that
+</p>
+<div><div id="highlighter_851582" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Return;...</code></div><div class="line number2 index1 alt1"><code class="cpp plain">EXPECT_CALL(turtle, GetX())</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.Times(5)</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(100))</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(150))</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillRepeatedly(Return(200));</code></div></div></td></tr></tbody></table></div></div>
+<p>says that the <code>turtle</code> object's <code>GetX()</code> method
+ will be called five times, it will return 100 the first time, 150 the 
+second time, and then 200 every time. Some people like to call this 
+style of syntax a Domain-Specific Language (DSL).
+</p><p><b>Note:</b> Why do we use a macro to do this? It serves two purposes: first it makes expectations easily identifiable (either by <code>grep</code>
+ or by a human reader), and second it allows Google Mock to include the 
+source file location of a failed expectation in messages, making 
+debugging easier.
+</p>
+<a name="Matchers:_What_Arguments_Do_We_Expect.3F" id="Matchers:_What_Arguments_Do_We_Expect.3F"></a><h2> <span class="mw-headline"> Matchers: What Arguments Do We Expect? </span></h2>
+<p>When a mock function takes arguments, we must specify what arguments we are expecting; for example:
+</p>
+<div><div id="highlighter_233303" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp comments">// Expects the turtle to move forward by 100 units.</code></div><div class="line number2 index1 alt1"><code class="cpp plain">EXPECT_CALL(turtle, Forward(100));</code></div></div></td></tr></tbody></table></div></div>
+<p>Sometimes you may not want to be too specific (Remember that talk 
+about tests being too rigid? Over specification leads to brittle tests 
+and obscures the intent of tests. Therefore we encourage you to specify 
+only what's necessary - no more, no less.). If you care to check that <code>Forward()</code> will be called but aren't interested in its actual argument, write <code>_</code> as the argument, which means "anything goes":
+</p>
+<div><div id="highlighter_676382" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::_;</code></div><div class="line number2 index1 alt1"><code class="cpp plain">...</code></div><div class="line number3 index2 alt2"><code class="cpp comments">// Expects the turtle to move forward.</code></div><div class="line number4 index3 alt1"><code class="cpp plain">EXPECT_CALL(turtle, Forward(_));</code></div></div></td></tr></tbody></table></div></div>
+<p><code>_</code> is an instance of what we call <b>matchers</b>. A matcher is like a predicate and can test whether an argument is what we'd expect. You can use a matcher inside <code>EXPECT_CALL()</code> wherever a function argument is expected.
+</p><p>A list of built-in matchers can be found in the <a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_CheetSheet" title="Google Mock CheetSheet">CheatSheet</a>. For example, here's the <code>Ge</code> (greater than or equal) matcher:
+</p>
+<div><div id="highlighter_234602" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Ge;...</code></div><div class="line number2 index1 alt1"><code class="cpp plain">EXPECT_CALL(turtle, Forward(Ge(100)));</code></div></div></td></tr></tbody></table></div></div>
+<p>This checks that the turtle will be told to go forward by at least 100 units.
+</p>
+<a name="Cardinalities:_How_Many_Times_Will_It_Be_Called.3F" id="Cardinalities:_How_Many_Times_Will_It_Be_Called.3F"></a><h2> <span class="mw-headline"> Cardinalities: How Many Times Will It Be Called? </span></h2>
+<p>The first clause we can specify following an <code>EXPECT_CALL()</code> is <code>Times()</code>. We call its argument a <b>cardinality</b> as it tells <i>how many times</i>
+ the call should occur. It allows us to repeat an expectation many times
+ without actually writing it as many times. More importantly, a 
+cardinality can be "fuzzy", just like a matcher can be. This allows a 
+user to express the intent of a test exactly.
+</p><p>An interesting special case is when we say <code>Times(0)</code>.
+ You may have guessed - it means that the function shouldn't be called 
+with the given arguments at all, and Google Mock will report a Google 
+Test failure whenever the function is (wrongfully) called.
+</p><p>We've seen <code>AtLeast(n)</code> as an example of fuzzy cardinalities earlier. For the list of built-in cardinalities you can use, see the <a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_CheetSheet" title="Google Mock CheetSheet">CheatSheet</a>.
+</p><p>The <code>Times()</code> clause can be omitted. <b>If you omit <code>Times()</code>, Google Mock will infer the cardinality for you.</b> The rules are easy to remember:
+</p>
+<ul><li> If <b>neither</b> <code>WillOnce()</code> <b>nor</b> <code>WillRepeatedly()</code> is in the <code>EXPECT_CALL()</code>, the inferred cardinality is <code>Times(1)</code>.
+</li><li> If there are <code>n WillOnce()</code>'s but <b>no</b> <code>WillRepeatedly()</code>, where <code>n</code> &gt;= 1, the cardinality is <code>Times(n)</code>.
+</li><li> If there are <code>n WillOnce()</code>'s and <b>one</b> <code>WillRepeatedly()</code>, where <code>n</code> &gt;= 0, the cardinality is <code>Times(AtLeast(n))</code>.
+</li></ul>
+<p><b>Quick quiz:</b> what do you think will happen if a function is expected to be called twice but actually called four times?
+</p>
+<a name="Actions:_What_Should_It_Do.3F" id="Actions:_What_Should_It_Do.3F"></a><h2> <span class="mw-headline"> Actions: What Should It Do? </span></h2>
+<p>Remember that a mock object doesn't really have a working 
+implementation? We as users have to tell it what to do when a method is 
+invoked. This is easy in Google Mock.
+</p><p>First, if the return type of a mock function is a built-in type or a pointer, the function has a <b>default action</b> (a <code>void</code> function will just return, a <code>bool</code> function will return <code>false</code>,
+ and other functions will return 0). In addition, in C++ 11 and above, a
+ mock function whose return type is default-constructible (i.e. has a 
+default constructor) has a default action of returning a 
+default-constructed value. If you don't say anything, this behavior will
+ be used.
+</p><p>Second, if a mock function doesn't have a default action, or the 
+default action doesn't suit you, you can specify the action to be taken 
+each time the expectation matches using a series of <code>WillOnce()</code> clauses followed by an optional <code>WillRepeatedly()</code>. For example,
+</p>
+<div><div id="highlighter_402390" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Return;...</code></div><div class="line number2 index1 alt1"><code class="cpp plain">EXPECT_CALL(turtle, GetX())</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(100))</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(200))</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(300));</code></div></div></td></tr></tbody></table></div></div>
+<p>This says that <code>turtle.GetX()</code> will be called <i>exactly three times</i> (Google Mock inferred this from how many <code>WillOnce()</code> clauses we've written, since we didn't explicitly write <code>Times()</code>), and will return 100, 200, and 300 respectively.
+</p>
+<div><div id="highlighter_460477" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Return;...</code></div><div class="line number2 index1 alt1"><code class="cpp plain">EXPECT_CALL(turtle, GetY())</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(100))</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(200))</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillRepeatedly(Return(300));</code></div></div></td></tr></tbody></table></div></div>
+<p>says that <code>turtle.GetY()</code> will be called <i>at least twice</i> (Google Mock knows this as we've written two <code>WillOnce()</code> clauses and a <code>WillRepeatedly()</code> while having no explicit <code>Times()</code>), will return 100 the first time, 200 the second time, and 300 from the third time on.
+</p><p>Of course, if you explicitly write a <code>Times()</code>, Google Mock will not try to infer the cardinality itself. What if the number you specified is larger than there are <code>WillOnce()</code> clauses? Well, after all <code>WillOnce()</code>s are used up, Google Mock will do the <i>default</i> action for the function every time (unless, of course, you have a <code>WillRepeatedly()</code>.).
+</p><p>What can we do inside <code>WillOnce()</code> besides <code>Return()</code>? You can return a reference using <code>ReturnRef(variable)</code>, or invoke a pre-defined function, among <a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_CheetSheet#actions" title="Google Mock CheetSheet">others</a>.
+</p><p><b>Important note:</b> The <code>EXPECT_CALL()</code> statement 
+evaluates the action clause only once, even though the action may be 
+performed many times. Therefore you must be careful about side effects. 
+The following may not do what you want:
+</p>
+<div><div id="highlighter_41585" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp color1 bold">int</code> <code class="cpp plain">n = 100;</code></div><div class="line number2 index1 alt1"><code class="cpp plain">EXPECT_CALL(turtle, GetX())</code></div><div class="line number3 index2 alt2"><code class="cpp plain">.Times(4)</code></div><div class="line number4 index3 alt1"><code class="cpp plain">.WillRepeatedly(Return(n++));</code></div></div></td></tr></tbody></table></div></div>
+<p>Instead of returning 100, 101, 102, ..., consecutively, this mock function will always return 100 as <code>n++</code> is only evaluated once. Similarly, <code>Return(new Foo)</code> will create a new <code>Foo</code> object when the <code>EXPECT_CALL()</code>
+ is executed, and will return the same pointer every time. If you want 
+the side effect to happen every time, you need to define a custom 
+action, which we'll teach in the <a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_Cookbook" title="Google Mock Cookbook">CookBook</a>.
+</p><p>Time for another quiz! What do you think the following means?
+</p>
+<div><div id="highlighter_855727" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Return;...</code></div><div class="line number2 index1 alt1"><code class="cpp plain">EXPECT_CALL(turtle, GetY())</code></div><div class="line number3 index2 alt2"><code class="cpp plain">.Times(4)</code></div><div class="line number4 index3 alt1"><code class="cpp plain">.WillOnce(Return(100));</code></div></div></td></tr></tbody></table></div></div>
+<p>Obviously <code>turtle.GetY()</code> is expected to be called four times. But if you think it will return 100 every time, think twice! Remember that one <code>WillOnce()</code>
+ clause will be consumed each time the function is invoked and the 
+default action will be taken afterwards. So the right answer is that <code>turtle.GetY()</code> will return 100 the first time, but <b>return 0 from the second time on</b>, as returning 0 is the default action for <code>int</code> functions.
+</p>
+<a name="Using_Multiple_Expectations" id="Using_Multiple_Expectations"></a><h2> <span class="mw-headline"> Using Multiple Expectations </span></h2>
+<p>So far we've only shown examples where you have a single expectation.
+ More realistically, you're going to specify expectations on multiple 
+mock methods, which may be from multiple mock objects.
+</p><p>By default, when a mock method is invoked, Google Mock will search the expectations in the <b>reverse order</b>
+ they are defined, and stop when an active expectation that matches the 
+arguments is found (you can think of it as "newer rules override older 
+ones."). If the matching expectation cannot take any more calls, you 
+will get an upper-bound-violated failure. Here's an example:
+</p>
+<div><div id="highlighter_649673" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::_;...</code></div><div class="line number2 index1 alt1"><code class="cpp plain">EXPECT_CALL(turtle, Forward(_));&nbsp; </code><code class="cpp comments">// #1</code></div><div class="line number3 index2 alt2"><code class="cpp plain">EXPECT_CALL(turtle, Forward(10))&nbsp; </code><code class="cpp comments">// #2</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.Times(2);</code></div></div></td></tr></tbody></table></div></div>
+<p>If <code>Forward(10)</code> is called three times in a row, the third
+ time it will be an error, as the last matching expectation (#2) has 
+been saturated. If, however, the third <code>Forward(10)</code> call is replaced by <code>Forward(20)</code>, then it would be OK, as now #1 will be the matching expectation.
+</p><p><b>Side note:</b> Why does Google Mock search for a match in the <i>reverse</i>
+ order of the expectations? The reason is that this allows a user to set
+ up the default expectations in a mock object's constructor or the test 
+fixture's set-up phase and then customize the mock by writing more 
+specific expectations in the test body. So, if you have two expectations
+ on the same method, you want to put the one with more specific matchers
+ <b>after</b> the other, or the more specific rule would be shadowed by the more general one that comes after it.
+</p>
+<a name="Ordered_vs_Unordered_Calls" id="Ordered_vs_Unordered_Calls"></a><h2> <span class="mw-headline"> Ordered vs Unordered Calls </span></h2>
+<p>By default, an expectation can match a call even though an earlier 
+expectation hasn't been satisfied. In other words, the calls don't have 
+to occur in the order the expectations are specified.
+</p><p>Sometimes, you may want all the expected calls to occur in a strict order. To say this in Google Mock is easy:
+</p>
+<div><div id="highlighter_444223" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::InSequence;...</code></div><div class="line number2 index1 alt1"><code class="cpp plain">TEST(FooTest, DrawsLineSegment) {</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">...</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">{</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">InSequence dummy;</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(turtle, PenDown());</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(turtle, Forward(100));</code></div><div class="line number9 index8 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(turtle, PenUp());</code></div><div class="line number10 index9 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">}</code></div><div class="line number11 index10 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">Foo();</code></div><div class="line number12 index11 alt1"><code class="cpp plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>By creating an object of type <code>InSequence</code>, all expectations in its scope are put into a <i>sequence</i> and have to occur <i>sequentially</i>.
+ Since we are just relying on the constructor and destructor of this 
+object to do the actual work, its name is really irrelevant.
+</p><p>In this example, we test that <code>Foo()</code> calls the three expected functions in the order as written. If a call is made out-of-order, it will be an error.
+</p><p>(What if you care about the relative order of some of the calls, 
+but not all of them? Can you specify an arbitrary partial order? The 
+answer is ... yes! If you are impatient, the details can be found in the
+ <a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_Cookbook#Expecting_Partially_Ordered_Calls" title="Google Mock Cookbook">CookBook</a>.)
+</p>
+<a name="All_Expectations_Are_Sticky_.28Unless_Said_Otherwise.29" id="All_Expectations_Are_Sticky_.28Unless_Said_Otherwise.29"></a><h2> <span class="mw-headline"> All Expectations Are Sticky (Unless Said Otherwise) </span></h2>
+<p>Now let's do a quick quiz to see how well you can use this mock stuff
+ already. How would you test that the turtle is asked to go to the 
+origin <i>exactly twice</i> (you want to ignore any other instructions it receives)?
+</p><p>After you've come up with your answer, take a look at ours and compare notes (solve it yourself first - don't cheat!):
+</p>
+<div><div id="highlighter_301362" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::_;...</code></div><div class="line number2 index1 alt1"><code class="cpp plain">EXPECT_CALL(turtle, GoTo(_, _))&nbsp; </code><code class="cpp comments">// #1</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.Times(AnyNumber());</code></div><div class="line number4 index3 alt1"><code class="cpp plain">EXPECT_CALL(turtle, GoTo(0, 0))&nbsp; </code><code class="cpp comments">// #2</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.Times(2);</code></div></div></td></tr></tbody></table></div></div>
+<p>Suppose <code>turtle.GoTo(0, 0)</code> is called three times. In the 
+third time, Google Mock will see that the arguments match expectation #2
+ (remember that we always pick the last matching expectation). Now, 
+since we said that there should be only two such calls, Google Mock will
+ report an error immediately. This is basically what we've told you in 
+the "Using Multiple Expectations" section above.
+</p><p>This example shows that <b>expectations in Google Mock are "sticky" by default</b>,
+ in the sense that they remain active even after we have reached their 
+invocation upper bounds. This is an important rule to remember, as it 
+affects the meaning of the spec, and is <b>different</b> to how it's 
+done in many other mocking frameworks (Why'd we do that? Because we 
+think our rule makes the common cases easier to express and 
+understand.).
+</p><p>Simple? Let's see if you've really understood it: what does the following code say?
+</p>
+<div><div id="highlighter_365474" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Return;</code></div><div class="line number2 index1 alt1"><code class="cpp plain">...</code></div><div class="line number3 index2 alt2"><code class="cpp keyword bold">for</code> <code class="cpp plain">(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">i = n; i &gt; 0; i--) {</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(turtle, GetX())</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(10*i));</code></div><div class="line number6 index5 alt1"><code class="cpp plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>If you think it says that <code>turtle.GetX()</code> will be called <code>n</code>
+ times and will return 10, 20, 30, ..., consecutively, think twice! The 
+problem is that, as we said, expectations are sticky. So, the second 
+time <code>turtle.GetX()</code> is called, the last (latest) <code>EXPECT_CALL()</code> statement will match, and will immediately lead to an "upper bound exceeded" error - this piece of code is not very useful!
+</p><p>One correct way of saying that <code>turtle.GetX()</code> will return 10, 20, 30, ..., is to explicitly say that the expectations are <i>not</i> sticky. In other words, they should <i>retire</i> as soon as they are saturated:
+</p>
+<div><div id="highlighter_501371" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Return;</code></div><div class="line number2 index1 alt1"><code class="cpp plain">...</code></div><div class="line number3 index2 alt2"><code class="cpp keyword bold">for</code> <code class="cpp plain">(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">i = n; i &gt; 0; i--) {</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(turtle, GetX())</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(10*i))</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.RetiresOnSaturation();</code></div><div class="line number7 index6 alt2"><code class="cpp plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>And, there's a better way to do it: in this case, we expect the calls
+ to occur in a specific order, and we line up the actions to match the 
+order. Since the order is important here, we should make it explicit 
+using a sequence:
+</p>
+<div><div id="highlighter_694054" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::InSequence;</code></div><div class="line number2 index1 alt1"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Return;</code></div><div class="line number3 index2 alt2"><code class="cpp plain">...</code></div><div class="line number4 index3 alt1"><code class="cpp plain">{</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">InSequence s;</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">for</code> <code class="cpp plain">(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">i = 1; i &lt;= n; i++) {</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(turtle, GetX())</code></div><div class="line number9 index8 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(10*i))</code></div><div class="line number10 index9 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.RetiresOnSaturation();</code></div><div class="line number11 index10 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">}</code></div><div class="line number12 index11 alt1"><code class="cpp plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>By the way, the other situation where an expectation may <i>not</i> 
+be sticky is when it's in a sequence - as soon as another expectation 
+that comes after it in the sequence has been used, it automatically 
+retires (and will never be used to match any call).
+</p>
+<a name="Uninteresting_Calls" id="Uninteresting_Calls"></a><h2> <span class="mw-headline"> Uninteresting Calls </span></h2>
+<p>A mock object may have many methods, and not all of them are that 
+interesting. For example, in some tests we may not care about how many 
+times <code>GetX()</code> and <code>GetY()</code> get called.
+</p><p>In Google Mock, if you are not interested in a method, just don't
+ say anything about it. If a call to this method occurs, you'll see a 
+warning in the test output, but it won't be a failure.
+</p>
+<a name="What_Now.3F" id="What_Now.3F"></a><h1> <span class="mw-headline"> What Now? </span></h1>
+<p>Congratulations! You've learned enough about Google Mock to start using it. Now, you might want to join the <a href="http://groups.google.com/group/googlemock" class="external text" title="http://groups.google.com/group/googlemock" rel="nofollow">googlemock</a>
+ discussion group and actually write some tests using Google Mock - it 
+will be fun. Hey, it may even be addictive - you've been warned.
+</p><p>Then, if you feel like increasing your mock quotient, you should move on to the <a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_Cookbook" title="Google Mock Cookbook">CookBook</a>. You can learn many advanced features of Google Mock there -- and advance your level of enjoyment and testing bliss.
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 118/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:413-0!1!0!!en!2!edit=0 and timestamp 20170525033651 -->
+<div class="printfooter">
+Retrieved from "<a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_Dummy">http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_Dummy</a>"</div>
+			<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:Categories" title="Special:Categories">Categories</a>: <span dir="ltr"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Qa" title="Category:Qa">Qa</a></span> | <span dir="ltr"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Mocking" title="Category:Mocking">Mocking</a></span> | <span dir="ltr"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Google_Test" title="Category:Google Test">Google Test</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+	
+				 <li id="ca-nstab-main" class="selected"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_Dummy" title="View the content page [alt-shift-c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Talk:Google_Mock_Dummy&amp;action=edit&amp;redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Google_Mock_Dummy&amp;action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Google_Mock_Dummy&amp;action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">History</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Special:UserLogin&amp;returnto=Google_Mock_Dummy" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(/wiki/skins/common/images/wiki.png);" href="http://shrek.tsdv.com.vn/wiki/index.php/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage-description"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Main_Page">Main Page</a></li>
+				<li id="n-portal"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:Community_Portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:RecentChanges" title="The list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+				<li id="n-Knowledge-Base"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:Categories">Knowledge Base</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/wiki/index.php" id="searchform"><div>
+				<input name="title" value="Special:Search" type="hidden">
+				<input id="searchInput" name="search" title="Search TsdvWiki [alt-shift-f]" accesskey="f" autocomplete="off" type="text">
+				<input name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if exists" type="submit">&nbsp;
+				<input name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text" type="submit">
+			</div></form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:WhatLinksHere/Google_Mock_Dummy" title="List of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:RecentChangesLinked/Google_Mock_Dummy" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+<li id="t-specialpages"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:SpecialPages" title="List of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Google_Mock_Dummy&amp;printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Google_Mock_Dummy&amp;oldid=1705" title="Permanent link to this revision of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-categorytree-portlet">
+		<h5>Categories</h5>
+		<div class="pBody">
+<div class=" CategoryTreeTag"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Best_Practices',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Best_Practices">Best Practices</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Code/Test_tips',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Code/Test_tips">Code/Test tips</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Performance_Optimization',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Performance_Optimization">Performance Optimization</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Readbility',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Readbility">Readbility</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Size_Optimization',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Size_Optimization">Size Optimization</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Guideline',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Guideline">Guideline</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Coding_Rule',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Coding_Rule">Coding Rule</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Information_Security',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Information_Security">Information Security</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><i class="CategoryTreeNotice">no subcategories</i></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('OS',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:OS">OS</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Embedded',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Embedded">Embedded</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Linux',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Linux">Linux</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Linux_embedded',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Linux_embedded">Linux embedded</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Process',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Process">Process</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Configuration_Management',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Configuration_Management">Configuration Management</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Programming',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Programming">Programming</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('C',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:C">C</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('C++',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:C%2B%2B">C++</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Coding_Rule',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Coding_Rule">Coding Rule</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('HTML-CSS-JavaScript',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:HTML-CSS-JavaScript">HTML-CSS-JavaScript</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Java',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Java">Java</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Java_Script',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Java_Script">Java Script</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('NodeJS',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:NodeJS">NodeJS</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('PHP',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:PHP">PHP</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Rails',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Rails">Rails</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Ruby',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Ruby">Ruby</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Project_Closing',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Project_Closing">Project Closing</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('2013B',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:2013B">2013B</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Qa',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Qa">Qa</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Code_coverage',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Code_coverage">Code coverage</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Collaborator',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Collaborator">Collaborator</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Mocking',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Mocking">Mocking</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Modelling',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Modelling">Modelling</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Parameterized_Test',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Parameterized_Test">Parameterized Test</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Static_checking',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Static_checking">Static checking</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Testing_tools',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Testing_tools">Testing tools</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Setup',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Setup">Setup</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><i class="CategoryTreeNotice">no subcategories</i></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Technologies',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Technologies">Technologies</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('OpenCV',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:OpenCV">OpenCV</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Testing',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Testing">Testing</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Android_Testing',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Android_Testing">Android Testing</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('CUnit',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:CUnit">CUnit</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Google_Test',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Google_Test">Google Test</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Jenkins',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Jenkins">Jenkins</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('NUnit',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:NUnit">NUnit</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Parasoft',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Parasoft">Parasoft</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Selenium',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Selenium">Selenium</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Tool',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Tool">Tool</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Common',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Common">Common</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Eclipse',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Eclipse">Eclipse</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Egroupware',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Egroupware">Egroupware</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('GCC',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:GCC">GCC</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Git',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Git">Git</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('LDAP',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:LDAP">LDAP</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('LibreOffice',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:LibreOffice">LibreOffice</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Lync',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Lync">Lync</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Minitab',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Minitab">Minitab</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Prismy',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Prismy">Prismy</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Qmail',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Qmail">Qmail</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Redmine',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Redmine">Redmine</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('SVN',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:SVN">SVN</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Xdebug',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Xdebug">Xdebug</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('UEFI_Bios',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:UEFI_Bios">UEFI Bios</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><i class="CategoryTreeNotice">no subcategories</i></div></div>
+		
+		</div>
+				</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div>
+				<div id="f-copyrightico"><a href="http://www.gnu.org/copyleft/fdl.html"><img src="Google%20Mock%20Dummy%20-%20TsdvWiki_files/gnu-fdl.png" alt="GNU Free Documentation License 1.3"></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> This page was last modified on 13 December 2016, at 06:12.</li>
+					<li id="viewcount">This page has been accessed 12 times.</li>
+					<li id="copyright">Content is available under <a href="http://www.gnu.org/copyleft/fdl.html" class="external " title="http://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3</a>.</li>
+					<li id="privacy"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:Privacy_policy" title="TsdvWiki:Privacy policy">Privacy policy</a></li>
+					<li id="about"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:About" title="TsdvWiki:About">About TsdvWiki</a></li>
+					<li id="disclaimer"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:General_disclaimer" title="TsdvWiki:General disclaimer">Disclaimers</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.259 secs. -->
+</body></html>

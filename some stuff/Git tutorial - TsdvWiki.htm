@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="generator" content="MediaWiki 1.15.1">
+		<meta name="keywords" content="Git tutorial">
+		<link rel="stylesheet" type="text/css" href="Git%20tutorial%20-%20TsdvWiki_files/CategoryTree.css">
+		<link rel="shortcut icon" href="http://shrek.tsdv.com.vn/favicon.ico">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://shrek.tsdv.com.vn/wiki/opensearch_desc.php" title="TsdvWiki (en)">
+		<link title="Creative Commons" type="application/rdf+xml" href="http://shrek.tsdv.com.vn/wiki/index.php?title=Git_tutorial&amp;action=creativecommons" rel="meta">
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html">
+		<link rel="alternate" type="application/rss+xml" title="TsdvWiki RSS Feed" href="http://shrek.tsdv.com.vn/wiki/index.php?title=Special:RecentChanges&amp;feed=rss">
+		<link rel="alternate" type="application/atom+xml" title="TsdvWiki Atom Feed" href="http://shrek.tsdv.com.vn/wiki/index.php?title=Special:RecentChanges&amp;feed=atom">
+		<title>Git tutorial - TsdvWiki</title>
+		<link rel="stylesheet" href="Git%20tutorial%20-%20TsdvWiki_files/shared.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="Git%20tutorial%20-%20TsdvWiki_files/commonPrint.css" type="text/css" media="print">
+		<link rel="stylesheet" href="Git%20tutorial%20-%20TsdvWiki_files/main.css" type="text/css" media="screen">
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE50Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE55Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/monobook/IE60Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/monobook/IE70Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="Git%20tutorial%20-%20TsdvWiki_files/index_003.css" type="text/css">
+		<link rel="stylesheet" href="Git%20tutorial%20-%20TsdvWiki_files/index_002.css" type="text/css" media="print">
+		<link rel="stylesheet" href="Git%20tutorial%20-%20TsdvWiki_files/index.css" type="text/css">
+		<link rel="stylesheet" href="Git%20tutorial%20-%20TsdvWiki_files/index_004.css" type="text/css">
+		<!--[if lt IE 7]><script type="text/javascript" src="/wiki/skins/common/IEFixes.js?207"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/wiki/skins";
+		var wgArticlePath = "/wiki/index.php/$1";
+		var wgScriptPath = "/wiki";
+		var wgScript = "/wiki/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://shrek.tsdv.com.vn";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Git_tutorial";
+		var wgTitle = "Git tutorial";
+		var wgAction = "view";
+		var wgArticleId = "179";
+		var wgIsArticle = true;
+		var wgUserName = null;
+		var wgUserGroups = null;
+		var wgUserLanguage = "en";
+		var wgContentLanguage = "en";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = 855;
+		var wgVersion = "1.15.1";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = ["", ""];
+		var wgDigitTransformTable = ["", ""];
+		var wgMWSuggestTemplate = "http://shrek.tsdv.com.vn/wiki/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest";
+		var wgDBname = "wikidb";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["with suggestions", "no suggestions"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/wikibits.js"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/CategoryTree.js"></script>
+			<script type="text/javascript">
+			var categoryTreeCollapseMsg = "collapse";
+			var categoryTreeExpandMsg = "expand";
+			var categoryTreeCollapseBulletMsg = "[\x3cb\x3e−\x3c/b\x3e]";
+			var categoryTreeExpandBulletMsg = "[\x3cb\x3e+\x3c/b\x3e]";
+			var categoryTreeLoadMsg = "load";
+			var categoryTreeLoadingMsg = "loading…";
+			var categoryTreeNothingFoundMsg = "nothing found";
+			var categoryTreeNoSubcategoriesMsg = "no subcategories";
+			var categoryTreeNoParentCategoriesMsg = "no parent categories";
+			var categoryTreeNoPagesMsg = "no pages or subcategories";
+			var categoryTreeErrorMsg = "Problem loading data.";
+			var categoryTreeRetryMsg = "Please wait a moment and try again.";
+			</script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/ajax.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/mwsuggest.js"></script>
+		<link rel="stylesheet" type="text/css" href="Git%20tutorial%20-%20TsdvWiki_files/shCore.css">
+		<link rel="stylesheet" type="text/css" href="Git%20tutorial%20-%20TsdvWiki_files/shThemeDefault.css">
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shCore.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushAS3.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushBash.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushCpp.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushCSharp.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushColdFusion.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushCss.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushDelphi.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushDiff.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushErlang.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushGroovy.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushJava.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushJavaFX.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushJScript.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushPerl.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushPhp.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushPlain.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushPowerShell.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushPython.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushRuby.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushScala.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushSql.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushVb.js"></script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/shBrushXml.js"></script>
+		<script type="text/javascript">SyntaxHighlighter.all();</script>
+		<script type="text/javascript" src="Git%20tutorial%20-%20TsdvWiki_files/index.php"><!-- site js --></script>
+	</head>
+<body class="mediawiki ltr ns-0 ns-subject page-Git_tutorial skin-monobook">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+				<h1 id="firstHeading" class="firstHeading">Git tutorial</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">From TsdvWiki</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>			<!-- start content -->
+			<p><b>1- Install and configure git</b>
+<br>refer to
+</p>
+<pre>refer to http://shrek.tsdv.com.vn/wiki/index.php/Howto</pre>
+<p>at for git section
+<br><br><b>2- Clone git</b>
+<br>This command will clone source code from repository:
+</p>
+<pre>git clone &lt;url&gt;</pre>
+<p><br><b>3- Commit git</b>
+<br>Commit your change to local repository. Caution: After this command, there is no actually data send to git server
+</p>
+<pre>git commit [file/folder] -m &lt;your commit message&gt;</pre>
+<p>For easier to manage files/folders that you want to commit in Linux, you should use <b>Meld</b> software, using this command in terminal&nbsp;: 
+</p>
+<pre>meld .</pre>
+<p>to show all changes of your files/folders, then right click and select 'commit' files/folders.
+<br><br><b>4- Push git</b>
+<br>If you want to make your change synchronize with source code on server, you need push command
+</p>
+<pre>git push origin &lt;branch name&gt;</pre>
+<p>Here, <b>master</b> is the default branch name.
+<br><b>Caution:</b> Because maybe there is many users can commit/clone/push at the same time, your source code may not up to date.
+At that time, you need:
+</p>
+<pre>git pull     # To let git merge server source code with your local change
+git push origin &lt;branch name&gt;
+</pre>
+<p><b>Caution:</b> When you run git pull, conflict may occurs, at this time, please:
+</p>
+<pre>git status 
+# To see which files have been merged, and which ones need your attention. 
+# Look for ====== conflict markers in each unmerged file, edit the surrounding text to fix the problem
+git add &lt;filename&gt; # to mark that file as resolved
+git commit # to complete the merge
+# After that, you can push as normal
+</pre>
+<p><b>Caution:</b> When you run git push, maybe other persons already push some commits to server and you can not push, please do <b>rebase</b>.
+<br><br><b>5- Rebase and merge</b>
+Example: source code on Server has revision is C2, then, user uA and uB 
+clone to them PC. uB commit and push C3, C4 to server.
+At this time, uA still has source code at revision C2. He commit C5, but
+ cannot push to server. To make uA modification apply to server, he can 
+rebase: <br>
+</p>
+<pre># Rebase current modification in current branch to branch..&lt;remote&gt;
+git rebase
+</pre>
+<p>If uA created a branch B, and C5 is in B, he can merge his work to master (B and master are different branches) by
+</p>
+<pre># When current branch is B
+git rebase master
+
+# When current branch is not B
+git rebase master B
+</pre>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 28/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:179-0!1!0!!en!2!edit=0 and timestamp 20170517092300 -->
+<div class="printfooter">
+Retrieved from "<a href="http://shrek.tsdv.com.vn/wiki/index.php/Git_tutorial">http://shrek.tsdv.com.vn/wiki/index.php/Git_tutorial</a>"</div>
+			<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:Categories" title="Special:Categories">Category</a>: <span dir="ltr"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Git" title="Category:Git">Git</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+	
+				 <li id="ca-nstab-main" class="selected"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Git_tutorial" title="View the content page [alt-shift-c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Talk:Git_tutorial&amp;action=edit&amp;redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Git_tutorial&amp;action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Git_tutorial&amp;action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">History</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Special:UserLogin&amp;returnto=Git_tutorial" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(/wiki/skins/common/images/wiki.png);" href="http://shrek.tsdv.com.vn/wiki/index.php/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage-description"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Main_Page">Main Page</a></li>
+				<li id="n-portal"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:Community_Portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:RecentChanges" title="The list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+				<li id="n-Knowledge-Base"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:Categories">Knowledge Base</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/wiki/index.php" id="searchform"><div>
+				<input name="title" value="Special:Search" type="hidden">
+				<input id="searchInput" name="search" title="Search TsdvWiki [alt-shift-f]" accesskey="f" autocomplete="off" type="text">
+				<input name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if exists" type="submit">&nbsp;
+				<input name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text" type="submit">
+			</div></form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:WhatLinksHere/Git_tutorial" title="List of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:RecentChangesLinked/Git_tutorial" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+<li id="t-specialpages"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:SpecialPages" title="List of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Git_tutorial&amp;printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Git_tutorial&amp;oldid=855" title="Permanent link to this revision of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-categorytree-portlet">
+		<h5>Categories</h5>
+		<div class="pBody">
+<div class=" CategoryTreeTag"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Best_Practices',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Best_Practices">Best Practices</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Code/Test_tips',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Code/Test_tips">Code/Test tips</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Performance_Optimization',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Performance_Optimization">Performance Optimization</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Readbility',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Readbility">Readbility</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Size_Optimization',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Size_Optimization">Size Optimization</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Guideline',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Guideline">Guideline</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Coding_Rule',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Coding_Rule">Coding Rule</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Information_Security',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Information_Security">Information Security</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><i class="CategoryTreeNotice">no subcategories</i></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('OS',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:OS">OS</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Embedded',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Embedded">Embedded</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Linux',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Linux">Linux</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Linux_embedded',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Linux_embedded">Linux embedded</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Process',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Process">Process</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Configuration_Management',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Configuration_Management">Configuration Management</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Programming',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Programming">Programming</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('C',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:C">C</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('C++',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:C%2B%2B">C++</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Coding_Rule',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Coding_Rule">Coding Rule</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('HTML-CSS-JavaScript',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:HTML-CSS-JavaScript">HTML-CSS-JavaScript</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Java',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Java">Java</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Java_Script',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Java_Script">Java Script</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('NodeJS',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:NodeJS">NodeJS</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('PHP',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:PHP">PHP</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Rails',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Rails">Rails</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Ruby',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Ruby">Ruby</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Project_Closing',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Project_Closing">Project Closing</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('2013B',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:2013B">2013B</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Qa',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Qa">Qa</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Code_coverage',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Code_coverage">Code coverage</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Collaborator',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Collaborator">Collaborator</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Mocking',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Mocking">Mocking</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Modelling',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Modelling">Modelling</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Parameterized_Test',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Parameterized_Test">Parameterized Test</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Static_checking',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Static_checking">Static checking</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Testing_tools',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Testing_tools">Testing tools</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Setup',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Setup">Setup</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><i class="CategoryTreeNotice">no subcategories</i></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Technologies',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Technologies">Technologies</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('OpenCV',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:OpenCV">OpenCV</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Testing',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Testing">Testing</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Android_Testing',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Android_Testing">Android Testing</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('CUnit',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:CUnit">CUnit</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Google_Test',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Google_Test">Google Test</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Jenkins',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Jenkins">Jenkins</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('NUnit',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:NUnit">NUnit</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Parasoft',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Parasoft">Parasoft</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Selenium',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Selenium">Selenium</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Tool',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Tool">Tool</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Common',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Common">Common</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Eclipse',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Eclipse">Eclipse</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Egroupware',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Egroupware">Egroupware</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('GCC',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:GCC">GCC</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Git',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Git">Git</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('LDAP',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:LDAP">LDAP</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('LibreOffice',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:LibreOffice">LibreOffice</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Lync',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Lync">Lync</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Minitab',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Minitab">Minitab</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Prismy',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Prismy">Prismy</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Qmail',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Qmail">Qmail</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Redmine',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Redmine">Redmine</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('SVN',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:SVN">SVN</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Xdebug',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Xdebug">Xdebug</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('UEFI_Bios',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:UEFI_Bios">UEFI Bios</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><i class="CategoryTreeNotice">no subcategories</i></div></div>
+		
+		</div>
+				</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="Git%20tutorial%20-%20TsdvWiki_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div>
+				<div id="f-copyrightico"><a href="http://www.gnu.org/copyleft/fdl.html"><img src="Git%20tutorial%20-%20TsdvWiki_files/gnu-fdl.png" alt="GNU Free Documentation License 1.3"></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> This page was last modified on 11 April 2013, at 01:44.</li>
+					<li id="viewcount">This page has been accessed 82 times.</li>
+					<li id="copyright">Content is available under <a href="http://www.gnu.org/copyleft/fdl.html" class="external " title="http://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3</a>.</li>
+					<li id="privacy"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:Privacy_policy" title="TsdvWiki:Privacy policy">Privacy policy</a></li>
+					<li id="about"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:About" title="TsdvWiki:About">About TsdvWiki</a></li>
+					<li id="disclaimer"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:General_disclaimer" title="TsdvWiki:General disclaimer">Disclaimers</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.126 secs. -->
+</body></html>

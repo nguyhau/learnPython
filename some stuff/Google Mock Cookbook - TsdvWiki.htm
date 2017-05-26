@@ -1,0 +1,1118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr" lang="en"><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="generator" content="MediaWiki 1.15.1">
+		<meta name="keywords" content="Google Mock Cookbook,CookBook.md">
+		<link rel="stylesheet" type="text/css" href="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/CategoryTree.css">
+		<link rel="shortcut icon" href="http://shrek.tsdv.com.vn/favicon.ico">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://shrek.tsdv.com.vn/wiki/opensearch_desc.php" title="TsdvWiki (en)">
+		<link title="Creative Commons" type="application/rdf+xml" href="http://shrek.tsdv.com.vn/wiki/index.php?title=Google_Mock_Cookbook&amp;action=creativecommons" rel="meta">
+		<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html">
+		<link rel="alternate" type="application/rss+xml" title="TsdvWiki RSS Feed" href="http://shrek.tsdv.com.vn/wiki/index.php?title=Special:RecentChanges&amp;feed=rss">
+		<link rel="alternate" type="application/atom+xml" title="TsdvWiki Atom Feed" href="http://shrek.tsdv.com.vn/wiki/index.php?title=Special:RecentChanges&amp;feed=atom">
+		<title>Google Mock Cookbook - TsdvWiki</title>
+		<link rel="stylesheet" href="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shared.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/commonPrint.css" type="text/css" media="print">
+		<link rel="stylesheet" href="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/main.css" type="text/css" media="screen">
+		<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE50Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE55Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/monobook/IE60Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/monobook/IE70Fixes.css?207" type="text/css" media="screen" /><![endif]-->
+		<link rel="stylesheet" href="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/index_003.css" type="text/css">
+		<link rel="stylesheet" href="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/index_002.css" type="text/css" media="print">
+		<link rel="stylesheet" href="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/index.css" type="text/css">
+		<link rel="stylesheet" href="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/index_004.css" type="text/css">
+		<!--[if lt IE 7]><script type="text/javascript" src="/wiki/skins/common/IEFixes.js?207"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+
+		<script type="text/javascript">/*<![CDATA[*/
+		var skin = "monobook";
+		var stylepath = "/wiki/skins";
+		var wgArticlePath = "/wiki/index.php/$1";
+		var wgScriptPath = "/wiki";
+		var wgScript = "/wiki/index.php";
+		var wgVariantArticlePath = false;
+		var wgActionPaths = {};
+		var wgServer = "http://shrek.tsdv.com.vn";
+		var wgCanonicalNamespace = "";
+		var wgCanonicalSpecialPageName = false;
+		var wgNamespaceNumber = 0;
+		var wgPageName = "Google_Mock_Cookbook";
+		var wgTitle = "Google Mock Cookbook";
+		var wgAction = "view";
+		var wgArticleId = "414";
+		var wgIsArticle = true;
+		var wgUserName = null;
+		var wgUserGroups = null;
+		var wgUserLanguage = "en";
+		var wgContentLanguage = "en";
+		var wgBreakFrames = false;
+		var wgCurRevisionId = 1704;
+		var wgVersion = "1.15.1";
+		var wgEnableAPI = true;
+		var wgEnableWriteAPI = true;
+		var wgSeparatorTransformTable = ["", ""];
+		var wgDigitTransformTable = ["", ""];
+		var wgMWSuggestTemplate = "http://shrek.tsdv.com.vn/wiki/api.php?action=opensearch\x26search={searchTerms}\x26namespace={namespaces}\x26suggest";
+		var wgDBname = "wikidb";
+		var wgSearchNamespaces = [0];
+		var wgMWSuggestMessages = ["with suggestions", "no suggestions"];
+		var wgRestrictionEdit = [];
+		var wgRestrictionMove = [];
+		/*]]>*/</script>
+
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/wikibits.js"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/CategoryTree.js"></script>
+			<script type="text/javascript">
+			var categoryTreeCollapseMsg = "collapse";
+			var categoryTreeExpandMsg = "expand";
+			var categoryTreeCollapseBulletMsg = "[\x3cb\x3e−\x3c/b\x3e]";
+			var categoryTreeExpandBulletMsg = "[\x3cb\x3e+\x3c/b\x3e]";
+			var categoryTreeLoadMsg = "load";
+			var categoryTreeLoadingMsg = "loading…";
+			var categoryTreeNothingFoundMsg = "nothing found";
+			var categoryTreeNoSubcategoriesMsg = "no subcategories";
+			var categoryTreeNoParentCategoriesMsg = "no parent categories";
+			var categoryTreeNoPagesMsg = "no pages or subcategories";
+			var categoryTreeErrorMsg = "Problem loading data.";
+			var categoryTreeRetryMsg = "Please wait a moment and try again.";
+			</script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/ajax.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/mwsuggest.js"></script>
+		<link rel="stylesheet" type="text/css" href="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shCore.css">
+		<link rel="stylesheet" type="text/css" href="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shThemeDefault.css">
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shCore.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushAS3.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushBash.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushCpp.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushCSharp.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushColdFusion.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushCss.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushDelphi.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushDiff.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushErlang.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushGroovy.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushJava.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushJavaFX.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushJScript.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushPerl.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushPhp.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushPlain.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushPowerShell.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushPython.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushRuby.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushScala.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushSql.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushVb.js"></script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/shBrushXml.js"></script>
+		<script type="text/javascript">SyntaxHighlighter.all();</script>
+		<script type="text/javascript" src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/index.php"><!-- site js --></script>
+	</head>
+<body class="mediawiki ltr ns-0 ns-subject page-Google_Mock_Cookbook skin-monobook">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+				<h1 id="firstHeading" class="firstHeading">Google Mock Cookbook</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">From TsdvWiki</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>			<!-- start content -->
+			<table id="toc" class="toc" summary="Contents"><tbody><tr><td><div id="toctitle"><h2>Contents</h2> <span class="toctoggle">[<a id="togglelink" class="internal" href="javascript:toggleToc()">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="#Defining_a_Mock_Class"><span class="tocnumber">1</span> <span class="toctext">Defining a Mock Class</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Mocking_a_Normal_Class"><span class="tocnumber">1.1</span> <span class="toctext">Mocking a Normal Class</span></a></li>
+<li class="toclevel-2"><a href="#Mocking_a_Class_Template"><span class="tocnumber">1.2</span> <span class="toctext">Mocking a Class Template</span></a></li>
+<li class="toclevel-2"><a href="#Specifying_Calling_Conventions_for_Mock_Functions"><span class="tocnumber">1.3</span> <span class="toctext">Specifying Calling Conventions for Mock Functions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Using_Mocks_in_Tests"><span class="tocnumber">2</span> <span class="toctext">Using Mocks in Tests</span></a></li>
+<li class="toclevel-1"><a href="#Setting_Default_Actions"><span class="tocnumber">3</span> <span class="toctext">Setting Default Actions</span></a></li>
+<li class="toclevel-1"><a href="#Setting_Expectations"><span class="tocnumber">4</span> <span class="toctext">Setting Expectations</span></a></li>
+<li class="toclevel-1"><a href="#Matchers"><span class="tocnumber">5</span> <span class="toctext">Matchers</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Wildcard"><span class="tocnumber">5.1</span> <span class="toctext">Wildcard</span></a></li>
+<li class="toclevel-2"><a href="#Generic_Comparison"><span class="tocnumber">5.2</span> <span class="toctext">Generic Comparison</span></a></li>
+<li class="toclevel-2"><a href="#Floating-Point_Matchers"><span class="tocnumber">5.3</span> <span class="toctext">Floating-Point Matchers</span></a></li>
+<li class="toclevel-2"><a href="#String_Matchers"><span class="tocnumber">5.4</span> <span class="toctext">String Matchers</span></a></li>
+<li class="toclevel-2"><a href="#Container_Matchers"><span class="tocnumber">5.5</span> <span class="toctext">Container Matchers</span></a></li>
+<li class="toclevel-2"><a href="#Member_Matchers"><span class="tocnumber">5.6</span> <span class="toctext">Member Matchers</span></a></li>
+<li class="toclevel-2"><a href="#Matching_the_Result_of_a_Function_or_Functor"><span class="tocnumber">5.7</span> <span class="toctext">Matching the Result of a Function or Functor</span></a></li>
+<li class="toclevel-2"><a href="#Pointer_Matchers"><span class="tocnumber">5.8</span> <span class="toctext">Pointer Matchers</span></a></li>
+<li class="toclevel-2"><a href="#Multiargument_Matchers"><span class="tocnumber">5.9</span> <span class="toctext">Multiargument Matchers</span></a></li>
+<li class="toclevel-2"><a href="#Composite_Matchers"><span class="tocnumber">5.10</span> <span class="toctext">Composite Matchers</span></a></li>
+<li class="toclevel-2"><a href="#Adapters_for_Matchers"><span class="tocnumber">5.11</span> <span class="toctext">Adapters for Matchers</span></a></li>
+<li class="toclevel-2"><a href="#Matchers_as_Predicates"><span class="tocnumber">5.12</span> <span class="toctext">Matchers as Predicates</span></a></li>
+<li class="toclevel-2"><a href="#Defining_Matchers"><span class="tocnumber">5.13</span> <span class="toctext">Defining Matchers</span></a></li>
+<li class="toclevel-2"><a href="#Matchers_as_Test_Assertions"><span class="tocnumber">5.14</span> <span class="toctext">Matchers as Test Assertions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Actions"><span class="tocnumber">6</span> <span class="toctext">Actions</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Returning_a_Value"><span class="tocnumber">6.1</span> <span class="toctext">Returning a Value</span></a></li>
+<li class="toclevel-2"><a href="#Side_Effects"><span class="tocnumber">6.2</span> <span class="toctext">Side Effects</span></a></li>
+<li class="toclevel-2"><a href="#Using_a_Function_or_a_Functor_as_an_Action"><span class="tocnumber">6.3</span> <span class="toctext">Using a Function or a Functor as an Action</span></a></li>
+<li class="toclevel-2"><a href="#Default_Action"><span class="tocnumber">6.4</span> <span class="toctext">Default Action</span></a></li>
+<li class="toclevel-2"><a href="#Composite_Actions"><span class="tocnumber">6.5</span> <span class="toctext">Composite Actions</span></a></li>
+<li class="toclevel-2"><a href="#Defining_Actions"><span class="tocnumber">6.6</span> <span class="toctext">Defining Actions</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Cardinalities"><span class="tocnumber">7</span> <span class="toctext">Cardinalities</span></a></li>
+<li class="toclevel-1"><a href="#Expectation_Order"><span class="tocnumber">8</span> <span class="toctext">Expectation Order</span></a>
+<ul>
+<li class="toclevel-2"><a href="#The_After_Clause"><span class="tocnumber">8.1</span> <span class="toctext">The After Clause</span></a></li>
+<li class="toclevel-2"><a href="#Sequences"><span class="tocnumber">8.2</span> <span class="toctext">Sequences</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Verifying_and_Resetting_a_Mock"><span class="tocnumber">9</span> <span class="toctext">Verifying and Resetting a Mock</span></a></li>
+<li class="toclevel-1"><a href="#Mock_Classes"><span class="tocnumber">10</span> <span class="toctext">Mock Classes</span></a></li>
+<li class="toclevel-1"><a href="#Flags"><span class="tocnumber">11</span> <span class="toctext">Flags</span></a></li>
+</ul>
+</td></tr></tbody></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<a name="Defining_a_Mock_Class" id="Defining_a_Mock_Class"></a><h1> <span class="mw-headline"> Defining a Mock Class </span></h1>
+<a name="Mocking_a_Normal_Class" id="Mocking_a_Normal_Class"></a><h2> <span class="mw-headline"> Mocking a Normal Class </span></h2>
+<p>Given
+</p>
+<div><div id="highlighter_870722" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">class</code> <code class="cpp plain">Foo {</code></div><div class="line number2 index1 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">...</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp plain">~Foo();</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp color1 bold">int</code> <code class="cpp plain">GetSize() </code><code class="cpp keyword bold">const</code> <code class="cpp plain">= 0;</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp plain">string Describe(</code><code class="cpp keyword bold">const</code> <code class="cpp color1 bold">char</code><code class="cpp plain">* name) = 0;</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp plain">string Describe(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">type) = 0;</code></div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp color1 bold">bool</code> <code class="cpp plain">Process(Bar elem, </code><code class="cpp color1 bold">int</code> <code class="cpp plain">count) = 0;</code></div><div class="line number8 index7 alt1"><code class="cpp plain">};</code></div></div></td></tr></tbody></table></div></div>
+<p>(note that <code>~Foo()</code> <b>must</b> be virtual) we can define its mock as
+</p>
+<div><div id="highlighter_611272" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp preprocessor">#include "gmock/gmock.h"</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="cpp keyword bold">class</code> <code class="cpp plain">MockFoo&nbsp;: </code><code class="cpp keyword bold">public</code> <code class="cpp plain">Foo {</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_CONST_METHOD0(GetSize, </code><code class="cpp color1 bold">int</code><code class="cpp plain">());</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_METHOD1(Describe, string(</code><code class="cpp keyword bold">const</code> <code class="cpp color1 bold">char</code><code class="cpp plain">* name));</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_METHOD1(Describe, string(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">type));</code></div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_METHOD2(Process, </code><code class="cpp color1 bold">bool</code><code class="cpp plain">(Bar elem, </code><code class="cpp color1 bold">int</code> <code class="cpp plain">count));</code></div><div class="line number8 index7 alt1"><code class="cpp plain">};</code></div></div></td></tr></tbody></table></div></div>
+<p>To create a "nice" mock object which ignores all uninteresting calls, or a "strict" mock object, which treats them as failures:
+</p>
+<div><div id="highlighter_14821" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp plain">NiceMock&lt;MockFoo&gt; nice_foo;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// The type is a subclass of MockFoo.</code></div><div class="line number2 index1 alt1"><code class="cpp plain">StrictMock&lt;MockFoo&gt; strict_foo; </code><code class="cpp comments">// The type is a subclass of MockFoo.</code></div></div></td></tr></tbody></table></div></div>
+<a name="Mocking_a_Class_Template" id="Mocking_a_Class_Template"></a><h2> <span class="mw-headline"> Mocking a Class Template </span></h2>
+<p>To mock
+</p>
+<div><div id="highlighter_969018" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">template</code> <code class="cpp plain">&lt;</code><code class="cpp keyword bold">typename</code> <code class="cpp plain">Elem&gt;</code></div><div class="line number2 index1 alt1"><code class="cpp keyword bold">class</code> <code class="cpp plain">StackInterface {</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;</code><code class="cpp keyword bold">public</code><code class="cpp plain">:</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">...</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp plain">~StackInterface();</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp color1 bold">int</code> <code class="cpp plain">GetSize() </code><code class="cpp keyword bold">const</code> <code class="cpp plain">= 0;</code></div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">virtual</code> <code class="cpp keyword bold">void</code> <code class="cpp plain">Push(</code><code class="cpp keyword bold">const</code> <code class="cpp plain">Elem&amp; x) = 0;</code></div><div class="line number8 index7 alt1"><code class="cpp plain">};</code></div></div></td></tr></tbody></table></div></div>
+<p>(note that <code>~StackInterface()</code> <b>must</b> be virtual) just append <code>_T</code> to the <code>MOCK_*</code> macros:
+</p>
+<div><div id="highlighter_196102" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">template</code> <code class="cpp plain">&lt;</code><code class="cpp keyword bold">typename</code> <code class="cpp plain">Elem&gt;</code></div><div class="line number2 index1 alt1"><code class="cpp keyword bold">class</code> <code class="cpp plain">MockStack&nbsp;: </code><code class="cpp keyword bold">public</code> <code class="cpp plain">StackInterface&lt;Elem&gt; {</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;</code><code class="cpp keyword bold">public</code><code class="cpp plain">:</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">...</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_CONST_METHOD0_T(GetSize, </code><code class="cpp color1 bold">int</code><code class="cpp plain">());</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_METHOD1_T(Push, </code><code class="cpp keyword bold">void</code><code class="cpp plain">(</code><code class="cpp keyword bold">const</code> <code class="cpp plain">Elem&amp; x));</code></div><div class="line number7 index6 alt2"><code class="cpp plain">};</code></div></div></td></tr></tbody></table></div></div>
+<a name="Specifying_Calling_Conventions_for_Mock_Functions" id="Specifying_Calling_Conventions_for_Mock_Functions"></a><h2> <span class="mw-headline"> Specifying Calling Conventions for Mock Functions </span></h2>
+<p>If your mock function doesn't use the default calling convention, you can specify it by appending <code>_WITH_CALLTYPE</code>
+ to any of the macros described in the previous two sections and 
+supplying the calling convention as the first argument to the macro. For
+ example,
+</p>
+<div><div id="highlighter_858513" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp plain">MOCK_METHOD_1_WITH_CALLTYPE(STDMETHODCALLTYPE, Foo, </code><code class="cpp color1 bold">bool</code><code class="cpp plain">(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">n));</code></div><div class="line number2 index1 alt1"><code class="cpp plain">MOCK_CONST_METHOD2_WITH_CALLTYPE(STDMETHODCALLTYPE, Bar, </code><code class="cpp color1 bold">int</code><code class="cpp plain">(</code><code class="cpp color1 bold">double</code> <code class="cpp plain">x, </code><code class="cpp color1 bold">double</code> <code class="cpp plain">y));</code></div></div></td></tr></tbody></table></div></div>
+<p>where <code>STDMETHODCALLTYPE</code> is defined by <code>&lt;objbase.h&gt;</code> on Windows.
+</p>
+<a name="Using_Mocks_in_Tests" id="Using_Mocks_in_Tests"></a><h1> <span class="mw-headline"> Using Mocks in Tests </span></h1>
+<p>The typical flow is: 1. Import the Google Mock names you need to use. All Google Mock names are in the <code>testing</code>
+ namespace unless they are macros or otherwise noted. 1. Create the mock
+ objects. 1. Optionally, set the default actions of the mock objects. 1.
+ Set your expectations on the mock objects (How will they be called? 
+What wil they do?). 1. Exercise code that uses the mock objects; if 
+necessary, check the result using [[../../googletest/|Google Test]] 
+assertions. 1. When a mock objects is destructed, Google Mock 
+automatically verifies that all expectations on it have been satisfied.
+</p><p>Here is an example:
+</p>
+<div><div id="highlighter_190962" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Return;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// #1</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="cpp plain">TEST(BarTest, DoesThis) {</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MockFoo foo;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// #2</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">ON_CALL(foo, GetSize())&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// #3</code></div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillByDefault(Return(1));</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp comments">// ... other default actions ...</code></div><div class="line number9 index8 alt2">&nbsp;</div><div class="line number10 index9 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(foo, Describe(5))&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// #4</code></div><div class="line number11 index10 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.Times(3)</code></div><div class="line number12 index11 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillRepeatedly(Return(</code><code class="cpp string">"Category 5"</code><code class="cpp plain">));</code></div><div class="line number13 index12 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp comments">// ... other expectations ...</code></div><div class="line number14 index13 alt1">&nbsp;</div><div class="line number15 index14 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_EQ(</code><code class="cpp string">"good"</code><code class="cpp plain">, MyProductionFunction(&amp;foo));&nbsp; </code><code class="cpp comments">// #5</code></div><div class="line number16 index15 alt1"><code class="cpp plain">}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code><code class="cpp comments">// #6</code></div></div></td></tr></tbody></table></div></div>
+<a name="Setting_Default_Actions" id="Setting_Default_Actions"></a><h1> <span class="mw-headline"> Setting Default Actions </span></h1>
+<p>Google Mock has a <b>built-in default action</b> for any function that returns <code>void</code>, <code>bool</code>, a numeric value, or a pointer.
+</p><p>To customize the default action for functions with return type <code>T</code> globally:
+</p>
+<div><div id="highlighter_283574" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::DefaultValue;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="cpp comments">// Sets the default value to be returned. T must be CopyConstructible.</code></div><div class="line number4 index3 alt1"><code class="cpp plain">DefaultValue&lt;T&gt;::Set(value);</code></div><div class="line number5 index4 alt2"><code class="cpp comments">// Sets a factory. Will be invoked on demand. T must be MoveConstructible.</code></div><div class="line number6 index5 alt1"><code class="cpp comments">//&nbsp;&nbsp; T MakeT();</code></div><div class="line number7 index6 alt2"><code class="cpp plain">DefaultValue&lt;T&gt;::SetFactory(&amp;MakeT);</code></div><div class="line number8 index7 alt1"><code class="cpp comments">// ... use the mocks ...</code></div><div class="line number9 index8 alt2"><code class="cpp comments">// Resets the default value.</code></div><div class="line number10 index9 alt1"><code class="cpp plain">DefaultValue&lt;T&gt;::Clear();</code></div></div></td></tr></tbody></table></div></div>
+<p>To customize the default action for a particular method, use <code>ON_CALL()</code>:
+</p>
+<div><div id="highlighter_381056" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp plain">ON_CALL(mock_object, method(matchers))</code></div><div class="line number2 index1 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.With(multi_argument_matcher) &nbsp;?</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillByDefault(action);</code></div></div></td></tr></tbody></table></div></div>
+<a name="Setting_Expectations" id="Setting_Expectations"></a><h1> <span class="mw-headline"> Setting Expectations </span></h1>
+<p><code>EXPECT_CALL()</code> sets <b>expectations</b> on a mock method (How will it be called? What will it do?):
+</p>
+<div><div id="highlighter_537357" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp plain">EXPECT_CALL(mock_object, method(matchers))</code></div><div class="line number2 index1 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.With(multi_argument_matcher) &nbsp;?</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.Times(cardinality)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;?</code></div><div class="line number4 index3 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.InSequence(sequences)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.After(expectations)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(action)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *</code></div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillRepeatedly(action)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;?</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.RetiresOnSaturation();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;?</code></div></div></td></tr></tbody></table></div></div>
+<p>If <code>Times()</code> is omitted, the cardinality is assumed to be:
+</p>
+<ul><li> <code>Times(1)</code> when there is neither <code>WillOnce()</code> nor <code>WillRepeatedly()</code>;
+</li><li> <code>Times(n)</code> when there are <code>n WillOnce()</code>s but no <code>WillRepeatedly()</code>, where <code>n</code> &gt;= 1; or
+</li><li> <code>Times(AtLeast(n))</code> when there are <code>n WillOnce()</code>s and a <code>WillRepeatedly()</code>, where <code>n</code> &gt;= 0.
+</li></ul>
+<p>A method with no <code>EXPECT_CALL()</code> is free to be invoked <i>any number of times</i>, and the default action will be taken each time.
+</p>
+<a name="Matchers" id="Matchers"></a><h1> <span class="mw-headline"> Matchers </span></h1>
+<p>A <b>matcher</b> matches a <i>single</i> argument. You can use it inside <code>ON_CALL()</code> or <code>EXPECT_CALL()</code>, or use it to validate a value directly:
+</p>
+<table>
+<tbody><tr>
+<th width="43%"> <code>EXPECT_THAT(value, matcher)</code>
+</th><th width="56%"> Asserts that <code>value</code> matches <code>matcher</code>.
+</th></tr>
+<tr>
+<td> <code>ASSERT_THAT(value, matcher)</code>
+</td><td> The same as <code>EXPECT_THAT(value, matcher)</code>, except that it generates a <b>fatal</b> failure.
+</td></tr></tbody></table>
+<p>Built-in matchers (where <code>argument</code> is the function argument) are divided into several categories:
+</p>
+<a name="Wildcard" id="Wildcard"></a><h2> <span class="mw-headline"> Wildcard </span></h2>
+<table>
+<tbody><tr>
+<th> <code>_</code>
+</th><th> <code>argument</code> can be any value of the correct type.
+</th></tr>
+<tr>
+<td> <code>A&lt;type&gt;()</code> or <code>An&lt;type&gt;()</code>
+</td><td> <code>argument</code> can be any value of type <code>type</code>.
+</td></tr></tbody></table>
+<a name="Generic_Comparison" id="Generic_Comparison"></a><h2> <span class="mw-headline"> Generic Comparison </span></h2>
+<table>
+<tbody><tr>
+<th width="31%"> <code>Eq(value)</code> or <code>value</code>
+</th><th width="27%"> <code>argument == value</code>
+</th></tr>
+<tr>
+<td> <code>Ge(value)</code>
+</td><td> <code>argument &gt;= value</code>
+</td></tr>
+<tr>
+<td> <code>Gt(value)</code>
+</td><td> <code>argument &gt; value</code>
+</td></tr>
+<tr>
+<td> <code>Le(value)</code>
+</td><td> <code>argument &lt;= value</code>
+</td></tr>
+<tr>
+<td> <code>Lt(value)</code>
+</td><td> <code>argument &lt; value</code>
+</td></tr>
+<tr>
+<td> <code>Ne(value)</code>
+</td><td> <code>argument&nbsp;!= value</code>
+</td></tr>
+<tr>
+<td> <code>IsNull()</code>
+</td><td> <code>argument</code> is a <code>NULL</code> pointer (raw or smart).
+</td></tr>
+<tr>
+<td> <code>NotNull()</code>
+</td><td> <code>argument</code> is a non-null pointer (raw or smart).
+</td></tr>
+<tr>
+<td> <code>Ref(variable)</code>
+</td><td> <code>argument</code> is a reference to <code>variable</code>.
+</td></tr>
+<tr>
+<td> <code>TypedEq&lt;type&gt;(value)</code>
+</td><td> <code>argument</code> has type <code>type</code> and is equal to <code>value</code>. You may need to use this instead of <code>Eq(value)</code> when the mock function is overloaded.
+</td></tr></tbody></table>
+<p>Except <code>Ref()</code>, these matchers make a <i>copy</i> of <code>value</code> in case it's modified or destructed later. If the compiler complains that <code>value</code> doesn't have a public copy constructor, try wrap it in <code>ByRef()</code>, e.g. <code>Eq(ByRef(non_copyable_value))</code>. If you do that, make sure <code>non_copyable_value</code> is not changed afterwards, or the meaning of your matcher will be changed.
+</p>
+<a name="Floating-Point_Matchers" id="Floating-Point_Matchers"></a><h2> <span class="mw-headline"> Floating-Point Matchers </span></h2>
+<table>
+<tbody><tr>
+<th width="17%"> <code>DoubleEq(a_double)</code>
+</th><th width="82%"> <code>argument</code> is a <code>double</code> value approximately equal to <code>a_double</code>, treating two NaNs as unequal.
+</th></tr>
+<tr>
+<td> <code>FloatEq(a_float)</code>
+</td><td> <code>argument</code> is a <code>float</code> value approximately equal to <code>a_float</code>, treating two NaNs as unequal.
+</td></tr>
+<tr>
+<td> <code>NanSensitiveDoubleEq(a_double)</code>
+</td><td> <code>argument</code> is a <code>double</code> value approximately equal to <code>a_double</code>, treating two NaNs as equal.
+</td></tr>
+<tr>
+<td> <code>NanSensitiveFloatEq(a_float)</code>
+</td><td> <code>argument</code> is a <code>float</code> value approximately equal to <code>a_float</code>, treating two NaNs as equal.
+</td></tr></tbody></table>
+<p>The above matchers use ULP-based comparison (the same as used in 
+[[../../googletest/|Google Test]]). They automatically pick a reasonable
+ error bound based on the absolute value of the expected value. <code>DoubleEq()</code> and <code>FloatEq()</code> conform to the IEEE standard, which requires comparing two NaNs for equality to return false. The <code>NanSensitive*</code> version instead treats two NaNs as equal, which is often what a user wants.
+</p>
+<table>
+<tbody><tr>
+<th width="24%"> <code>DoubleNear(a_double, max_abs_error)</code>
+</th><th width="75%"> <code>argument</code> is a <code>double</code> value close to <code>a_double</code> (absolute error &lt;= <code>max_abs_error</code>), treating two NaNs as unequal.
+</th></tr>
+<tr>
+<td> <code>FloatNear(a_float, max_abs_error)</code>
+</td><td> <code>argument</code> is a <code>float</code> value close to <code>a_float</code> (absolute error &lt;= <code>max_abs_error</code>), treating two NaNs as unequal.
+</td></tr>
+<tr>
+<td> <code>NanSensitiveDoubleNear(a_double, max_abs_error)</code>
+</td><td> <code>argument</code> is a <code>double</code> value close to <code>a_double</code> (absolute error &lt;= <code>max_abs_error</code>), treating two NaNs as equal.
+</td></tr>
+<tr>
+<td> <code>NanSensitiveFloatNear(a_float, max_abs_error)</code>
+</td><td> <code>argument</code> is a <code>float</code> value close to <code>a_float</code> (absolute error &lt;= <code>max_abs_error</code>), treating two NaNs as equal.
+</td></tr></tbody></table>
+<a name="String_Matchers" id="String_Matchers"></a><h2> <span class="mw-headline"> String Matchers </span></h2>
+<p>The <code>argument</code> can be either a C string or a C++ string object:
+</p>
+<table>
+<tbody><tr>
+<th width="32%"> <code>ContainsRegex(string)</code>
+</th><th width="67%"> <code>argument</code> matches the given regular expression.
+</th></tr>
+<tr>
+<td> <code>EndsWith(suffix)</code>
+</td><td> <code>argument</code> ends with string <code>suffix</code>.
+</td></tr>
+<tr>
+<td> <code>HasSubstr(string)</code>
+</td><td> <code>argument</code> contains <code>string</code> as a sub-string.
+</td></tr>
+<tr>
+<td> <code>MatchesRegex(string)</code>
+</td><td> <code>argument</code> matches the given regular expression with the match starting at the first character and ending at the last character.
+</td></tr>
+<tr>
+<td> <code>StartsWith(prefix)</code>
+</td><td> <code>argument</code> starts with string <code>prefix</code>.
+</td></tr>
+<tr>
+<td> <code>StrCaseEq(string)</code>
+</td><td> <code>argument</code> is equal to <code>string</code>, ignoring case.
+</td></tr>
+<tr>
+<td> <code>StrCaseNe(string)</code>
+</td><td> <code>argument</code> is not equal to <code>string</code>, ignoring case.
+</td></tr>
+<tr>
+<td> <code>StrEq(string)</code>
+</td><td> <code>argument</code> is equal to <code>string</code>.
+</td></tr>
+<tr>
+<td> <code>StrNe(string)</code>
+</td><td> <code>argument</code> is not equal to <code>string</code>.
+</td></tr></tbody></table>
+<p><code>ContainsRegex()</code> and <code>MatchesRegex()</code> use the regular expression syntax defined [[../../googletest/docs/AdvancedGuide.md#regular-expression-syntax|here]]. <code>StrCaseEq()</code>, <code>StrCaseNe()</code>, <code>StrEq()</code>, and <code>StrNe()</code> work for wide strings as well.
+</p>
+<a name="Container_Matchers" id="Container_Matchers"></a><h2> <span class="mw-headline"> Container Matchers </span></h2>
+<p>Most STL-style containers support <code>==</code>, so you can use <code>Eq(expected_container)</code> or simply <code>expected_container</code>
+ to match a container exactly. If you want to write the elements 
+in-line, match them more flexibly, or get more informative messages, you
+ can use:
+</p>
+<table>
+<tbody><tr>
+<th width="17%"> <code>ContainerEq(container)</code>
+</th><th width="82%"> The same as <code>Eq(container)</code> except that the failure message also includes which elements are in one container but not the other.
+</th></tr>
+<tr>
+<td> <code>Contains(e)</code>
+</td><td> <code>argument</code> contains an element that matches <code>e</code>, which can be either a value or a matcher.
+</td></tr>
+<tr>
+<td> <code>Each(e)</code>
+</td><td> <code>argument</code> is a container where <i>every</i> element matches <code>e</code>, which can be either a value or a matcher.
+</td></tr>
+<tr>
+<td> <code>ElementsAre(e0, e1, ..., en)</code>
+</td><td> <code>argument</code> has <code>n + 1</code> elements, where the i-th element matches <code>ei</code>, which can be a value or a matcher. 0 to 10 arguments are allowed.
+</td></tr>
+<tr>
+<td> <code>ElementsAreArray({ e0, e1, ..., en })</code>, <code>ElementsAreArray(array)</code>, or <code>ElementsAreArray(array, count)</code>
+</td><td> The same as <code>ElementsAre()</code> except that the expected element values/matchers come from an initializer list, STL-style container, or C-style array.
+</td></tr>
+<tr>
+<td> <code>IsEmpty()</code>
+</td><td> <code>argument</code> is an empty container (<code>container.empty()</code>).
+</td></tr>
+<tr>
+<td> <code>Pointwise(m, container)</code>
+</td><td> <code>argument</code> contains the same number of elements as in <code>container</code>, and for all i, (the i-th element in <code>argument</code>, the i-th element in <code>container</code>) match <code>m</code>, which is a matcher on 2-tuples. E.g. <code>Pointwise(Le(), upper_bounds)</code> verifies that each element in <code>argument</code> doesn't exceed the corresponding element in <code>upper_bounds</code>. See more detail below.
+</td></tr>
+<tr>
+<td> <code>SizeIs(m)</code>
+</td><td> <code>argument</code> is a container whose size matches <code>m</code>. E.g. <code>SizeIs(2)</code> or <code>SizeIs(Lt(2))</code>.
+</td></tr>
+<tr>
+<td> <code>UnorderedElementsAre(e0, e1, ..., en)</code>
+</td><td> <code>argument</code> has <code>n + 1</code> elements, and under some permutation each element matches an <code>ei</code> (for a different <code>i</code>), which can be a value or a matcher. 0 to 10 arguments are allowed.
+</td></tr>
+<tr>
+<td> <code>UnorderedElementsAreArray({ e0, e1, ..., en })</code>, <code>UnorderedElementsAreArray(array)</code>, or <code>UnorderedElementsAreArray(array, count)</code>
+</td><td> The same as <code>UnorderedElementsAre()</code> except that the expected element values/matchers come from an initializer list, STL-style container, or C-style array.
+</td></tr>
+<tr>
+<td> <code>WhenSorted(m)</code>
+</td><td> When <code>argument</code> is sorted using the <code>&lt;</code> operator, it matches container matcher <code>m</code>. E.g. <code>WhenSorted(UnorderedElementsAre(1, 2, 3))</code> verifies that <code>argument</code> contains elements <code>1</code>, <code>2</code>, and <code>3</code>, ignoring order.
+</td></tr>
+<tr>
+<td> <code>WhenSortedBy(comparator, m)</code>
+</td><td> The same as <code>WhenSorted(m)</code>, except that the given comparator instead of <code>&lt;</code> is used to sort <code>argument</code>. E.g. <code>WhenSortedBy(std::greater&lt;int&gt;(), ElementsAre(3, 2, 1))</code>.
+</td></tr></tbody></table>
+<p>Notes:
+</p>
+<ul><li> These matchers can also match:
+<ol><li> a native array passed by reference (e.g. in <code>Foo(const int (&amp;a)[5])</code>), and
+</li><li> an array passed as a pointer and a count (e.g. in <code>Bar(const T* buffer, int len)</code> -- see <a href="#Multiargument_Matchers.md" title="">Multi-argument Matchers</a>).
+</li></ol>
+</li><li> The array being matched may be multi-dimensional (i.e. its elements can be arrays).
+</li><li> <code>m</code> in <code>Pointwise(m, ...)</code> should be a matcher for <code>::testing::tuple&lt;T, U&gt;</code> where <code>T</code> and <code>U</code> are the element type of the actual container and the expected container, respectively. For example, to compare two <code>Foo</code> containers where <code>Foo</code> doesn't support <code>operator==</code> but has an <code>Equals()</code> method, one might write:
+</li></ul>
+<div><div id="highlighter_775387" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::get;</code></div><div class="line number2 index1 alt1"><code class="cpp plain">MATCHER(FooEq, </code><code class="cpp string">""</code><code class="cpp plain">) {</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp keyword bold">return</code> <code class="cpp plain">get&lt;0&gt;(arg).Equals(get&lt;1&gt;(arg));</code></div><div class="line number4 index3 alt1"><code class="cpp plain">}</code></div><div class="line number5 index4 alt2"><code class="cpp plain">...</code></div><div class="line number6 index5 alt1"><code class="cpp plain">EXPECT_THAT(actual_foos, Pointwise(FooEq(), expected_foos));</code></div></div></td></tr></tbody></table></div></div>
+<a name="Member_Matchers" id="Member_Matchers"></a><h2> <span class="mw-headline"> Member Matchers </span></h2>
+<table>
+<tbody><tr>
+<th width="15%"> <code>Field(&amp;class::field, m)</code>
+</th><th width="84%"> <code>argument.field</code> (or <code>argument-&gt;field</code> when <code>argument</code> is a plain pointer) matches matcher <code>m</code>, where <code>argument</code> is an object of type <i>class</i>.
+</th></tr>
+<tr>
+<td> <code>Key(e)</code>
+</td><td> <code>argument.first</code> matches <code>e</code>, which can be either a value or a matcher. E.g. <code>Contains(Key(Le(5)))</code> can verify that a <code>map</code> contains a key <code>&lt;= 5</code>.
+</td></tr>
+<tr>
+<td> <code>Pair(m1, m2)</code>
+</td><td> <code>argument</code> is an <code>std::pair</code> whose <code>first</code> field matches <code>m1</code> and <code>second</code> field matches <code>m2</code>.
+</td></tr>
+<tr>
+<td> <code>Property(&amp;class::property, m)</code>
+</td><td> <code>argument.property()</code> (or <code>argument-&gt;property()</code> when <code>argument</code> is a plain pointer) matches matcher <code>m</code>, where <code>argument</code> is an object of type <i>class</i>.
+</td></tr></tbody></table>
+<a name="Matching_the_Result_of_a_Function_or_Functor" id="Matching_the_Result_of_a_Function_or_Functor"></a><h2> <span class="mw-headline"> Matching the Result of a Function or Functor </span></h2>
+<table>
+<tbody><tr>
+<th width="19%"> <code>ResultOf(f, m)</code>
+</th><th width="80%"> <code>f(argument)</code> matches matcher <code>m</code>, where <code>f</code> is a function or functor.
+</th></tr></tbody></table>
+<a name="Pointer_Matchers" id="Pointer_Matchers"></a><h2> <span class="mw-headline"> Pointer Matchers </span></h2>
+<table>
+<tbody><tr>
+<th width="11%"> <code>Pointee(m)</code>
+</th><th width="88%"> <code>argument</code> (either a smart pointer or a raw pointer) points to a value that matches matcher <code>m</code>.
+</th></tr>
+<tr>
+<td> <code>WhenDynamicCastTo&lt;T&gt;(m)</code>
+</td><td> when <code>argument</code> is passed through <code>dynamic_cast&lt;T&gt;()</code>, it matches matcher <code>m</code>.
+</td></tr></tbody></table>
+<a name="Multiargument_Matchers" id="Multiargument_Matchers"></a><h2> <span class="mw-headline"> Multiargument Matchers </span></h2>
+<p>Technically, all matchers match a <i>single</i> value. A "multi-argument" matcher is just one that matches a <i>tuple</i>. The following matchers can be used to match a tuple <code>(x, y)</code>:
+</p>
+<table>
+<tbody><tr>
+<th> <code>Eq()</code>
+</th><th> <code>x == y</code>
+</th></tr>
+<tr>
+<td> <code>Ge()</code>
+</td><td> <code>x &gt;= y</code>
+</td></tr>
+<tr>
+<td> <code>Gt()</code>
+</td><td> <code>x &gt; y</code>
+</td></tr>
+<tr>
+<td> <code>Le()</code>
+</td><td> <code>x &lt;= y</code>
+</td></tr>
+<tr>
+<td> <code>Lt()</code>
+</td><td> <code>x &lt; y</code>
+</td></tr>
+<tr>
+<td> <code>Ne()</code>
+</td><td> <code>x&nbsp;!= y</code>
+</td></tr></tbody></table>
+<p>You can use the following selectors to pick a subset of the arguments (or reorder them) to participate in the matching:
+</p>
+<table>
+<tbody><tr>
+<th width="15%"> <code>AllArgs(m)</code>
+</th><th width="84%"> Equivalent to <code>m</code>. Useful as syntactic sugar in <code>.With(AllArgs(m))</code>.
+</th></tr>
+<tr>
+<td> <code>Args&lt;N1, N2, ..., Nk&gt;(m)</code>
+</td><td> The tuple of the <code>k</code> selected (using 0-based indices) arguments matches <code>m</code>, e.g. <code>Args&lt;1, 2&gt;(Eq())</code>.
+</td></tr></tbody></table>
+<a name="Composite_Matchers" id="Composite_Matchers"></a><h2> <span class="mw-headline"> Composite Matchers </span></h2>
+<p>You can make a matcher from one or more other matchers:
+</p>
+<table>
+<tbody><tr>
+<th width="32%"> <code>AllOf(m1, m2, ..., mn)</code>
+</th><th width="67%"> <code>argument</code> matches all of the matchers <code>m1</code> to <code>mn</code>.
+</th></tr>
+<tr>
+<td> <code>AnyOf(m1, m2, ..., mn)</code>
+</td><td> <code>argument</code> matches at least one of the matchers <code>m1</code> to <code>mn</code>.
+</td></tr>
+<tr>
+<td> <code>Not(m)</code>
+</td><td> <code>argument</code> doesn't match matcher <code>m</code>.
+</td></tr></tbody></table>
+<a name="Adapters_for_Matchers" id="Adapters_for_Matchers"></a><h2> <span class="mw-headline"> Adapters for Matchers </span></h2>
+<table>
+<tbody><tr>
+<th width="27%"> <code>MatcherCast&lt;T&gt;(m)</code>
+</th><th width="55%"> casts matcher <code>m</code> to type <code>Matcher&lt;T&gt;</code>.
+</th></tr>
+<tr>
+<td> <code>SafeMatcherCast&lt;T&gt;(m)</code>
+</td><td> <a href="http://shrek.tsdv.com.vn/wiki/index.php?title=CookBook.md&amp;action=edit&amp;redlink=1" class="new" title="CookBook.md (page does not exist)">safely casts</a> matcher <code>m</code> to type <code>Matcher&lt;T&gt;</code>.
+</td></tr>
+<tr>
+<td> <code>Truly(predicate)</code>
+</td><td> <code>predicate(argument)</code> returns something considered by C++ to be true, where <code>predicate</code> is a function or functor.
+</td></tr></tbody></table>
+<a name="Matchers_as_Predicates" id="Matchers_as_Predicates"></a><h2> <span class="mw-headline"> Matchers as Predicates </span></h2>
+<table>
+<tbody><tr>
+<th width="17%"> <code>Matches(m)(value)</code>
+</th><th width="82%"> evaluates to <code>true</code> if <code>value</code> matches <code>m</code>. You can use <code>Matches(m)</code> alone as a unary functor.
+</th></tr>
+<tr>
+<td> <code>ExplainMatchResult(m, value, result_listener)</code>
+</td><td> evaluates to <code>true</code> if <code>value</code> matches <code>m</code>, explaining the result to <code>result_listener</code>.
+</td></tr>
+<tr>
+<td> <code>Value(value, m)</code>
+</td><td> evaluates to <code>true</code> if <code>value</code> matches <code>m</code>.
+</td></tr></tbody></table>
+<a name="Defining_Matchers" id="Defining_Matchers"></a><h2> <span class="mw-headline"> Defining Matchers </span></h2>
+<table>
+<tbody><tr>
+<th width="47%"> <code>MATCHER(IsEven, "") { return (arg&nbsp;% 2) == 0; }</code>
+</th><th width="52%"> Defines a matcher <code>IsEven()</code> to match an even number.
+</th></tr>
+<tr>
+<td> <code>MATCHER_P(IsDivisibleBy, n, "") { *result_listener &lt;&lt; 
+"where the remainder is " &lt;&lt; (arg&nbsp;% n); return (arg&nbsp;% n)
+ == 0; }</code>
+</td><td> Defines a macher <code>IsDivisibleBy(n)</code> to match a number divisible by <code>n</code>.
+</td></tr>
+<tr>
+<td> <code>MATCHER_P2(IsBetween, a, b, std::string(negation&nbsp;? 
+"isn't"&nbsp;: "is") + " between " + PrintToString(a) + " and " + 
+PrintToString(b)) { return a &lt;= arg &amp;&amp; arg &lt;= b; }</code>
+</td><td> Defines a matcher <code>IsBetween(a, b)</code> to match a value in the range [<code>a</code>, <code>b</code>].
+</td></tr></tbody></table>
+<p><b>Notes:</b>
+</p>
+<ol><li> The <code>MATCHER*</code> macros cannot be used inside a function or class.
+</li><li> The matcher body must be <i>purely functional</i> (i.e. it 
+cannot have any side effect, and the result must not depend on anything 
+other than the value being matched and the matcher parameters).
+</li><li> You can use <code>PrintToString(x)</code> to convert a value <code>x</code> of any type to a string.
+</li></ol>
+<a name="Matchers_as_Test_Assertions" id="Matchers_as_Test_Assertions"></a><h2> <span class="mw-headline"> Matchers as Test Assertions </span></h2>
+<table>
+<tbody><tr>
+<th width="16%"> <code>ASSERT_THAT(expression, m)</code>
+</th><th width="83%"> Generates a [[../../googletest/docs/Primer.md#assertions|fatal failure]] if the value of <code>expression</code> doesn't match matcher <code>m</code>.
+</th></tr>
+<tr>
+<td> <code>EXPECT_THAT(expression, m)</code>
+</td><td> Generates a non-fatal failure if the value of <code>expression</code> doesn't match matcher <code>m</code>.
+</td></tr></tbody></table>
+<a name="Actions" id="Actions"></a><h1> <span class="mw-headline"> Actions </span></h1>
+<p><b>Actions</b> specify what a mock function should do when invoked.
+</p>
+<a name="Returning_a_Value" id="Returning_a_Value"></a><h2> <span class="mw-headline"> Returning a Value </span></h2>
+<table>
+<tbody><tr>
+<th width="15%"> <code>Return()</code>
+</th><th width="50%"> Return from a <code>void</code> mock function.
+</th></tr>
+<tr>
+<td> <code>Return(value)</code>
+</td><td> Return <code>value</code>. If the type of <code>value</code> is different to the mock function's return type, <code>value</code> is converted to the latter type <i>at the time the expectation is set</i>, not when the action is executed.
+</td></tr>
+<tr>
+<td> <code>ReturnArg&lt;N&gt;()</code>
+</td><td> Return the <code>N</code>-th (0-based) argument.
+</td></tr>
+<tr>
+<td> <code>ReturnNew&lt;T&gt;(a1, ..., ak)</code>
+</td><td> Return <code>new T(a1, ..., ak)</code>; a different object is created each time.
+</td></tr>
+<tr>
+<td> <code>ReturnNull()</code>
+</td><td> Return a null pointer.
+</td></tr>
+<tr>
+<td> <code>ReturnPointee(ptr)</code>
+</td><td> Return the value pointed to by <code>ptr</code>.
+</td></tr>
+<tr>
+<td> <code>ReturnRef(variable)</code>
+</td><td> Return a reference to <code>variable</code>.
+</td></tr>
+<tr>
+<td> <code>ReturnRefOfCopy(value)</code>
+</td><td> Return a reference to a copy of <code>value</code>; the copy lives as long as the action.
+</td></tr></tbody></table>
+<a name="Side_Effects" id="Side_Effects"></a><h2> <span class="mw-headline"> Side Effects </span></h2>
+<table>
+<tbody><tr>
+<th width="37%"> <code>Assign(&amp;variable, value)</code>
+</th><th width="38%"> Assign <code>value</code> to variable.
+</th></tr>
+<tr>
+<td> <code>DeleteArg&lt;N&gt;()</code>
+</td><td> Delete the <code>N</code>-th (0-based) argument, which must be a pointer.
+</td></tr>
+<tr>
+<td> <code>SaveArg&lt;N&gt;(pointer)</code>
+</td><td> Save the <code>N</code>-th (0-based) argument to <code>*pointer</code>.
+</td></tr>
+<tr>
+<td> <code>SaveArgPointee&lt;N&gt;(pointer)</code>
+</td><td> Save the value pointed to by the <code>N</code>-th (0-based) argument to <code>*pointer</code>.
+</td></tr>
+<tr>
+<td> <code>SetArgReferee&lt;N&gt;(value)</code>
+</td><td> Assign value to the variable referenced by the <code>N</code>-th (0-based) argument.
+</td></tr>
+<tr>
+<td> <code>SetArgPointee&lt;N&gt;(value)</code>
+</td><td> Assign <code>value</code> to the variable pointed by the <code>N</code>-th (0-based) argument.
+</td></tr>
+<tr>
+<td> <code>SetArgumentPointee&lt;N&gt;(value)</code>
+</td><td> Same as <code>SetArgPointee&lt;N&gt;(value)</code>. Deprecated. Will be removed in v1.7.0.
+</td></tr>
+<tr>
+<td> <code>SetArrayArgument&lt;N&gt;(first, last)</code>
+</td><td> Copies the elements in source range [<code>first</code>, <code>last</code>) to the array pointed to by the <code>N</code>-th
+ (0-based) argument, which can be either a pointer or an iterator. The 
+action does not take ownership of the elements in the source range.
+</td></tr>
+<tr>
+<td> <code>SetErrnoAndReturn(error, value)</code>
+</td><td> Set <code>errno</code> to <code>error</code> and return <code>value</code>.
+</td></tr>
+<tr>
+<td> <code>Throw(exception)</code>
+</td><td> Throws the given exception, which can be any copyable value. Available since v1.1.0.
+</td></tr></tbody></table>
+<a name="Using_a_Function_or_a_Functor_as_an_Action" id="Using_a_Function_or_a_Functor_as_an_Action"></a><h2> <span class="mw-headline"> Using a Function or a Functor as an Action </span></h2>
+<table>
+<tbody><tr>
+<th width="9%"> <code>Invoke(f)</code>
+</th><th width="90%"> Invoke <code>f</code> with the arguments passed to the mock function, where <code>f</code> can be a global/static function or a functor.
+</th></tr>
+<tr>
+<td> <code>Invoke(object_pointer, &amp;class::method)</code>
+</td><td> Invoke the {method on the object with the arguments passed to the mock function.
+</td></tr>
+<tr>
+<td> <code>InvokeWithoutArgs(f)</code>
+</td><td> Invoke <code>f</code>, which can be a global/static function or a functor. <code>f</code> must take no arguments.
+</td></tr>
+<tr>
+<td> <code>InvokeWithoutArgs(object_pointer, &amp;class::method)</code>
+</td><td> Invoke the method on the object, which takes no arguments.
+</td></tr>
+<tr>
+<td> <code>InvokeArgument&lt;N&gt;(arg1, arg2, ..., argk)</code>
+</td><td> Invoke the mock function's <code>N</code>-th (0-based) argument, which must be a function or a functor, with the <code>k</code> arguments.
+</td></tr></tbody></table>
+<p>The return value of the invoked function is used as the return value of the action.
+</p><p>When defining a function or functor to be used with <code>Invoke*()</code>, you can declare any unused parameters as <code>Unused</code>:
+</p>
+<div><div id="highlighter_872777" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp color1 bold">double</code> <code class="cpp plain">Distance(Unused, </code><code class="cpp color1 bold">double</code> <code class="cpp plain">x, </code><code class="cpp color1 bold">double</code> <code class="cpp plain">y) { </code><code class="cpp keyword bold">return</code> <code class="cpp functions bold">sqrt</code><code class="cpp plain">(x*x + y*y); }</code></div><div class="line number2 index1 alt1"><code class="cpp plain">...</code></div><div class="line number3 index2 alt2"><code class="cpp plain">EXPECT_CALL(mock, Foo(</code><code class="cpp string">"Hi"</code><code class="cpp plain">, _, _)).WillOnce(Invoke(Distance));</code></div></div></td></tr></tbody></table></div></div>
+<p>In <code>InvokeArgument&lt;N&gt;(...)</code>, if an argument needs to be passed by reference, wrap it inside <code>ByRef()</code>. For example,
+</p>
+<div><div id="highlighter_633138" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp plain">InvokeArgument&lt;2&gt;(5, string(</code><code class="cpp string">"Hi"</code><code class="cpp plain">), ByRef(foo))</code></div></div></td></tr></tbody></table></div></div>
+<p>calls the mock function's #2 argument, passing to it <code>5</code> and <code>string("Hi")</code> by value, and <code>foo</code> by reference.
+</p>
+<a name="Default_Action" id="Default_Action"></a><h2> <span class="mw-headline"> Default Action </span></h2>
+<table>
+<tbody><tr>
+<th width="16%"> <code>DoDefault()</code>
+</th><th width="83%"> Do the default action (specified by <code>ON_CALL()</code> or the built-in one).
+</th></tr></tbody></table>
+<p><b>Note:</b> due to technical reasons, <code>DoDefault()</code> cannot be used inside a composite action - trying to do so will result in a run-time error.
+</p>
+<a name="Composite_Actions" id="Composite_Actions"></a><h2> <span class="mw-headline"> Composite Actions </span></h2>
+<table>
+<tbody><tr>
+<th width="16%"> <code>DoAll(a1, a2, ..., an)</code>
+</th><th width="83%"> Do all actions <code>a1</code> to <code>an</code> and return the result of <code>an</code> in each invocation. The first <code>n - 1</code> sub-actions must return void.
+</th></tr>
+<tr>
+<td> <code>IgnoreResult(a)</code>
+</td><td> Perform action <code>a</code> and ignore its result. <code>a</code> must not return void.
+</td></tr>
+<tr>
+<td> <code>WithArg&lt;N&gt;(a)</code>
+</td><td> Pass the <code>N</code>-th (0-based) argument of the mock function to action <code>a</code> and perform it.
+</td></tr>
+<tr>
+<td> <code>WithArgs&lt;N1, N2, ..., Nk&gt;(a)</code>
+</td><td> Pass the selected (0-based) arguments of the mock function to action <code>a</code> and perform it.
+</td></tr>
+<tr>
+<td> <code>WithoutArgs(a)</code>
+</td><td> Perform action <code>a</code> without any arguments.
+</td></tr></tbody></table>
+<a name="Defining_Actions" id="Defining_Actions"></a><h2> <span class="mw-headline"> Defining Actions </span></h2>
+<table>
+<tbody><tr>
+<th width="31%"> <code>ACTION(Sum) { return arg0 + arg1; }</code>
+</th><th width="68%"> Defines an action <code>Sum()</code> to return the sum of the mock function's argument #0 and #1.
+</th></tr>
+<tr>
+<td> <code>ACTION_P(Plus, n) { return arg0 + n; }</code>
+</td><td> Defines an action <code>Plus(n)</code> to return the sum of the mock function's argument #0 and <code>n</code>.
+</td></tr>
+<tr>
+<td> <code>ACTION_Pk(Foo, p1, ..., pk) { statements; }</code>
+</td><td> Defines a parameterized action <code>Foo(p1, ..., pk)</code> to execute the given <code>statements</code>.
+</td></tr></tbody></table>
+<p>The <code>ACTION*</code> macros cannot be used inside a function or class.
+</p>
+<a name="Cardinalities" id="Cardinalities"></a><h1> <span class="mw-headline"> Cardinalities </span></h1>
+<p>These are used in <code>Times()</code> to specify how many times a mock function will be called:
+</p>
+<table>
+<tbody><tr>
+<th width="19%"> <code>AnyNumber()</code>
+</th><th width="66%"> The function can be called any number of times.
+</th></tr>
+<tr>
+<td> <code>AtLeast(n)</code>
+</td><td> The call is expected at least <code>n</code> times.
+</td></tr>
+<tr>
+<td> <code>AtMost(n)</code>
+</td><td> The call is expected at most <code>n</code> times.
+</td></tr>
+<tr>
+<td> <code>Between(m, n)</code>
+</td><td> The call is expected between <code>m</code> and <code>n</code> (inclusive) times.
+</td></tr>
+<tr>
+<td> <code>Exactly(n) or n</code>
+</td><td> The call is expected exactly <code>n</code> times. In particular, the call should never happen when <code>n</code> is 0.
+</td></tr></tbody></table>
+<a name="Expectation_Order" id="Expectation_Order"></a><h1> <span class="mw-headline"> Expectation Order </span></h1>
+<p>By default, the expectations can be matched in <i>any</i> order. If 
+some or all expectations must be matched in a given order, there are two
+ ways to specify it. They can be used either independently or together.
+</p>
+<a name="The_After_Clause" id="The_After_Clause"></a><h2> <span class="mw-headline"> The After Clause </span></h2>
+<div><div id="highlighter_745783" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Expectation;</code></div><div class="line number2 index1 alt1"><code class="cpp plain">...</code></div><div class="line number3 index2 alt2"><code class="cpp plain">Expectation init_x = EXPECT_CALL(foo, InitX());</code></div><div class="line number4 index3 alt1"><code class="cpp plain">Expectation init_y = EXPECT_CALL(foo, InitY());</code></div><div class="line number5 index4 alt2"><code class="cpp plain">EXPECT_CALL(foo, Bar())</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.After(init_x, init_y);</code></div></div></td></tr></tbody></table></div></div>
+<p>says that <code>Bar()</code> can be called only after both <code>InitX()</code> and <code>InitY()</code> have been called.
+</p><p>If you don't know how many pre-requisites an expectation has when you write it, you can use an <code>ExpectationSet</code> to collect them:
+</p>
+<div><div id="highlighter_925187" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::ExpectationSet;</code></div><div class="line number2 index1 alt1"><code class="cpp plain">...</code></div><div class="line number3 index2 alt2"><code class="cpp plain">ExpectationSet all_inits;</code></div><div class="line number4 index3 alt1"><code class="cpp keyword bold">for</code> <code class="cpp plain">(</code><code class="cpp color1 bold">int</code> <code class="cpp plain">i = 0; i &lt; element_count; i++) {</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">all_inits += EXPECT_CALL(foo, InitElement(i));</code></div><div class="line number6 index5 alt1"><code class="cpp plain">}</code></div><div class="line number7 index6 alt2"><code class="cpp plain">EXPECT_CALL(foo, Bar())</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.After(all_inits);</code></div></div></td></tr></tbody></table></div></div>
+<p>says that <code>Bar()</code> can be called only after all elements 
+have been initialized (but we don't care about which elements get 
+initialized before the others).
+</p><p>Modifying an <code>ExpectationSet</code> after using it in an <code>.After()</code> doesn't affect the meaning of the <code>.After()</code>.
+</p>
+<a name="Sequences" id="Sequences"></a><h2> <span class="mw-headline"> Sequences </span></h2>
+<p>When you have a long chain of sequential expectations, it's easier to specify the order using <b>sequences</b>, which don't require you to given each expectation in the chain a different name. <i>All expected<br> calls</i> in the same sequence must occur in the order they are specified.
+</p>
+<div><div id="highlighter_805134" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Sequence;</code></div><div class="line number2 index1 alt1"><code class="cpp plain">Sequence s1, s2;</code></div><div class="line number3 index2 alt2"><code class="cpp plain">...</code></div><div class="line number4 index3 alt1"><code class="cpp plain">EXPECT_CALL(foo, Reset())</code></div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.InSequence(s1, s2)</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(</code><code class="cpp keyword bold">true</code><code class="cpp plain">));</code></div><div class="line number7 index6 alt2"><code class="cpp plain">EXPECT_CALL(foo, GetSize())</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.InSequence(s1)</code></div><div class="line number9 index8 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(1));</code></div><div class="line number10 index9 alt1"><code class="cpp plain">EXPECT_CALL(foo, Describe(A&lt;</code><code class="cpp keyword bold">const</code> <code class="cpp color1 bold">char</code><code class="cpp plain">*&gt;()))</code></div><div class="line number11 index10 alt2"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.InSequence(s2)</code></div><div class="line number12 index11 alt1"><code class="cpp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="cpp plain">.WillOnce(Return(</code><code class="cpp string">"dummy"</code><code class="cpp plain">));</code></div></div></td></tr></tbody></table></div></div>
+<p>says that <code>Reset()</code> must be called before <i>both</i> <code>GetSize()</code> <i>and</i> <code>Describe()</code>, and the latter two can occur in any order.
+</p><p>To put many expectations in a sequence conveniently:
+</p>
+<div><div id="highlighter_745414" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::InSequence;</code></div><div class="line number2 index1 alt1"><code class="cpp plain">{</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">InSequence dummy;</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(...)...;</code></div><div class="line number6 index5 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(...)...;</code></div><div class="line number7 index6 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">...</code></div><div class="line number8 index7 alt1"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">EXPECT_CALL(...)...;</code></div><div class="line number9 index8 alt2"><code class="cpp plain">}</code></div></div></td></tr></tbody></table></div></div>
+<p>says that all expected calls in the scope of <code>dummy</code> must occur in strict order. The name <code>dummy</code> is irrelevant.)
+</p>
+<a name="Verifying_and_Resetting_a_Mock" id="Verifying_and_Resetting_a_Mock"></a><h1> <span class="mw-headline"> Verifying and Resetting a Mock </span></h1>
+<p>Google Mock will verify the expectations on a mock object when it is destructed, or you can do it earlier:
+</p>
+<div><div id="highlighter_155838" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">using</code>&nbsp;<code class="cpp plain">::testing::Mock;</code></div><div class="line number2 index1 alt1"><code class="cpp plain">...</code></div><div class="line number3 index2 alt2"><code class="cpp comments">// Verifies and removes the expectations on mock_obj;</code></div><div class="line number4 index3 alt1"><code class="cpp comments">// returns true iff successful.</code></div><div class="line number5 index4 alt2"><code class="cpp plain">Mock::VerifyAndClearExpectations(&amp;mock_obj);</code></div><div class="line number6 index5 alt1"><code class="cpp plain">...</code></div><div class="line number7 index6 alt2"><code class="cpp comments">// Verifies and removes the expectations on mock_obj;</code></div><div class="line number8 index7 alt1"><code class="cpp comments">// also removes the default actions set by ON_CALL();</code></div><div class="line number9 index8 alt2"><code class="cpp comments">// returns true iff successful.</code></div><div class="line number10 index9 alt1"><code class="cpp plain">Mock::VerifyAndClear(&amp;mock_obj);</code></div></div></td></tr></tbody></table></div></div>
+<p>You can also tell Google Mock that a mock object can be leaked and doesn't need to be verified:
+</p>
+<div><div id="highlighter_578643" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp plain">Mock::AllowLeak(&amp;mock_obj);</code></div></div></td></tr></tbody></table></div></div>
+<a name="Mock_Classes" id="Mock_Classes"></a><h1> <span class="mw-headline"> Mock Classes </span></h1>
+<p>Google Mock defines a convenient mock class template
+</p>
+<div><div id="highlighter_126510" class="syntaxhighlighter  cpp"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="cpp keyword bold">class</code> <code class="cpp plain">MockFunction&lt;R(A1, ..., An)&gt; {</code></div><div class="line number2 index1 alt1"><code class="cpp spaces">&nbsp;</code><code class="cpp keyword bold">public</code><code class="cpp plain">:</code></div><div class="line number3 index2 alt2"><code class="cpp spaces">&nbsp;&nbsp;</code><code class="cpp plain">MOCK_METHODn(Call, R(A1, ..., An));</code></div><div class="line number4 index3 alt1"><code class="cpp plain">};</code></div></div></td></tr></tbody></table></div></div>
+<p>See this <a href="http://shrek.tsdv.com.vn/wiki/index.php?title=CookBook.md&amp;action=edit&amp;redlink=1" class="new" title="CookBook.md (page does not exist)">recipe</a> for one application of it.
+</p>
+<a name="Flags" id="Flags"></a><h1> <span class="mw-headline"> Flags </span></h1>
+<table>
+<tbody><tr>
+<th width="40%"> <code>--gmock_catch_leaked_mocks=0</code>
+</th><th width="59%"> Don't report leaked mock objects as failures.
+</th></tr>
+<tr>
+<td> <code>--gmock_verbose=LEVEL</code>
+</td><td> Sets the default verbosity level (<code>info</code>, <code>warning</code>, or <code>error</code>) of Google Mock messages.
+</td></tr></tbody></table>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 169/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:414-0!1!0!!en!2!edit=0 and timestamp 20170525033928 -->
+<div class="printfooter">
+Retrieved from "<a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_Cookbook">http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_Cookbook</a>"</div>
+			<div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:Categories" title="Special:Categories">Categories</a>: <span dir="ltr"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Qa" title="Category:Qa">Qa</a></span> | <span dir="ltr"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Mocking" title="Category:Mocking">Mocking</a></span> | <span dir="ltr"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Google_Test" title="Category:Google Test">Google Test</a></span></div></div>			<!-- end content -->
+						<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+	
+				 <li id="ca-nstab-main" class="selected"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Google_Mock_Cookbook" title="View the content page [alt-shift-c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Talk:Google_Mock_Cookbook&amp;action=edit&amp;redlink=1" title="Discussion about the content page [alt-shift-t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Google_Mock_Cookbook&amp;action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Google_Mock_Cookbook&amp;action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h">History</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Special:UserLogin&amp;returnto=Google_Mock_Cookbook" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(/wiki/skins/common/images/wiki.png);" href="http://shrek.tsdv.com.vn/wiki/index.php/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class="pBody">
+			<ul>
+				<li id="n-mainpage-description"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Main_Page">Main Page</a></li>
+				<li id="n-portal"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:Community_Portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:RecentChanges" title="The list of recent changes in the wiki [alt-shift-r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x">Random page</a></li>
+				<li id="n-Knowledge-Base"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:Categories">Knowledge Base</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/wiki/index.php" id="searchform"><div>
+				<input name="title" value="Special:Search" type="hidden">
+				<input id="searchInput" name="search" title="Search TsdvWiki [alt-shift-f]" accesskey="f" autocomplete="off" type="text">
+				<input name="go" class="searchButton" id="searchGoButton" value="Go" title="Go to a page with this exact name if exists" type="submit">&nbsp;
+				<input name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text" type="submit">
+			</div></form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:WhatLinksHere/Google_Mock_Cookbook" title="List of all wiki pages that link here [alt-shift-j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:RecentChangesLinked/Google_Mock_Cookbook" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k">Related changes</a></li>
+<li id="t-specialpages"><a href="http://shrek.tsdv.com.vn/wiki/index.php/Special:SpecialPages" title="List of all special pages [alt-shift-q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Google_Mock_Cookbook&amp;printable=yes" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="http://shrek.tsdv.com.vn/wiki/index.php?title=Google_Mock_Cookbook&amp;oldid=1704" title="Permanent link to this revision of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+	<div class="generated-sidebar portlet" id="p-categorytree-portlet">
+		<h5>Categories</h5>
+		<div class="pBody">
+<div class=" CategoryTreeTag"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Best_Practices',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Best_Practices">Best Practices</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Code/Test_tips',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Code/Test_tips">Code/Test tips</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Performance_Optimization',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Performance_Optimization">Performance Optimization</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Readbility',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Readbility">Readbility</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Size_Optimization',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Size_Optimization">Size Optimization</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Guideline',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Guideline">Guideline</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Coding_Rule',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Coding_Rule">Coding Rule</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Information_Security',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Information_Security">Information Security</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><i class="CategoryTreeNotice">no subcategories</i></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('OS',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:OS">OS</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Embedded',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Embedded">Embedded</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Linux',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Linux">Linux</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Linux_embedded',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Linux_embedded">Linux embedded</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Process',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Process">Process</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Configuration_Management',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Configuration_Management">Configuration Management</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Programming',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Programming">Programming</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('C',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:C">C</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('C++',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:C%2B%2B">C++</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Coding_Rule',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Coding_Rule">Coding Rule</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('HTML-CSS-JavaScript',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:HTML-CSS-JavaScript">HTML-CSS-JavaScript</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Java',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Java">Java</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Java_Script',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Java_Script">Java Script</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('NodeJS',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:NodeJS">NodeJS</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('PHP',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:PHP">PHP</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Rails',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Rails">Rails</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Ruby',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Ruby">Ruby</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Project_Closing',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Project_Closing">Project Closing</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('2013B',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:2013B">2013B</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Qa',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Qa">Qa</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Code_coverage',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Code_coverage">Code coverage</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Collaborator',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Collaborator">Collaborator</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Mocking',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Mocking">Mocking</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Modelling',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Modelling">Modelling</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Parameterized_Test',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Parameterized_Test">Parameterized Test</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Static_checking',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Static_checking">Static checking</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Testing_tools',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Testing_tools">Testing tools</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Setup',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Setup">Setup</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><i class="CategoryTreeNotice">no subcategories</i></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Technologies',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Technologies">Technologies</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('OpenCV',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:OpenCV">OpenCV</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Testing',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Testing">Testing</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Android_Testing',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Android_Testing">Android Testing</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('CUnit',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:CUnit">CUnit</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Google_Test',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Google_Test">Google Test</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Jenkins',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Jenkins">Jenkins</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('NUnit',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:NUnit">NUnit</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Parasoft',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Parasoft">Parasoft</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Selenium',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Selenium">Selenium</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('Tool',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Tool">Tool</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Common',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Common">Common</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Eclipse',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Eclipse">Eclipse</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Egroupware',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Egroupware">Egroupware</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('GCC',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:GCC">GCC</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Git',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Git">Git</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('LDAP',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:LDAP">LDAP</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('LibreOffice',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:LibreOffice">LibreOffice</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Lync',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Lync">Lync</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Minitab',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Minitab">Minitab</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Prismy',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Prismy">Prismy</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Qmail',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Qmail">Qmail</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Redmine',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Redmine">Redmine</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('SVN',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:SVN">SVN</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeExpandNode('Xdebug',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="expand">[<b>+</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:Xdebug">Xdebug</a></div>
+		<div class="CategoryTreeChildren" style="display:none"></div></div>
+		
+		</div></div>
+		
+		<div class="CategoryTreeSection"><div class="CategoryTreeItem"><span class="CategoryTreeBullet"><span class="CategoryTreeToggle CategoryTreeLoaded" style="display: inline;" onclick="if (this.href) this.href='javascript:void(0)'; categoryTreeCollapseNode('UEFI_Bios',{&quot;mode&quot;:0,&quot;hideprefix&quot;:20,&quot;showcount&quot;:false,&quot;namespaces&quot;:false},this);" title="collapse">[<b>−</b>]</span> </span><a class="CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory" href="http://shrek.tsdv.com.vn/wiki/index.php/Category:UEFI_Bios">UEFI Bios</a></div>
+		<div class="CategoryTreeChildren" style="display:block"><i class="CategoryTreeNotice">no subcategories</i></div></div>
+		
+		</div>
+				</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki"></a></div>
+				<div id="f-copyrightico"><a href="http://www.gnu.org/copyleft/fdl.html"><img src="Google%20Mock%20Cookbook%20-%20TsdvWiki_files/gnu-fdl.png" alt="GNU Free Documentation License 1.3"></a></div>
+			<ul id="f-list">
+					<li id="lastmod"> This page was last modified on 13 December 2016, at 06:12.</li>
+					<li id="viewcount">This page has been accessed 11 times.</li>
+					<li id="copyright">Content is available under <a href="http://www.gnu.org/copyleft/fdl.html" class="external " title="http://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License 1.3</a>.</li>
+					<li id="privacy"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:Privacy_policy" title="TsdvWiki:Privacy policy">Privacy policy</a></li>
+					<li id="about"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:About" title="TsdvWiki:About">About TsdvWiki</a></li>
+					<li id="disclaimer"><a href="http://shrek.tsdv.com.vn/wiki/index.php/TsdvWiki:General_disclaimer" title="TsdvWiki:General disclaimer">Disclaimers</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.342 secs. -->
+</body></html>

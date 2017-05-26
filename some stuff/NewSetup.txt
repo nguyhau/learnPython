@@ -1,0 +1,253 @@
+/**/
+ suid: (superuser ID)
+ * fix /dev/null: permission denied
+   sudo chroot chroot-haund/
+   rm -f /dev/null; mknod -m 666 /dev/null c 1 3
+ * passwd -> setpass.
+  unmount all
+ * sed -i -e 's/chroot/chroot1/g' *
+/*************************************************************************
+ *   config network and proxy
+ *************************************************************************/
+ 1  nano /etc/apt/apt.conf   -> for install 
+     Acquire::http::Proxy "http://haund:fpttoshiba@proxy.tsdv.com.vn:3128/"; 
+                                                                                                   
+ 2  nano /etc/apt/sources.list -> update kelnel (search key: source list generator debian)
+    deb http://ftp.us.debian.org/debian/ jessie main
+    deb-src http://ftp.us.debian.org/debian/ jessie main
+    deb http://security.debian.org/ jessie/updates main contrib
+    deb-src http://security.debian.org/ jessie/updates main contrib
+ 3  apt-get update                                                                                                             
+ 4  nano /etc/hosts                                                                                                              
+    127.0.0.1       localhost                                                                                                     
+    ::1             localhost ip6-localhost ip6-loopback                                                                          
+    ff02::1         ip6-allnodes                                                                                                  
+    ff02::2         ip6-allrouters                                                                                                
+    127.0.1.1    debian 
+ 5  nano /etc/resolv.conf   -> set name server
+    search toshiba-tsdv.com                                                                                                       
+    nameserver 10.116.16.13                                                                                                       
+    nameserver 10.116.16.2  
+/*************************************************************************
+ *   create account
+ *************************************************************************/ 
+ 7  apt-get install sudo  -> install sudo package to create sudoers file. 
+ 8  sudoedit /etc/sudoers  -> add sudo privilege
+    haund   ALL=(ALL:ALL) ALL 
+ 9  adduser haund1                                                                                                             
+ 9'  deluser haund 
+ 9"  adduser haund                                                                                                             
+ 10  su - haund  
+ 11 sudo chown -R haund:haund /home/haund  -> change owner for directory "sudo chown -R username:group directory"
+ 6  apt-get install vim   -> install vim                
+    set up for vim:
+    vi ~/.vimrc
+        syntax on
+        :color desert
+        :set nu
+        set tabstop=4
+    http://stackoverflow.com/questions/1878974/redefine-tab-as-4-spaces 
+ 12. sudo apt-get install apt-file 
+    apt-file update
+    apt-file search <filename>
+ 13. set environment: vi /etc/environment    
+    http_proxy="http://haund:fpttoshiba@proxy.tsdv.com.vn:3128/"
+ 14. git config --global http.proxy $http_proxy
+/*************************************************************************
+ *   config git proxy: http://shrek.tsdv.com.vn/wiki/index.php/Howto
+ *************************************************************************/ 
+
+/**********************************************************************************
+ * Some utilities command 
+ **********************************************************************************/
+ 1. check mount device: df -h 
+ 2. check partition : -fdisk -l <device> /dev/hda.
+ 3. check installed package: dpkg -L package name ; dpkg --list
+ 4, format disk : sudo mkfs.ext4 mfs.img 
+ 5. Extract file: tar -xvf /home/nguyhau/Downloads/linux-4.8.6.tar.xz -C /home/nguyhau/Downloads/Linux
+ 6. Mount: sudo mount rootfs.img test/ ; umount: sudo umount test/
+ 7. Shutdow/Restart: Powoff/shutdown -r now
+ 8. Check folder size: du -sh /
+ 9. remote command:
+    ssh haund@10.116.41.72
+    scp bzImage-initramfs-intel.bin haund@10.116.41.72:bootX64.efi
+    scp haund@10.116.41.102:~/* .
+ 10. remote desktop: 
+    rdesktop -u user -p pass -d TOSHIBA -f IP 
+    Quit remote mode: Ctrl Alt Return   
+ 11. Add partition:
+    http://www.vitalsofttech.com/add-disk-storage-to-oracle-virtualbox-with-linux/
+    sudo fdisk -l -> list all partition
+    sudo fdisk /dev/sdb -> to set partition (n: create, default, default, type: primary , w: write&save)
+    sudo mkfs.ext4 /dev/sdb1 -> to format partition 
+    mkdir -p /NewPartition
+    sudo mount /dev/sdb1 /NewPartition
+    chown nguyhau /NewPartition/
+    add "/dev/sdb1               /NewPartition           ext4    defaults        1 2" to /etc/fstab
+ 12. Get environment variable */
+    env|grep PROXY   
+ 13. Check a package
+    dpkg -L package name   
+ /********************************************************
+  * Regular Expression
+  *********************************************************/
+    Operator                  Behavior
+    .                 Wildcard, matches any character
+    ^abc              Matches some pattern abc at the start of a string
+    abc$              Matches some pattern abc at the end of a string
+    [abc]             Matches one of a set of characters
+    [A-Z0-9]          Matches one of a range of characters
+    ed|ing|s          Matches one of the specified strings (disjunction)
+    *                 Zero or more of previous item, e.g. a*, [a-z]* (also known as Kleene Closure)
+    +                 One or more of previous item, e.g. a+, [a-z]+
+    ?                 Zero or one of the previous item (i.e. optional), e.g. a?, [a-z]?
+    {n}               Exactly n repeats where n is a non-negative integer
+    {n,}              At least n repeats
+    {,n}              No more than n repeats
+    {m,n}             At least m and no more than n repeats
+    a(b|c)+           Parentheses that indicate the scope of the operators    
+/*******************************************
+ *      NFS: https://github.com/mitchellh/vagrant/issues/2304; https://github.com/mitchellh/vagrant/issues/1706
+ *****************************/    
+ sudo mount -t nfs 10.116.41.50:/ vmmachine/
+ cat /proc/mounts| mount -f
+ * Server
+    /* install 
+    apt-get install nfs-kernel-server
+    apt-get install rpcbind
+    /* config
+    mkdir –m 0555 –p /home/exports   -> directory contain share file.
+    chown nobody:nogroup –R /home/exports
+    vi /etc/exports: /home/exports 10.116.41.0/24(rw,sync,fsid=0,crossmnt,no_subtree_check,no_root_squash)
+            option: - fsid=0 or fsid=root
+                    - ro/rw: read only/read-write
+                    - sync/async: default is sync; Asynchronous writes increase performance a bit, but they decrease reliability since there is a     data loss risk in case of the server crashing
+                    - root_squash/no_root_squash: /root on the client machine will have the same level of access to the files on the system as root on the server.You should not specify this option without a good reason
+                    - sec option to indicate the security level that you want: sec=sys is the default with no special security features, sec=krb5 enables authentication only, sec=krb5i adds integrity protection, and sec=krb5p is the most complete level which includes privacy protection (with data encryption). For this to work you need a working Kerberos setup 
+                    - no_subtree_check: If only part of a volume is exported, a routine called subtree checking verifies that a file that is requested from the client is in the appropriate part of the volume.
+                    - wdelay — Causes the NFS server to delay writing to the disk if it suspects another write request is imminent. This can improve performance by reducing the number of times the disk must be accessed by separate write commands, reducing write overhead. The no_wdelay option turns off this feature, but is only available when using the sync option.
+    exportfs –a -o async
+            option: a: export or unexport all directory 
+                    u: unexport.
+                    o: option for export: (ro|rw; sync|async; no_wdelay|wdelay; secure|insecure)
+                    v: view export directory
+    /* NOTE: use "/sbin/service nfs reload" command after each time you change /etc/exports file to apply new change.                
+    /* start service
+    service rpcbind start
+    service nfs-kernel-server restart
+    /* test:Permission denied
+    showmount –e
+    rpcinfo –p | grep nfs
+    check /proc/fs/nfs/exports| /var/lib/nfs/xtab
+    /* test: Program Not Registered
+    /* Secure:
+    vi /etc/hosts.allow:<daemon list>: <client list> [: <option>: <option>: ...]
+    vi /etc/hosts.deny:<daemon list>: <client list> [: <option>: <option>: ...]
+ * Client
+    /* install
+    apt-get install nfs-common rpcbind
+    mkdir mnt1
+    /* mount 
+    mount server’sIP:/ mnt1
+    mount –t nfs4 –o rsize=8192,wsize=8192,proto=tcp,port=2049 server’sIP:/ mnt1
+    /* test 
+    rpcinfo -p server'IP
+ * Check version of nfs: mount -v| nfsstat -m    
+ /============================================
+    Note that NFS Version 2 is limited to a maximum of 8K, regardless of the maximum block size defined by NFSSVC_MAXBLKSIZE; Version 3 will support up to 64K, if permitted
+    currently, nfs version is 4, support default is 1MB, not defined by NFSSVC_MAXBLKSIZE.
+    /home/haund/temp/vmmachine from 10.116.41.50:/                                                                                 Flags: rw,relatime,vers=4.0,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=10.116.41.72,local_lock=none,addr=10.116.41.50
+    
+     maximum transmission unit (MTU) is the largest size packet or frame:
+     * check by using ifconfig| grep MTU; | tracepath IP| netstat -i  https://www.cyberciti.biz/faq/centos-rhel-redhat-fedora-debian-linux-mtu-size/
+     * http://www.microhowto.info/howto/change_the_mtu_of_a_network_interface.html
+    212992: 
+    
+/****************************************************************************************************************************
+ * KVM: KVM, which stands for Kernel-based Virtual Machine,  KVM was merged into the Linux kernel right from the start. Its developers chose to take advantage of the processor instruction sets dedicated to virtualization (Intel-VT and AMD-V), which keeps KVM lightweight, elegant and not resource-hungry.
+ * you can verify that you have such a processor by looking for “vmx” or “svm” in the CPU flags listed in /proc/cpuinfo. 
+ ****************************************************************************************************************************/     
+ * Environment
+ apt-get install qemu-kvm libvirt-bin virtinst virt-manager virt-viewer
+ - libvirt allows managing virtual machines in a uniform way. (libvirt-bin provides the libvirtd daemon, which allows (potentially remote) management of the virtual machines running of the host, and starts the required VMs when the host boots. In addition, this package provides the virsh command-line tool, which allows controlling the libvirtd-managed machines.)
+ - virtual-manager is a graphical interface that uses libvirt to create and manage virtual machines
+ - virtinst package provides virt-install, which allows creating virtual machines from the command line.
+ - virt-viewer allows accessing a VM's graphical console. 
+ * Create virtual machine: Most options are not required. Minimum requirements are --name, --ram, guest storage (--disk, --filesystem or --nodisks), and an install option 
+    virt-install --connect qemu:///system  1
+                 --virt-type kvm           2: allows specifying the use of KVM even though the URL looks like QEMU.
+                 --name testkvm            3: option defines a (unique) name for the virtual machine.
+                 --ram 1024                4: option allows specifying the amount of RAM (in MB) to allocate for the virtual machine.
+                 --disk /srv/kvm/testkvm.qcow,format=qcow2,size=10 5: specifies the location of the image file that is to represent our virtual machine's hard disk
+                 --cdrom /srv/isos/debian-8.1.0-amd64-netinst.iso  6: option is used to indicate where to find the optical disk to use for installation
+                 --network bridge=br0      7
+                 --vnc                     8: states that the graphical console should be made available using VNC
+                 --os-type linux           9: The --os-type and --os-variant options allow optimizing a few parameters of the virtual machine,
+                 --os-variant debianwheezy
+                 --noautoconsole    10: Don't automatically try to connect to the guest console.
+                 --import           11: Skip the OS installation process, and build a guest around an existing disk image.
+                 --debug            12: Print debugging information to the terminal when running the install process.
+ * Run virtual machine                
+    sudo virsh net-start default
+    [sudo /etc/init.d/libvirtd restart]
+   virt-viewer --connect qemu+ssh://root@server/system testkvm  (romlinux@debian/system ) [sudo virt-manager]
+ * Managing Machines:
+    virsh -c qemu:///system list --all --> list all virtual machines
+    virsh -c qemu:///system start testkvm --> start virtual machine (shutdown|reboot|suspend|resume|destroy)
+    virsh -c qemu:///system vncdisplay testkvm --> connect and display graphical console
+  * fix sound 
+  sudo virsh edit guest-machine  
+  change sound model ='ip6' to 'ac97'
+  install sound driver from http://www.realtek.com.tw/downloads/downloadsView.aspx?Langid=1&PNid=14&PFid=23&Level=4&Conn=3&DownTypeID=3&GetDown=false  
+/*
+ DLNA, Screen Mirroring, Google Cast, Photo Share, Smart View, LG Smart Share
+
+DLNA separates multimedia devices into 10 certified classes subdivided into three broad categories: 
+- Home Network Devices (PCs, TVs, AV receivers, game consoles), 
+- Mobile Handheld Devices (smartphones, tablets, digital cameras), 
+- and Home Infrastructure Devices (routers and hubs).  
+
+you might have a PC running DLNA-certified software that transforms it into a media server. 
+Your DLNA-certified player—a TV or game console, for example—would be able to browse the content on the PC and stream it.
+a controller, such as a tablet or smartphone, could discover the content on the PC and tell the TV to play it back. 
+
+All DLNA-certified devices use Universal Plug and Play (UPnP) to discover and talk to each other on the network. When you connect one to your router, it should automatically appear on any other DLNA-certified component’s menu without needing you to perform any setup.
+
+/*** Secure NFS ***/
+The first step is mount access. Mount access is achieved by the client machine attempting to attach to the server.
+ The security for this is provided by the /etc/exports file. This file lists the names or IP addresses for machines that are allowed to access a share point. 
+The second step is file access. This is a function of normal file system access controls on the client and not a specialized function of NFS. Once the drive is mounted the user and group permissions on the files determine access control. 
+
+/********************************************/
+ Best practice:
+ * Device vitualization 
+    - Optimize performance by using the  virtio_blk and  virtio_net drivers:  virtio_blk driver uses the VirtIO  API to provide high performance for storage I/O devices,virtio_net driver uses the VirtIO  API to provide increased network performance
+    - Virtualize memory resources by using the  virtio_balloon driver: The  virtio_balloon driver provides a communication pathway between the hypervisor and the guest operating system. 
+    - Configure para-virtualized network devices
+ 
+ chmod a+rwxt /tmp
+ 
+ https://bugzilla.redhat.com/show_bug.cgi?id=1176761
+ 
+ http://www.userbenchmark.com/UserRun/3701407
+ 3703409
+ 
+ config bridge network: https://www.linux-kvm.org/page/Networking
+ 
+ https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3180542/
+ 
+
+
+/* apt-get install qemu-kvm libvirt-bin virtinst
+1. fallocate -l 16G win7.img
+2. qemu-img create -f qcow2 ./win7.qcow2 16G
+3. virt-install --name Windows --ram 2048 --vcpus 4 --os-type=windows --debug --os-variant=win7 --controller type=scsi,model=virtio-scsi --disk win7.img,bus=virtio --video=qxl --network=default,model=virtio --soundhw ich6 --vnc --noautoconsole --cdrom win7.iso
+*/
+
+/==============================================================================================
+ Error
+ ==============================================================================================/
+ libsndfile1.
+ harfbuzz
+ xfonts-utils
+ vi ../meta-debian/classes/debian-package.bbclass -> change PR from git$SRC to git 

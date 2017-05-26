@@ -1,22 +1,22 @@
 1. Kerneld consists of two components:
-+ sending request to the daemon requesting a module for a certain task
-+ A user-space daemon that can figure out what module must be loaded to fulfill the request from the kernel
-# /etc/rc.d/rc.S -> /etc/rc.d/rc.sysinit.-> 
+    + sending request to the daemon requesting a module for a certain task
+    + A user-space daemon that can figure out what module must be loaded to fulfill the request from the kernel
+    # /etc/rc.d/rc.S -> /etc/rc.d/rc.sysinit.-> 
 2. Manage kernel module: (device driver, network driver, file system, ..)
-+ modprobe (/etc/conf.modules)
-+ insmod
-+ lsmod: list all currently loaded modules
-+ depmod -a: build a list of all available modules and analyzes their inter-dependencies
-+ genksysm
-The requests that the kerneld daemon gets from kernel: 
-+ block-device driver
-+ character-device driver 
-+ binary format 
-+ tty line discripline 
-+ filesystem
-+ network device 
-+ network service 
-+ network protocol
+    + modprobe (/etc/conf.modules)
+    + insmod
+    + lsmod: list all currently loaded modules
+    + depmod -a: build a list of all available modules and analyzes their inter-dependencies
+    + genksysm
+    The requests that the kerneld daemon gets from kernel: 
+    + block-device driver
+    + character-device driver 
+    + binary format 
+    + tty line discripline 
+    + filesystem
+    + network device 
+    + network service 
+    + network protocol
 
 //===========================================
 At kernel initialization time, there is an absolutely minimal filesystem registered, called rootfs. The code that implements this filesystem can be found in fs/ramfs/inode.c, which also happens to contain the code for the ramfs filesystem. rootfs is basically identical to ramfs, except for the specification of the MS_NOUSER flag. This is interpreted by the routine graft_tree in fs/namespace.c, and I think it prevents userland processes doing their own mounts of rootfs
@@ -150,8 +150,7 @@ sudo fdisk -l
  
  . Indicator: Monitor panel, Network, Other, TouchPad
  VGA&HDMI
- luyen1.tranminh@toshiba.co.jp
- Abcd1234
+ 
  
  
  
@@ -260,4 +259,6 @@ tzset function initializes the tzname variable from the value of the TZ environm
    - add package to citrix: ~/TZCS/poky/meta-tzcs/meta-intel-vdi-citrix/recipes-core$ vi packagegroups/packagegroup-base-intel-vdi.bbappend   
    - add package to citrix&vmware ~/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-core/packagegroups$ vi packagegroup-base-intel-vdi.bb
    
+  
    
+//samsung-ua43ku6000   
