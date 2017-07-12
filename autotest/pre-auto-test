@@ -1,0 +1,23 @@
+#!/bin/sh
+# Have to run this file when you want to use auto test
+
+wget ftp://hoantt:1@10.116.41.72/auto-test/hotkeys-lf/*
+
+tar -xzvf scrot.tar.gz
+tar -xzvf compare.tar.gz
+tar -xzvf scp.tar.gz
+tar -xzvf bc.tar.gz
+
+chmod 755 run-test compare-screen-shot
+mv run-test compare-screen-shot /usr/bin
+mkir -p /usr/share/auto-test/hotkeys-lf/
+mv hotkeys* /usr/share/auto-test/hotkeys-lf/
+sleep 4
+
+run-test
+sleep 5
+compare-screen-shot
+sleep 5
+xterm
+
+

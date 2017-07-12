@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# Path to file contains hotkeys data
+FILE_INPUT="/usr/share/auto-test/hotkeys-lf/hotkeys"
+DIR="/usr/share/auto-test/hotkeys-lf/"
+
+# Run test follow categories
+while read category; do
+	CATEGORY=${DIR}${category}
+	
+	# Check categories exist or not
+	if [ -z $CATEGORY ]; then
+		echo "ERROR: Missing data of category $category..."
+		echo "Please update data!"
+		exit 1
+	fi
+	
+	# Define variables
+	PART="$(echo $category | cut -d "-" -f2)"
+	PREFIX="VDI-Mod-LF-$PART"
+	i=1
+
+	# Path to screenshot directory of each category
+	SCREENSHOTS_DIR="/var/log/auto-test/hotkeys-lf/ScreenShots-$PART/"
+	
+	# Check screenshot directory exist or not
+	if [ -d "$SCREENSHOTS_DIR" ]; then
+		rm -rf $SCREENSHOTS_DIR
+	fi
+	mkdir -p $SCREENSHOTS_DIR
+	
+	icesh -class xterm.XTerm toggleState Minimized
+	sleep 5
+	
+	# Take base screenshot
+	echo "Capture base screen for $category"
+	scrot ${SCREENSHOTS_DIR}${PREFIX}-base.png
+
+	# Simulate hotkeys and take screenshot
+	echo "Start test disable hotkeys Firefox: $category"
+	while read tc; do
+		if [ $i -lt 10 ]; then
+			NUMBER="00${i}"
+		else
+			NUMBER="0${i}"
+		fi
+		xdotool key `echo $tc | sed 's/ //g'`
+		sleep 5
+		scrot ${SCREENSHOTS_DIR}${PREFIX}-${NUMBER}.png
+		i=`expr $i + 1`
+	done <$CATEGORY
+	
+	echo "End test disable hotkeys Firefox: $category"
+done <$FILE_INPUT

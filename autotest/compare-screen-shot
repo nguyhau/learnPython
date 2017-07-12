@@ -1,0 +1,69 @@
+#!/bin/sh
+
+# Path to file contains hotkeys data 
+FILE_INPUT="/usr/share/auto-test/hotkeys-lf/hotkeys"
+DIR="/usr/share/auto-test/hotkeys-lf/"
+
+# Get result follow categories 
+while read category; do
+	CATEGORY=${DIR}${category}
+	
+	# Define variables
+	PART="$(echo $category | cut -d "-" -f2)"
+	PREFIX="VDI-Mod-LF-$PART"
+	LIMIT_VALUE=0.01
+
+	# Path to screenshot directory of each category
+	SCREENSHOTS_DIR="/var/log/auto-test/hotkeys-lf/ScreenShots-$PART"
+	
+	# Path to result file	
+	FILE_RESULT="/var/log/auto-test/hotkeys-lf/Test-${PART}.log"
+
+	# Path to log file
+	IMAGE_COMPARE="/tmp/image-compare.png"
+	LOG_COMPARE="/tmp/log-compare"
+
+	# Check screenshot directory exist or not
+	if [ -z $SCREENSHOTS_DIR ]; then
+		echo "ERROR: Missing file input..."
+		echo "Please retry execute command with directory includes test results!"
+		exit 1
+	fi
+	
+	# Check result file exist or not
+	if [ -f $FILE_RESULT ]; then
+		rm $FILE_RESULT
+	fi
+	touch $FILE_RESULT
+
+	# Compare screenshots
+	echo "Start compare log test for Light Firefox ${PART}"
+
+	NUMBER_TESTCASE=$(expr $(ls -1 $SCREENSHOTS_DIR | wc -l) - 1)
+	for i in $(seq 1 $NUMBER_TESTCASE); do
+		if [ $i -lt 10 ]; then
+			NUMBER="00${i}"
+		else
+			NUMBER="0${i}"
+		fi
+
+		compare -verbose -metric mae ./$SCREENSHOTS_DIR/$PREFIX-base.png \
+			./$SCREENSHOTS_DIR/$PREFIX-$NUMBER.png $IMAGE_COMPARE &> $LOG_COMPARE
+
+		TEST_RESULT=$(cat $LOG_COMPARE | grep "all" | cut -d "(" -f2 | sed 's/.$//')
+
+		if [[ ${TEST_RESULT/e} != "$TEST_RESULT" ]]; then
+        	echo "$PREFIX-$NUMBER ---> OK"
+        	echo "$PREFIX-$NUMBER ---> OK" >> $FILE_RESULT
+		elif [ 1 -eq "$(echo "$TEST_RESULT > $LIMIT_VALUE" | bc )" ] ; then
+			echo "$PREFIX-$NUMBER ---> NG"
+			echo "$PREFIX-$NUMBER ---> NG" >> $FILE_RESULT
+		else
+			echo "$PREFIX-$NUMBER ---> OK"
+			echo "$PREFIX-$NUMBER ---> OK" >> $FILE_RESULT
+		fi
+	done
+
+	echo "End compare log test for Light Firefox ${PART}"
+	echo "Test results: ${FILE_RESULT}"
+done <$FILE_INPUT

@@ -111,7 +111,7 @@
  *****************************/    
  sudo mount -t nfs 10.116.41.50:/ vmmachine/
  cat /proc/mounts| mount -f
- * Server
+ * Server   *
     /* install 
     apt-get install nfs-kernel-server
     apt-get install rpcbind
@@ -143,7 +143,7 @@
     /* Secure:
     vi /etc/hosts.allow:<daemon list>: <client list> [: <option>: <option>: ...]
     vi /etc/hosts.deny:<daemon list>: <client list> [: <option>: <option>: ...]
- * Client
+ * Client   *
     /* install
     apt-get install nfs-common rpcbind
     mkdir mnt1
@@ -163,43 +163,8 @@
      * http://www.microhowto.info/howto/change_the_mtu_of_a_network_interface.html
     212992: 
     
-/****************************************************************************************************************************
- * KVM: KVM, which stands for Kernel-based Virtual Machine,  KVM was merged into the Linux kernel right from the start. Its developers chose to take advantage of the processor instruction sets dedicated to virtualization (Intel-VT and AMD-V), which keeps KVM lightweight, elegant and not resource-hungry.
- * you can verify that you have such a processor by looking for “vmx” or “svm” in the CPU flags listed in /proc/cpuinfo. 
- ****************************************************************************************************************************/     
- * Environment
- apt-get install qemu-kvm libvirt-bin virtinst virt-manager virt-viewer
- - libvirt allows managing virtual machines in a uniform way. (libvirt-bin provides the libvirtd daemon, which allows (potentially remote) management of the virtual machines running of the host, and starts the required VMs when the host boots. In addition, this package provides the virsh command-line tool, which allows controlling the libvirtd-managed machines.)
- - virtual-manager is a graphical interface that uses libvirt to create and manage virtual machines
- - virtinst package provides virt-install, which allows creating virtual machines from the command line.
- - virt-viewer allows accessing a VM's graphical console. 
- * Create virtual machine: Most options are not required. Minimum requirements are --name, --ram, guest storage (--disk, --filesystem or --nodisks), and an install option 
-    virt-install --connect qemu:///system  1
-                 --virt-type kvm           2: allows specifying the use of KVM even though the URL looks like QEMU.
-                 --name testkvm            3: option defines a (unique) name for the virtual machine.
-                 --ram 1024                4: option allows specifying the amount of RAM (in MB) to allocate for the virtual machine.
-                 --disk /srv/kvm/testkvm.qcow,format=qcow2,size=10 5: specifies the location of the image file that is to represent our virtual machine's hard disk
-                 --cdrom /srv/isos/debian-8.1.0-amd64-netinst.iso  6: option is used to indicate where to find the optical disk to use for installation
-                 --network bridge=br0      7
-                 --vnc                     8: states that the graphical console should be made available using VNC
-                 --os-type linux           9: The --os-type and --os-variant options allow optimizing a few parameters of the virtual machine,
-                 --os-variant debianwheezy
-                 --noautoconsole    10: Don't automatically try to connect to the guest console.
-                 --import           11: Skip the OS installation process, and build a guest around an existing disk image.
-                 --debug            12: Print debugging information to the terminal when running the install process.
- * Run virtual machine                
-    sudo virsh net-start default
-    [sudo /etc/init.d/libvirtd restart]
-   virt-viewer --connect qemu+ssh://root@server/system testkvm  (romlinux@debian/system ) [sudo virt-manager]
- * Managing Machines:
-    virsh -c qemu:///system list --all --> list all virtual machines
-    virsh -c qemu:///system start testkvm --> start virtual machine (shutdown|reboot|suspend|resume|destroy)
-    virsh -c qemu:///system vncdisplay testkvm --> connect and display graphical console
-  * fix sound 
-  sudo virsh edit guest-machine  
-  change sound model ='ip6' to 'ac97'
-  install sound driver from http://www.realtek.com.tw/downloads/downloadsView.aspx?Langid=1&PNid=14&PFid=23&Level=4&Conn=3&DownTypeID=3&GetDown=false  
-/*
+
+/** How to connect smart phone to smart tivi **/
  DLNA, Screen Mirroring, Google Cast, Photo Share, Smart View, LG Smart Share
 
 DLNA separates multimedia devices into 10 certified classes subdivided into three broad categories: 
@@ -239,7 +204,7 @@ The second step is file access. This is a function of normal file system access 
 
 
 /* apt-get install qemu-kvm libvirt-bin virtinst
-1. fallocate -l 16G win7.img
+//1. fallocate -l 16G win7.img
 2. qemu-img create -f qcow2 ./win7.qcow2 16G
 3. virt-install --name Windows --ram 2048 --vcpus 4 --os-type=windows --debug --os-variant=win7 --controller type=scsi,model=virtio-scsi --disk win7.img,bus=virtio --video=qxl --network=default,model=virtio --soundhw ich6 --vnc --noautoconsole --cdrom win7.iso
 */
@@ -247,7 +212,219 @@ The second step is file access. This is a function of normal file system access 
 /==============================================================================================
  Error
  ==============================================================================================/
+ openssl
+ locale 
  libsndfile1.
  harfbuzz
  xfonts-utils
  vi ../meta-debian/classes/debian-package.bbclass -> change PR from git$SRC to git 
+ 
+ /****************************************************************************************************************************
+ * KVM: KVM, which stands for Kernel-based Virtual Machine,  KVM was merged into the Linux kernel right from the start. Its developers chose to take advantage of the processor instruction sets dedicated to virtualization (Intel-VT and AMD-V), which keeps KVM lightweight, elegant and not resource-hungry.
+ * you can verify that you have such a processor by looking for “vmx” or “svm” in the CPU flags listed in /proc/cpuinfo. 
+ ****************************************************************************************************************************/     
+ * Environment
+ apt-get install qemu-kvm libvirt-bin virtinst virt-manager virt-viewer
+ - libvirt allows managing virtual machines in a uniform way. (libvirt-bin provides the libvirtd daemon, which allows (potentially remote) management of the virtual machines running of the host, and starts the required VMs when the host boots. In addition, this package provides the virsh command-line tool, which allows controlling the libvirtd-managed machines.)
+ - virt-manager is a graphical interface that uses libvirt to create and manage virtual machines
+ - virtinst package provides virt-install, which allows creating virtual machines from the command line.
+ - virt-viewer allows accessing a VM's graphical console. 
+ * Create virtual machine: Most options are not required. Minimum requirements are --name, --ram, guest storage (--disk, --filesystem or --nodisks), and an install option 
+    virt-install --connect qemu:///system  1
+                 --virt-type kvm           2: allows specifying the use of KVM even though the URL looks like QEMU.
+                 --name testkvm            3: option defines a (unique) name for the virtual machine.
+                 --ram 1024                4: option allows specifying the amount of RAM (in MB) to allocate for the virtual machine.
+                 --disk /srv/kvm/testkvm.qcow,format=qcow2,size=10 5: specifies the location of the image file that is to represent our virtual machine's hard disk
+                 --cdrom /srv/isos/debian-8.1.0-amd64-netinst.iso  6: option is used to indicate where to find the optical disk to use for installation
+                 --network bridge=br0      7
+                 --vnc                     8: states that the graphical console should be made available using VNC
+                 --os-type linux           9: The --os-type and --os-variant options allow optimizing a few parameters of the virtual machine,
+                 --os-variant debianwheezy
+                 --noautoconsole    10: Don't automatically try to connect to the guest console.
+                 --import           11: Skip the OS installation process, and build a guest around an existing disk image.
+                 --debug            12: Print debugging information to the terminal when running the install process.
+ * Run virtual machine                
+    sudo virsh net-start default
+    [sudo /etc/init.d/libvirtd restart]
+   virt-viewer --connect qemu+ssh://root@server/system testkvm  (romlinux@debian/system ) [sudo virt-manager]
+ * Managing Machines:
+    virsh -c qemu:///system list --all --> list all virtual machines
+    virsh -c qemu:///system start testkvm --> start virtual machine (shutdown|reboot|suspend|resume|destroy)
+    virsh -c qemu:///system vncdisplay testkvm --> connect and display graphical console
+  * fix sound 
+  sudo virsh edit guest-machine  
+  change sound model ='ip6' to 'ac97'
+  install sound driver from http://www.realtek.com.tw/downloads/downloadsView.aspx?Langid=1&PNid=14&PFid=23&Level=4&Conn=3&DownTypeID=3&GetDown=false  
+  
+  virsh list -all 
+  virsh nodedev-list pci_0000_00_1b_0
+  lspci
+  virsh edit Windows(name guest machine)
+  vi usr/bin/create-guest-machine 
+  
+/** network control **/
+cat /sys/class/net/wlan0/operstate -> up or down.
+sudo ifconfig -a
+sudo ifconfig interface down 
+sudo brctl delbr interface   
+
+/** Issue when build small core **/
+1. can't set locale:
+    sudo locale-gen "en_US.UTF-8"
+    sudo dpkg-reconfigure locales
+    export LC_ALL="en_US.UTF-8" in .bashrc
+2. openssl/opensslv.h: No such file or directory
+    sudo apt-get install libssl-dev 
+
+
+/******* config kernel for using NAT: cateee *****/
+enalbe:
+CONFIG_NF_NAT_REDIRECT
+CONFIG_NETFILTER_XT_TARGET_REDIRECT
+CONFIG_NF_REJECT_IPV4
+CONFIG_NF_NAT_MASQUERADE_IPV4
+CONFIG_IP_NF_FILTER
+CONFIG_IP_NF_TARGET_REJECT
+CONFIG_IP_NF_TARGET_MASQUERADE
+CONFIG_IP_NF_TARGET_REDIRECT
+CONFIG_IP_NF_MANGLE
+
+/** Recompile linux kernel **/
+1. Download linux kernel soure linux-4.4.2.tar.gz
+2. tar xf linux-4.4.2.tar.gz
+3. cd linux-4.4.2
+4. make menuconfig
+5. make -j4
+6. sudo make modules_install && sudo make install.
+7. sudo update-grub2 
+8. sudo reboot.
+
+/** **/
+mesure performance: (iperf, user benchmark, crytal)
+1. Rich:
+    - No virtio (Disk drives, network adapter): 3902185
+    - Apply virtio 3982396
+    - change root Apply virtio.
+2. TZCS:
+    - Apply virtio : 3851792
+//
+win7-4: 
+virsh start 
+virt-viewer -cf qemu:///system Windows     
+
+192.168.122.126
+
+sudo route -n -> default gateway
+cat /etc/resolv.conf -> dns server.
+
+/******* create bridge for network *******/
+/etc/sysctl.d/bridge.conf:
+cat >> /etc/sysctl.d/bridge.conf <<EOF
+    net.bridge.bridge-nf-call-ip6tables=0
+    net.bridge.bridge-nf-call-iptables=0
+    net.bridge.bridge-nf-call-arptables=0
+    EOF
+/etc/udev/rules.d/99-bridge.rules
+cat >> /etc/udev/rules.d/99-bridge.rules <<EOF
+    ACTION=="add", SUBSYSTEM=="module", KERNEL=="bridge", RUN+="/sbin/sysctl -p /etc/sysctl.d/bridge.conf"
+    EOF
+apt-get install bridge-utils
+/etc/network/interfaces
+cat >> /etc/network/interfaces <<EOF
+    iface eth0 inet manual
+
+    auto br0
+    iface br0 inet static
+        # Use the MAC address identified above.
+        hwaddress ether 19:7c:3b:92:ec:ee
+        address 203.0.113.166
+        netmask 255.255.255.248
+        gateway 203.0.113.161
+
+        bridge_ports eth0
+        # If you want to turn on Spanning Tree Protocol, ask your hosting
+        # provider first as it may conflict with their network.
+        bridge_stp off
+        # If STP is off, set to 0. If STP is on, set to 2 (or greater).
+        bridge_fd 0
+
+    iface br0 inet6 static
+        address 2001:db8::1
+        netmask 64
+        gateway fe80::1
+        autoconf 0
+    EOF    
+RUN: ip address flush eth0 scope global && ifup br0        
+
+Check : brctl show br0
+
+// comment tzcs main: ~/TZCS/poky/meta-tzcs vi meta-intel-wifi/recipes-core/base-files/files/.bashrc
+
+sudo service lightdm|gdm|mdm stop
+pkill X
+
+soft / hard
+
+Determines the recovery behavior of the NFS client after an NFS request times out. If neither option is specified (or if the hard option is specified), NFS requests are retried indefinitely.
+/**************************************************************
+ *      bitbake process:
+ **************************************************************/
+ 1. Source fetch:
+    - do_fetch
+    - do_unpack
+ 2. Patching
+    - do_patch
+ 3. Configuration and Compilation
+    - do_configure
+    - do_compile
+    - do_install
+ 4. Package Splitting
+    - do_package 
+    - do_packagedata
+    - do_package_write_deb
+ 5. Image generation
+    - do_rootfs
+ 6. SDK Generation
+    - do_populate_sdk
+ /**************************************************************
+  * Build project with cmake
+  **************************************************************/   
+  1. sudo apt-get install cmake 
+  2. cd project and create build dir:
+  3. cmake ../
+  4. make -j 4
+  /**************************************************************
+  * Build a package manual
+  **************************************************************/   
+  1. jump to package src ex ~/TZCS/build-bigcore-vmware/tmp/work/x86_64-debian-linux/icewm/1.3.12-r3/icewm
+  2. run script to confige:
+    ../temp/run.do_configure
+  3. run compile
+    ../temp/run.do_compile
+    
+/**************************************************
+ *
+ */    
+ /etc/X11/default-display-manager.
+ update-alternatives --config x-window-manager
+ 
+ create -> virt-install
+ virt-install -n Windows \
+ -r 1024 \        
+ --vcpus 4 \
+ --os-type=windows  \
+ --debug --os-variant=win7 \
+ --controller type=scsi,model=virtio-scsi \
+ --disk /mnt/WindowVirtio.img,bus=virtio \
+ --video=qxl \
+ --network=default,model=virtio \
+ --soundhw ich6 \
+ --vnc \
+ --noautoconsole \
+ --import \ 
+ virt-install in virtinst
+ 
+ 
+ virsh start Windows   
+ virsh -> libvirt-clients
+ virt-viewer -cf qemu:///system Windows

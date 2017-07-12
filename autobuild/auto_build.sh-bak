@@ -1,0 +1,102 @@
+################################################################################################################
+# Copyright : luyentm
+# 1.       Mặc định build vào nửa đêm
+# 2.       Mặc định build commit mới nhất
+# 3.       Script tự động xóa hết thư mục build và build lại từ đầu
+# 4.       Script tự động gửi mail thông báo cho team sau khi build xong.
+# 5.       Script có thể được dùng trong trường hợp khẩn cấp phải hỗ trợ khách hàng trong khoảng thời gian ngắn,
+################################################################################################################
+TARGET_BRANCH="daisy-dspc-tsdv-vdi-vmware-A9J"
+TARGET_BUILD_SMALL_CORE="linux-append"
+TARGET_BUILD_BIG_CORE="core-image-base"
+################################################################################################################
+DATE_BUILD="`date +%F`"
+FOLDER_SMALL_CORE="build-small-core"
+FOLDER_BIG_CORE="build-big-core"
+BUILD_PATH="$HOME/A5JT-luyentm"
+SCRIPT_PATH="$BUILD_PATH/autobuild"
+STORE_PATH="$HOME/build_store"
+LOG_SMALL_CORE="log-build-small-core"
+LOG_BIG_CORE="log-build-big-core"
+LOG_SEND_MAIL="log-send-mail"	# both of small core and big core
+cd $BUILD_PATH
+yes | rm -rf $FOLDER_SMALL_CORE
+yes | rm -rf $FOLDER_BIG_CORE
+mkdir $FOLDER_SMALL_CORE
+mkdir $FOLDER_BIG_CORE
+################### LOGIC TO FETCH SOURCE CODE [ONLY TZCS] ####################
+echo -e  "Target branch : " > $BUILD_PATH/$LOG_SEND_MAIL
+echo "$TARGET_BRANCH" >> $BUILD_PATH/$LOG_SEND_MAIL
+echo ""
+cd "$BUILD_PATH/poky/meta-tzcs"
+git checkout $TARGET_BRANCH &> /dev/null
+git pull
+git show --quiet HEAD >> "$BUILD_PATH/$LOG_SEND_MAIL"
+COMMIT_ID=`git show --quiet | head -1 | cut -d' ' -f2`
+STORE_DATA_PATH="$STORE_PATH/$COMMIT_ID"
+STORE_LOG_PATH="$STORE_DATA_PATH/$DATE_BUILD"
+mkdir -p $STORE_LOG_PATH
+echo "********************************************************************" >> $BUILD_PATH/$LOG_SEND_MAIL
+##################### SMALL CORE #####################################
+cd "$BUILD_PATH"
+echo "START building small core at : `date` " >> $BUILD_PATH/$LOG_SEND_MAIL
+source poky/oe-init-build-env $BUILD_PATH/$FOLDER_SMALL_CORE &>> $BUILD_PATH/$LOG_SMALL_CORE
+cp $SCRIPT_PATH/conf/bblayers.confsmall conf/bblayers.conf
+cp $SCRIPT_PATH/conf/local.confsmall conf/local.conf
+bitbake $TARGET_BUILD_SMALL_CORE &>>  $BUILD_PATH/$LOG_SMALL_CORE
+re1=`python $SCRIPT_PATH/search_errors_log.py $BUILD_PATH/$LOG_SMALL_CORE`
+if [[ ! -z $re1 ]]
+  then
+    echo -e "\nError found :(" >> $BUILD_PATH/$LOG_SEND_MAIL
+    if [[ -f $re1 ]]; then
+      echo "Contents of $re1" >> $BUILD_PATH/$LOG_SEND_MAIL
+      cat $re1 >> $BUILD_PATH/$LOG_SEND_MAIL
+    else
+      echo "Error at $re1" >> $BUILD_PATH/$LOG_SEND_MAIL
+    fi
+  else
+    echo -e "\nNo error found :)" >> $BUILD_PATH/$LOG_SEND_MAIL
+    cp /home/luyentm/A5JT-luyentm/build-small-core/tmp/deploy/images/intel/bzImage-intel.bin \
+       $STORE_DATA_PATH
+fi
+#python $SCRIPT_PATH/sendlog.py
+mv "$BUILD_PATH/$LOG_SMALL_CORE" $STORE_LOG_PATH
+echo "COMPLETE building small core at : `date` " >> $BUILD_PATH/$LOG_SEND_MAIL
+echo "*********************************************************************" >> $BUILD_PATH/$LOG_SEND_MAIL
+############################## BIG CORE #####################################
+cd "$BUILD_PATH"
+source poky/oe-init-build-env $BUILD_PATH/$FOLDER_BIG_CORE &>> $BUILD_PATH/$LOG_BIG_CORE
+cp $SCRIPT_PATH/conf/bblayers.confbig conf/bblayers.conf
+cp $SCRIPT_PATH/conf/local.confbig conf/local.conf
+echo "Start building big core at : `date` " >> $BUILD_PATH/$LOG_SEND_MAIL
+bitbake $TARGET_BUILD_BIG_CORE &>>  $BUILD_PATH/$LOG_BIG_CORE
+re1=`python $SCRIPT_PATH/search_errors_log.py $BUILD_PATH/$LOG_BIG_CORE`
+if [[ ! -z $re1 ]]
+  then
+    echo -e "\nError found :(" >> $BUILD_PATH/$LOG_SEND_MAIL
+    if [[ -f $re1 ]]; then
+      echo "Contents of $re1" >> $BUILD_PATH/$LOG_SEND_MAIL
+      cat $re1 >> $BUILD_PATH/$LOG_SEND_MAIL
+    else
+      echo "Error at $re1" >> $BUILD_PATH/$LOG_SEND_MAIL
+    fi
+  else
+    echo -e "\nNo error found :)" >> $BUILD_PATH/$LOG_SEND_MAIL
+    cp /home/luyentm/A5JT-luyentm/build-big-core/tmp/deploy/images/intel/core-image-base-intel.tar.gz \
+       $STORE_DATA_PATH
+    cp /home/luyentm/A5JT-luyentm/build-big-core/tmp/deploy/images/intel/modules-intel.tgz \
+       $STORE_DATA_PATH
+fi
+mv "$BUILD_PATH/$LOG_BIG_CORE" $STORE_LOG_PATH
+echo "COMPLETE building big core at : `date` " >> $BUILD_PATH/$LOG_SEND_MAIL
+echo "*********************************************************************" >> $BUILD_PATH/$LOG_SEND_MAIL
+echo "NOTE: Building results will be stored in server, if you want testing, please find out as follow:" >> $BUILD_PATH/$LOG_SEND_MAIL
+echo "Server : romlinux@10.116.41.71" >> "$BUILD_PATH/$LOG_SEND_MAIL"
+echo "Password : 1" >> "$BUILD_PATH/$LOG_SEND_MAIL"
+echo "Data path : /home/romlinux/chroot-debian-luyentm/home/luyentm/build_store/$COMMIT_ID" >> $BUILD_PATH/$LOG_SEND_MAIL
+echo "Log path: /home/romlinux/chroot-debian-luyentm/home/luyentm/build_store/$COMMIT_ID/$DATE_BUILD" >> $BUILD_PATH/$LOG_SEND_MAIL
+echo "" >> $BUILD_PATH/$LOG_SEND_MAIL
+echo "---------------------------------------------------------------------" >> $BUILD_PATH/$LOG_SEND_MAIL
+echo "Please must not change any configure in this server!!!" >> $BUILD_PATH/$LOG_SEND_MAIL
+python $SCRIPT_PATH/sendlog.py
+mv "$BUILD_PATH/$LOG_SEND_MAIL" $STORE_LOG_PATH
