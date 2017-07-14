@@ -1,0 +1,114 @@
+================================================================================
+                    THIS IS PROCEDURE OF USING GIT FOR PROJECT MEMBERS.
+ALL MEMBER MUST READ THIS AT LEAST 3 TIMES AND MAKE SURE UNDERSTAND THIS DOC BEFORE USING GIT.
+================================================================================
+
+1. Branch management
+--------------------
+1-1: Create a branch
+    - In TSDV, use "tsdv" in the name of branch
+    ex. git branch ahitaka-master-name-of-branch-tsdv
+    - Same branch name must not be created by more than two person
+
+1-2: Delete a branch
+    - Once delete a branch from master repository,
+    an e-mail announcement is required to skerlet@tsdv.com.vn and skerlet@swc.toshiba.co.jp
+    - Note:
+    - Do not delete a branch so often.
+    - If you want to delete a branch in remote repository, please inform to project leader before delete.
+    We need to inform to our customer(SWC) to delete their local branch (deleted branch).
+
+2. Conflict management:
+--------------------
+2-1: Conflict when merging 2 branch
+    - Reason of conflict:
+    - If 2 branches has difference in same line of same file. Conflict will occur.
+    - This conflict always happen when:
+        + 2(or more) users modify same file of 2(or more) branches.
+
+    - How to avoid this conflict
+        - Please discuss with another user who develop another branch before 
+          merging to list all files which developed by 2 users.
+        - With each same file, discuss to choosse a file which can run on 2 branches.
+          Then commit again.
+
+    - How to resolve if conflict occur:
+        - Resolve each conflict file.
+        $ git mergetool
+        - Choose vimdiff to edit conflicted file.
+        - Manual checking each conflicted line in file and decide which line 
+        will be accept(from 2 branch).
+        - After resolve all conflict and checking carefully, please commit again.
+
+2-2: Conflict when pulling & pushing from remote repository
+    - Reason of conflict:
+        - If local 's branch and remote 's branch has difference in same line of same file.
+        Conflict will occur.
+        => pulling & pushing actions in this branch will be rejected.
+    - This conflict always happen when:
+        + 2(or more) users develop same branch.
+        + User forget using 'git pull' before modifying and committing,
+        so 'git push' will be rejected.
+
+    - How to avoid this conflict:
+        - Use 'git pull' before doing something.
+        - Commit and push after finish a task.
+        - Please discuss with another user who develop same branch if you alread know which 
+        file also modify by 2 users.
+
+    - How to resolve if conflict occur:
+        - Backup all the file which conflict occur.
+        - Using 'git reset' to revert newest commit id which also exist in remote branch.
+        - Using 'git pull' to get newest runable commit id.
+        - Using 'diff -Naur' to check differences between backup file and current file.
+        - Discuss with user who also develop branch, then get runable file.
+        - After get all runable files, commit and push runable source to remote repository.
+        - Inform to all user to pull newest runable source code.
+
+2-3: Conflict when deleting a remote branch
+    - Reason of conflict:
+    - If someone delete a remote branch, but another users still exist this branch in local.
+    And then using "push --all" to push this branch again to remote repository.
+    => The conflict will occur.
+
+    - How to avoid this conflict:
+        - Becareful with delete branch.
+        - If you delete some remote branch, please inform to leader,
+        he will inform to SWC to delete their local branch.
+        - If you delete some remote branch, please inform to all other members 
+        to delete their local branch.
+
+    - How to resolve if conflict occur:
+        - For (TSDV) branch, (TSDV) side is master.
+        - (TSDV) need to delete the branch from TSCC server and push the
+        branch  from TSDV
+        - (SWC) need to delete the branch from local copy 
+        and (SWC)'s master repository. Then pull the branch from
+        TSCC server.
+        - For (SWC) branch, (SWC) side is master.
+        - (SWC) need to delete the branch from TSCC server and push the
+        branch from (SWC)
+        - (TSDV) need to delete the branch from local copy 
+        and (TSDV)'s master repository. Then pull the branch
+        from TSCC server
+    
+3. Merge rule:
+--------------------
+    - To merge from one branch to another, "git merge" or "git rebase" must
+    be used or use "git format-patch"
+    - Do not use copy and paste between branches
+
+4. Push & Commit rule:
+--------------------
+4-1: Some definition
+    - Main branch: a stable and runable branch which TSDV with send to customer.
+    - Development branch: Project members branch which use to develop.
+
+4-2: Rules
+    - Do not develop in main branch.
+    - If any project member finish his task in development branch.
+    Please commit and create patch file (or using 'git merge') 
+    to make sure main branch runable.
+    - Re-test in main branch.
+    - If re-test is OK then push to remote repository.
+    - Note: Do not using 'push -f'
