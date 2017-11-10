@@ -106,4 +106,6 @@ git pull
  du -sh /
  /* Check a package */
  dpkg -L package name
- 
+//===========================================================
+git push origin HEAD:refs/for/ 
+

@@ -53,6 +53,8 @@
  13. set environment: vi /etc/environment    
     http_proxy="http://haund:fpttoshiba@proxy.tsdv.com.vn:3128/"
  14. git config --global http.proxy $http_proxy
+ 15. add "ulimit -c unlimited" to .bashrc
+ 
 /*************************************************************************
  *   config git proxy: http://shrek.tsdv.com.vn/wiki/index.php/Howto
  *************************************************************************/ 
@@ -88,9 +90,9 @@
     env|grep PROXY   
  13. Check a package
     dpkg -L package name   
- /********************************************************
-  * Regular Expression
-  *********************************************************/
+/********************************************************
+ * Regular Expression
+ *********************************************************/
     Operator                  Behavior
     .                 Wildcard, matches any character
     ^abc              Matches some pattern abc at the start of a string
@@ -106,6 +108,32 @@
     {,n}              No more than n repeats
     {m,n}             At least m and no more than n repeats
     a(b|c)+           Parentheses that indicate the scope of the operators    
+    
+    
+I. Retrieve all lines containing strA but not strB in Viual Studio:
+1. Search result:
+ ^~(.*strB).*strA.*$
+    
+ Explanation:
+  ^         Matches the beginning of a line.
+  .         Matches any character except a newline.
+  ~(...)    is the prevent match construct, equivalent to negative lookahead ((?!...)) used by the other responders.
+  (?!.*strB) Make sure that strB isn't on the current line.
+  .*strA.*   Match the entire line if it contains strA
+  $          Anchor the search to the end of the line.
+  (?:\r\n) at the end of the regex if you also want to remove the carrigage returns/line feeds alogn with the rest of the line.
+  
+  
+II. Remove empty lines 
+ Use replace feature:
+  Old:
+  ^:b*$\n
+  New:
+  ^(?([^\r\n])\s)*\r?$\r\n
+  
+  Old: ^$\n
+  
+  ^.*perror.*$\n    
 /*******************************************
  *      NFS: https://github.com/mitchellh/vagrant/issues/2304; https://github.com/mitchellh/vagrant/issues/1706
  *****************************/    
@@ -219,8 +247,10 @@ The second step is file access. This is a function of normal file system access 
  xfonts-utils
  vi ../meta-debian/classes/debian-package.bbclass -> change PR from git$SRC to git 
  
- /****************************************************************************************************************************
- * KVM: KVM, which stands for Kernel-based Virtual Machine,  KVM was merged into the Linux kernel right from the start. Its developers chose to take advantage of the processor instruction sets dedicated to virtualization (Intel-VT and AMD-V), which keeps KVM lightweight, elegant and not resource-hungry.
+/****************************************************************************************************************************
+ * KVM: KVM, which stands for Kernel-based Virtual Machine,  KVM was merged into the Linux kernel right from the start. 
+ * Its developers chose to take advantage of the processor instruction sets dedicated to virtualization (Intel-VT and AMD-V),
+ * which keeps KVM lightweight, elegant and not resource-hungry.
  * you can verify that you have such a processor by looking for “vmx” or “svm” in the CPU flags listed in /proc/cpuinfo. 
  ****************************************************************************************************************************/     
  * Environment
@@ -261,14 +291,28 @@ The second step is file access. This is a function of normal file system access 
   lspci
   virsh edit Windows(name guest machine)
   vi usr/bin/create-guest-machine 
-  
+/******************************************************************************
+ *  Virsh command
+ ******************************************************************************/  
+ virsh list --all : list all guest machine 
+ virsh edit guest-machine : edit guest-machine configuration
+ virsh net-list --all: list all network 
+ virsh net-start default: start default network 
+ virsh dumpxml alice > bob.xml: create xml file from alice machine.
+ virsh create alice.xml : create a guest machine from a xml file.
+ 
+ virsh destroy alice: stop a VM and destroy a guest domain
+ virsh shutdown alice:  shutdown a VM (without destroying a domain)
 /** network control **/
 cat /sys/class/net/wlan0/operstate -> up or down.
 sudo ifconfig -a
 sudo ifconfig interface down 
 sudo brctl delbr interface   
+virsh net-list --all
 
-/** Issue when build small core **/
+/*****************************************************************************
+ * Issue when build small core *
+ ****************************************************************************/
 1. can't set locale:
     sudo locale-gen "en_US.UTF-8"
     sudo dpkg-reconfigure locales
@@ -357,9 +401,13 @@ cat >> /etc/network/interfaces <<EOF
 RUN: ip address flush eth0 scope global && ifup br0        
 
 Check : brctl show br0
+sudo service network-manager restart
+sudo service networking restart 
 
 // comment tzcs main: ~/TZCS/poky/meta-tzcs vi meta-intel-wifi/recipes-core/base-files/files/.bashrc
-
+/*************************************************************
+ * change root 
+ *************************************************************/
 sudo service lightdm|gdm|mdm stop
 pkill X
 
@@ -404,7 +452,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
     
 /**************************************************
  *
- */    
+ *********/    
  /etc/X11/default-display-manager.
  update-alternatives --config x-window-manager
  
@@ -427,4 +475,243 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
  
  virsh start Windows   
  virsh -> libvirt-clients
+ 
  virt-viewer -cf qemu:///system Windows
+ virt-viewer -> virt-viewer 
+ 
+ Virtualization: Provides an environment for hosting virtual machines. Ex qemu-kvm
+ Virtualization Client: Clients for installing and managing virtualization instances. Ex python-virtinst, virt-manager, virt-viewer
+ Virtualization Platform: Provides an interface for accessing and controlling virtual machines and containers. Ex: libvirt, libvirt-client, virt-who, virt-what
+ 
+ /etc/libvirt/qemu 
+ virt-viewer version 5.0
+ 
+ sudo apt-get install build-essential
+ 
+ 
+ ls /usr/share/i18n/locales/
+ //
+ vi /etc/locale.gen 
+    en_GB.UTF-8 UTF-8 
+    en_US.UTF-8 UTF-8 
+/*******************************************************************
+ * Difference between Linux Loadable and built-in modules
+ *******************************************************************/    
+ Linux kernel supports inserting of modules (aka device drivers) in two ways:
+
+    - Built-in kernel modules - When the kernel is booted up, the kernel automatically inserts this driver in to the kernel (it's more like it is already part of the kernel code).
+    - Loadable kernel module (LKM) - A driver that is not automatically loaded by the kernel, the user can insert this module at run-time by insmod driver.ko or modprobe driver.ko
+
+ The advantage the loadable modules have over the built-in modules is that you can load unload them on run-time. This is good if you are working on a module and you need to test it. Every time you test it and you need to make changes to it, you can easily unload it (rmmod driver.ko or modprobe -r driver.ko) and then after making changes, you can insert it back. But for the built-in modules if you need to make any changes in the module then you need to compile the whole kernel and then reboot the system with the new image of the kernel.
+
+ Configuration:
+    You can configure a module to be either of the two by editing the .config file in the root folder of your kernel source:
+
+    DRIVER_1=y // y indicate a builtin module
+    DRIVER_1=m //m inicates a loadable module
+
+ Note: lsmod displays only the dynamically loaded modules not the built-in ones.
+ /** add module **/
+ insmod module-name or modprobe module-name 
+ /** remove module **/
+ rmmod module-name or modprobe -r module-name 
+ Note:
+ modprobe looks in the module directory /lib/modules/'uname -r' for all the modules and other files.
+ modprobe expects an up-to-date modules.dep file, as generated by depmod. This file lists what other modules each module needs (if any), and modprobe uses this to add or remove these dependencies automatically.
+ 
+ dmesg|tail :-> log enable by printk
+ view file 
+/*****************************************************
+ * update gcc, g++ link when compile error
+ *****************************************************/
+  /* check */
+  ls -l /usr/bin/ |grep gcc 
+  ls -l /usr/bin/ |grep g++
+  /* install */
+  sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-version 60 (60 is the priority of this version)
+  sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-version 60 (60 is the priority of this version)
+  /* remove */
+  sudo update-alternatives --remove-all gcc 
+  sudo update-alternatives --remove-all gcc
+  /* change */
+  sudo update-alternatives --config gcc 
+  
+
+/******************************************************
+ * Task
+ *******/  
+  - Fix unexpected resolution of Windows guest machine on boot time. 
+  - Investigate about mounting over the internet (NFS+VPN)
+  
+/******************************************************
+ * support smart card
+ **/
+  libccid
+  pcsc-lite
+  pcsc-tool
+  
+/**********************************************************************
+ * Authenticated by Smart Card.
+ **********************************************************************/
+  1. 
+  gcc -g *.c -o indicator -lpthread -lX11 -lXrandr -ltzcs -ltzcs-security `pkg-config --cflags --libs gtk+-2.0`
+  
+  -pthread  -lgtk-x11-2.0  gdk-x11-2.0  pangocairo-1.0  atk-1.0  cairo  gdk_pixbuf-2.0  gio-2.0  pangoft2-1.0  pango-1.0  gobject-2.0  glib-2.0  fontconfig  freetype
+  
+  /usr/include/gtk-2.0  /usr/lib/x86_64-linux-gnu/gtk-2.0/include  /usr/include/gio-unix-2.0/  /usr/include/cairo  /usr/include/pango-1.0  /usr/include/atk-1.0  /usr/include/cairo  /usr/include/pixman-1  /usr/include/libpng12  /usr/include/gdk-pixbuf-2.0  /usr/include/libpng12  /usr/include/pango-1.0  /usr/include/harfbuzz  /usr/include/pango-1.0  /usr/include/glib-2.0  /usr/lib/x86_64-linux-gnu/glib-2.0/include  /usr/include/freetype2
+  
+  
+  /usr/src/linux-headers-3.16.0-4-common/include/
+  
+/*************************************************************************
+ * Debug segment fault with gdb: http://www.brendangregg.com/blog/2016-08-09/gdb-example-ncurses.html
+ *************************************************************************/
+  /* set up environment */
+  ulimit -a --> check core file size
+  add "ulimit -c unlimited" to ~/.bashrc.
+  /**/
+  Make file: add flag "-g"
+  Run --> create core file.
+  trace segment: gdb core_file binary_file.
+  
+/*
+ * starting X log
+ */
+  /var/log/Xorg.).log -> log file when loading X.
+  /usr/share/X11/xorg.conf.d/10-evdev.conf
+  
+/*************************************************************************
+ * Device in Linux 
+ * http://www.reactivated.net/writing_udev_rules.html
+ * http://www.linuxfromscratch.org/lfs/view/development/chapter07/udev.html 
+ *************************************************************************/ 
+  /** Concept */
+	If you issue the ls –l command, you’ll see two numbers (separated by a comma)
+ in the device file entries before the date. These numbers are the major and 
+ minor device number for the particular device.
+	Traditionally, the major number identifies the driver associated with the device.
+  The minor number is used by the kernel to determine exactly which device is being referred to.
+  /** Associate command */
+  lshw [-short] [-class pci] [-businfo]
+  install udev: change source list; sudo apt-get install --fix-missing;
+  query package: dpkg-query -l|grep udev.
+  remove package: sudo apt-get purge pakagename
+  get dependencies of a package: apt-cache rdepends package.
+  find -name "" -path path 
+  grep -nr "" --include=*.{}
+  lspci --n 
+  sudo dmidecode -t 
+  ls /sys/class/..
+  udevadm monitor -k; -> monitor kernel signal: get device_name;
+  udevadm info -a -p device_path
+  udevadm info -a -n device_name (in /dev/..)
+  /************************************/
+  uname -r -> kernel version
+  lshw -C network -> wifi information: class can be found using lshw -short or lshw -businfo.  
+  linux wifi driver intel ( for intel product)
+  //link https://www.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf
+  /**************** ACPI ********************/
+  ACPI (Advanced Configuration and Power Interface) modules enable special ACPI functions or add information to /proc or /sys
+  acpi -V ->  show every device
+  
+https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-command-line
+/********************************************************************************
+ * Build dynamic library in linux
+ ********************************************************************************/  
+  gcc -fPIC -c TzcsUtil.c //-> create TzcsUtil.o with dynamic flag
+  gcc -fPIC -c TzcsDisplay.c  //-> create TzcsDisplay.o with dynamic flag
+  gcc -shared -Wl,-soname=libtzcs.so.1 -o libtzcs.so.1.0.0 TzcsUtil.o TzcsDisplay.o //-> create so file from object
+  ln -snf libtzcs.so.1.0.0 libtzcs.so.1    //-> create softlink
+  ln -snf libtzcs.so.1 libtzcs.so          //-> create softlink.
+/**/  
+kill -9 PID
+remove swap file (ls -la)
+/****************************************************************************
+ * Decrease binary size 
+ ***************************************************************************/
+E:\Project\TZCS\2017A\trunk\src\aria\aria
+
+http://ptspts.blogspot.com/2013/12/how-to-make-smaller-c-and-c-binaries.html
+
+// Build: anonscm.debian.org/gitweb/?p=collab-maint/aria2.git;a=summary
+1. git clone
+2. git checkout debian/1.18.8-1
+3. Modify file configure: vi debian/rules
+4. Run ./debian/rules .PHONY
+// Use
+Create file torrent: use tool transmission-gtk 
+Seed: aria2c --bt-enable-lpd --check-integrity data-A8J-luyentm.tar.gz.torrent
+Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
+
+/******************************************************************************
+ * Flush log : https://stackoverflow.com/questions/12450066/flushing-buffers-in-c
+ ********************/
+ /*** C ***/
+ #include <stdio.h>
+ FILE *fd = fopen("log.txt","a"); 
+ fprintf(fd, "Buffered, will be flushed");
+ fflush(fd);  //Prints to a file
+ fclose(fd);
+ /*** C++ ***/
+ #include <fstream>
+ std::ofstream outfile;
+ outfile.open("log.txt", std::ios_base::app);
+ outfile << "abc";
+ outfile.flush();
+ outfile.close();
+/**
+ * insert first line into a file : https://unix.stackexchange.com/questions/99350/how-to-insert-text-before-the-first-line-of-a-file
+ **/
+ sed -i '1 i\#include "log.h"' log.txt
+ 
+ 
+/******************************************************************
+ * Share file using python 
+ ***********************************/
+ python -m SimpleHTTPServer "port"
+ 
+/*****************************************************************************
+ * Trace binary file 
+ ****/ 
+ /* list all function in binary file: build with option -g to trace function name */
+ objdump -d executable -> show asm code 
+ objdump -t executable -> show local function 
+ objdump -T executable -> show link function 
+ /* trace flowchar when run binary file: https://stackoverflow.com/questions/311840/tool-to-trace-local-function-calls-in-linux */
+ 1. install systemtap
+ 2. down para-callgraph.stp script: 
+	#! /usr/bin/env stap
+	function trace(entry_p, extra) {
+	  %( $# > 1 %? if (tid() in trace) %)
+	  printf("%s%s%s %s\n",
+			 thread_indent (entry_p),
+			 (entry_p>0?"->":"<-"),
+			 ppfunc (),
+			 extra)
+	}
+	%( $# > 1 %?
+	global trace
+	probe $2.call {
+	  trace[tid()] = 1
+	}
+	probe $2.return {
+	  delete trace[tid()]
+	}
+	%)
+	probe $1.call   { trace(1, $$parms) }
+	probe $1.return { trace(-1, $$return) }
+ 3. Run command.
+	sudo stap para-callgraph.stp 'process("/home/nguyhau/P2P/some_stuff/log/executable").function("*")' \
+		-c "/home/nguyhau/P2P/some_stuff/log/executable [param]" >trace
+	
+	sudo stap para-callgraph.stp 'process("/home/nguyhau/P2P/aria2/bin/aria2c").function("*")' \
+		-c "/home/nguyhau/P2P/aria2/bin/aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent"
+ 4. grep function name from above step 
+	objdump -t executable |grep flush
+ 5. trace address from above step (column 1)
+	addr2line -e executable 0000000000400ab6 -s
+	
+/******
+ *
+ */	
+	
