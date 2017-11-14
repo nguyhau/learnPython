@@ -705,13 +705,43 @@ Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
 		-c "/home/nguyhau/P2P/some_stuff/log/executable [param]" >trace
 	
 	sudo stap para-callgraph.stp 'process("/home/nguyhau/P2P/aria2/bin/aria2c").function("*")' \
-		-c "/home/nguyhau/P2P/aria2/bin/aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent"
+		-c "/home/nguyhau/P2P/aria2/bin/aria2c --enable-dht=false --log=log_down.txt --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent" 
+		aria2c --enable-dht=false --log=log3.txt --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
  4. grep function name from above step 
 	objdump -t executable |grep flush
  5. trace address from above step (column 1)
 	addr2line -e executable 0000000000400ab6 -s
 	
 /******
- *
+ * aria2c --enable-dht=false --check-integrity --log=log3.txt --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
  */	
 	
+/**********************************************************************************************
+ * Allow ssh root user.
+ ****/	
+ 1. vi /etc/ssh/sshd_config: PermitRootLogin without-password -> PermitRootLogin yes
+ 2. sudo service ssh restart
+/**********************************************************************************************
+ * Using nm to trace binary file () -> list source file 
+ **/	
+ /* list all function in binary file: build with option -g to trace function name */
+ 1. nm -l aria2c |grep "/home/nguyhau/P2P/aria2"> try_ls
+ 2. cut -d' ' -f3 try_ls >ls_file
+ 3. cut -f2 ls_file >ls_file1 (not using -d -> using default delimiter is \t character )
+ 4. cut -d':' -f1 ls_file >ls_file1
+ 5. Remove all duplicate line.(use excel )
+ // sudo ./configure --disable-option-checking --disable-silent-rules --disable-dependency-tracking --disable-libtool-lock --disable-metalink --disable-epoll --disable-xmltest --disable-nls --disable-rpath
+ --disable-option-checking 
+ --disable-silent-rules 
+ --disable-dependency-tracking 
+ --disable-libtool-lock 
+ --disable-metalink 
+ --disable-epoll 
+ --disable-xmltest 
+ --disable-nls 
+ --disable-rpath
+ # Count number of word 
+ grep -nr ".cc" temp_file |wc -w
+ 
+ A2_LOG_ERROR("----HauND LOG: newDownloadEngine");
+ A2_LOG_ERROR(fmt("----HauND LOG: Download Engine: %s", option_.get().c_str()));
