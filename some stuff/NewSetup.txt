@@ -745,3 +745,14 @@ Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
  
  A2_LOG_ERROR("----HauND LOG: newDownloadEngine");
  A2_LOG_ERROR(fmt("----HauND LOG: Download Engine: %s", option_.get().c_str()));
+/*************************************************************
+ * Check code coverage: http://devdocs.io/gcc~7/invoking-gcov; https://gcc.gnu.org/onlinedocs/gcc/Invoking-Gcov.html#Invoking-Gcov
+ * http://gcovr.com/guide.html#installationgcc -fprofile-arcs -ftest-coverage tmp.c
+ * https://linux.die.net/man/1/gcc
+ **/
+--coverage: This option is used to compile and link code instrumented for coverage analysis. 
+The option is a synonym for -fprofile-arcs -ftest-coverage (when compiling) and -lgcov (when linking).
+ 1. g++ -fprofile-arcs -ftest-coverage -fPIC -O0 tmp.cpp -o program| gcc -fprofile-arcs -ftest-coverage tmp.c -o program
+ 2. ./program -> generate tmp.gcno and tmp.gcda
+ 3. gcov tmp.cpp -m 	
+ 4. gcovr -r . --html --html-details -o tmp.html

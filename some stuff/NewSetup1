@@ -1,0 +1,747 @@
+/**/
+ suid: (superuser ID)
+ * fix /dev/null: permission denied
+   sudo chroot chroot-haund/
+   rm -f /dev/null; mknod -m 666 /dev/null c 1 3
+ * passwd -> setpass.
+  unmount all
+ * sed -i -e 's/chroot/chroot1/g' *
+/*************************************************************************
+ *   config network and proxy
+ *************************************************************************/
+ 1  nano /etc/apt/apt.conf   -> for install 
+     Acquire::http::Proxy "http://haund:fpttoshiba@proxy.tsdv.com.vn:3128/"; 
+                                                                                                   
+ 2  nano /etc/apt/sources.list -> update kelnel (search key: source list generator debian)
+    deb http://ftp.us.debian.org/debian/ jessie main
+    deb-src http://ftp.us.debian.org/debian/ jessie main
+    deb http://security.debian.org/ jessie/updates main contrib
+    deb-src http://security.debian.org/ jessie/updates main contrib
+ 3  apt-get update                                                                                                             
+ 4  nano /etc/hosts                                                                                                              
+    127.0.0.1       localhost                                                                                                     
+    ::1             localhost ip6-localhost ip6-loopback                                                                          
+    ff02::1         ip6-allnodes                                                                                                  
+    ff02::2         ip6-allrouters                                                                                                
+    127.0.1.1    debian 
+ 5  nano /etc/resolv.conf   -> set name server
+    search toshiba-tsdv.com                                                                                                       
+    nameserver 10.116.16.13                                                                                                       
+    nameserver 10.116.16.2  
+/*************************************************************************
+ *   create account
+ *************************************************************************/ 
+ 7  apt-get install sudo  -> install sudo package to create sudoers file. 
+ 8  sudoedit /etc/sudoers  -> add sudo privilege
+    haund   ALL=(ALL:ALL) ALL 
+ 9  adduser haund1                                                                                                             
+ 9'  deluser haund 
+ 9"  adduser haund                                                                                                             
+ 10  su - haund  
+ 11 sudo chown -R haund:haund /home/haund  -> change owner for directory "sudo chown -R username:group directory"
+ 6  apt-get install vim   -> install vim                
+    set up for vim:
+    vi ~/.vimrc
+        syntax on
+        :color desert
+        :set nu
+        set tabstop=4
+    http://stackoverflow.com/questions/1878974/redefine-tab-as-4-spaces 
+ 12. sudo apt-get install apt-file 
+    apt-file update
+    apt-file search <filename>
+ 13. set environment: vi /etc/environment    
+    http_proxy="http://haund:fpttoshiba@proxy.tsdv.com.vn:3128/"
+ 14. git config --global http.proxy $http_proxy
+ 15. add "ulimit -c unlimited" to .bashrc
+ 
+/*************************************************************************
+ *   config git proxy: http://shrek.tsdv.com.vn/wiki/index.php/Howto
+ *************************************************************************/ 
+
+/**********************************************************************************
+ * Some utilities command 
+ **********************************************************************************/
+ 1. check mount device: df -h 
+ 2. check partition : -fdisk -l <device> /dev/hda.
+ 3. check installed package: dpkg -L package name ; dpkg --list
+ 4, format disk : sudo mkfs.ext4 mfs.img 
+ 5. Extract file: tar -xvf /home/nguyhau/Downloads/linux-4.8.6.tar.xz -C /home/nguyhau/Downloads/Linux
+ 6. Mount: sudo mount rootfs.img test/ ; umount: sudo umount test/
+ 7. Shutdow/Restart: Powoff/shutdown -r now
+ 8. Check folder size: du -sh /
+ 9. remote command:
+    ssh haund@10.116.41.72
+    scp bzImage-initramfs-intel.bin haund@10.116.41.72:bootX64.efi
+    scp haund@10.116.41.102:~/* .
+ 10. remote desktop: 
+    rdesktop -u user -p pass -d TOSHIBA -f IP 
+    Quit remote mode: Ctrl Alt Return   
+ 11. Add partition:
+    http://www.vitalsofttech.com/add-disk-storage-to-oracle-virtualbox-with-linux/
+    sudo fdisk -l -> list all partition
+    sudo fdisk /dev/sdb -> to set partition (n: create, default, default, type: primary , w: write&save)
+    sudo mkfs.ext4 /dev/sdb1 -> to format partition 
+    mkdir -p /NewPartition
+    sudo mount /dev/sdb1 /NewPartition
+    chown nguyhau /NewPartition/
+    add "/dev/sdb1               /NewPartition           ext4    defaults        1 2" to /etc/fstab
+ 12. Get environment variable */
+    env|grep PROXY   
+ 13. Check a package
+    dpkg -L package name   
+/********************************************************
+ * Regular Expression
+ *********************************************************/
+    Operator                  Behavior
+    .                 Wildcard, matches any character
+    ^abc              Matches some pattern abc at the start of a string
+    abc$              Matches some pattern abc at the end of a string
+    [abc]             Matches one of a set of characters
+    [A-Z0-9]          Matches one of a range of characters
+    ed|ing|s          Matches one of the specified strings (disjunction)
+    *                 Zero or more of previous item, e.g. a*, [a-z]* (also known as Kleene Closure)
+    +                 One or more of previous item, e.g. a+, [a-z]+
+    ?                 Zero or one of the previous item (i.e. optional), e.g. a?, [a-z]?
+    {n}               Exactly n repeats where n is a non-negative integer
+    {n,}              At least n repeats
+    {,n}              No more than n repeats
+    {m,n}             At least m and no more than n repeats
+    a(b|c)+           Parentheses that indicate the scope of the operators    
+    
+    
+I. Retrieve all lines containing strA but not strB in Viual Studio:
+1. Search result:
+ ^~(.*strB).*strA.*$
+    
+ Explanation:
+  ^         Matches the beginning of a line.
+  .         Matches any character except a newline.
+  ~(...)    is the prevent match construct, equivalent to negative lookahead ((?!...)) used by the other responders.
+  (?!.*strB) Make sure that strB isn't on the current line.
+  .*strA.*   Match the entire line if it contains strA
+  $          Anchor the search to the end of the line.
+  (?:\r\n) at the end of the regex if you also want to remove the carrigage returns/line feeds alogn with the rest of the line.
+  
+  
+II. Remove empty lines 
+ Use replace feature:
+  Old:
+  ^:b*$\n
+  New:
+  ^(?([^\r\n])\s)*\r?$\r\n
+  
+  Old: ^$\n
+  
+  ^.*perror.*$\n    
+/*******************************************
+ *      NFS: https://github.com/mitchellh/vagrant/issues/2304; https://github.com/mitchellh/vagrant/issues/1706
+ *****************************/    
+ sudo mount -t nfs 10.116.41.50:/ vmmachine/
+ cat /proc/mounts| mount -f
+ * Server   *
+    /* install 
+    apt-get install nfs-kernel-server
+    apt-get install rpcbind
+    /* config
+    mkdir –m 0555 –p /home/exports   -> directory contain share file.
+    chown nobody:nogroup –R /home/exports
+    vi /etc/exports: /home/exports 10.116.41.0/24(rw,sync,fsid=0,crossmnt,no_subtree_check,no_root_squash)
+            option: - fsid=0 or fsid=root
+                    - ro/rw: read only/read-write
+                    - sync/async: default is sync; Asynchronous writes increase performance a bit, but they decrease reliability since there is a     data loss risk in case of the server crashing
+                    - root_squash/no_root_squash: /root on the client machine will have the same level of access to the files on the system as root on the server.You should not specify this option without a good reason
+                    - sec option to indicate the security level that you want: sec=sys is the default with no special security features, sec=krb5 enables authentication only, sec=krb5i adds integrity protection, and sec=krb5p is the most complete level which includes privacy protection (with data encryption). For this to work you need a working Kerberos setup 
+                    - no_subtree_check: If only part of a volume is exported, a routine called subtree checking verifies that a file that is requested from the client is in the appropriate part of the volume.
+                    - wdelay — Causes the NFS server to delay writing to the disk if it suspects another write request is imminent. This can improve performance by reducing the number of times the disk must be accessed by separate write commands, reducing write overhead. The no_wdelay option turns off this feature, but is only available when using the sync option.
+    exportfs –a -o async
+            option: a: export or unexport all directory 
+                    u: unexport.
+                    o: option for export: (ro|rw; sync|async; no_wdelay|wdelay; secure|insecure)
+                    v: view export directory
+    /* NOTE: use "/sbin/service nfs reload" command after each time you change /etc/exports file to apply new change.                
+    /* start service
+    service rpcbind start
+    service nfs-kernel-server restart
+    /* test:Permission denied
+    showmount –e
+    rpcinfo –p | grep nfs
+    check /proc/fs/nfs/exports| /var/lib/nfs/xtab
+    /* test: Program Not Registered
+    /* Secure:
+    vi /etc/hosts.allow:<daemon list>: <client list> [: <option>: <option>: ...]
+    vi /etc/hosts.deny:<daemon list>: <client list> [: <option>: <option>: ...]
+ * Client   *
+    /* install
+    apt-get install nfs-common rpcbind
+    mkdir mnt1
+    /* mount 
+    mount server’sIP:/ mnt1
+    mount –t nfs4 –o rsize=8192,wsize=8192,proto=tcp,port=2049 server’sIP:/ mnt1
+    /* test 
+    rpcinfo -p server'IP
+ * Check version of nfs: mount -v| nfsstat -m    
+ /============================================
+    Note that NFS Version 2 is limited to a maximum of 8K, regardless of the maximum block size defined by NFSSVC_MAXBLKSIZE; Version 3 will support up to 64K, if permitted
+    currently, nfs version is 4, support default is 1MB, not defined by NFSSVC_MAXBLKSIZE.
+    /home/haund/temp/vmmachine from 10.116.41.50:/                                                                                 Flags: rw,relatime,vers=4.0,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=10.116.41.72,local_lock=none,addr=10.116.41.50
+    
+     maximum transmission unit (MTU) is the largest size packet or frame:
+     * check by using ifconfig| grep MTU; | tracepath IP| netstat -i  https://www.cyberciti.biz/faq/centos-rhel-redhat-fedora-debian-linux-mtu-size/
+     * http://www.microhowto.info/howto/change_the_mtu_of_a_network_interface.html
+    212992: 
+    
+
+/** How to connect smart phone to smart tivi **/
+ DLNA, Screen Mirroring, Google Cast, Photo Share, Smart View, LG Smart Share
+
+DLNA separates multimedia devices into 10 certified classes subdivided into three broad categories: 
+- Home Network Devices (PCs, TVs, AV receivers, game consoles), 
+- Mobile Handheld Devices (smartphones, tablets, digital cameras), 
+- and Home Infrastructure Devices (routers and hubs).  
+
+you might have a PC running DLNA-certified software that transforms it into a media server. 
+Your DLNA-certified player—a TV or game console, for example—would be able to browse the content on the PC and stream it.
+a controller, such as a tablet or smartphone, could discover the content on the PC and tell the TV to play it back. 
+
+All DLNA-certified devices use Universal Plug and Play (UPnP) to discover and talk to each other on the network. When you connect one to your router, it should automatically appear on any other DLNA-certified component’s menu without needing you to perform any setup.
+
+/*** Secure NFS ***/
+The first step is mount access. Mount access is achieved by the client machine attempting to attach to the server.
+ The security for this is provided by the /etc/exports file. This file lists the names or IP addresses for machines that are allowed to access a share point. 
+The second step is file access. This is a function of normal file system access controls on the client and not a specialized function of NFS. Once the drive is mounted the user and group permissions on the files determine access control. 
+
+/********************************************/
+ Best practice:
+ * Device vitualization 
+    - Optimize performance by using the  virtio_blk and  virtio_net drivers:  virtio_blk driver uses the VirtIO  API to provide high performance for storage I/O devices,virtio_net driver uses the VirtIO  API to provide increased network performance
+    - Virtualize memory resources by using the  virtio_balloon driver: The  virtio_balloon driver provides a communication pathway between the hypervisor and the guest operating system. 
+    - Configure para-virtualized network devices
+ 
+ chmod a+rwxt /tmp
+ 
+ https://bugzilla.redhat.com/show_bug.cgi?id=1176761
+ 
+ http://www.userbenchmark.com/UserRun/3701407
+ 3703409
+ 
+ config bridge network: https://www.linux-kvm.org/page/Networking
+ 
+ https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3180542/
+ 
+
+
+/* apt-get install qemu-kvm libvirt-bin virtinst
+//1. fallocate -l 16G win7.img
+2. qemu-img create -f qcow2 ./win7.qcow2 16G
+3. virt-install --name Windows --ram 2048 --vcpus 4 --os-type=windows --debug --os-variant=win7 --controller type=scsi,model=virtio-scsi --disk win7.img,bus=virtio --video=qxl --network=default,model=virtio --soundhw ich6 --vnc --noautoconsole --cdrom win7.iso
+*/
+
+/==============================================================================================
+ Error
+ ==============================================================================================/
+ openssl
+ locale 
+ libsndfile1.
+ harfbuzz
+ xfonts-utils
+ vi ../meta-debian/classes/debian-package.bbclass -> change PR from git$SRC to git 
+ 
+/****************************************************************************************************************************
+ * KVM: KVM, which stands for Kernel-based Virtual Machine,  KVM was merged into the Linux kernel right from the start. 
+ * Its developers chose to take advantage of the processor instruction sets dedicated to virtualization (Intel-VT and AMD-V),
+ * which keeps KVM lightweight, elegant and not resource-hungry.
+ * you can verify that you have such a processor by looking for “vmx” or “svm” in the CPU flags listed in /proc/cpuinfo. 
+ ****************************************************************************************************************************/     
+ * Environment
+ apt-get install qemu-kvm libvirt-bin virtinst virt-manager virt-viewer
+ - libvirt allows managing virtual machines in a uniform way. (libvirt-bin provides the libvirtd daemon, which allows (potentially remote) management of the virtual machines running of the host, and starts the required VMs when the host boots. In addition, this package provides the virsh command-line tool, which allows controlling the libvirtd-managed machines.)
+ - virt-manager is a graphical interface that uses libvirt to create and manage virtual machines
+ - virtinst package provides virt-install, which allows creating virtual machines from the command line.
+ - virt-viewer allows accessing a VM's graphical console. 
+ * Create virtual machine: Most options are not required. Minimum requirements are --name, --ram, guest storage (--disk, --filesystem or --nodisks), and an install option 
+    virt-install --connect qemu:///system  1
+                 --virt-type kvm           2: allows specifying the use of KVM even though the URL looks like QEMU.
+                 --name testkvm            3: option defines a (unique) name for the virtual machine.
+                 --ram 1024                4: option allows specifying the amount of RAM (in MB) to allocate for the virtual machine.
+                 --disk /srv/kvm/testkvm.qcow,format=qcow2,size=10 5: specifies the location of the image file that is to represent our virtual machine's hard disk
+                 --cdrom /srv/isos/debian-8.1.0-amd64-netinst.iso  6: option is used to indicate where to find the optical disk to use for installation
+                 --network bridge=br0      7
+                 --vnc                     8: states that the graphical console should be made available using VNC
+                 --os-type linux           9: The --os-type and --os-variant options allow optimizing a few parameters of the virtual machine,
+                 --os-variant debianwheezy
+                 --noautoconsole    10: Don't automatically try to connect to the guest console.
+                 --import           11: Skip the OS installation process, and build a guest around an existing disk image.
+                 --debug            12: Print debugging information to the terminal when running the install process.
+ * Run virtual machine                
+    sudo virsh net-start default
+    [sudo /etc/init.d/libvirtd restart]
+   virt-viewer --connect qemu+ssh://root@server/system testkvm  (romlinux@debian/system ) [sudo virt-manager]
+ * Managing Machines:
+    virsh -c qemu:///system list --all --> list all virtual machines
+    virsh -c qemu:///system start testkvm --> start virtual machine (shutdown|reboot|suspend|resume|destroy)
+    virsh -c qemu:///system vncdisplay testkvm --> connect and display graphical console
+  * fix sound 
+  sudo virsh edit guest-machine  
+  change sound model ='ip6' to 'ac97'
+  install sound driver from http://www.realtek.com.tw/downloads/downloadsView.aspx?Langid=1&PNid=14&PFid=23&Level=4&Conn=3&DownTypeID=3&GetDown=false  
+  
+  virsh list -all 
+  virsh nodedev-list pci_0000_00_1b_0
+  lspci
+  virsh edit Windows(name guest machine)
+  vi usr/bin/create-guest-machine 
+/******************************************************************************
+ *  Virsh command
+ ******************************************************************************/  
+ virsh list --all : list all guest machine 
+ virsh edit guest-machine : edit guest-machine configuration
+ virsh net-list --all: list all network 
+ virsh net-start default: start default network 
+ virsh dumpxml alice > bob.xml: create xml file from alice machine.
+ virsh create alice.xml : create a guest machine from a xml file.
+ 
+ virsh destroy alice: stop a VM and destroy a guest domain
+ virsh shutdown alice:  shutdown a VM (without destroying a domain)
+/** network control **/
+cat /sys/class/net/wlan0/operstate -> up or down.
+sudo ifconfig -a
+sudo ifconfig interface down 
+sudo brctl delbr interface   
+virsh net-list --all
+
+/*****************************************************************************
+ * Issue when build small core *
+ ****************************************************************************/
+1. can't set locale:
+    sudo locale-gen "en_US.UTF-8"
+    sudo dpkg-reconfigure locales
+    export LC_ALL="en_US.UTF-8" in .bashrc
+2. openssl/opensslv.h: No such file or directory
+    sudo apt-get install libssl-dev 
+
+
+/******* config kernel for using NAT: cateee *****/
+enalbe:
+CONFIG_NF_NAT_REDIRECT
+CONFIG_NETFILTER_XT_TARGET_REDIRECT
+CONFIG_NF_REJECT_IPV4
+CONFIG_NF_NAT_MASQUERADE_IPV4
+CONFIG_IP_NF_FILTER
+CONFIG_IP_NF_TARGET_REJECT
+CONFIG_IP_NF_TARGET_MASQUERADE
+CONFIG_IP_NF_TARGET_REDIRECT
+CONFIG_IP_NF_MANGLE
+
+/** Recompile linux kernel **/
+1. Download linux kernel soure linux-4.4.2.tar.gz
+2. tar xf linux-4.4.2.tar.gz
+3. cd linux-4.4.2
+4. make menuconfig
+5. make -j4
+6. sudo make modules_install && sudo make install.
+7. sudo update-grub2 
+8. sudo reboot.
+
+/** **/
+mesure performance: (iperf, user benchmark, crytal)
+1. Rich:
+    - No virtio (Disk drives, network adapter): 3902185
+    - Apply virtio 3982396
+    - change root Apply virtio.
+2. TZCS:
+    - Apply virtio : 3851792
+//
+win7-4: 
+virsh start 
+virt-viewer -cf qemu:///system Windows     
+
+192.168.122.126
+
+sudo route -n -> default gateway
+cat /etc/resolv.conf -> dns server.
+
+/******* create bridge for network *******/
+/etc/sysctl.d/bridge.conf:
+cat >> /etc/sysctl.d/bridge.conf <<EOF
+    net.bridge.bridge-nf-call-ip6tables=0
+    net.bridge.bridge-nf-call-iptables=0
+    net.bridge.bridge-nf-call-arptables=0
+    EOF
+/etc/udev/rules.d/99-bridge.rules
+cat >> /etc/udev/rules.d/99-bridge.rules <<EOF
+    ACTION=="add", SUBSYSTEM=="module", KERNEL=="bridge", RUN+="/sbin/sysctl -p /etc/sysctl.d/bridge.conf"
+    EOF
+apt-get install bridge-utils
+/etc/network/interfaces
+cat >> /etc/network/interfaces <<EOF
+    iface eth0 inet manual
+
+    auto br0
+    iface br0 inet static
+        # Use the MAC address identified above.
+        hwaddress ether 19:7c:3b:92:ec:ee
+        address 203.0.113.166
+        netmask 255.255.255.248
+        gateway 203.0.113.161
+
+        bridge_ports eth0
+        # If you want to turn on Spanning Tree Protocol, ask your hosting
+        # provider first as it may conflict with their network.
+        bridge_stp off
+        # If STP is off, set to 0. If STP is on, set to 2 (or greater).
+        bridge_fd 0
+
+    iface br0 inet6 static
+        address 2001:db8::1
+        netmask 64
+        gateway fe80::1
+        autoconf 0
+    EOF    
+RUN: ip address flush eth0 scope global && ifup br0        
+
+Check : brctl show br0
+sudo service network-manager restart
+sudo service networking restart 
+
+// comment tzcs main: ~/TZCS/poky/meta-tzcs vi meta-intel-wifi/recipes-core/base-files/files/.bashrc
+/*************************************************************
+ * change root 
+ *************************************************************/
+sudo service lightdm|gdm|mdm stop
+pkill X
+
+soft / hard
+
+Determines the recovery behavior of the NFS client after an NFS request times out. If neither option is specified (or if the hard option is specified), NFS requests are retried indefinitely.
+/**************************************************************
+ *      bitbake process:
+ **************************************************************/
+ 1. Source fetch:
+    - do_fetch
+    - do_unpack
+ 2. Patching
+    - do_patch
+ 3. Configuration and Compilation
+    - do_configure
+    - do_compile
+    - do_install
+ 4. Package Splitting
+    - do_package 
+    - do_packagedata
+    - do_package_write_deb
+ 5. Image generation
+    - do_rootfs
+ 6. SDK Generation
+    - do_populate_sdk
+ /**************************************************************
+  * Build project with cmake
+  **************************************************************/   
+  1. sudo apt-get install cmake 
+  2. cd project and create build dir:
+  3. cmake ../
+  4. make -j 4
+  /**************************************************************
+  * Build a package manual
+  **************************************************************/   
+  1. jump to package src ex ~/TZCS/build-bigcore-vmware/tmp/work/x86_64-debian-linux/icewm/1.3.12-r3/icewm
+  2. run script to confige:
+    ../temp/run.do_configure
+  3. run compile
+    ../temp/run.do_compile
+    
+/**************************************************
+ *
+ *********/    
+ /etc/X11/default-display-manager.
+ update-alternatives --config x-window-manager
+ 
+ create -> virt-install
+ virt-install -n Windows \
+ -r 1024 \        
+ --vcpus 4 \
+ --os-type=windows  \
+ --debug --os-variant=win7 \
+ --controller type=scsi,model=virtio-scsi \
+ --disk /mnt/WindowVirtio.img,bus=virtio \
+ --video=qxl \
+ --network=default,model=virtio \
+ --soundhw ich6 \
+ --vnc \
+ --noautoconsole \
+ --import \ 
+ virt-install in virtinst
+ 
+ 
+ virsh start Windows   
+ virsh -> libvirt-clients
+ 
+ virt-viewer -cf qemu:///system Windows
+ virt-viewer -> virt-viewer 
+ 
+ Virtualization: Provides an environment for hosting virtual machines. Ex qemu-kvm
+ Virtualization Client: Clients for installing and managing virtualization instances. Ex python-virtinst, virt-manager, virt-viewer
+ Virtualization Platform: Provides an interface for accessing and controlling virtual machines and containers. Ex: libvirt, libvirt-client, virt-who, virt-what
+ 
+ /etc/libvirt/qemu 
+ virt-viewer version 5.0
+ 
+ sudo apt-get install build-essential
+ 
+ 
+ ls /usr/share/i18n/locales/
+ //
+ vi /etc/locale.gen 
+    en_GB.UTF-8 UTF-8 
+    en_US.UTF-8 UTF-8 
+/*******************************************************************
+ * Difference between Linux Loadable and built-in modules
+ *******************************************************************/    
+ Linux kernel supports inserting of modules (aka device drivers) in two ways:
+
+    - Built-in kernel modules - When the kernel is booted up, the kernel automatically inserts this driver in to the kernel (it's more like it is already part of the kernel code).
+    - Loadable kernel module (LKM) - A driver that is not automatically loaded by the kernel, the user can insert this module at run-time by insmod driver.ko or modprobe driver.ko
+
+ The advantage the loadable modules have over the built-in modules is that you can load unload them on run-time. This is good if you are working on a module and you need to test it. Every time you test it and you need to make changes to it, you can easily unload it (rmmod driver.ko or modprobe -r driver.ko) and then after making changes, you can insert it back. But for the built-in modules if you need to make any changes in the module then you need to compile the whole kernel and then reboot the system with the new image of the kernel.
+
+ Configuration:
+    You can configure a module to be either of the two by editing the .config file in the root folder of your kernel source:
+
+    DRIVER_1=y // y indicate a builtin module
+    DRIVER_1=m //m inicates a loadable module
+
+ Note: lsmod displays only the dynamically loaded modules not the built-in ones.
+ /** add module **/
+ insmod module-name or modprobe module-name 
+ /** remove module **/
+ rmmod module-name or modprobe -r module-name 
+ Note:
+ modprobe looks in the module directory /lib/modules/'uname -r' for all the modules and other files.
+ modprobe expects an up-to-date modules.dep file, as generated by depmod. This file lists what other modules each module needs (if any), and modprobe uses this to add or remove these dependencies automatically.
+ 
+ dmesg|tail :-> log enable by printk
+ view file 
+/*****************************************************
+ * update gcc, g++ link when compile error
+ *****************************************************/
+  /* check */
+  ls -l /usr/bin/ |grep gcc 
+  ls -l /usr/bin/ |grep g++
+  /* install */
+  sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-version 60 (60 is the priority of this version)
+  sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-version 60 (60 is the priority of this version)
+  /* remove */
+  sudo update-alternatives --remove-all gcc 
+  sudo update-alternatives --remove-all gcc
+  /* change */
+  sudo update-alternatives --config gcc 
+  
+
+/******************************************************
+ * Task
+ *******/  
+  - Fix unexpected resolution of Windows guest machine on boot time. 
+  - Investigate about mounting over the internet (NFS+VPN)
+  
+/******************************************************
+ * support smart card
+ **/
+  libccid
+  pcsc-lite
+  pcsc-tool
+  
+/**********************************************************************
+ * Authenticated by Smart Card.
+ **********************************************************************/
+  1. 
+  gcc -g *.c -o indicator -lpthread -lX11 -lXrandr -ltzcs -ltzcs-security `pkg-config --cflags --libs gtk+-2.0`
+  
+  -pthread  -lgtk-x11-2.0  gdk-x11-2.0  pangocairo-1.0  atk-1.0  cairo  gdk_pixbuf-2.0  gio-2.0  pangoft2-1.0  pango-1.0  gobject-2.0  glib-2.0  fontconfig  freetype
+  
+  /usr/include/gtk-2.0  /usr/lib/x86_64-linux-gnu/gtk-2.0/include  /usr/include/gio-unix-2.0/  /usr/include/cairo  /usr/include/pango-1.0  /usr/include/atk-1.0  /usr/include/cairo  /usr/include/pixman-1  /usr/include/libpng12  /usr/include/gdk-pixbuf-2.0  /usr/include/libpng12  /usr/include/pango-1.0  /usr/include/harfbuzz  /usr/include/pango-1.0  /usr/include/glib-2.0  /usr/lib/x86_64-linux-gnu/glib-2.0/include  /usr/include/freetype2
+  
+  
+  /usr/src/linux-headers-3.16.0-4-common/include/
+  
+/*************************************************************************
+ * Debug segment fault with gdb: http://www.brendangregg.com/blog/2016-08-09/gdb-example-ncurses.html
+ *************************************************************************/
+  /* set up environment */
+  ulimit -a --> check core file size
+  add "ulimit -c unlimited" to ~/.bashrc.
+  /**/
+  Make file: add flag "-g"
+  Run --> create core file.
+  trace segment: gdb core_file binary_file.
+  
+/*
+ * starting X log
+ */
+  /var/log/Xorg.).log -> log file when loading X.
+  /usr/share/X11/xorg.conf.d/10-evdev.conf
+  
+/*************************************************************************
+ * Device in Linux 
+ * http://www.reactivated.net/writing_udev_rules.html
+ * http://www.linuxfromscratch.org/lfs/view/development/chapter07/udev.html 
+ *************************************************************************/ 
+  /** Concept */
+	If you issue the ls –l command, you’ll see two numbers (separated by a comma)
+ in the device file entries before the date. These numbers are the major and 
+ minor device number for the particular device.
+	Traditionally, the major number identifies the driver associated with the device.
+  The minor number is used by the kernel to determine exactly which device is being referred to.
+  /** Associate command */
+  lshw [-short] [-class pci] [-businfo]
+  install udev: change source list; sudo apt-get install --fix-missing;
+  query package: dpkg-query -l|grep udev.
+  remove package: sudo apt-get purge pakagename
+  get dependencies of a package: apt-cache rdepends package.
+  find -name "" -path path 
+  grep -nr "" --include=*.{}
+  lspci --n 
+  sudo dmidecode -t 
+  ls /sys/class/..
+  udevadm monitor -k; -> monitor kernel signal: get device_name;
+  udevadm info -a -p device_path
+  udevadm info -a -n device_name (in /dev/..)
+  /************************************/
+  uname -r -> kernel version
+  lshw -C network -> wifi information: class can be found using lshw -short or lshw -businfo.  
+  linux wifi driver intel ( for intel product)
+  //link https://www.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf
+  /**************** ACPI ********************/
+  ACPI (Advanced Configuration and Power Interface) modules enable special ACPI functions or add information to /proc or /sys
+  acpi -V ->  show every device
+  
+https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-command-line
+/********************************************************************************
+ * Build dynamic library in linux
+ ********************************************************************************/  
+  gcc -fPIC -c TzcsUtil.c //-> create TzcsUtil.o with dynamic flag
+  gcc -fPIC -c TzcsDisplay.c  //-> create TzcsDisplay.o with dynamic flag
+  gcc -shared -Wl,-soname=libtzcs.so.1 -o libtzcs.so.1.0.0 TzcsUtil.o TzcsDisplay.o //-> create so file from object
+  ln -snf libtzcs.so.1.0.0 libtzcs.so.1    //-> create softlink
+  ln -snf libtzcs.so.1 libtzcs.so          //-> create softlink.
+/**/  
+kill -9 PID
+remove swap file (ls -la)
+/****************************************************************************
+ * Decrease binary size 
+ ***************************************************************************/
+E:\Project\TZCS\2017A\trunk\src\aria\aria
+
+http://ptspts.blogspot.com/2013/12/how-to-make-smaller-c-and-c-binaries.html
+
+// Build: anonscm.debian.org/gitweb/?p=collab-maint/aria2.git;a=summary
+1. git clone
+2. git checkout debian/1.18.8-1
+3. Modify file configure: vi debian/rules
+4. Run ./debian/rules .PHONY
+// Use
+Create file torrent: use tool transmission-gtk 
+Seed: aria2c --bt-enable-lpd --check-integrity data-A8J-luyentm.tar.gz.torrent
+Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
+
+/******************************************************************************
+ * Flush log : https://stackoverflow.com/questions/12450066/flushing-buffers-in-c
+ ********************/
+ /*** C ***/
+ #include <stdio.h>
+ FILE *fd = fopen("log.txt","a"); 
+ fprintf(fd, "Buffered, will be flushed");
+ fflush(fd);  //Prints to a file
+ fclose(fd);
+ /*** C++ ***/
+ #include <fstream>
+ std::ofstream outfile;
+ outfile.open("log.txt", std::ios_base::app);
+ outfile << "abc";
+ outfile.flush();
+ outfile.close();
+/**
+ * insert first line into a file : https://unix.stackexchange.com/questions/99350/how-to-insert-text-before-the-first-line-of-a-file
+ **/
+ sed -i '1 i\#include "log.h"' log.txt
+ 
+ 
+/******************************************************************
+ * Share file using python 
+ ***********************************/
+ python -m SimpleHTTPServer "port"
+ 
+/*****************************************************************************
+ * Trace binary file 
+ ****/ 
+ /* list all function in binary file: build with option -g to trace function name */
+ objdump -d executable -> show asm code 
+ objdump -t executable -> show local function 
+ objdump -T executable -> show link function 
+ /* trace flowchar when run binary file: https://stackoverflow.com/questions/311840/tool-to-trace-local-function-calls-in-linux */
+ 1. install systemtap
+ 2. down para-callgraph.stp script: 
+	#! /usr/bin/env stap
+	function trace(entry_p, extra) {
+	  %( $# > 1 %? if (tid() in trace) %)
+	  printf("%s%s%s %s\n",
+			 thread_indent (entry_p),
+			 (entry_p>0?"->":"<-"),
+			 ppfunc (),
+			 extra)
+	}
+	%( $# > 1 %?
+	global trace
+	probe $2.call {
+	  trace[tid()] = 1
+	}
+	probe $2.return {
+	  delete trace[tid()]
+	}
+	%)
+	probe $1.call   { trace(1, $$parms) }
+	probe $1.return { trace(-1, $$return) }
+ 3. Run command.
+	sudo stap para-callgraph.stp 'process("/home/nguyhau/P2P/some_stuff/log/executable").function("*")' \
+		-c "/home/nguyhau/P2P/some_stuff/log/executable [param]" >trace
+	
+	sudo stap para-callgraph.stp 'process("/home/nguyhau/P2P/aria2/bin/aria2c").function("*")' \
+		-c "/home/nguyhau/P2P/aria2/bin/aria2c --enable-dht=false --log=log_down.txt --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent" 
+		aria2c --enable-dht=false --log=log3.txt --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
+ 4. grep function name from above step 
+	objdump -t executable |grep flush
+ 5. trace address from above step (column 1)
+	addr2line -e executable 0000000000400ab6 -s
+	
+/******
+ * aria2c --enable-dht=false --check-integrity --log=log3.txt --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
+ */	
+	
+/**********************************************************************************************
+ * Allow ssh root user.
+ ****/	
+ 1. vi /etc/ssh/sshd_config: PermitRootLogin without-password -> PermitRootLogin yes
+ 2. sudo service ssh restart
+/**********************************************************************************************
+ * Using nm to trace binary file () -> list source file 
+ **/	
+ /* list all function in binary file: build with option -g to trace function name */
+ 1. nm -l aria2c |grep "/home/nguyhau/P2P/aria2"> try_ls
+ 2. cut -d' ' -f3 try_ls >ls_file
+ 3. cut -f2 ls_file >ls_file1 (not using -d -> using default delimiter is \t character )
+ 4. cut -d':' -f1 ls_file >ls_file1
+ 5. Remove all duplicate line.(use excel )
+ // sudo ./configure --disable-option-checking --disable-silent-rules --disable-dependency-tracking --disable-libtool-lock --disable-metalink --disable-epoll --disable-xmltest --disable-nls --disable-rpath
+ --disable-option-checking 
+ --disable-silent-rules 
+ --disable-dependency-tracking 
+ --disable-libtool-lock 
+ --disable-metalink 
+ --disable-epoll 
+ --disable-xmltest 
+ --disable-nls 
+ --disable-rpath
+ # Count number of word 
+ grep -nr ".cc" temp_file |wc -w
+ 
+ A2_LOG_ERROR("----HauND LOG: newDownloadEngine");
+ A2_LOG_ERROR(fmt("----HauND LOG: Download Engine: %s", option_.get().c_str()));
