@@ -756,3 +756,25 @@ The option is a synonym for -fprofile-arcs -ftest-coverage (when compiling) and 
  2. ./program -> generate tmp.gcno and tmp.gcda
  3. gcov tmp.cpp -m 	
  4. gcovr -r . --html --html-details -o tmp.html
+ /*** Configure for aira ***/
+ ./configure CFLAGS='-g -O2 -fprofile-arcs -ftest-coverage' CXXFLAGS='-g -O2 -fprofile-arcs -ftest-coverage'
+ ./configure --disable-option-checking --disable-silent-rules --disable-dependency-tracking --disable-libtool-lock --disable-metalink --disable-epoll --disable-xmltest --disable-nls --disable-rpath CFLAGS='-g -fprofile-arcs -ftest-coverage' CXXFLAGS='-g -fprofile-arcs -ftest-coverage -fPIC'
+ 
+ 
+ / option 
+ ENABLE_XML_RPC 
+ ENABLE_WEBSOCKET 
+ HAVE_SOME_XMLLIB 
+ ENABLE_ASYNC_DNS
+ HAVE_LIBEXPAT 
+ -HAVE_ZLIB 
+ 
+ / ignore
+ UnknownOptionException.cc
+ 
+ ls /lib/firmware/iw \t
+ 
+//======
+rounte -n -> show default gateway
+route add default gw 192.168.173.1 -> add default gateway
+etc/vsftpd 

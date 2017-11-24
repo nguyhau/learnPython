@@ -31,7 +31,7 @@ git add . -> add all file to index
 git push origin HEAD:refs/for/daisy-dspc-tsdv-vdi-citrix-A8J
 
 git pull origin: get all branch from server.
-/* commit to a branch */
+/******* commit to a branch */
 git status
 git add meta-intel-vdi-common/recipes-tzcs/tzdata/ meta-intel-wifi/recipes-core/base-files/files/start-app-citrix.sh meta-intel-wifi/recipes-core/base-files/files/start-app-vmware.sh
 git status
@@ -45,7 +45,7 @@ git commit --amend: add file to latest commit.
 git push origin HEAD:refs/for/(branch)daisy-dspc-tsdv-vdi-citrix-vmware-common-controlpanel-testing
                               
 
-/*** configure merge tool **/
+/******* configure merge tool **/
 sudo apt-get install meld
 git config --global merge.tool meld.
 
@@ -54,7 +54,7 @@ git mergetool
 git cherry-pick --continue
 
 git cherry-pick --strategy=recursive -X theirs IDcommit: -> resolve conflict using their changes
-/**** reset ****/
+/******** reset ****/
 git checkout .
 git checkout daisy-dspc-tsdv-vdi-citrix-vmware-common-controlpanel-testing
 git pull 
@@ -109,3 +109,6 @@ git pull
 //===========================================================
 git push origin HEAD:refs/for/ 
 
+/********** Reset git folder ****/	
+git reset --hard HEAD~1
+git clean -fd
