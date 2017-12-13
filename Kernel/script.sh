@@ -1,0 +1,51 @@
+#!/bin/bash
+# Create file list_function_call
+list_func()
+{
+	while read -r line
+	do
+	    # Get code
+		temp="$line"
+		code1=$( cut -d'>' -f2  <<< $temp)
+		#echo "Call function is $code1"
+		code=$( cut -d' ' -f1  <<< $code1)
+		if [[ ! -z "$code" ]] && [[ "$code" != " " ]] && [[ $code != *"<"* ]] && [[ $code != *"~"* ]] && [[ $code != *"\*"* ]]; then
+			echo $code>>list_function_call
+		fi
+	done < "$1"
+}
+# Trace object from function name
+trace_funct()
+{
+	while read -r line
+	do
+	    # Get code
+		temp="$line"
+		function_add=$(objdump -t aria2c | grep $temp |awk '{print $1}')
+		echo "Trace binary function address: $function_add"
+		# Get line of code 
+		line_code=$(addr2line -e aria2c $function_add -s)
+		#echo "Line of code: $line_code "
+		file_name=$( cut -d':' -f1  <<< $line_code)
+		#echo "File name: $file_name"
+		if grep -qs "$file_name" "$2"
+		then
+			echo $line_code    	
+		fi
+	done < "$1"
+}
+restruct_file()
+{
+	while read -r line
+	do
+	    echo "Processing new line" >/dev/tty
+	    for word in $line
+	    do
+	        echo $word >> res_file
+	    done
+	done < "$1"
+}
+#echo $2
+#list_func $1
+#trace_funct $2
+restruct_file $1

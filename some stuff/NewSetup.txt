@@ -747,7 +747,7 @@ Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
  A2_LOG_ERROR(fmt("----HauND LOG: Download Engine: %s", option_.get().c_str()));
 /*************************************************************
  * Check code coverage: http://devdocs.io/gcc~7/invoking-gcov; https://gcc.gnu.org/onlinedocs/gcc/Invoking-Gcov.html#Invoking-Gcov
- * http://gcovr.com/guide.html#installationgcc -fprofile-arcs -ftest-coverage tmp.c
+ * http://gcovr.com/guide.html#installation gcc -fprofile-arcs -ftest-coverage tmp.c
  * https://linux.die.net/man/1/gcc
  **/
 --coverage: This option is used to compile and link code instrumented for coverage analysis. 
@@ -755,26 +755,49 @@ The option is a synonym for -fprofile-arcs -ftest-coverage (when compiling) and 
  1. g++ -fprofile-arcs -ftest-coverage -fPIC -O0 tmp.cpp -o program| gcc -fprofile-arcs -ftest-coverage tmp.c -o program
  2. ./program -> generate tmp.gcno and tmp.gcda
  3. gcov tmp.cpp -m 	
- 4. gcovr -r . --html --html-details -o tmp.html
+ 4. gcovr -p -r . --html --html-details -o tmp.html
+ 
  /*** Configure for aira ***/
  ./configure CFLAGS='-g -O2 -fprofile-arcs -ftest-coverage' CXXFLAGS='-g -O2 -fprofile-arcs -ftest-coverage'
  ./configure --disable-option-checking --disable-silent-rules --disable-dependency-tracking --disable-libtool-lock --disable-metalink --disable-epoll --disable-xmltest --disable-nls --disable-rpath CFLAGS='-g -fprofile-arcs -ftest-coverage' CXXFLAGS='-g -fprofile-arcs -ftest-coverage -fPIC'
- 
- 
- / option 
- ENABLE_XML_RPC 
- ENABLE_WEBSOCKET 
- HAVE_SOME_XMLLIB 
- ENABLE_ASYNC_DNS
- HAVE_LIBEXPAT 
- -HAVE_ZLIB 
+ ./configure --without-gnutls --without-libxml2 --without-libexpat --without-libsqlite3 --without-wintls --without-libnettle --without-libgcrypt --disable-metalink --without-libnettle --without-libgmp --without-libssh2 --without-libz --without-libcares --disable-epoll --disable-websocket --disable-libtool-lock --disable-ssl --disable-xmltest --disable-largefile --disable-nls --disable-rpath --without-appletls --without-openssl --without-sqlite3
  
  / ignore
  UnknownOptionException.cc
  
  ls /lib/firmware/iw \t
- 
+ http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/#makedep
 //======
 rounte -n -> show default gateway
 route add default gw 192.168.173.1 -> add default gateway
 etc/vsftpd 
+
+./aria2c --check-integrity --seed-ratio=0.0 --log=log3.txt --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
+
+-static-libstdc++ 
+//https://stackoverflow.com/questions/26103966/how-can-i-statically-link-standard-library-to-my-c-program
+https://stackoverflow.com/questions/15314581/g-compiler-flag-to-minimize-binary-size
+
+./configure --without-gnutls --without-libxml2 --without-libexpat --without-libsqlite3 --without-wintls --without-libnettle --without-libgcrypt --disable-metalink --without-libnettle --without-libgmp --without-libssh2 --without-libz --without-libcares --disable-epoll --disable-websocket --disable-libtool-lock --disable-ssl --disable-largefile --disable-nls --disable-rpath --without-appletls --without-openssl --without-sqlite3 --without-libssh2 CXXFLAGS='-static-libstdc++ -g -fprofile-arcs -ftest-coverage' 
+printf("TSDV DEBUG: [%s] : Start\n",__func__);
+printf("TSDV DEBUG: [%s] : VGA=%d HDMI=%d\n",__func__, _un_plugVGA, _un_plugHDMI);
+//================
+Show file size by KB: ls -lh --block-size=K aria.tar.gz
+
+struct BtObject {
+  std::shared_ptr<DownloadContext> downloadContext;
+  std::shared_ptr<PieceStorage> pieceStorage;
+  std::shared_ptr<PeerStorage> peerStorage;
+  std::shared_ptr<BtAnnounce> btAnnounce;
+  std::shared_ptr<BtRuntime> btRuntime;
+  std::shared_ptr<BtProgressInfoFile> btProgressInfoFile;
+
+  BtObject(const std::shared_ptr<DownloadContext>& downloadContext,
+           const std::shared_ptr<PieceStorage>& pieceStorage,
+           const std::shared_ptr<PeerStorage>& peerStorage,
+           const std::shared_ptr<BtAnnounce>& btAnnounce,
+           const std::shared_ptr<BtRuntime>& btRuntime,
+           const std::shared_ptr<BtProgressInfoFile>& btProgressInfoFile);
+
+  BtObject();
+};
