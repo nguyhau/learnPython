@@ -672,7 +672,7 @@ Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
  
 /*****************************************************************************
  * Trace binary file 
- ****/ 
+ *****************************************************************************/ 
  /* list all function in binary file: build with option -g to trace function name */
  objdump -d executable -> show asm code 
  objdump -t executable -> show local function 
@@ -712,18 +712,18 @@ Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
  5. trace address from above step (column 1)
 	addr2line -e executable 0000000000400ab6 -s
 	
-/******
+/************************************************************************************
  * aria2c --enable-dht=false --check-integrity --log=log3.txt --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
- */	
+ ************************************************************************************/	
 	
 /**********************************************************************************************
  * Allow ssh root user.
- ****/	
+ **********************************************************************************************/	
  1. vi /etc/ssh/sshd_config: PermitRootLogin without-password -> PermitRootLogin yes
  2. sudo service ssh restart
 /**********************************************************************************************
  * Using nm to trace binary file () -> list source file 
- **/	
+ **********************************************************************************************/	
  /* list all function in binary file: build with option -g to trace function name */
  1. nm -l aria2c |grep "/home/nguyhau/P2P/aria2"> try_ls
  2. cut -d' ' -f3 try_ls >ls_file
@@ -749,7 +749,7 @@ Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
  * Check code coverage: http://devdocs.io/gcc~7/invoking-gcov; https://gcc.gnu.org/onlinedocs/gcc/Invoking-Gcov.html#Invoking-Gcov
  * http://gcovr.com/guide.html#installation gcc -fprofile-arcs -ftest-coverage tmp.c
  * https://linux.die.net/man/1/gcc
- **/
+ **************************************************************************/
 --coverage: This option is used to compile and link code instrumented for coverage analysis. 
 The option is a synonym for -fprofile-arcs -ftest-coverage (when compiling) and -lgcov (when linking).
  1. g++ -fprofile-arcs -ftest-coverage -fPIC -O0 tmp.cpp -o program| gcc -fprofile-arcs -ftest-coverage tmp.c -o program
@@ -777,7 +777,9 @@ etc/vsftpd
 -static-libstdc++ 
 //https://stackoverflow.com/questions/26103966/how-can-i-statically-link-standard-library-to-my-c-program
 https://stackoverflow.com/questions/15314581/g-compiler-flag-to-minimize-binary-size
-
+https://stackoverflow.com/questions/6687630/how-to-remove-unused-c-c-symbols-with-gcc-and-ld/6689731
+./configure --without-gnutls --without-libxml2 --without-libexpat
+--without-libsqlite3 --without-wintls --without-libnettle --without-libgcrypt --disable-metalink --without-libnettle --without-libgmp --without-libssh2 --without-libz --without-libcares --disable-epoll --disable-websocket --disable-libtool-lock --disable-ssl --disable-largefile --disable-nls --disable-rpath --without-appletls --without-openssl --without-sqlite3 --without-libssh2 CXXFLAGS='-static-libstdc++ -g -Os -fdata-sections -ffunction-sections -Wl,--gc-sections'
 ./configure --without-gnutls --without-libxml2 --without-libexpat --without-libsqlite3 --without-wintls --without-libnettle --without-libgcrypt --disable-metalink --without-libnettle --without-libgmp --without-libssh2 --without-libz --without-libcares --disable-epoll --disable-websocket --disable-libtool-lock --disable-ssl --disable-largefile --disable-nls --disable-rpath --without-appletls --without-openssl --without-sqlite3 --without-libssh2 CXXFLAGS='-static-libstdc++ -g -fprofile-arcs -ftest-coverage' 
 printf("TSDV DEBUG: [%s] : Start\n",__func__);
 printf("TSDV DEBUG: [%s] : VGA=%d HDMI=%d\n",__func__, _un_plugVGA, _un_plugHDMI);
@@ -801,3 +803,63 @@ struct BtObject {
 
   BtObject();
 };
+//****** Option for optimize size
+gcc -Os -fdata-sections -ffunction-sections test.cpp -o test -Wl,--gc-sections
+/********************************************************************
+ * Apache: https://linode.com/docs/web-servers/apache/apache-web-server-debian-8/
+ * https://www.tecmint.com/check-apache-modules-enabled/
+ * https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-debian-8#step-1-%E2%80%94-install-apache
+ ********************************************************************/
+Run service(Start|stop|reload|restart):  sudo systemctl start apache2|| sudo service apache2 start.
+To enable conf: sudo a2enconf <config file>
+To disable conf: sudo a2disconf <config file>
+To enable a site: sudo a2ensite <site>  /** /etc/apache2/sites-available/example.com.conf -> sudo a2ensite example.com.conf -> sudo systemctl restart apache2**/
+To disable a site: sudo a2dissite <site>
+list all enable module: apache2ctl -t -D DUMP_MODULES
+To enable ssl module:	sudo a2enmod ssl
+To disable ssl module:  sudo a2dismod ssl
+/****
+ * Configure for server 
+ * http://www.stefanocapitanio.com/configuring-two-way-authentication-ssl-with-apache/
+ * https://help.ubuntu.com/community/OpenSSL
+ *********/
+ /** Install */
+ sudo apt install apache2
+ sudo apt install wget
+ sudo apt install openssl
+ sudo apt install transmission-cli
+ /** Create CA */
+ openssl req -new -x509 -extensions v3_ca -keyout private/cakey.pem -out cacert.pem -days 365 -config ./openssl.cnf
+ /** Create and signed server request */
+ openssl req -new -nodes -out server-req.pem -keyout private/server-key.pem -days 365 -config ./openssl.cnf
+ openssl ca -out server-cert.pem -days 365 -config ./openssl.cnf -infiles server-req.pem
+ /** Create and signed client request */
+ openssl req -new -nodes -out client-req.pem -keyout private/client-key.pem -days 365 -config ./openssl.cnf
+ openssl ca -out client-cert.pem -days 365 -config ./openssl.cnf -infiles client-req.pem
+ /** Config apache web server */
+ $ sudo cp cacert.pem server-cert.pem /etc/ssl/certs/
+ $ sudo cp private/server-key.pem /etc/ssl/private/
+ $ sudo a2enmod ssl
+ $ sudo service apache2 restart
+ //
+ sudo nano /etc/apache2/sites-available/default-ssl.conf
+	SSLEngine on
+	SSLCertificateFile /etc/ssl/certs/server-cert.pem
+    SSLCertificateKeyFile /etc/ssl/private/server-key.pem
+    SSLCACertificateFile /etc/ssl/certs/cacert.pem
+    SSLVerifyClient require
+    SSLVerifyDepth  10
+ //
+ $ sudo a2ensite default-ssl.conf
+ $ sudo service apache2 restart
+ /** Test server */
+ $ sudo touch /var/www/html/test_file.tar.gz
+ $ wget https://192.168.145.131/test_file.tar.gz \
+--ca-certificate=cacert.pem --certificate=client-cert.pem \
+--private-key=private/client-key.pem --no-proxy
+
+
+ ./wget https://10.116.41.71:443/data-citrix.tar.gz.torrent --no-proxy --private-key=CA_client/client-key.pem --certificate=CA_client/client-cert.pem --no-check-certificate
+ 
+  /** Create torrent file */
+  $ transmission-create data-big.tar.gz -o data-big.torrent
