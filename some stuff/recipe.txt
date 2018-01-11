@@ -123,7 +123,27 @@ PARALLEL_MAKE = ""
 BBCLASSEXTEND = "native"
 
 
-bitbake -ccleanall <recipe name >: clean core image.
+1. bitbake -ccleanall <recipe name >: clean core image.
 
 find -name ''
 grep -nr "" .
+
+/*********************************************************************************
+ * TZCS environment 
+ ********************************************************************************/
+ 1. Create recipe:
+	- Modify an recipe that places in meta-tzcs layer: Modify directly to the recipe.
+	- Modify an recipe that places in another layer: Create a bbappend file.
+ 2. Build and testing recipe:
+	/** Building package **/
+	bitbake ${package recipe name
+	/** Checking package after build **/
+	- Located: ${BUILD_DIR}/tmp/work/x6_64-debian-linux-uclibc/${source package name}
+	- image: This directory contains all files of package after build. 
+	- temp: This directory contains all log files of build process such as configure, compile, install, etc.. . 
+	- packages-split: Contains all of package that were built from source package name. 
+ 3. Adding a package to image:	
+	- Adding package to Citrix Environment: meta-intel-vdi/meta-intel-vdi-citrix/recipes-core/packagegroups/packagegroup-intel-citrix.bb
+	- Adding package to Vmware Environment: meta-intel-vdi/meta-intel-vdi-vmware/recipes-core/packagegroups/packagegroup-intel-vmware.bb
+	- Adding package to Small Core: meta-intel-wifi/recipes-core/packagegroups/packagegroup-intel-wifi.bb
+	- Adding package to Big Core: meta-intel-vdi/common/recipes-core/packagegroups/packagegroup-intel-vdi.bb

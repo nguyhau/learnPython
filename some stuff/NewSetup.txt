@@ -1,3 +1,4 @@
+http://www.brendangregg.com/
 /**/
  suid: (superuser ID)
  * fix /dev/null: permission denied
@@ -110,30 +111,30 @@
     a(b|c)+           Parentheses that indicate the scope of the operators    
     
     
-I. Retrieve all lines containing strA but not strB in Viual Studio:
-1. Search result:
- ^~(.*strB).*strA.*$
-    
- Explanation:
-  ^         Matches the beginning of a line.
-  .         Matches any character except a newline.
-  ~(...)    is the prevent match construct, equivalent to negative lookahead ((?!...)) used by the other responders.
-  (?!.*strB) Make sure that strB isn't on the current line.
-  .*strA.*   Match the entire line if it contains strA
-  $          Anchor the search to the end of the line.
-  (?:\r\n) at the end of the regex if you also want to remove the carrigage returns/line feeds alogn with the rest of the line.
-  
-  
-II. Remove empty lines 
- Use replace feature:
-  Old:
-  ^:b*$\n
-  New:
-  ^(?([^\r\n])\s)*\r?$\r\n
-  
-  Old: ^$\n
-  
-  ^.*perror.*$\n    
+ I. Retrieve all lines containing strA but not strB in Viual Studio:
+ 1. Search result:
+  ^~(.*strB).*strA.*$
+     
+  Explanation:
+   ^         Matches the beginning of a line.
+   .         Matches any character except a newline.
+   ~(...)    is the prevent match construct, equivalent to negative lookahead ((?!...)) used by the other responders.
+   (?!.*strB) Make sure that strB isn't on the current line.
+   .*strA.*   Match the entire line if it contains strA
+   $          Anchor the search to the end of the line.
+   (?:\r\n) at the end of the regex if you also want to remove the carrigage returns/line feeds alogn with the rest of the line.
+   
+   
+ II. Remove empty lines 
+  Use replace feature:
+   Old:
+   ^:b*$\n
+   New:
+   ^(?([^\r\n])\s)*\r?$\r\n
+   
+   Old: ^$\n
+   
+   ^.*perror.*$\n    
 /*******************************************
  *      NFS: https://github.com/mitchellh/vagrant/issues/2304; https://github.com/mitchellh/vagrant/issues/1706
  *****************************/    
@@ -195,21 +196,21 @@ II. Remove empty lines
 /** How to connect smart phone to smart tivi **/
  DLNA, Screen Mirroring, Google Cast, Photo Share, Smart View, LG Smart Share
 
-DLNA separates multimedia devices into 10 certified classes subdivided into three broad categories: 
-- Home Network Devices (PCs, TVs, AV receivers, game consoles), 
-- Mobile Handheld Devices (smartphones, tablets, digital cameras), 
-- and Home Infrastructure Devices (routers and hubs).  
-
-you might have a PC running DLNA-certified software that transforms it into a media server. 
-Your DLNA-certified player—a TV or game console, for example—would be able to browse the content on the PC and stream it.
-a controller, such as a tablet or smartphone, could discover the content on the PC and tell the TV to play it back. 
-
-All DLNA-certified devices use Universal Plug and Play (UPnP) to discover and talk to each other on the network. When you connect one to your router, it should automatically appear on any other DLNA-certified component’s menu without needing you to perform any setup.
+ DLNA separates multimedia devices into 10 certified classes subdivided into three broad categories: 
+ - Home Network Devices (PCs, TVs, AV receivers, game consoles), 
+ - Mobile Handheld Devices (smartphones, tablets, digital cameras), 
+ - and Home Infrastructure Devices (routers and hubs).  
+ 
+ you might have a PC running DLNA-certified software that transforms it into a media server. 
+ Your DLNA-certified player—a TV or game console, for example—would be able to browse the content on the PC and stream it.
+ a controller, such as a tablet or smartphone, could discover the content on the PC and tell the TV to play it back. 
+ 
+ All DLNA-certified devices use Universal Plug and Play (UPnP) to discover and talk to each other on the network. When you connect one to your router, it should automatically appear on any other DLNA-certified component’s menu without needing you to perform any setup.
 
 /*** Secure NFS ***/
-The first step is mount access. Mount access is achieved by the client machine attempting to attach to the server.
- The security for this is provided by the /etc/exports file. This file lists the names or IP addresses for machines that are allowed to access a share point. 
-The second step is file access. This is a function of normal file system access controls on the client and not a specialized function of NFS. Once the drive is mounted the user and group permissions on the files determine access control. 
+ The first step is mount access. Mount access is achieved by the client machine attempting to attach to the server.
+  The security for this is provided by the /etc/exports file. This file lists the names or IP addresses for machines that are allowed to access a share point. 
+ The second step is file access. This is a function of normal file system access controls on the client and not a specialized function of NFS. Once the drive is mounted the user and group permissions on the files determine access control. 
 
 /********************************************/
  Best practice:
@@ -304,11 +305,11 @@ The second step is file access. This is a function of normal file system access 
  virsh destroy alice: stop a VM and destroy a guest domain
  virsh shutdown alice:  shutdown a VM (without destroying a domain)
 /** network control **/
-cat /sys/class/net/wlan0/operstate -> up or down.
-sudo ifconfig -a
-sudo ifconfig interface down 
-sudo brctl delbr interface   
-virsh net-list --all
+ cat /sys/class/net/wlan0/operstate -> up or down.
+ sudo ifconfig -a
+ sudo ifconfig interface down 
+ sudo brctl delbr interface   
+ virsh net-list --all
 
 /*****************************************************************************
  * Issue when build small core *
@@ -322,7 +323,7 @@ virsh net-list --all
 
 
 /******* config kernel for using NAT: cateee *****/
-enalbe:
+enable:
 CONFIG_NF_NAT_REDIRECT
 CONFIG_NETFILTER_XT_TARGET_REDIRECT
 CONFIG_NF_REJECT_IPV4
@@ -452,7 +453,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
     
 /**************************************************
  *
- *********/    
+ **************************************************/    
  /etc/X11/default-display-manager.
  update-alternatives --config x-window-manager
  
@@ -545,7 +546,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
   
 /******************************************************
  * support smart card
- **/
+ ******************************************************/
   libccid
   pcsc-lite
   pcsc-tool
@@ -574,9 +575,9 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
   Run --> create core file.
   trace segment: gdb core_file binary_file.
   
-/*
+/***********************************************************************
  * starting X log
- */
+ ***********************************************************************/
   /var/log/Xorg.).log -> log file when loading X.
   /usr/share/X11/xorg.conf.d/10-evdev.conf
   
@@ -629,19 +630,19 @@ remove swap file (ls -la)
 /****************************************************************************
  * Decrease binary size 
  ***************************************************************************/
-E:\Project\TZCS\2017A\trunk\src\aria\aria
-
-http://ptspts.blogspot.com/2013/12/how-to-make-smaller-c-and-c-binaries.html
-
-// Build: anonscm.debian.org/gitweb/?p=collab-maint/aria2.git;a=summary
-1. git clone
-2. git checkout debian/1.18.8-1
-3. Modify file configure: vi debian/rules
-4. Run ./debian/rules .PHONY
-// Use
-Create file torrent: use tool transmission-gtk 
-Seed: aria2c --bt-enable-lpd --check-integrity data-A8J-luyentm.tar.gz.torrent
-Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
+ E:\Project\TZCS\2017A\trunk\src\aria\aria
+ 
+ http://ptspts.blogspot.com/2013/12/how-to-make-smaller-c-and-c-binaries.html
+ 
+ // Build: anonscm.debian.org/gitweb/?p=collab-maint/aria2.git;a=summary
+ 1. git clone
+ 2. git checkout debian/1.18.8-1
+ 3. Modify file configure: vi debian/rules
+ 4. Run ./debian/rules .PHONY
+ // Use
+ Create file torrent: use tool transmission-gtk 
+ Seed: aria2c --bt-enable-lpd --check-integrity data-A8J-luyentm.tar.gz.torrent
+ Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
 
 /******************************************************************************
  * Flush log : https://stackoverflow.com/questions/12450066/flushing-buffers-in-c
@@ -659,9 +660,9 @@ Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
  outfile << "abc";
  outfile.flush();
  outfile.close();
-/**
+/***************************************************************
  * insert first line into a file : https://unix.stackexchange.com/questions/99350/how-to-insert-text-before-the-first-line-of-a-file
- **/
+ ***************************************************************/
  sed -i '1 i\#include "log.h"' log.txt
  
  
@@ -757,7 +758,7 @@ The option is a synonym for -fprofile-arcs -ftest-coverage (when compiling) and 
  3. gcov tmp.cpp -m 	
  4. gcovr -p -r . --html --html-details -o tmp.html
  
- /*** Configure for aira ***/
+ /*** Configure for aria ***/
  ./configure CFLAGS='-g -O2 -fprofile-arcs -ftest-coverage' CXXFLAGS='-g -O2 -fprofile-arcs -ftest-coverage'
  ./configure --disable-option-checking --disable-silent-rules --disable-dependency-tracking --disable-libtool-lock --disable-metalink --disable-epoll --disable-xmltest --disable-nls --disable-rpath CFLAGS='-g -fprofile-arcs -ftest-coverage' CXXFLAGS='-g -fprofile-arcs -ftest-coverage -fPIC'
  ./configure --without-gnutls --without-libxml2 --without-libexpat --without-libsqlite3 --without-wintls --without-libnettle --without-libgcrypt --disable-metalink --without-libnettle --without-libgmp --without-libssh2 --without-libz --without-libcares --disable-epoll --disable-websocket --disable-libtool-lock --disable-ssl --disable-xmltest --disable-largefile --disable-nls --disable-rpath --without-appletls --without-openssl --without-sqlite3
@@ -778,9 +779,8 @@ etc/vsftpd
 //https://stackoverflow.com/questions/26103966/how-can-i-statically-link-standard-library-to-my-c-program
 https://stackoverflow.com/questions/15314581/g-compiler-flag-to-minimize-binary-size
 https://stackoverflow.com/questions/6687630/how-to-remove-unused-c-c-symbols-with-gcc-and-ld/6689731
-./configure --without-gnutls --without-libxml2 --without-libexpat
---without-libsqlite3 --without-wintls --without-libnettle --without-libgcrypt --disable-metalink --without-libnettle --without-libgmp --without-libssh2 --without-libz --without-libcares --disable-epoll --disable-websocket --disable-libtool-lock --disable-ssl --disable-largefile --disable-nls --disable-rpath --without-appletls --without-openssl --without-sqlite3 --without-libssh2 CXXFLAGS='-static-libstdc++ -g -Os -fdata-sections -ffunction-sections -Wl,--gc-sections'
-./configure --without-gnutls --without-libxml2 --without-libexpat --without-libsqlite3 --without-wintls --without-libnettle --without-libgcrypt --disable-metalink --without-libnettle --without-libgmp --without-libssh2 --without-libz --without-libcares --disable-epoll --disable-websocket --disable-libtool-lock --disable-ssl --disable-largefile --disable-nls --disable-rpath --without-appletls --without-openssl --without-sqlite3 --without-libssh2 CXXFLAGS='-static-libstdc++ -g -fprofile-arcs -ftest-coverage' 
+./configure --without-gnutls --without-libxml2 --without-libexpat --without-libsqlite3 --without-wintls --without-libnettle --without-libgcrypt --disable-metalink --without-libnettle --without-libgmp --without-libssh2 --without-libz --without-libcares --disable-epoll --disable-websocket --disable-libtool-lock --disable-ssl --disable-largefile --disable-nls --disable-rpath --without-appletls --without-openssl --without-sqlite3 --without-libssh2 CXXFLAGS='-static-libstdc++ -g -Os -fdata-sections -ffunction-sections -Wl,--gc-sections'
+./configure --without-gnutls --without-libxml2 --without-libexpat --without-libsqlite3 --without-wintls --without-libnettle --without-libgcrypt --disable-metalink --without-libnettle --without-libgmp --without-libssh2 --without-libz --without-libcares --disable-epoll --disable-websocket --disable-libtool-lock --disable-ssl --disable-largefile --disable-nls --disable-rpath --without-appletls --without-openssl --without-sqlite3 --without-libssh2 CXXFLAGS='-static-libstdc++ -g -Os -fdata-sections -ffunction-sections -Wl,--gc-sections'
 printf("TSDV DEBUG: [%s] : Start\n",__func__);
 printf("TSDV DEBUG: [%s] : VGA=%d HDMI=%d\n",__func__, _un_plugVGA, _un_plugHDMI);
 //================
@@ -803,26 +803,28 @@ struct BtObject {
 
   BtObject();
 };
-//****** Option for optimize size
-gcc -Os -fdata-sections -ffunction-sections test.cpp -o test -Wl,--gc-sections
+//****** Option for optimize size CXXFLAGS='-Os -fdata-sections -ffunction-sections -Wl,--gc-sections'
+ CFLAGS += "-O2 -fdata-sections -ffunction-sections -Wl,--gc-sections"
+ CXXFLAGS += "-Os -fdata-sections -ffunction-sections -Wl,--gc-sections"
+ gcc -Os -fdata-sections -ffunction-sections test.cpp -o test -Wl,--gc-sections
 /********************************************************************
  * Apache: https://linode.com/docs/web-servers/apache/apache-web-server-debian-8/
  * https://www.tecmint.com/check-apache-modules-enabled/
  * https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-debian-8#step-1-%E2%80%94-install-apache
  ********************************************************************/
-Run service(Start|stop|reload|restart):  sudo systemctl start apache2|| sudo service apache2 start.
-To enable conf: sudo a2enconf <config file>
-To disable conf: sudo a2disconf <config file>
-To enable a site: sudo a2ensite <site>  /** /etc/apache2/sites-available/example.com.conf -> sudo a2ensite example.com.conf -> sudo systemctl restart apache2**/
-To disable a site: sudo a2dissite <site>
-list all enable module: apache2ctl -t -D DUMP_MODULES
-To enable ssl module:	sudo a2enmod ssl
-To disable ssl module:  sudo a2dismod ssl
-/****
+ Run service(Start|stop|reload|restart):  sudo systemctl start apache2|| sudo service apache2 start.
+ To enable conf: sudo a2enconf <config file>
+ To disable conf: sudo a2disconf <config file>
+ To enable a site: sudo a2ensite <site>  /** /etc/apache2/sites-available/example.com.conf -> sudo a2ensite example.com.conf -> sudo systemctl restart apache2**/
+ To disable a site: sudo a2dissite <site>
+ List all enable module: apache2ctl -t -D DUMP_MODULES
+ To enable ssl module:	sudo a2enmod ssl
+ To disable ssl module:  sudo a2dismod ssl
+/*************************************************************************************************
  * Configure for server 
  * http://www.stefanocapitanio.com/configuring-two-way-authentication-ssl-with-apache/
  * https://help.ubuntu.com/community/OpenSSL
- *********/
+ **************************************************************************************************/
  /** Install */
  sudo apt install apache2
  sudo apt install wget
@@ -833,10 +835,10 @@ To disable ssl module:  sudo a2dismod ssl
  /** Create and signed server request */
  openssl req -new -nodes -out server-req.pem -keyout private/server-key.pem -days 365 -config ./openssl.cnf
  openssl ca -out server-cert.pem -days 365 -config ./openssl.cnf -infiles server-req.pem
- /** Create and signed client request */
+ /*** Create and signed client request */
  openssl req -new -nodes -out client-req.pem -keyout private/client-key.pem -days 365 -config ./openssl.cnf
  openssl ca -out client-cert.pem -days 365 -config ./openssl.cnf -infiles client-req.pem
- /** Config apache web server */
+ /*** Config apache web server */
  $ sudo cp cacert.pem server-cert.pem /etc/ssl/certs/
  $ sudo cp private/server-key.pem /etc/ssl/private/
  $ sudo a2enmod ssl
@@ -852,14 +854,72 @@ To disable ssl module:  sudo a2dismod ssl
  //
  $ sudo a2ensite default-ssl.conf
  $ sudo service apache2 restart
- /** Test server */
+ /*** Test server */
  $ sudo touch /var/www/html/test_file.tar.gz
  $ wget https://192.168.145.131/test_file.tar.gz \
---ca-certificate=cacert.pem --certificate=client-cert.pem \
---private-key=private/client-key.pem --no-proxy
+	--ca-certificate=cacert.pem --certificate=client-cert.pem \
+	--private-key=private/client-key.pem --no-proxy
 
 
  ./wget https://10.116.41.71:443/data-citrix.tar.gz.torrent --no-proxy --private-key=CA_client/client-key.pem --certificate=CA_client/client-cert.pem --no-check-certificate
  
-  /** Create torrent file */
+ /*** Create torrent file */
   $ transmission-create data-big.tar.gz -o data-big.torrent
+  
+  ~/TZCS/build_apricot/intel-wifi-7265/tmp-uclibc/work/x86_64-tzcs-linux-uclibc/openssl/1.0.1t-r1/temp
+
+/***************************************************************************
+ * Search package name from command or lib
+ ***************************************************************************/
+ 1. apt-file search {command/library/file name}. Ex apt-file search /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.0 -> package name is libssl1.0.0
+ 2. https://www.debian.org/distrib/packages -> Search the contents of packages: Input {command/library/file name}
+ 
+/**** Optimize kernel size ****/
+ edit meta/conf/bitbake.conf: 
+ -export TARGET_CFLAGS = "${TARGET_CPPFLAGS} ${SELECTED_OPTIMIZATION}"                                                                                           
+-                                                                                                                                                  
+ +export TARGET_CFLAGS = "${TARGET_CPPFLAGS} ${SELECTED_OPTIMIZATION} -Os -fdata-sections -ffunction-sections -Wl,--gc-sections"
+ 
+apricot: 
+	 vmware: 150MB
+	 citrix: 156MB
+	 
+/*** Create patch file **/	 
+git clone git://10.116.41.86/skelios/nss
+cd nss/
+git checkout baron-master
+vi manifest.mn
+git diff > hau.patch
+
+/** Apply path*/
+vi bbappend file:
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"                                                                                                                
+SRC_URI += "file://hau.patch"
+
+
+TARGET_CFLAGS=" -O2 -pipe -g -feliminate-unused-debug-types"
+10.116.114.70
+bitbake -g -u depexp recipename ->  view build-time and runtime dependencies for the recipes
+/******************************************************************
+ * Test 
+ ****/
+ vmware server: 41.126| 224.173
+ user: 			xduser|vuser1
+ pass: TSDV#2015|Tsdv2017
+ 
+/*********************************************************************
+ * Valgrind for analysis source code
+ * https://baptiste-wicht.com/posts/2011/09/profile-c-application-with-callgrind-kcachegrind.html
+ *********************************************************************/
+ wget http://valgrind.org/downloads/valgrind-3.11.0.tar.bz2
+ tar xvjf valgrind-3.11.0.tar.bz2
+ cd valgrind-3.11.0
+ ./configure CFLAGS="-O2" CXXFLAGS="-O2"
+ make
+ sudo make install
+ /** How to use **/
+ valgrind --leak-check=full --log-file=memcheck.out.06-D185 /home/ocrdev/gerrit/PHOcr-master/build_release/build/bin/PHOcrExe -ocr -layout
+ -> use textedit to run log of leak
+ valgrind --tool=callgrind --callgrind-out-file=callgrind.out.A_10305_German_Page0002-D182
+ -> use kcachegrind to view performance result of valgrind
+
