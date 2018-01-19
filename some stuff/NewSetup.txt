@@ -7,6 +7,11 @@ http://www.brendangregg.com/
  * passwd -> setpass.
   unmount all
  * sed -i -e 's/chroot/chroot1/g' *
+ * sed -i -e "<line number>s/<search pattern>/<replacement string>/"
+ * replace whole line: sed -i -e "s/.*/<content>"
+/** **/
+ $(tail -1 cmd) -> run last line of cmd file 
+ $(sed '3q;d' cmd) -> run 3th line of cmd file  
 /*************************************************************************
  *   config network and proxy
  *************************************************************************/
@@ -409,10 +414,10 @@ sudo service networking restart
 /*************************************************************
  * change root 
  *************************************************************/
-sudo service lightdm|gdm|mdm stop
-pkill X
-
-soft / hard
+ sudo service lightdm|gdm|mdm stop
+ pkill X
+ 
+ soft / hard
 
 Determines the recovery behavior of the NFS client after an NFS request times out. If neither option is specified (or if the hard option is specified), NFS requests are retried indefinitely.
 /**************************************************************
@@ -452,7 +457,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
     ../temp/run.do_compile
     
 /**************************************************
- *
+ * X server
  **************************************************/    
  /etc/X11/default-display-manager.
  update-alternatives --config x-window-manager
@@ -552,7 +557,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
   pcsc-tool
   
 /**********************************************************************
- * Authenticated by Smart Card.
+ * Config VisualGDB
  **********************************************************************/
   1. 
   gcc -g *.c -o indicator -lpthread -lX11 -lXrandr -ltzcs -ltzcs-security `pkg-config --cflags --libs gtk+-2.0`
@@ -625,8 +630,8 @@ https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-comman
   ln -snf libtzcs.so.1.0.0 libtzcs.so.1    //-> create softlink
   ln -snf libtzcs.so.1 libtzcs.so          //-> create softlink.
 /**/  
-kill -9 PID
-remove swap file (ls -la)
+ kill -9 PID
+ remove swap file (ls -la)
 /****************************************************************************
  * Decrease binary size 
  ***************************************************************************/
@@ -707,7 +712,7 @@ remove swap file (ls -la)
 	
 	sudo stap para-callgraph.stp 'process("/home/nguyhau/P2P/aria2/bin/aria2c").function("*")' \
 		-c "/home/nguyhau/P2P/aria2/bin/aria2c --enable-dht=false --log=log_down.txt --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent" 
-		aria2c --enable-dht=false --log=log3.txt --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
+		
  4. grep function name from above step 
 	objdump -t executable |grep flush
  5. trace address from above step (column 1)
@@ -922,4 +927,22 @@ bitbake -g -u depexp recipename ->  view build-time and runtime dependencies for
  -> use textedit to run log of leak
  valgrind --tool=callgrind --callgrind-out-file=callgrind.out.A_10305_German_Page0002-D182
  -> use kcachegrind to view performance result of valgrind
+
+
+/******************************************************************
+ * NTP: Re: [TZCS][Apricot]Network Time Protocol(NTP) (29/11)
+ **********/
+ cat /proc/version
+ cat /proc/uptime
+ TestAP:
+ romlinux |Tsdv#2016
+ 
+cat twlan2.conf  
+
+vi /opt/Citrix/ICAClient/config/wfclient.template: KeyboardLayout=(Server Default)
+setxkbmap es -> set spanish keyboard
+
+/** Redirect **/
+Syntax to redirect error and output messages to /dev/null: command > /dev/null 2>&1
+Redirect both standard error and standard out messages to a log file: command > file 2>&1
 

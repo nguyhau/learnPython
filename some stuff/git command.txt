@@ -126,3 +126,17 @@ git remote -v
 git remote set-url origin  https://github.com/meta-debian/meta-debian.git
 git pull 
 git checkout 
+
+/** Fix conflict **/
+checkout self commit id
+create new branch from that commit: git checkout abc
+git checkout master branch; git pull all master branch
+git checkout abc branch; git rebase master branch.
+git checkout master branch 
+git merge abc branch.
+remove temp branch: git branch -D abc.
+push to remote branch: git push origin HEAD:refs/for/Apricot
+//=== amend 
+git add citrix_13.7.0.bb
+git commit --amend 
+git push origin HEAD:refs/for/Apricot
