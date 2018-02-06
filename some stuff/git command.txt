@@ -32,7 +32,7 @@ git add . -> add all file to index
 git push origin HEAD:refs/for/daisy-dspc-tsdv-vdi-citrix-A8J
 
 git pull origin: get all branch from server.
-/******* commit to a branch */
+/***************** commit to a branch *******************/
 git status
 git add meta-intel-vdi-common/recipes-tzcs/tzdata/ meta-intel-wifi/recipes-core/base-files/files/start-app-citrix.sh meta-intel-wifi/recipes-core/base-files/files/start-app-vmware.sh
 git status
@@ -140,3 +140,6 @@ push to remote branch: git push origin HEAD:refs/for/Apricot
 git add citrix_13.7.0.bb
 git commit --amend 
 git push origin HEAD:refs/for/Apricot
+//-- back to server commit:
+git reset --hard 4e4fcfa4e8b5f22297567d91d5863a778ad4e7f9
+git pull 

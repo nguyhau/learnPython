@@ -34,6 +34,44 @@ http://www.brendangregg.com/
     search toshiba-tsdv.com                                                                                                       
     nameserver 10.116.16.13                                                                                                       
     nameserver 10.116.16.2  
+/**** Config git proxy ****/	
+git config --global user.email "hau.nguydinh@toshiba-tsdv.com"
+git config --global user.name "Nguy Dinh Hau"
+1.  For git (http and https protocols)
+	git config --global http.proxy $http_proxy
+	git config --global https.proxy $http_proxy
+	git config --global ftp.proxy $http_proxy
+	git config --global core.noproxy *.tsdv.com.vn
+2. For git protocol:	
+	2.0. for local user: vim ~/.bashrc: 
+		export http_proxy=http://username:password@proxy.tsdv.com.vn:3128
+	2.0'. for global user: vim /etc/profile
+		export http_proxy=http://username:password@proxy.tsdv.com.vn:3128	
+	2.1. Install socat: sudo apt-get install socat
+	2.2. Create a file /usr/bin/gitproxy:
+		#!/bin/sh
+		# Use socat to proxy git through an HTTP CONNECT firewall.
+		# Useful if you are trying to clone git:// from inside a company.
+		# Requires that the proxy allows CONNECT to port 9418.
+		#
+		# Save this file as gitproxy somewhere in your path (e.g., ~/bin) and then run
+		# chmod +x gitproxy
+		# git config --global core.gitproxy gitproxy
+		#
+		# More details at http://tinyurl.com/8xvpny
+
+		# Configuration. Common proxy ports are 3128, 8123, 8000.
+		_proxy=proxy.tsdv.com.vn
+		_proxyport=3128
+		_proxyuser=your_username
+		_proxypass=your_password
+
+		exec socat STDIO PROXY:$_proxy:$1:$2,proxyport=$_proxyport,proxyauth=$_proxyuser:$_proxypass
+	2.3. git config --global core.gitproxy gitproxy
+	2.4. git config --global http.sslverify false
+	
+/*** Config proxy for wget **/	
+  vi /etc/wgetrc
 /*************************************************************************
  *   create account
  *************************************************************************/ 
@@ -321,7 +359,7 @@ http://www.brendangregg.com/
  ****************************************************************************/
 1. can't set locale:
     sudo locale-gen "en_US.UTF-8"
-    sudo dpkg-reconfigure locales
+    sudo dpkg-reconfigure locales: select locale by space character.
     export LC_ALL="en_US.UTF-8" in .bashrc
 2. openssl/opensslv.h: No such file or directory
     sudo apt-get install libssl-dev 
@@ -909,8 +947,14 @@ bitbake -g -u depexp recipename ->  view build-time and runtime dependencies for
  * Test 
  ****/
  vmware server: 41.126| 224.173
- user: 			xduser|vuser1
- pass: TSDV#2015|Tsdv2017
+ user: 			viewuser1|vuser1
+ pass: Tsdv2017
+ Test smart card: 126
+ Test lync 173
+ ------------------------------------------
+ citrix server:41.39
+ training\haund: Abcd1234
+ training\xduser:Tsdv#2015
  
 /*********************************************************************
  * Valgrind for analysis source code
@@ -932,10 +976,14 @@ bitbake -g -u depexp recipename ->  view build-time and runtime dependencies for
 /******************************************************************
  * NTP: Re: [TZCS][Apricot]Network Time Protocol(NTP) (29/11)
  **********/
+ In the case ntp take much time than 60s to complete synchronization then hwclock will not be updated correctly
+ 
  cat /proc/version
  cat /proc/uptime
  TestAP:
  romlinux |Tsdv#2016
+
+Server build: 10.116.224.88
  
 cat twlan2.conf  
 
@@ -946,3 +994,48 @@ setxkbmap es -> set spanish keyboard
 Syntax to redirect error and output messages to /dev/null: command > /dev/null 2>&1
 Redirect both standard error and standard out messages to a log file: command > file 2>&1
 
+/******************************************************************************
+ * https://viblo.asia/p/part-2-gerrit-code-review-with-jenkins-ci-cai-dat-cau-hinh-gerrit-voi-apache-basic-authen-jvlKaqMNKVr
+ * https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-9-4-on-debian-8
+ **/
+ 
+ 
+ Test Indicator: turn off wifi, not connect wired in 5'.
+ I -> create certificate.
+ ways key (left right 1 keyboard) -> boot BIOS
+ 
+ truong1.nguyenhai@toshiba.co.jp
+ t9773050
+ Tsdv2018
+ /proc/acpi/
+ 
+ de-latin1
+ es
+ fr-latin1
+ 
+ dis-ctrl-de-latin1.bmap
+ dis-ctrl-es.bmap  
+ dis-ctrl-fr-latin1.bmap  (*)
+ dis-ctrl-jp106.bmap  
+ dis-ctrl-uk.bmap  
+ dis-ctrl-us.bmap
+ 
+ 
+ LIBRARY_PATH
+ /opt/tzcs-vdi/8.0/sysroots/x86_64-tzcs-linux/usr/include
+ LIBRARY_PATH+="/opt/tzcs-vdi/8.0/sysroots/x86_64-tzcs-linux/usr/include"
+ -L/opt/tzcs-vdi/8.0/sysroots/x86_64-tzcssdk-linux/usr/lib 
+ -L/opt/tzcs-vdi/8.0/sysroots/x86_64-tzcssdk-linux/lib
+ /opt/tzcs-vdi/8.0/sysroots/x86_64-tzcs-linux/usr/lib
+/********************************
+ *
+ **/
+ make CFLAGS=-Dvar=42
+ -DDEBUG_GUI -DDEBUG_GUI
+ indicator &>/dev/null &
+ https://stackoverflow.com/questions/28774830/retrieve-physical-screen-size
+ 
+/** Create ssh key **/ 
+ssh-keygen -t rsa
+
+git config --global --unset core.gitproxy
