@@ -953,8 +953,10 @@ bitbake -g -u depexp recipename ->  view build-time and runtime dependencies for
  Test lync 173
  ------------------------------------------
  citrix server:41.39
- training\haund: Abcd1234
- training\xduser:Tsdv#2015
+ citrix\haund: Abcd1234
+ citrix\xduser:Tsdv#2015
+Please login with user: CITRIX\xduser  |   Pass: Tsdv#2015
+Or your personal user: CITRIX\{ldap_username}   |    Pass: Abcd1234  (exp: user: CITRIX\tamtv   |  Pass: Abcd1234)
  
 /*********************************************************************
  * Valgrind for analysis source code
@@ -978,7 +980,7 @@ bitbake -g -u depexp recipename ->  view build-time and runtime dependencies for
  **********/
  In the case ntp take much time than 60s to complete synchronization then hwclock will not be updated correctly
  
- cat /proc/version
+ cat /proc/version | uname -r 
  cat /proc/uptime
  TestAP:
  romlinux |Tsdv#2016
@@ -1039,3 +1041,69 @@ Redirect both standard error and standard out messages to a log file: command > 
 ssh-keygen -t rsa
 
 git config --global --unset core.gitproxy
+/***** IoTT ****/
+Thing: piaREST lib.
+Platform: dweet.io  <Hadoop, big Data>
+Analytics: ifttt.com <Tensor Flow>
+App: freeboard.io  
+/*** Japanese Citrix Server ***/
+https://tgtca0002.vc.toshiba.co.jp/Citrix/StoreWeb/
+Account: t0533950
+Pass: Tsdv2018
+
+romlinuxAP-WEP: nonpass
+romlinuxAP: 1-0
+testAP_5GHz:romlinux:
+testAP(WEP-pass):12345
+
+//
+"iwconfig wlan0 essid \"%s\" channel auto > /dev/null 2>&1"
+sprintf(buffer, "udhcpc -n -t %d -i wlan0 > /dev/null%s", retry_cnt, eos);
+"ip route flush dev eth0"
+
+udevadm monitor -u -s "drm"
+
+
+/home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi/common/recipes-tzcs/indicator/indicator
+/home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-tzcs/indicator/indicator
+/********************************************************
+ * Create patch file https://www.thegeekstuff.com/2014/12/patch-command-examples
+ *******************************************************/
+ diff from original file with new file:  diff -u a.txt b.txt >a.patch
+ apply patch file on original file and create backup file: patch -b <a.patch		(-b: backup option)
+ undo apply patch:  patch -R<a.patch
+ check apply patch file before apply: patch --dry-run < a.patch.
+ 
+/***************************************
+ * Check commitID from kernel source. 
+ ****************************************/
+ Ex: kernel source is 4.4.111
+ checkout repository:
+	git clone -b linux-4.4.y --single-branch https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git 
+	git tag |grep 4.4.111 -> output v4.4.111
+	git show v4.4.111 -> get commit ID.
+	
+v4.4.111: c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c 
+v4.4.2: 1cb8570bf04ab12a03c31c397a4d158f24895d9c 	
+
+/**************************************
+ * create patch file using git 
+ **************************************/
+ 
+ create patch for commitID1 from commitID2: git diff ID1 ID2 > revert.patch
+ apply patch for commitID1:  git apply revert.patch
+ undo apply patch: git apply -R revert.patch
+ 
+ git format-patch 11b6b7ad30c3f82a6bb6c897bc1e1c51f0e0023a 40ef6ef2f9f30cae414a6bfcbe6e819fbde1ffda
+ 
+/** Use usb in linux */
+df -h -> show mount point of usb. Maniputation on mount point -> ok.
+mount /dev/sdb1 /mnt.
+
+/*** Diff a folder from two commit **/
+git diff c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c 1cb8570bf04ab12a03c31c397a4d158f24895d9c drivers/gpu/drm/i915/intel_hotplug.c >hot-plug.patch
+
+
+tmp/work/intel-debian-linux-uclibc/linux-base/4.4.111-r0/temp/log.do_patch
+/*** Checkout a file from a commit **/
+git checkout commitID file-path
