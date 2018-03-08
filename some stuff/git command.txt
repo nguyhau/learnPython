@@ -145,3 +145,4 @@ git reset --hard 4e4fcfa4e8b5f22297567d91d5863a778ad4e7f9
 git pull 
 //*** clone only a branch of repo
  git clone -b linux-4.4.y --single-branch https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git 
+ 

@@ -81,7 +81,7 @@
         ::ctrlaltdel:/sbin/reboot
         ::shutdown:/bin/umount ­a ­r 
     #vi etc / passwd
-     #   root :0:0: root:/root:/bin/sh
+        root :0:0: root:/root:/bin/sh
     vi etc / groups
         root ::0: root
     vi etc / fstab
@@ -126,7 +126,8 @@
    ­append "root=/dev/sda"
    /* cd to directory contained rootfs.img file*/
    qemu-system-x86_64 -hda rootfs.img -kernel linux-4.8.6/arch/x86/boot/bzImage -append "root=/dev/sda console=ttyS0 rw" -nographic
-   
+
+** Quit qemu **   Ctrl A C
 /********************************************************************
  * Linux kernel
  ********************************************************************/   
@@ -316,3 +317,32 @@ address and executes the code just loaded.
   - The final initialization of the IDT is performed by invoking trap_init( ) and init_IRQ( ) 
   - The kernel thread for process 1 is created by invoking thekernel_thread( )function. 
   In turn, this kernel thread creates the other kernel threads and executes the /sbin/init program  
+  
+/**
+ * Debug with gdb
+ ***/  
+ /******* Build kernel **********/
+ make mrproper
+ make x86_64_defconfig
+ cat <<EOF >.config-fragment
+ CONFIG_DEBUG_INFO=y
+ CONFIG_DEBUG_KERNEL=y
+ CONFIG_GDB_SCRIPTS=y
+ EOF
+ ./scripts/kconfig/merge_config.sh .config .config-fragment
+ make -j"$(nproc)"
+ /** run and debug **/
+ https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu
+ 1. qemu-system-x86_64 -s -S -hda rootfs.img -kernel /home/nguyhau/try/kernel/linux-stable/arch/x86/boot/bzImage -append "root=/dev/sda console=ttyS0 rw" -nographic 
+ 2. cd /home/nguyhau/try/kernel/linux-stable/arch/x86/boot
+	gdb ./vmlinux.bin
+ 3. target remote localhost:1234
+ 4. <set break point > 
+ 5. c (continue)
+ 6. s (step in)
+ 7. n (next)
+ 8. q (quit)
+ 9. bt (backtrace)
+ /*
+  * Quit qemu: ctrl a c 
+  **/

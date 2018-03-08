@@ -98,7 +98,8 @@ git config --global user.name "Nguy Dinh Hau"
     http_proxy="http://haund:fpttoshiba@proxy.tsdv.com.vn:3128/"
  14. git config --global http.proxy $http_proxy
  15. add "ulimit -c unlimited" to .bashrc
- 
+ sudo apt-get install bash-completion
+ source ~/.bashrc 
 /*************************************************************************
  *   config git proxy: http://shrek.tsdv.com.vn/wiki/index.php/Howto
  *************************************************************************/ 
@@ -1107,3 +1108,34 @@ git diff c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c 1cb8570bf04ab12a03c31c397a4d15
 tmp/work/intel-debian-linux-uclibc/linux-base/4.4.111-r0/temp/log.do_patch
 /*** Checkout a file from a commit **/
 git checkout commitID file-path
+/*****************************************************
+ * API and ABI 
+ *************/
+
+API: Application Program Interface
+	This is the set of public types/variables/functions that you expose from your application/library.
+	In C/C++ this is what you expose in the header files that you ship with the application.
+	
+ABI: Application Binary Interface
+	This is how the compiler builds an application.
+	It defines things (but is not limited to):
+		How parameters are passed to functions (registers/stack).
+		Who cleans parameters from the stack (caller/callee).
+		Where the return value is placed for return.
+		How exceptions propagate.
+
+/******************************************************
+ * Build only module in linux kernel: https://stackoverflow.com/questions/8744087/how-to-recompile-just-a-single-kernel-module
+ ***/
+ 1. Download source.
+ 2. Prepare for build:
+	$ make oldconfig
+	$ make kernelversion
+	$ make prepare
+	$ make scripts
+ 3. Build that module which you want, ex i915:
+	make modules SUBDIRS=drivers/gpu/drm/i915
+ 4. To clean module:
+	make modules SUBDIRS=drivers/gpu/drm/i915 clean
+	
+ https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu
