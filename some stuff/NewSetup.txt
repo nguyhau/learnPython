@@ -291,7 +291,9 @@ git config --global user.name "Nguy Dinh Hau"
  harfbuzz
  xfonts-utils
  vi ../meta-debian/classes/debian-package.bbclass -> change PR from git$SRC to git 
- 
+ libcursor: create "libxcursor_debian.bbappend " file in meta-intel-vdi/common/recipes-debian/xorg-lib:
+	DEBIAN_PATCH_TYPE = "quilt"
+	
 /****************************************************************************************************************************
  * KVM: KVM, which stands for Kernel-based Virtual Machine,  KVM was merged into the Linux kernel right from the start. 
  * Its developers chose to take advantage of the processor instruction sets dedicated to virtualization (Intel-VT and AMD-V),
@@ -1139,3 +1141,63 @@ ABI: Application Binary Interface
 	make modules SUBDIRS=drivers/gpu/drm/i915 clean
 	
  https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu
+ 
+/***
+ *
+ */ 
+make distclean                                         
+make mrproper                                                                                                          
+make menuconfig                                                                                                        
+sudo apt-get install libncurses5 
+libncurses5-dev                                                                                                   
+make menuconfig                                                                                                        
+make -j4                                                                                                               
+sudo apt-get install build-essential                                                                                                   
+sudo apt-get upgrade                                                                                                           
+sudo apt-get update                                                                                                            
+make -j4                                                                                                               
+sudo apt-get install bc                                                                                                                
+make -j4                                                                                                               
+                                         
+ls                                                                                                                
+sudo make modules_install install                                                                                                           
+sudo update-grub2                                                                                                      
+sudo reboot
+
+/etc/udhcpc/50default
+udhcpc -n -t 20 -i wlan0
+
+/*** Remote_indi **/
+Apricot: /home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi/common/recipes-tzcs/indicator/indicator
+Common:  /home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-tzcs/indicator/indicator
+
+/** Machine learning **/
+https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471
+https://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/
+
+=== Notify network only be handle in the case 
+/*************************************************************************
+ * Network knowledge
+ **************/
+
+
+"for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'eth0'/{print $1}'`; do kill $k 2>/dev/null; done\n"
+ps 
+-v : except
+http://clfs.org/view/clfs-embedded/mips/bootscripts/network.html
+/** Sequence udhcpc **/
+1. Deconfig
+	ip addr flush dev "interface ". examp eth0, wlan0
+2. Bound
+	ip addr add dev "interface" local "ip/subnet". examp 192.168.173.52/24.
+	ip route del default 2>/dev/null. --> delete default route.
+	ip route add default via "route add" metric "metric value". example route add is 192.168.173.1; metric is 0.
+	echo -n nameserver "dns" > /etc/resolv.conf. Examp dns is 10.116.16.13
+3. 	
+	
+/*******************/
+route add default gw 192.168.173.1
+/*******************/
+sudo ifconfig eth0 192.168.0.1 netmask 255.255.255.0
+sudo route add default gw 192.168.0.253 eth0
+echo "nameserver 4.2.2.2" > /etc/resolv.conf

@@ -112,7 +112,7 @@ git push origin HEAD:refs/for/
 
 /********** Reset git folder ****/	
 git reset --hard HEAD~1
-git clean -fd
+git clean -xfd
 /*** Remove history **********************/ 
 1. https://stackoverflow.com/questions/19573031/cant-push-to-github-because-of-large-file-which-i-already-deleted
 2. https://stackoverflow.com/questions/7654822/remove-refs-original-heads-master-from-git-repo-after-filter-branch-tree-filte
