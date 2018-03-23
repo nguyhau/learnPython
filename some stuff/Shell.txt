@@ -1,3 +1,4 @@
+http://www.tldp.org/LDP/abs/html/index.html
 1. Declare variable
  $xinchao = "Hello" --> after '=' if you want used space, the value must contain in "".
  echo $xinchao.
@@ -105,3 +106,22 @@ fi
 calculate $1
 echo $?
 echo $(date)
+/********************************************************************************
+ * Vi editor
+ **/
+ 1. set color
+	color desert
+ 2. set tab
+	set tabstop=4
+ 3. set auto indention:
+	gg=G
+ 4. select a block
+	Ctrl+V
+ 5. delete from current line to end of file:	dG
+	delete from current cursor to end of file: d Ctrl + End
+ 6. Insert many line:
+	select lines (Ctrl+V)
+	set insert mode: Shift i
+	add text; 
+	Press Esc.
+	

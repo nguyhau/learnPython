@@ -1,4 +1,45 @@
 http://www.brendangregg.com/
+/**********************************************************************
+ * Redirect
+ ************/
+ 1>filename
+    # Redirect stdout to file "filename."
+ 1>>filename
+    # Redirect and append stdout to file "filename."
+ 2>filename
+    # Redirect stderr to file "filename."
+ 2>>filename
+    # Redirect and append stderr to file "filename."
+ &>filename
+    # Redirect both stdout and stderr to file "filename."
+    # This operator is now functional, as of Bash 4, final release.
+
+ M>N
+   # "M" is a file descriptor, which defaults to 1, if not explicitly set.
+   # "N" is a filename.
+   # File descriptor "M" is redirect to file "N."
+ M>&N
+   # "M" is a file descriptor, which defaults to 1, if not set.
+   # "N" is another file descriptor.
+   
+ 2>&1
+   # Redirects stderr to stdout.
+   # Error messages get sent to same place as standard output.
+     >>filename 2>&1
+         bad_command >>filename 2>&1
+         # Appends both stdout and stderr to the file "filename" ...
+     2>&1 | [command(s)]
+         bad_command 2>&1 | awk '{print $5}'   # found
+         # Sends stderr through a pipe.
+         # |& was added to Bash 4 as an abbreviation for 2>&1 |.
+
+i>&j
+   # Redirects file descriptor i to j.
+   # All output of file pointed to by i gets sent to file pointed to by j.
+
+>&j
+   # Redirects, by default, file descriptor 1 (stdout) to j.
+   # All stdout gets sent to file pointed to by j.
 /**/
  suid: (superuser ID)
  * fix /dev/null: permission denied
@@ -1086,8 +1127,8 @@ udevadm monitor -u -s "drm"
 	git tag |grep 4.4.111 -> output v4.4.111
 	git show v4.4.111 -> get commit ID.
 	
-v4.4.111: c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c 
-v4.4.2: 1cb8570bf04ab12a03c31c397a4d158f24895d9c 	
+v4.4.111: c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c   10/1/2018
+v4.4.2: 1cb8570bf04ab12a03c31c397a4d158f24895d9c 	17/21016
 
 /**************************************
  * create patch file using git 
@@ -1141,7 +1182,37 @@ ABI: Application Binary Interface
 	make modules SUBDIRS=drivers/gpu/drm/i915 clean
 	
  https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu
- 
+
+  
+/**
+ * Debug with gdb
+ ***/  
+ /******* Build kernel **********/
+ make mrproper
+ make x86_64_defconfig
+ cat <<EOF >.config-fragment
+ CONFIG_DEBUG_INFO=y
+ CONFIG_DEBUG_KERNEL=y
+ CONFIG_GDB_SCRIPTS=y
+ EOF
+ ./scripts/kconfig/merge_config.sh .config .config-fragment
+ make -j"$(nproc)"
+ /** run and debug **/
+ https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu
+ 1. qemu-system-x86_64 -s -S -hda rootfs.img -kernel /home/nguyhau/try/kernel/linux-stable/arch/x86/boot/bzImage -append "root=/dev/sda console=ttyS0 rw" -nographic 
+ 2. cd /home/nguyhau/try/kernel/linux-stable/arch/x86/boot
+	gdb ./vmlinux.bin
+ 3. target remote localhost:1234
+ 4. <set break point > 
+ 5. c (continue)
+ 6. s (step in)
+ 7. n (next)
+ 8. q (quit)
+ 9. bt (backtrace)
+ /*
+  * Quit qemu: ctrl a c 
+  **/
+  
 /***
  *
  */ 
@@ -1181,23 +1252,141 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  **************/
 
 
-"for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'eth0'/{print $1}'`; do kill $k 2>/dev/null; done\n"
-ps 
--v : except
-http://clfs.org/view/clfs-embedded/mips/bootscripts/network.html
+ "for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'eth0'/{print $1}'`; do kill $k 2>/dev/null; done\n"
+ ps 
+ -v : except
+ http://clfs.org/view/clfs-embedded/mips/bootscripts/network.html
 /** Sequence udhcpc **/
-1. Deconfig
-	ip addr flush dev "interface ". examp eth0, wlan0
-2. Bound
-	ip addr add dev "interface" local "ip/subnet". examp 192.168.173.52/24.
-	ip route del default 2>/dev/null. --> delete default route.
-	ip route add default via "route add" metric "metric value". example route add is 192.168.173.1; metric is 0.
-	echo -n nameserver "dns" > /etc/resolv.conf. Examp dns is 10.116.16.13
-3. 	
+ 1. Deconfig
+ 	ip addr flush dev "interface ". examp eth0, wlan0
+ 2. Bound
+ 	ip addr add dev "interface" local "ip/subnet". examp 192.168.173.52/24.
+ 	ip route del default 2>/dev/null. --> delete default route.
+ 	ip route add default via "route add" metric "metric value". example route add is 192.168.173.1; metric is 0.
+ 	echo -n nameserver "dns" > /etc/resolv.conf. Examp dns is 10.116.16.13
+ 3. 	
 	
 /*******************/
-route add default gw 192.168.173.1
-/*******************/
-sudo ifconfig eth0 192.168.0.1 netmask 255.255.255.0
-sudo route add default gw 192.168.0.253 eth0
-echo "nameserver 4.2.2.2" > /etc/resolv.conf
+ route add default gw 192.168.173.1
+/*********
+ * Configure network : IP, route, name server. https://p5r.uk/blog/2010/ifconfig-ip-comparison.html 
+ *********/
+ To add/del Ip addr: ip addr add/dell
+ sudo ifconfig eth0 192.168.0.1 netmask 255.255.255.0
+ sudo route add default gw 192.168.0.253 eth0
+ echo "nameserver 4.2.2.2" > /etc/resolv.conf
+
+/**************************************************
+ * Build meta-toolchain
+ *****/
+ $ vi ${path}/meta-tzcs/meta-intel-vdi-common/recipes-core/packagegroups/packagegroup-core-standalone-sdk-target.bbappend
+
+ RDEPENDS_${PN} += “\
+     linux-libc-headers-base-dev \
+     tzcslib-dev \
+     libtzcs-security-dev \
+     gtk+-dev \
+ ”
+ 
+ $ bitbake –ccleanall meta-toolchain      /* if necessary */
+ $ bitbake meta-toolchain
+
+
+/** How to use **/
+ •	Copy debian-eglibc-x86_64-meta-toolchain-x86_64-toolchain-8.0.sh to your PC
+ •	Install meta-toolchain on your PC
+ $ source /opt/debian/8.0/environment-setup-x86_64-debian-linux
+ https://lists.yoctoproject.org/pipermail/yocto/2017-April/035792.html
+
+/**********************************************************
+ * Debug in makefile
+ ********************************/
+ Assumption make file contain SOURCES variable. Need print out that value:
+ --> 
+ 1. Add following line to makefile.
+ .PHONY: print_vars                                                                                                                                              
+ print_vars:                                                                                                                                                         
+	@echo $(SOURCES)
+	
+ 2. Run make print_vars	
+/*************************************************************
+ *
+ */ 
+ lspci -k
+ ls /lib/modules
+ cp /boot/config**
+ 	
+/*****************************************
+ * Show git log history for a sub directory of a git repo.
+ *********************************/
+	You need the '--' to separate <path>.. from the <since>..<until> refspecs.	
+ git log -- . --since=1cb8570bf04ab12a03c31c397a4d158f24895d9c --until=c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c> list_cm
+ git log -- . --since=3d8acd1f667b45c531401c8f0c2033072e32a05d --until=68e6cd9a0547d40d921baff918c111db96d96d76> list_cm
+ 3d8acd1f667b45c531401c8f0c2033072e32a05d	
+ 68e6cd9a0547d40d921baff918c111db96d96d76
+ 
+ Search lines starting with one specific using grep:
+ 	grep '^a.*e$' file
+ 
+ git tag --contains 68e6cd9a0547d40d921baff918c111db96d96d76 -> list tags that contain 68e6cd9a0547d40d921baff918c111db96d96d76 commit.
+
+
+/*
+ * Install firmware:
+ */
+ ls 
+ /lib/firmware/
+ ls /lib/firmware/                                                                                                                                             
+ ifconfig -a                                                                                                                                                  
+ systemctl restart networking                                                                                                                                    
+ ifconfig -a                                                                                                                                                  
+ systemctl restart networking                                                                                                                                    
+ systemctl stop networking                                                                                                                                       
+ systemctl start networking                                                                                                                                      
+ systemctl status networking                                                                                                                                     
+ ifconfig -a                                                                                                                                                  
+ ifup  enp0s25                                                                                                                                             
+ ifconfig enp0s25 10.116.41.58/24                                                                                                                                
+ ifconfig                                                                                                                                            
+ ping 10.116.41.1                                                                                                                                         
+ apt-cache search firmware                                                                                                                                       
+ apt-get install firmware-iwlwifi
+ df -h                                                                                                                                                  
+ du -sh /boot                                                                                                                                               
+ du -sh /lib/modules                                                                                                                                        
+ ls /lib/modules/                                                                                                                                       
+ du -sh /lib/modules/*                                                                                                                                      
+ rm -rf /lib/modules/4.4.*                                                                                                                                  
+ du -sh /lib/modules                                                                                                                                        
+ df -h                                                                                                                                                  
+ apt-get install firmware-iwlwifi                                                                                                                                
+ cat /etc/apt/apt.conf                                                                                                                                   
+ ping proxy.tsdv.com.vn                                                                                                                                   
+ ping 10.116.16.20                                                                                                                                        
+ ping 10.116.16.1                                                                                                                                         
+ ping 10.116.41.1                                                                                                                                         
+ route add default gw 10.116.41.1                                                                                                                                
+ ping 10.116.16.1                                                                                                                                         
+ cat /etc/resolv.conf                                                                                                                                    
+ touch /etc/resolv.conf                                                                                                                                    
+ ls /etc/                                                                                                                                               
+ ls /etc/resolv.conf                                                                                                                                    
+ cat /etc/resolv.conf                                                                                                                                    
+ ls /etc/resolv.conf 
+ systemctl start NetworkManager                                                                                                                                  
+ ls /var/run/                                                                                                                                           
+ ls /var/run/NetworkManager/                                                                                                                            
+ route                                                                                                                                               
+ ping 10.116.16.2                                                                                                                                         
+ apt-get install firmware-iwlwifi                                                                                                                                
+ ping 10.116.16.20                                                                                                                                        
+ vi /etc/apt/apt.conf                                                                                                                                   
+ apt-get install firmware-iwlwifi                                                                                                                                
+                                                                                                                                
+ apt-cache search firmware                                                                                                                                       
+ apt-cache search firmware |grep -i blue                                                                                                                         apt-get search 
+ bluez-firmware                                                                                                                                   
+ apt-get install 
+ bluez-firmware                                                                                                                                  
+ dpkg -L bluez-firmware
+ 

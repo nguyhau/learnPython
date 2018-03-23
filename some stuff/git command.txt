@@ -146,3 +146,6 @@ git pull
 //*** clone only a branch of repo
  git clone -b linux-4.4.y --single-branch https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git 
  
+ 
+git push origin HEAD:refs/for/Apricot
+ 
