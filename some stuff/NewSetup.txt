@@ -1331,6 +1331,9 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  git tag --contains 68e6cd9a0547d40d921baff918c111db96d96d76 -> list tags that contain 68e6cd9a0547d40d921baff918c111db96d96d76 commit.
 
 
+ acd21d848252d8ea06b19066b675391d012b1737 v4.4.29
+ c843445f19f4e6f05b32125d7556958f98033999 v4.4.28
+ 
 /*
  * Install firmware:
  */
@@ -1390,3 +1393,38 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  bluez-firmware                                                                                                                                  
  dpkg -L bluez-firmware
  
+/*********************************************
+ * Git rebase
+ **/ 
+ Ignore a commit: f1ab38e63d246e5becf195cdbaf1534691dad44b
+ 1. git rebase -i f1ab38e63d246e5becf195cdbaf1534691dad44b^
+ 2. fix conflict
+ 3. git add 
+ 4. git status 
+ 5. git log 
+ 6. git rebase --continue.
+ 
+ 
+/************************************************
+ * Explaination about conflict mark when using git merger
+ **/
+ <<<<<<< HEAD:file.txt
+ Hello world
+ =======
+ Goodbye
+ >>>>>>> 77976da35a11db4580b80ae27e8d65caf5208086:file.txt
+ 
+ --> Explain 
+ The line (or lines) between the lines beginning <<<<<<< and ====== here:
+
+ <<<<<<< HEAD:file.txt
+ Hello world
+ =======
+ 
+ ... is what you already had locally - you can tell because HEAD points to your current branch or commit. The line (or lines) between the lines beginning ======= and >>>>>>>:
+ 
+ =======
+ Goodbye
+ >>>>>>> 77976da35a11db4580b80ae27e8d65caf5208086:file.txt
+ 
+ ... is what was introduced by the other commit, in this case 77976da35a11.
