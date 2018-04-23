@@ -1276,9 +1276,9 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  sudo route add default gw 192.168.0.253 eth0
  echo "nameserver 4.2.2.2" > /etc/resolv.conf
 
-/**************************************************
+/*****************************************************************
  * Build meta-toolchain
- *****/
+ *****************************************************************/
  $ vi ${path}/meta-tzcs/meta-intel-vdi-common/recipes-core/packagegroups/packagegroup-core-standalone-sdk-target.bbappend
 
  RDEPENDS_${PN} += “\
@@ -1316,9 +1316,9 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  ls /lib/modules
  cp /boot/config**
  	
-/*****************************************
+/**********************************************************
  * Show git log history for a sub directory of a git repo.
- *********************************/
+ **********************************************************/
 	You need the '--' to separate <path>.. from the <since>..<until> refspecs.	
  git log -- . --since=1cb8570bf04ab12a03c31c397a4d158f24895d9c --until=c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c> list_cm
  git log -- . --since=3d8acd1f667b45c531401c8f0c2033072e32a05d --until=68e6cd9a0547d40d921baff918c111db96d96d76> list_cm
@@ -1334,9 +1334,9 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  acd21d848252d8ea06b19066b675391d012b1737 v4.4.29
  c843445f19f4e6f05b32125d7556958f98033999 v4.4.28
  
-/*
+/********************************************************
  * Install firmware:
- */
+ ********************************************************/
  ls 
  /lib/firmware/
  ls /lib/firmware/                                                                                                                                             
@@ -1395,7 +1395,7 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  
 /*********************************************
  * Git rebase
- **/ 
+ **********************************************/ 
  Ignore a commit: f1ab38e63d246e5becf195cdbaf1534691dad44b
  1. git rebase -i f1ab38e63d246e5becf195cdbaf1534691dad44b^
  2. fix conflict
@@ -1405,9 +1405,9 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  6. git rebase --continue.
  
  
-/************************************************
+/********************************************************
  * Explaination about conflict mark when using git merger
- **/
+ ********************************************************/
  <<<<<<< HEAD:file.txt
  Hello world
  =======
@@ -1428,3 +1428,248 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  >>>>>>> 77976da35a11db4580b80ae27e8d65caf5208086:file.txt
  
  ... is what was introduced by the other commit, in this case 77976da35a11.
+ 
+/************************************************
+ * Synchronize Indicator and xfce monitor mode.
+ **/ 
+ xfce: using external monitor:
+	extend right: extend
+	extend left: switch
+	extend horizontal: none
+	mirror.
+	
+xfce_displays_helper_channel_property_changed 	
+/*
+ * xrandr command
+ */
+ # Using xrandr -> list all connected monitor: monitor name, status, resolution , ...
+	xrandr -q 
+	Ex eDP1 connected 1024x768, DP1 connected 1024x768.
+ # To turn on DP1: 
+	xrandr --output DP1 --mode "<resolution>1024x768" --right-of eDP1. (eDP1 is primary monitor)
+ # To turn off DP1: 
+	xrandr --output DP1 --off.
+ # Put your normal screen in 1024x768
+	xrandr --output eDP1 --mode 1024x768
+ # Add a mode for display port
+	xrandr --addmode DP1 1024x768
+ # Clone the normal screen to the display port
+	xrandr --output DP1 --mode 1024x768 --same-as eDP1 
+ 
+xrandr --output DP1 --mode 1024x768|preferred  --right-of eDP1
+ 
+xrandr |grep "Current Profile"|cut -d ':' -f2
+
+/************************************************
+ * Measue time consumed of function 
+ ************************************************/
+#include <sys/time.h> 
+typedef void (*func_p)();
+ 
+void measure_func(func_p f)
+{
+    struct timeval  time_start, time_end;
+    gettimeofday(&time_start, NULL);
+    f();
+    gettimeofday(&time_end, NULL);
+    printf ("Total time = %f seconds\n",
+        (double) (time_end.tv_usec - time_start.tv_usec) / 1000000 +
+        (double) (time_end.tv_sec - time_start.tv_sec));
+}
+
+void init_network()
+{
+#ifdef DEBUG_NETWORK
+    printf("======> Enter to %d: %s:%s, time %s \n", __LINE__, __FUNCTION__, __FILE__, __TIME__);
+#endif
+    int ret = NONE_NET;
+    /* Reset all values of network struct */
+    memset(&network_info_s, 0, sizeof(NetworkInfo));
+    /* Get BIOS info */
+    printf("============== Init network ===========\n");
+    printf("get_network_bios_setting \n");
+    measure_func(&get_network_bios_setting);
+}	
+/***************************************************
+ * Register XRR notify
+ ***************************************************/
+#include <gdk/gdkx.h>
+#include <X11/extensions/Xrandr.h>
+/** event base for XRandR notifications */
+static gint randr_event_base;
+gint error_base, err;
+static GdkFilterReturn screen_on_event (GdkXEvent *xevent,
+                                        GdkEvent  *event,
+                                        gpointer   data)
+{
+#ifdef DEBUG_GUI
+    printf("Enter to %d: %s:%s \n",  __LINE__, __FUNCTION__,__FILE__);
+#endif
+    GtkBuilder *builder = data;
+    XEvent     *e = xevent;
+    gint        event_num;
+    if (!e)
+        return GDK_FILTER_CONTINUE;
+    event_num = e->type - randr_event_base;
+    if (event_num == RRScreenChangeNotify)
+    {
+        printf("============= RRS notify ========= \n");
+    }
+#ifdef DEBUG_GUI
+    printf("Leave to %d: %s:%s \n",  __LINE__, __FUNCTION__,__FILE__);
+#endif
+    /* Pass the event on to GTK+ */
+    return GDK_FILTER_CONTINUE;
+}	
+GtkWidget *init_frame()
+//Init all frames that use on indicator application
+{
+#ifdef DEBUG_GUI
+    printf("Enter to %d: %s:%s \n",  __LINE__, __FUNCTION__,__FILE__);
+#endif
+    GtkBuilder *builder;
+    builder = gtk_builder_new();
+    gtk_builder_add_from_file(builder, "/usr/share/indicator/glade/main.glade", NULL);
+	/** Register RSS notify */
+    GdkDisplay  *display;
+    /* Get the default display */
+    display = gdk_display_get_default ();
+    /* Check if the randr extension is avaible on the system */
+    if (!XRRQueryExtension (gdk_x11_display_get_xdisplay (display), &randr_event_base, &error_base))
+    {
+        printf("Unable to query the version of the RandR extension being used \n");
+    }else{
+        /* Set up notifications */
+        XRRSelectInput (gdk_x11_display_get_xdisplay (display),
+                        GDK_WINDOW_XID (gdk_get_default_root_window ()),
+                        RRScreenChangeNotifyMask);
+        gdk_x11_register_standard_event_type (display,
+                                              randr_event_base,
+                                              RRNotify + 1);
+        gdk_window_add_filter (gdk_get_default_root_window (), screen_on_event, builder);
+    }
+/** End of register */
+/*********************************************************************
+ * Get monitor output
+ *********************************************************************/
+ #include <X11/extensions/Xrandr.h>
+ /** Screen properties **/
+typedef struct _OutputScreen{
+    char* name;
+    int width;
+    int height;
+} OutputScreen, *pOutputScreen;
+/** Outputs structure **/
+typedef struct _Outputs{
+    pOutputScreen out_screens;
+    int nscreen;
+    int nprimary;
+    int nsecond;
+    int ninternal;
+    int ncrt_use;
+} Outputs, *pOutputs;
+ /**-------------------------------------------------------------------
+ * <B>Function</B>:    get_screen_info
+ * 
+ * Get all out put screen
+ *@n
+ *------------------------------------------------------------------*/
+pOutputs get_screen_info ()
+{
+    pOutputs outputs = NULL;
+    Display *display_screen = NULL;
+    XRRScreenResources *res = NULL;
+    RROutput primary_id;
+    int i, j;
+#ifdef DEBUG_MONITOR
+    printf("Enter to %d: %s:%s \n",  __LINE__, __FUNCTION__,__FILE__);
+#endif
+    display_screen = XOpenDisplay(NULL);
+    if (display_screen == NULL){
+        printf("XOpenDiplay return NULL \n");
+    } else{
+        res = XRRGetScreenResources(display_screen, DefaultRootWindow(display_screen));
+        if (res == NULL){
+            printf("XRRGetScreenResources return NULL \n");
+        } else{
+            int number_screen = 0;
+            printf("Count number of output \n");
+            for (i = 0; i < res->noutput; i++)
+            {
+                XRROutputInfo *output_info = XRRGetOutputInfo (display_screen, res, res->outputs[i]);
+                if (!output_info) {
+                    printf ("could not get output 0x%d information\n", res->outputs[i]); 
+                    return outputs;
+                }
+                if (!output_info->connection) number_screen++;
+                XRRFreeOutputInfo(output_info);
+            }
+            /* Allocate memory for outputs */
+            outputs = (pOutputs)malloc(sizeof(Outputs));
+            memset(outputs, 0, sizeof(Outputs));
+            outputs->nscreen = number_screen;
+            outputs->nprimary = -1;
+            outputs->out_screens = calloc (number_screen, sizeof (OutputScreen));
+            memset(outputs->out_screens, 0, number_screen*sizeof (OutputScreen));
+            int scr_index = 0;
+            primary_id = XRRGetOutputPrimary(display_screen, DefaultRootWindow(display_screen));
+            for (i = 0; i < res->noutput; i++)
+            {
+                XRROutputInfo *output_info = XRRGetOutputInfo (display_screen, res, res->outputs[i]);
+                if (!output_info->connection){
+                    XRRCrtcInfo *crtc_info = NULL;
+                    /* Get name of screen */
+                    outputs->out_screens[scr_index].name = strdup(output_info->name);
+                    /* Get size of screen */
+                    for (j = 0; j < res->ncrtc;j++){
+                        crtc_info = XRRGetCrtcInfo(display_screen, res, res->crtcs[j]);
+                        if (crtc_info == NULL){
+                            continue;;
+                        }
+                        else{
+                            if (crtc_info->noutput > 0){
+                                if(crtc_info->outputs[crtc_info->noutput - 1] == res->outputs[i]){
+                                    break;
+                                }
+                            }
+                            XRRFreeCrtcInfo(crtc_info);
+                        }
+                    }
+                    if (crtc_info == NULL){
+                        printf("Error get crtc info \n");
+                    }
+                    else{
+                        outputs->out_screens[scr_index].width = crtc_info->width;
+                        outputs->out_screens[scr_index].height = crtc_info->height;
+                        XRRFreeCrtcInfo(crtc_info);
+                    }
+                    /* Set internal position screen */
+                    if(!strcmp(output_info->name,"eDP1"))
+                    {
+                        outputs->ninternal = scr_index;
+                    }else{
+                        outputs->nsecond = scr_index;
+
+                    }
+                    /* Set primary position screen */
+                    if (res->outputs[i] == primary_id){
+                        printf("Primary monitor name: %s\n", outputs->out_screens[scr_index].name);
+                        outputs->nprimary = scr_index;
+                    }
+                    scr_index++;
+                }
+                XRRFreeOutputInfo(output_info);
+            }
+        }
+    }
+#ifdef DEBUG_MONITOR
+    for (i = 0; i < outputs->nscreen; i++)
+    {
+        printf("==== Monitor %d =========\n", i);
+        printf("Name: %s, Primary: %s \n", p_outputs->out_screens[i].name, p_outputs->out_screens[i].is_primary==1?"Yes":"No");
+        printf("width %d, height %d \n", p_outputs->out_screens[i].width, p_outputs->out_screens[i].height);
+    }
+    printf("Exit to %d: %s:%s \n",  __LINE__, __FUNCTION__,__FILE__);
+#endif
+    return outputs;
+}

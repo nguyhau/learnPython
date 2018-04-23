@@ -56,6 +56,8 @@
     sudo mknod -m 660 dev/ram0 b 1 0
     sudo mknod -m 666 dev/tty c 5 0
     sudo mknod -m 600 dev/tty1 c 4 1
+	major: device driver.
+	minnor: 1-125
  3. Create environment 
     /*
         The kernel will start a program called init
