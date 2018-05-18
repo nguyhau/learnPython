@@ -1249,9 +1249,9 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
 === Notify network only be handle in the case 
 /*************************************************************************
  * Network knowledge
- **************/
+ *************************************************************************/
 
-
+iwconfig
  "for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'eth0'/{print $1}'`; do kill $k 2>/dev/null; done\n"
  ps 
  -v : except
@@ -1266,11 +1266,11 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  	echo -n nameserver "dns" > /etc/resolv.conf. Examp dns is 10.116.16.13
  3. 	
 	
-/*******************/
+/*****************************************************/
  route add default gw 192.168.173.1
-/*********
+/****************************************************************
  * Configure network : IP, route, name server. https://p5r.uk/blog/2010/ifconfig-ip-comparison.html 
- *********/
+ ***********************************************************************************/
  To add/del Ip addr: ip addr add/dell
  sudo ifconfig eth0 192.168.0.1 netmask 255.255.255.0
  sudo route add default gw 192.168.0.253 eth0
@@ -1477,6 +1477,19 @@ void measure_func(func_p f)
         (double) (time_end.tv_sec - time_start.tv_sec));
 }
 
+typedef int (*ret_func_p)();
+int measure_ret_func(ret_func_p f)
+{
+	int ret = 0;
+    struct timeval  time_start, time_end;
+    gettimeofday(&time_start, NULL);
+    ret=f();
+    gettimeofday(&time_end, NULL);
+    printf ("Total time = %f seconds\n",
+        (double) (time_end.tv_usec - time_start.tv_usec) / 1000000 +
+        (double) (time_end.tv_sec - time_start.tv_sec));
+    return ret;
+}
 void init_network()
 {
 #ifdef DEBUG_NETWORK
@@ -1666,10 +1679,159 @@ pOutputs get_screen_info ()
     for (i = 0; i < outputs->nscreen; i++)
     {
         printf("==== Monitor %d =========\n", i);
-        printf("Name: %s, Primary: %s \n", p_outputs->out_screens[i].name, p_outputs->out_screens[i].is_primary==1?"Yes":"No");
-        printf("width %d, height %d \n", p_outputs->out_screens[i].width, p_outputs->out_screens[i].height);
+        printf("Name: %s, Primary: %s \n", outputs->out_screens[i].name, outputs->out_screens[i].is_primary==1?"Yes":"No");
+        printf("width %d, height %d \n", outputs->out_screens[i].width, outputs->out_screens[i].height);
     }
     printf("Exit to %d: %s:%s \n",  __LINE__, __FUNCTION__,__FILE__);
 #endif
     return outputs;
 }
+/**************************************************************************
+ * Config wifi network using command line: 
+ * https://p5r.uk/blog/2010/ifconfig-ip-comparison.html
+ * https://www.blackmoreops.com/2014/09/18/connect-to-wifi-network-from-command-line-in-linux/ 
+ * https://www.linuxjournal.com/content/wi-fi-command-line 
+ *  iwconfig - configure a wireless network interface
+ *  iwlist - Get more detailed wireless information from a wireless interface
+ *  iwpriv - configure optionals (private) parameters of a wireless network interface
+ *  iw - show / manipulate wireless devices and their configuration
+ **************************************************************************/
+ 1. Find available WiFi adapters:
+	# iw dev
+ 2. Check device status:
+	# ip link show wlan0
+ 3. Bring up the WiFi interface:
+	# ip link set wlan0 up
+	+if wlan0 is soft block.
+		- check by running "rfkill list" command
+		run: rfkill unblock wifi.
+		
+		
+ 4: Check the connection status
+	# iw wlan0 link
+ 5: Scan to find WiFi Network
+	# iw wlan0 scan
+	$ sudo iwlist wlan0 scan | grep ESSID
+ 6: Generate a wpa/wpa2 configuration file:
+	# wpa_passphrase blackMOREOps >> /etc/wpa_supplicant.conf
+	abcd1234
+	root@kali:~#
+	(where 'abcd1234' was the Network password)
+	#wpa_passphrase networkname password > /etc/wpa_supplicant/wpa_supplicant.conf
+ 7: Connect to WPA/WPA2 WiFi network:
+	# wpa_supplicant -i wlan0 -c /etc/wpa_supplicant.conf
+	OR # wpa_supplicant -B -D wext -i wlan0 -c /etc/wpa_supplicant.conf
+	
+    -B means run wpa_supplicant in the background.
+    -D specifies the wireless driver. wext is the generic driver.
+    -c specifies the path for the configuration file.
+
+ 8. Check the connection status:
+	# iw wlan0 link
+	OR #iwconfig
+ 9: Get an IP using dhclient:
+	# dhclient wlan0
+	+ verify the IP address assigned by DHCP
+		ip addr show wlan0
+		ifconfig wlan0
+	+ Check default routing rule
+		ip route show
+		route
+	+ Add default routing rule
+		route add -net 192.168.3.0/24 dev eth3
+		ip route add 192.168.3.0/24 dev eth3
+ 10: Test connectivity:
+	# ping 8.8.8.8
+	
+watch -n 1 cat /proc/net/wireless
+
+ip route del default
+
+ip addr flush dev eth0
+ifconfig eth0 inet up "ip" netmask "subnet" 
+route add -net default gw "gateway" dev eth0
+echo nameserver dns > /etc/resolv.conf 
+	
+MST -> CMT: http://tongcucthue.org/tra-cuu-ma-thue-thu-nhap-ca-nhan-online-tncnonline/
+CMT -> MBHXH: http://thue.dianam.vn/Huong-dan-nghiep-vu/Tim-so-so-bhxh-bang-cmnd-7422
+			  https://baohiemxahoi.gov.vn/tracuu/Pages/tra-cuu-ho-gia-dinh.aspx
+TTBHXH: https://baohiemxahoi.gov.vn/tracuu/Pages/tra-cuu-dong-bao-hiem.aspx			  
+
+/*****************************************************************************
+ * Network acronym& terminology
+ *****************************************************************************/
+ip: RTNETLINK answer: File exists.
+
+IEEE:  Institute of Electrical and Electronics Engineers
+IEEE-SA: Institute of Electrical and Electronics Engineers Standards Association                                                                                                                   +        //
+VLANs: Virtual LANs
+PKI: Public Key Infrastructure 
+EAP: Extensible Authentication Protocol 
+EAPoLAN: EAP over LAN 
+EAPoWLAN: EAP over WLAN
+NPS: Network Policy Server 
+RADIUS: Remote Authentication Dial-In User Service
+AD: Active Directory
+PEAP: Protect EAP.
+DS: Domain Services
+CA: Certification Authority
+Active Directory Domain Controller
+EAP-TLS: EAP Transport Layer Security
+CRL: Certificate Revocation List 
+MAC: Medium Access Control 
+WEP: Wired Equivalent Privacy
+WPA: Wi-Fi Protected Access 
+SSID: Service Set Identifier
+Wi-Fi: Wireless Fidelity, a wireless technology association. 
+ESS: Extended Service Set
+DNS: Domain Name System, convert Internet addresses to numeric IP addresses
+LAN: Local Area Network
+http://tutorial.wmlcloud.com/windows_7/Understanding-Network-Connectivity-in-an-Enterprise-(part-1)---Unicast,-Multicast,-and-Broadcast---Using-IPConfig.aspx
+wget ftp://trungnt:1@10.116.224.88/goo*
+/**********************************************************************************
+ * Routing table 
+ * https://manpages.debian.org/stretch/iproute2/ip-route.8.en.html
+ * https://www.cyberciti.biz/faq/what-is-a-routing-table/
+ **********************************************************************************/
+
+ip route { add | del | change | append | replace } ROUTE
+ROUTE := NODE_SPEC [ INFO_SPEC ]
+NODE_SPEC := [ TYPE ] PREFIX [ tos TOS ] [ table TABLE_ID ] [ proto RTPROTO ] [ scope SCOPE ] [ metric METRIC ]
+INFO_SPEC := NH OPTIONS FLAGS [ nexthop NH ]
+TYPE := [ unicast | local | broadcast | multicast | throw | unreachable | prohibit | blackhole | nat ]
+NH := [ encap ENCAP ] [ via [ FAMILY ] ADDRESS ] [ dev STRING ] [ weight NUMBER ] NHFLAGS
+
+ip route add metric "" via "" dev $interface 
+
++ Destination : The destination network or destination host.
++ Gateway : The gateway address or â€™*â€™ if none set.
++ Genmask : The netmask for the destination net; 255.255.255.255 for a host destination and 0.0.0.0 for the default route.
++ Flags : Possible flags include
+    U (route is up)
+    H (target is a host)
+    G (use gateway)
+    R (reinstate route for dynamic routing)
+    D (dynamically installed by daemon or redirect)
+    M (modified from routing daemon or redirect)
+    A (installed by addrconf)
+    C (cache entry)
+    ! (reject route)
+
++ Metric : The distance to the target (usually counted in hops). It is not used by recent kernels, but may be needed by routing daemons.
++ Ref : Number of references to this route. (Not used in the Linux kernel.)
++ Use : Count of lookups for the route. Depending on the use of -F and -C this will be either route cache misses (-F) or hits (-C).
++ Iface : Interface to which packets for this route will be sent.
++ Network Route: A route (path) to a specific Network ID in the internetwork.
++ Host Route : A route to a specific internetwork address (Network ID and Host ID).
+	Host routes allow intelligent routing decisions to be made for each network address. 
+	Host routes are used to create custom routes to control or optimize specific types of network traffic.
++ Default Route: A route that is used when no other routes for the destination are found in the routing table. 
+	If a router or end system (such as a PC running Microsoft Windows or Linux), cannot find a route for a destination,
+	the default route is used. The default route is used if no other host or network route matches the destination address.
+
+
+Flag G indicates path to route packets via a gateway.
+/************************************************************************************
+ * Diagram 
+ * https://www.uml-diagrams.org/uml-25-diagrams.html
+ ************************************************************************************/
