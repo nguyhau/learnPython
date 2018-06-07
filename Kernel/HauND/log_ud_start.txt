@@ -1,0 +1,48 @@
+-------------- Start udhc -------------------
+interface: eth0
+broadcast: 
+netmask: 
+metric: 
+router: 
+domain: 
+parameter: deconfig 
+-------------- End udhc ----------------
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+-------------- Start udhc -------------------
+interface: eth0
+broadcast: 
+netmask: 24
+metric: 
+router: 10.116.41.1
+domain: toshiba-tsdv.com
+parameter: bound 
+-------------- End udhc ----------------
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         10.116.41.1     0.0.0.0         UG    10     0        0 eth0
+10.116.41.0     *               255.255.255.0   U     0      0        0 eth0
+-------------- Start udhc -------------------
+interface: eth0
+broadcast: 
+netmask: 
+metric: 
+router: 
+domain: 
+parameter: deconfig 
+-------------- End udhc ----------------
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+-------------- Start udhc -------------------
+interface: eth0
+broadcast: 
+netmask: 24
+metric: 
+router: 10.116.41.1
+domain: toshiba-tsdv.com
+parameter: bound 
+-------------- End udhc ----------------
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         10.116.41.1     0.0.0.0         UG    10     0        0 eth0
+10.116.41.0     *               255.255.255.0   U     0      0        0 eth0

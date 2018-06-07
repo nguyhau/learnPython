@@ -1,0 +1,162 @@
+Set ip Wire command: ip addr flush dev eth0
+ ifconfig eth0 inet up 10.116.41.52 netmask 255.255.255.0
+ route add -net default gw 10.116.41.1 dev eth0
+ echo 'nameserver 10.116.16.20' > /etc/resolv.conf
+<====== Exit to 178: get_ip_command_wired:src/network.c, time 09:52:21 
+======> Enter to 191: get_ip_command_wifi:src/network.c, time 09:52:21 
+Set ip Wi-fi command: 
+ ip addr flush dev wlan0
+ ifconfig wlan0 inet up 192.168.173.52 netmask 255.255.255.0
+ route add -net default gw 192.168.173.1 dev wlan0
+ echo 'nameserver 10.116.16.20' > /etc/resolv.conf~
+
+//// udhcpc
++ Switch eth0 -> wlan0: 
+udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+//deconfig
+ip addr flush dev wlan0
+ip link set dev wlan0 up
+//bound
+ip addr add dev wlan0 local 192.168.173.53/24 broadcast +
+ip route add default via 192.168.173.1 metric 10
++ Switch wlan0 -> eth0
+udhcpc -n -t 3 -i eth0 -F "(none)" -x "hostname:(none)" > /dev/null
+//deconfig
+ip addr flush dev eth0
+ip link set dev eth0 up
+//bound
+ip addr add dev eth0 local 10.116.41.52/24 broadcast +
+ip route add default via 10.116.41.1 metric 10
+Net work notify: by kill udhcpc.
+//deconfig
+ip addr flush dev eth0                                                       
+ip link set dev eth0 up
+//bound
+ip addr add dev eth0 local 10.116.41.52/24 broadcast +
+ip route add default via 10.116.41.1 metric 10
+
+//wifi connection close
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Run command: rfkill block wifi
+//wire connection close
+Run command: ip route flush dev eth0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'eth0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'eth0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+Run command: rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+i~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+i 
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+i 
+

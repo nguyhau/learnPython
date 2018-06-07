@@ -1,0 +1,75 @@
+====================== UHDC ==========================
+// set eth0: udhcpc -n -t 3 -i eth0 -F "(none)" -x "hostname:(none)" > /dev/null
+# deconfig -> change router
+ip addr flush dev eth0
+ip link set dev eth0 up
+# alternative: /sbin/ifconfig $interface 0.0.0.0
+# bound
+## add interface ip addr add dev $interface local $ip/$mask $BROADCAST 
+ip addr add dev eth0 local 10.116.41.70/24 broadcast +
+### alternative: /sbin/ifconfig $interface $ip $BROADCAST $NETMAS
+## remove default gatway
+while ip route del default 2>/dev/null
+## add default:ip route add default via $i dev $interface metric $metric 
+ip route add default via 10.116.41.1 dev eth0 metric 10
+### alternative: route add default gw $i dev $interface metric $metric 2>/dev/null
+## update resolver.
+
+// set wlan0: udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+// Run command rfkill unblock wifi
+// wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" >/dev/null 2>&1
+// udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+
+# deconfig -> change router
+ip addr flush dev wlan0
+ip link set dev wlan0 up
+# bound
+ip addr add dev wlan0 local 192.168.173.51/24 broadcast +
+## remove default gateway
+while ip route del default 2>/dev/null
+## add default gateway
+ip route add default via 192.168.173.1 dev wlan0 metric 10
+## update resolver configure file
+
+//close wifi:
+ip route flush dev wlan0
+kill wpa_supplicant
+rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+rm -rf /var/log/wifi.log > /dev/null 2>&1
+rfkill block wifi
+
+//close wire:
+ip route flush dev eth0
+kill wpa_supplicant
+kill udhcpc
+rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+====================== Manual ============================
+// set eth0:
+ip addr flush dev eth0
+ifconfig eth0 inet up 10.116.41.103 netmask 255.255.255.0
+route add -net default gw 10.116.41.1 dev eth0
+echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+// set wlan0
+// rfkill unblock wifi
+// ifconfig wlan0 up
+//  wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 -> network notify.
+ip addr flush dev wlan0
+ifconfig wlan0 inet up 192.168.173.53 netmask 255.255.255.0
+route add -net default gw 10.116.41.1 dev eth0
+echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+//close wifi
+ip route flush dev wlan0
+kill wpa_supplicant
+rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+rm -rf /var/log/wifi.log > /dev/null 2>&1
+rfkill block wifi
+
+//close wire
+ip route flush dev eth0
+kill wpa_supplicant
+rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+

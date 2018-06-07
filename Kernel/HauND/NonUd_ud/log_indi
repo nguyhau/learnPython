@@ -1,0 +1,1722 @@
+Select Alps TouchPad (SelectTouchPadName) 
+ALPS TouchPad (TOUCH_ON) 
+======> Enter to 45: init_network:src/network.c, time 03:51:08 
+======> Enter to 86: get_network_bios_setting:src/network.c, time 03:51:08 
+======> Exit to 124: get_network_bios_setting:src/network.c, time 03:51:08 
+======> Enter to 141: get_tls_infor:src/network.c, time 03:51:08 
+<====== Exit 151: get_tls_infor:src/network.c, time 03:51:08 
+======> Enter to 164: get_ip_command_wired:src/network.c, time 03:51:08 
+Set ip Wire command: ip addr flush dev eth0
+ ifconfig eth0 inet up 10.116.41.103 netmask 255.255.255.0
+ route add -net default gw 10.116.41.1 dev eth0
+ echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+<====== Exit to 182: get_ip_command_wired:src/network.c, time 03:51:08 
+======> Enter to 195: get_ip_command_wifi:src/network.c, time 03:51:08 
+Set ip Wi-fi command: udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+<====== Exit to 214: get_ip_command_wifi:src/network.c, time 03:51:08 
+======> Enter to 229: create_wired_wpa_config_file:src/network.c, time 03:51:08 
+Return status 1
+<====== Exit 242: create_wired_wpa_config_file:src/network.c, time 03:51:08 
+======> Enter to 344: create_wifi_wpa_config_file:src/network.c time 03:51:08
+======> Enter to 257: get_wifi_security_type:src/network.c time 03:51:08
+WPA-PERSONAL (Only password)
+Return status 3
+<====== Leave at 291: get_wifi_security_type:src/network.c time 03:51:08
+Return status 0
+<====== Leave at 389: create_wifi_wpa_config_file:src/network.c time 03:51:08
+Current network mode: wifi
+<====== Exit to 72: init_network:src/network.c, time 03:51:08 
+Init tvalz
+handle_system_display
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIFI_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wifi
+======> Enter to 407: connect_network_wired:src/network.c time 03:51:08
+======> Enter to 497: set_ip_wired:src/network.c 
+Run command: ip addr flush dev eth0
+ ifconfig eth0 inet up 10.116.41.103 netmask 255.255.255.0
+ route add -net default gw 10.116.41.1 dev eth0
+ echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+cat /sys/class/net/eth0/operstate: up
+Return status 0
+<====== Leave to 528: set_ip_wired:src/network.c 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 479: connect_network_wired:src/network.c time 03:51:08
+Current network mode: wired
+Return status 1
+<====== Leave to 906: retry_connect_network:src/network.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network status : switch: no, recover: no
+Leave to 565: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 344: handle_sig_event:src/indicator.c 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 798: switch_network:src/network.c 
+Current network mode: wired
+Switch to mode: wifi
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network change notify
+: switch: yes, recover: no
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: yes, recover: no
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Network change notify
+: switch: yes, recover: no
+Network change notify
+: switch: yes, recover: no
+cat /sys/class/net/wlan0/operstate: up
+Get status 0
+Return status 0
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 546: close_wired_connection:src/network.c time 03:51:08
+Run command: ip route flush dev eth0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'eth0'/'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+Run command: rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+<====== Leave to 573: close_wired_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Current network mode: wifi
+Return status 1
+<====== Leave to 860: switch_network:src/network.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network status : switch: no, recover: no
+Leave to 565: update_network_thread:src/indicator.c time 03:51:08
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIFI_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wifi
+======> Enter to 407: connect_network_wired:src/network.c time 03:51:08
+======> Enter to 497: set_ip_wired:src/network.c 
+Run command: ip addr flush dev eth0
+ ifconfig eth0 inet up 10.116.41.103 netmask 255.255.255.0
+ route add -net default gw 10.116.41.1 dev eth0
+ echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+cat /sys/class/net/eth0/operstate: up
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 528: set_ip_wired:src/network.c 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 479: connect_network_wired:src/network.c time 03:51:08
+Current network mode: wired
+Return status 1
+<====== Leave to 906: retry_connect_network:src/network.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network status : switch: no, recover: no
+Leave to 565: update_network_thread:src/indicator.c time 03:51:08
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+======> Enter to 344: handle_sig_event:src/indicator.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 798: switch_network:src/network.c 
+Current network mode: wired
+Switch to mode: wifi
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: yes, recover: no
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Network change notify
+: switch: yes, recover: no
+Network change notify
+: switch: yes, recover: no
+cat /sys/class/net/wlan0/operstate: up
+Get status 0
+Return status 0
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 546: close_wired_connection:src/network.c time 03:51:08
+Run command: ip route flush dev eth0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'eth0'/'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+Run command: rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+<====== Leave to 573: close_wired_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Current network mode: wifi
+Return status 1
+<====== Leave to 860: switch_network:src/network.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network status : switch: no, recover: no
+Leave to 565: update_network_thread:src/indicator.c time 03:51:08
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIFI_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wifi
+======> Enter to 407: connect_network_wired:src/network.c time 03:51:08
+======> Enter to 497: set_ip_wired:src/network.c 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIFI_MODE 
+Run command: ip addr flush dev eth0
+ ifconfig eth0 inet up 10.116.41.103 netmask 255.255.255.0
+ route add -net default gw 10.116.41.1 dev eth0
+ echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIFI_MODE 
+cat /sys/class/net/eth0/operstate: up
+Return status 0
+<====== Leave to 528: set_ip_wired:src/network.c 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 479: connect_network_wired:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: dormant
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: dormant
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Current network mode: wired
+Return status 0
+<====== Leave to 906: retry_connect_network:src/network.c 
+Network status : switch: no, recover: yes
+Leave to 565: update_network_thread:src/indicator.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: down
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+cat /sys/class/net/wlan0/operstate: up
+Get status 0
+Return status 0
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 546: close_wired_connection:src/network.c time 03:51:08
+Run command: ip route flush dev eth0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'eth0'/'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+Run command: rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+<====== Leave to 573: close_wired_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Current network mode: wifi
+Return status 1
+<====== Leave to 906: retry_connect_network:src/network.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network status : switch: no, recover: no
+Leave to 565: update_network_thread:src/indicator.c time 03:51:08
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIFI_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wifi
+======> Enter to 407: connect_network_wired:src/network.c time 03:51:08
+======> Enter to 497: set_ip_wired:src/network.c 
+Run command: ip addr flush dev eth0
+ ifconfig eth0 inet up 10.116.41.103 netmask 255.255.255.0
+ route add -net default gw 10.116.41.1 dev eth0
+ echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIFI_MODE 
+cat /sys/class/net/eth0/operstate: up
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIFI_MODE 
+Return status 0
+<====== Leave to 528: set_ip_wired:src/network.c 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 479: connect_network_wired:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: dormant
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: down
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+cat /sys/class/net/wlan0/operstate: up
+Get status 0
+Return status 0
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 546: close_wired_connection:src/network.c time 03:51:08
+Run command: ip route flush dev eth0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'eth0'/'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+Run command: rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+<====== Leave to 573: close_wired_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Current network mode: wifi
+Return status 1
+<====== Leave to 906: retry_connect_network:src/network.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network status : switch: no, recover: no
+Leave to 565: update_network_thread:src/indicator.c time 03:51:08
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIFI_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wifi
+======> Enter to 407: connect_network_wired:src/network.c time 03:51:08
+======> Enter to 497: set_ip_wired:src/network.c 
+Run command: ip addr flush dev eth0
+ ifconfig eth0 inet up 10.116.41.103 netmask 255.255.255.0
+ route add -net default gw 10.116.41.1 dev eth0
+ echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+cat /sys/class/net/eth0/operstate: up
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIFI_MODE 
+Return status 0
+<====== Leave to 528: set_ip_wired:src/network.c 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Run command: ip route flush dev wlan0
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 479: connect_network_wired:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: dormant
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: dormant
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+======> Enter to 344: handle_sig_event:src/indicator.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: down
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: down
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: down
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+cat /sys/class/net/wlan0/operstate: up
+Get status 0
+Return status 0
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 546: close_wired_connection:src/network.c time 03:51:08
+Run command: ip route flush dev eth0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'eth0'/'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+Run command: rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+<====== Leave to 573: close_wired_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Current network mode: wifi
+Return status 1
+<====== Leave to 906: retry_connect_network:src/network.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network status : switch: no, recover: no
+Leave to 565: update_network_thread:src/indicator.c time 03:51:08
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIFI_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wifi
+======> Enter to 407: connect_network_wired:src/network.c time 03:51:08
+======> Enter to 497: set_ip_wired:src/network.c 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: ip addr flush dev eth0
+ ifconfig eth0 inet up 10.116.41.103 netmask 255.255.255.0
+ route add -net default gw 10.116.41.1 dev eth0
+ echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIFI_MODE 
+cat /sys/class/net/eth0/operstate: up
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 528: set_ip_wired:src/network.c 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 479: connect_network_wired:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: dormant
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: dormant
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+cat /sys/class/net/wlan0/operstate: up
+Get status 0
+Return status 0
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 546: close_wired_connection:src/network.c time 03:51:08
+Run command: ip route flush dev eth0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'eth0'/'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+Run command: rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+<====== Leave to 573: close_wired_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 677: connect_network_wifi:src/network.c time 03:51:08
+Current network mode: wifi
+Return status 1
+<====== Leave to 906: retry_connect_network:src/network.c 
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network status : switch: no, recover: no
+Leave to 565: update_network_thread:src/indicator.c time 03:51:08
+Enter to 987: update_network_icon:src/gui.c 
+Leave to 1009: update_network_icon:src/gui.c 
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIFI_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wifi
+======> Enter to 407: connect_network_wired:src/network.c time 03:51:08
+======> Enter to 497: set_ip_wired:src/network.c 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIFI_MODE 
+Run command: ip addr flush dev eth0
+ ifconfig eth0 inet up 10.116.41.103 netmask 255.255.255.0
+ route add -net default gw 10.116.41.1 dev eth0
+ echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+cat /sys/class/net/eth0/operstate: up
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIFI_MODE 
+Return status 0
+<====== Leave to 528: set_ip_wired:src/network.c 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Network change notify
+: switch: no, recover: no
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/log/wifi.log > /dev/null 2>&1
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rfkill block wifi
+<====== Leave to 780: close_wifi_connection:src/network.c time 03:51:08
+Return status 1
+<====== Leave to 479: connect_network_wired:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 1
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIFI_MODE 
+Network current mode: WIRE_MODE 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: down
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'wpa_supplicant'/' | awk '/'wlan0'/'`; do kill $k 2>/dev/null; done
+
+Run command: for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'wlan0'/{print $1}'`; do kill $k 2>/dev/null; done
+
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+Run command: rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+ Run command wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+Network change notify
+: switch: no, recover: yes
+======> Enter to 921: get_network_status:src/network.c 
+ Run command udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+ 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+Enter to 540: update_network_thread:src/indicator.c time 03:51:08
+======> Enter to 885: retry_connect_network:src/network.c 
+Current network mode: wired
+======> Enter to 590: connect_network_wifi:src/network.c time 03:51:08
+ Run command rfkill unblock wifi
+ ifconfig wlan0 up 
+======> Enter to 695: set_ip_wifi:src/network.c time 03:51:08
+cat /sys/class/net/wlan0/operstate: down
+Get status -17
+Return status 5
+<====== Leave to 728: set_ip_wifi:src/network.c time 03:51:08
+======> Enter to 921: get_network_status:src/network.c 
+Return status 0
+<====== Leave to 931: get_network_status:src/network.c 
+Network status: WIRE_MODE 
+Network current mode: WIRE_MODE 
+======> Enter to 747: close_wifi_connection:src/network.c time 03:51:08
+Run command: ip route flush dev wlan0
+Run command: for k in `ps 
