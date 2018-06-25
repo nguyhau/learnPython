@@ -110,7 +110,7 @@ git config --global user.name "Nguy Dinh Hau"
 		exec socat STDIO PROXY:$_proxy:$1:$2,proxyport=$_proxyport,proxyauth=$_proxyuser:$_proxypass
 	2.3. git config --global core.gitproxy gitproxy
 	2.4. git config --global http.sslverify false
-	
+Tell git ignore permission: git config core.filemode false	
 /*** Config proxy for wget **/	
   vi /etc/wgetrc
 /*************************************************************************
@@ -1835,9 +1835,151 @@ Flag G indicates path to route packets via a gateway.
  * Diagram 
  * https://www.uml-diagrams.org/uml-25-diagrams.html
  ************************************************************************************/
+====================== UHDC ==========================
+// set eth0: udhcpc -n -t 3 -i eth0 -F "(none)" -x "hostname:(none)" > /dev/null
+# deconfig -> change router
+ip addr flush dev eth0
+ip link set dev eth0 up
+# alternative: /sbin/ifconfig $interface 0.0.0.0
+# bound
+## add interface ip addr add dev $interface local $ip/$mask $BROADCAST 
+ip addr add dev eth0 local 10.116.41.70/24 broadcast +
+### alternative: /sbin/ifconfig $interface $ip $BROADCAST $NETMAS
+## remove default gatway
+while ip route del default 2>/dev/null
+## add default:ip route add default via $i dev $interface metric $metric 
+ip route add default via 10.116.41.1 dev eth0 metric 10
+### alternative: route add default gw $i dev $interface metric $metric 2>/dev/null
+## update resolver.
+
+// set wlan0: udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+// Run command rfkill unblock wifi
+// wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" >/dev/null 2>&1
+// udhcpc -n -t 20 -i wlan0 -F "(none)" -x "hostname:(none)" > /dev/null
+
+# deconfig -> change router
+ip addr flush dev wlan0
+ip link set dev wlan0 up
+# bound
+ip addr add dev wlan0 local 192.168.173.51/24 broadcast +
+## remove default gateway
+while ip route del default 2>/dev/null
+## add default gateway
+ip route add default via 192.168.173.1 dev wlan0 metric 10
+## update resolver configure file
+
+//close wifi:
+ip route flush dev wlan0
+kill wpa_supplicant
+rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+rm -rf /var/log/wifi.log > /dev/null 2>&1
+rfkill block wifi
+
+//close wire:
+ip route flush dev eth0
+kill wpa_supplicant
+kill udhcpc
+rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+====================== Manual ============================
+// set eth0:
+ip addr flush dev eth0
+ifconfig eth0 inet up 10.116.41.103 netmask 255.255.255.0
+route add -net default gw 10.116.41.1 dev eth0
+echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+// set wlan0
+// rfkill unblock wifi
+// ifconfig wlan0 up
+//  wpa_supplicant -i wlan0 -D nl80211 -c twlan2.conf -B -f "/var/log/wifi.log" > /dev/null 2>&1 -> network notify.
+ip addr flush dev wlan0
+ifconfig wlan0 inet up 192.168.173.53 netmask 255.255.255.0
+route add -net default gw 10.116.41.1 dev eth0
+echo 'nameserver 10.116.16.13' > /etc/resolv.conf
+
+//close wifi
+ip route flush dev wlan0
+kill wpa_supplicant
+rm -rf /var/run/wpa_supplicant/wlan0 > /dev/null 2>&1
+rm -rf /var/log/wifi.log > /dev/null 2>&1
+rfkill block wifi
+
+//close wire
+ip route flush dev eth0
+kill wpa_supplicant
+rm -rf /var/run/wpa_supplicant/eth0 > /dev/null 2>&1
+rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
+
  
  
  
  
  for k in ''
  
+ ~/TZCS/poky/meta-tzcs/meta-intel-vdi/common vi recipes-core/packagegroups/packagegroup-intel-vdi.bb
+ 
+/************************************************************************************
+ * Build cross compile: select target and host.
+ ************************************************************************************/ 
+ get environment variable: env.-> show sdk environment.
+ Ex: CONFIGURE_FLAGS=--target=x86_64-tzcs-linux --host=x86_64-tzcs-linux --build=x86_64-linux --with-libtool-sysroot=/opt/tzcs-vdi/8.0/sysroots/x86_64-tzcs-linux
+ ./configure  $CONFIGURE_FLAGS
+ /*********************************************************************************
+ **/
+ /***********************************************************************************/
+
+/******************/
+cat /sys/class/drm/card0-HDMI*/status
+/******************/
+aplay: sound player for ALSA sound card driver
+	-l: list all sound cards and digital audio devices.
+	
+pactl: Control a running PulseAudio sound server
+	info: Dump some info about the PulseAudio daemon
+	
+	set-default-sink SINK: Make the specified sink (identified by its symbolic name) the default sink.
+	
+	move-sink-input ID SINK: Move the specified playback stream (identified by its numerical index) to the specified sink (identified by its symbolic name or numerical index).
+	
+	set-card-profile CARD PROFILE: Set the specified card (identified by its symbolic name or numerical index) to the specified profile (identified by its symbolic name)
+	
+	list [short] [TYPE]: Dump all currently loaded modules, available sinks, sources, streams.
+		TYPE must be one of: modules, sinks, sources, sink-inputs, source-outputs, clients, samples, cards
+		If short is given, output is in a tabular format, for easy parsing by scripts
+		ex: list cards, list sinks short
+		
+amixer: mixer for ALSA soundcard driver
+	info: Shows the information about a mixer device.
+	
+	scontrols: Shows a complete list of simple mixer controls.	
+	
+	set or sset <SCONTROL> <PARAMETER>
+		The PARAMETER can be the volume either as a percentage from 0% to 100% with % suffix.
+		The PARAMETER cap, nocap, mute, unmute, toggle are used to change capture (recording) and muting for the group specified.
+		Ex: amixer sset Master 1%+ unmute
+			amixer sset Speaker unmute
+			amixer sset Headphone unmute
+			
+card: 
+	- id:
+	- name: 
+	- type:
+
+    interface:card,device,subdevice
+    interface:CARD=1,DEV=3,SUBDEV=2.
+	
+#/** set to internal */
+#*pactl list cards | grep "Active" | grep "hdmi-stereo" &>/dev/null
+#ANALOG_PROFILE='output:analog-stereo+input:analog-stereo'
+#pactl set-card-profile 0 output:analog-stereo+input:analog-stereo	
+#/** set to hdmi */
+#// get hdmi id
+#pactl list cards | grep "Active" | grep "hdmi-stereo" &>/dev/null
+#// get hdmi card 
+#pactl list cards | awk '/device.product.name/{getline; print}' | awk '{print $5}' | tr -d ','
+#pactl set-card-profile 0 output:hdmi-stereo+input:analog-stereo
+
+aplay -l 
+pactl info 
+pactl list cards 
+pactl list cards short 
