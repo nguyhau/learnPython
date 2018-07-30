@@ -1,6 +1,6 @@
 http://www.brendangregg.com/
 /**********************************************************************
- * Redirect
+ * Redirect_tut
  ************/
  1>filename
     # Redirect stdout to file "filename."
@@ -40,7 +40,8 @@ i>&j
 >&j
    # Redirects, by default, file descriptor 1 (stdout) to j.
    # All stdout gets sent to file pointed to by j.
-/**/
+
+/** super_tut */
  suid: (superuser ID)
  * fix /dev/null: permission denied
    sudo chroot chroot-haund/
@@ -54,7 +55,7 @@ i>&j
  $(tail -1 cmd) -> run last line of cmd file 
  $(sed '3q;d' cmd) -> run 3th line of cmd file  
 /*************************************************************************
- *   config network and proxy
+ *   config_tut network and proxy
  *************************************************************************/
  1  nano /etc/apt/apt.conf   -> for install 
      Acquire::http::Proxy "http://haund:fpttoshiba@proxy.tsdv.com.vn:3128/"; 
@@ -324,7 +325,7 @@ Tell git ignore permission: git config core.filemode false
 */
 
 /==============================================================================================
- Error
+ Build-Common-Error
  ==============================================================================================/
  openssl
  locale 
@@ -494,7 +495,7 @@ sudo service networking restart
 
 // comment tzcs main: ~/TZCS/poky/meta-tzcs vi meta-intel-wifi/recipes-core/base-files/files/.bashrc
 /*************************************************************
- * change root 
+ * change_root 
  *************************************************************/
  sudo service lightdm|gdm|mdm stop
  pkill X
@@ -503,7 +504,7 @@ sudo service networking restart
 
 Determines the recovery behavior of the NFS client after an NFS request times out. If neither option is specified (or if the hard option is specified), NFS requests are retried indefinitely.
 /**************************************************************
- *      bitbake process:
+ *      bitbake_tut process:
  **************************************************************/
  1. Source fetch:
     - do_fetch
@@ -610,7 +611,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
  dmesg|tail :-> log enable by printk
  view file 
 /*****************************************************
- * update gcc, g++ link when compile error
+ * update_compiler gcc, g++ link when compile error
  *****************************************************/
   /* check */
   ls -l /usr/bin/ |grep gcc 
@@ -639,7 +640,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
   pcsc-tool
   
 /**********************************************************************
- * Config VisualGDB
+ * Config_VisualGDB
  **********************************************************************/
   1. 
   gcc -g *.c -o indicator -lpthread -lX11 -lXrandr -ltzcs -ltzcs-security `pkg-config --cflags --libs gtk+-2.0`
@@ -652,7 +653,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
   /usr/src/linux-headers-3.16.0-4-common/include/
   
 /*************************************************************************
- * Debug segment fault with gdb: http://www.brendangregg.com/blog/2016-08-09/gdb-example-ncurses.html
+ * Debug_segment_fault with gdb: http://www.brendangregg.com/blog/2016-08-09/gdb-example-ncurses.html
  *************************************************************************/
   /* set up environment */
   ulimit -a --> check core file size
@@ -704,7 +705,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
   
 https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-command-line
 /********************************************************************************
- * Build dynamic library in linux
+ * Build_dynamic library in linux
  ********************************************************************************/  
   gcc -fPIC -c TzcsUtil.c //-> create TzcsUtil.o with dynamic flag
   gcc -fPIC -c TzcsDisplay.c  //-> create TzcsDisplay.o with dynamic flag
@@ -732,7 +733,7 @@ https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-comman
  Down: aria2c --bt-enable-lpd data-A8J-luyentm.tar.gz.torrent
 
 /******************************************************************************
- * Flush log : https://stackoverflow.com/questions/12450066/flushing-buffers-in-c
+ * Flush_log : https://stackoverflow.com/questions/12450066/flushing-buffers-in-c
  ********************/
  /*** C ***/
  #include <stdio.h>
@@ -759,7 +760,7 @@ https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-comman
  python -m SimpleHTTPServer "port"
  
 /*****************************************************************************
- * Trace binary file 
+ * Trace_binary file 
  *****************************************************************************/ 
  /* list all function in binary file: build with option -g to trace function name */
  objdump -d executable -> show asm code 
@@ -834,7 +835,7 @@ https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-comman
  A2_LOG_ERROR("----HauND LOG: newDownloadEngine");
  A2_LOG_ERROR(fmt("----HauND LOG: Download Engine: %s", option_.get().c_str()));
 /*************************************************************
- * Check code coverage: http://devdocs.io/gcc~7/invoking-gcov; https://gcc.gnu.org/onlinedocs/gcc/Invoking-Gcov.html#Invoking-Gcov
+ * Check code_coverage: http://devdocs.io/gcc~7/invoking-gcov; https://gcc.gnu.org/onlinedocs/gcc/Invoking-Gcov.html#Invoking-Gcov
  * http://gcovr.com/guide.html#installation gcc -fprofile-arcs -ftest-coverage tmp.c
  * https://linux.die.net/man/1/gcc
  **************************************************************************/
@@ -908,7 +909,7 @@ struct BtObject {
  To enable ssl module:	sudo a2enmod ssl
  To disable ssl module:  sudo a2dismod ssl
 /*************************************************************************************************
- * Configure for server 
+ * Configure certifcate for server 
  * http://www.stefanocapitanio.com/configuring-two-way-authentication-ssl-with-apache/
  * https://help.ubuntu.com/community/OpenSSL
  **************************************************************************************************/
@@ -956,7 +957,7 @@ struct BtObject {
   ~/TZCS/build_apricot/intel-wifi-7265/tmp-uclibc/work/x86_64-tzcs-linux-uclibc/openssl/1.0.1t-r1/temp
 
 /***************************************************************************
- * Search package name from command or lib
+ * Search_package name from command or lib
  ***************************************************************************/
  1. apt-file search {command/library/file name}. Ex apt-file search /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.0 -> package name is libssl1.0.0
  2. https://www.debian.org/distrib/packages -> Search the contents of packages: Input {command/library/file name}
@@ -1073,15 +1074,16 @@ Redirect both standard error and standard out messages to a log file: command > 
  -L/opt/tzcs-vdi/8.0/sysroots/x86_64-tzcssdk-linux/usr/lib 
  -L/opt/tzcs-vdi/8.0/sysroots/x86_64-tzcssdk-linux/lib
  /opt/tzcs-vdi/8.0/sysroots/x86_64-tzcs-linux/usr/lib
-/********************************
- *
- **/
+ 
+/**************************************************************************
+ * add define value when run make_command 
+ ***************************************************************************/
  make CFLAGS=-Dvar=42
  -DDEBUG_GUI -DDEBUG_GUI
  indicator &>/dev/null &
  https://stackoverflow.com/questions/28774830/retrieve-physical-screen-size
  
-/** Create ssh key **/ 
+/** Create ssh_tut key **/ 
 ssh-keygen -t rsa
 
 git config --global --unset core.gitproxy
@@ -1118,28 +1120,7 @@ udevadm monitor -u -s "drm"
  undo apply patch:  patch -R<a.patch
  check apply patch file before apply: patch --dry-run < a.patch.
  
-/***************************************
- * Check commitID from kernel source. 
- ****************************************/
- Ex: kernel source is 4.4.111
- checkout repository:
-	git clone -b linux-4.4.y --single-branch https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git 
-	git tag |grep 4.4.111 -> output v4.4.111
-	git show v4.4.111 -> get commit ID.
-	
-v4.4.111: c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c   10/1/2018
-v4.4.2: 1cb8570bf04ab12a03c31c397a4d158f24895d9c 	17/21016
 
-/**************************************
- * create patch file using git 
- **************************************/
- 
- create patch for commitID1 from commitID2: git diff ID1 ID2 > revert.patch
- apply patch for commitID1:  git apply revert.patch
- undo apply patch: git apply -R revert.patch
- 
- git format-patch 11b6b7ad30c3f82a6bb6c897bc1e1c51f0e0023a 40ef6ef2f9f30cae414a6bfcbe6e819fbde1ffda
- 
 /** Use usb in linux */
 df -h -> show mount point of usb. Maniputation on mount point -> ok.
 mount /dev/sdb1 /mnt.
@@ -1167,9 +1148,10 @@ ABI: Application Binary Interface
 		Where the return value is placed for return.
 		How exceptions propagate.
 
-/******************************************************
- * Build only module in linux kernel: https://stackoverflow.com/questions/8744087/how-to-recompile-just-a-single-kernel-module
- ***/
+/**********************************************************************************
+ * Build only module in linux_kernel: 
+ * https://stackoverflow.com/questions/8744087/how-to-recompile-just-a-single-kernel-module
+ *************************************************************************************/
  1. Download source.
  2. Prepare for build:
 	$ make oldconfig
@@ -1184,9 +1166,9 @@ ABI: Application Binary Interface
  https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu
 
   
-/**
- * Debug with gdb
- ***/  
+/************************************************************************************
+ * Debug_kernel with gdb
+ ************************************************************************************/  
  /******* Build kernel **********/
  make mrproper
  make x86_64_defconfig
@@ -1247,34 +1229,7 @@ https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471
 https://machinelearningmastery.com/handwritten-digit-recognition-using-convolutional-neural-networks-python-keras/
 
 === Notify network only be handle in the case 
-/*************************************************************************
- * Network knowledge
- *************************************************************************/
 
-iwconfig
- "for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'eth0'/{print $1}'`; do kill $k 2>/dev/null; done\n"
- ps 
- -v : except
- http://clfs.org/view/clfs-embedded/mips/bootscripts/network.html
-/** Sequence udhcpc **/
- 1. Deconfig
- 	ip addr flush dev "interface ". examp eth0, wlan0
- 2. Bound
- 	ip addr add dev "interface" local "ip/subnet". examp 192.168.173.52/24.
- 	ip route del default 2>/dev/null. --> delete default route.
- 	ip route add default via "route add" metric "metric value". example route add is 192.168.173.1; metric is 0.
- 	echo -n nameserver "dns" > /etc/resolv.conf. Examp dns is 10.116.16.13
- 3. 	
-	
-/*****************************************************/
- route add default gw 192.168.173.1
-/****************************************************************
- * Configure network : IP, route, name server. https://p5r.uk/blog/2010/ifconfig-ip-comparison.html 
- ***********************************************************************************/
- To add/del Ip addr: ip addr add/dell
- sudo ifconfig eth0 192.168.0.1 netmask 255.255.255.0
- sudo route add default gw 192.168.0.253 eth0
- echo "nameserver 4.2.2.2" > /etc/resolv.conf
 
 /*****************************************************************
  * Build meta-toolchain
@@ -1316,26 +1271,10 @@ iwconfig
  ls /lib/modules
  cp /boot/config**
  	
-/**********************************************************
- * Show git log history for a sub directory of a git repo.
- **********************************************************/
-	You need the '--' to separate <path>.. from the <since>..<until> refspecs.	
- git log -- . --since=1cb8570bf04ab12a03c31c397a4d158f24895d9c --until=c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c> list_cm
- git log -- . --since=3d8acd1f667b45c531401c8f0c2033072e32a05d --until=68e6cd9a0547d40d921baff918c111db96d96d76> list_cm
- 3d8acd1f667b45c531401c8f0c2033072e32a05d	
- 68e6cd9a0547d40d921baff918c111db96d96d76
- 
- Search lines starting with one specific using grep:
- 	grep '^a.*e$' file
- 
- git tag --contains 68e6cd9a0547d40d921baff918c111db96d96d76 -> list tags that contain 68e6cd9a0547d40d921baff918c111db96d96d76 commit.
 
-
- acd21d848252d8ea06b19066b675391d012b1737 v4.4.29
- c843445f19f4e6f05b32125d7556958f98033999 v4.4.28
  
 /********************************************************
- * Install firmware:
+ * firmware_tut:
  ********************************************************/
  ls 
  /lib/firmware/
@@ -1394,8 +1333,46 @@ iwconfig
  dpkg -L bluez-firmware
  
 /*********************************************
- * Git rebase
+ * Git_tut rebase
  **********************************************/ 
+ /***************************************
+ * Check commitID from kernel source. 
+ ****************************************/
+ Ex: kernel source is 4.4.111
+ checkout repository:
+	git clone -b linux-4.4.y --single-branch https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git 
+	git tag |grep 4.4.111 -> output v4.4.111
+	git show v4.4.111 -> get commit ID.
+	
+v4.4.111: c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c   10/1/2018
+v4.4.2: 1cb8570bf04ab12a03c31c397a4d158f24895d9c 	17/21016
+
+/**************************************
+ * create patch file using git 
+ **************************************/
+ 
+ create patch for commitID1 from commitID2: git diff ID1 ID2 > revert.patch
+ apply patch for commitID1:  git apply revert.patch
+ undo apply patch: git apply -R revert.patch
+ 
+ git format-patch 11b6b7ad30c3f82a6bb6c897bc1e1c51f0e0023a 40ef6ef2f9f30cae414a6bfcbe6e819fbde1ffda
+ 
+ git format-patch b06c152d2c69b80e0f1392bf46e44b00631471a2..16edcc8151be50cc5b51812fafb5a6ca73f6019a
+ ** Show git log history for a sub directory of a git repo */
+	You need the '--' to separate <path>.. from the <since>..<until> refspecs.	
+ git log -- . --since=1cb8570bf04ab12a03c31c397a4d158f24895d9c --until=c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c> list_cm
+ git log -- . --since=3d8acd1f667b45c531401c8f0c2033072e32a05d --until=68e6cd9a0547d40d921baff918c111db96d96d76> list_cm
+ 3d8acd1f667b45c531401c8f0c2033072e32a05d	
+ 68e6cd9a0547d40d921baff918c111db96d96d76
+ 
+ Search lines starting with one specific using grep:
+ 	grep '^a.*e$' file
+ 
+ git tag --contains 68e6cd9a0547d40d921baff918c111db96d96d76 -> list tags that contain 68e6cd9a0547d40d921baff918c111db96d96d76 commit.
+
+
+ acd21d848252d8ea06b19066b675391d012b1737 v4.4.29
+ c843445f19f4e6f05b32125d7556958f98033999 v4.4.28
  Ignore a commit: f1ab38e63d246e5becf195cdbaf1534691dad44b
  1. git rebase -i f1ab38e63d246e5becf195cdbaf1534691dad44b^
  2. fix conflict
@@ -1405,9 +1382,7 @@ iwconfig
  6. git rebase --continue.
  
  
-/********************************************************
- * Explaination about conflict mark when using git merger
- ********************************************************/
+ ** Explaination about conflict mark when using git merger **/
  <<<<<<< HEAD:file.txt
  Hello world
  =======
@@ -1461,7 +1436,7 @@ xrandr --output DP1 --mode 1024x768|preferred  --right-of eDP1
 xrandr |grep "Current Profile"|cut -d ':' -f2
 
 /************************************************
- * Measue time consumed of function 
+ * Measure_c_time consumed of function 
  ************************************************/
 #include <sys/time.h> 
 typedef void (*func_p)();
@@ -1504,7 +1479,7 @@ void init_network()
     measure_func(&get_network_bios_setting);
 }	
 /***************************************************
- * Register XRR notify
+ * xrandr_tut: Register XRR notify
  ***************************************************/
 #include <gdk/gdkx.h>
 #include <X11/extensions/Xrandr.h>
@@ -1687,7 +1662,18 @@ pOutputs get_screen_info ()
     return outputs;
 }
 /**************************************************************************
- * Config wifi network using command line: 
+ * Network_tut: https://wiki.archlinux.org/index.php/Network_configuration
+ ***************************************/
+/****** Basic network *****/
+ To troubleshoot a network connection, go through the following conditions and ensure that you meet them:
+    1. Your network interface is listed and enabled.
+    2. You are connected to the network. The cable is plugged in or you are connected to the wireless LAN.
+    3. Your network interface has an IP address
+    4. Your routing table is correctly set up.
+    5. You can ping a local IP address (e.g. your default gateway).
+    6. You can ping a public IP address (e.g. 8.8.8.8), if you can't it may be related to your default gateway or your internet service provider.
+    7. Check if you can resolve domain names (e.g. archlinux.org).
+/* Config wifi network using command line: 
  * https://p5r.uk/blog/2010/ifconfig-ip-comparison.html
  * https://www.blackmoreops.com/2014/09/18/connect-to-wifi-network-from-command-line-in-linux/ 
  * https://www.linuxjournal.com/content/wi-fi-command-line 
@@ -1752,10 +1738,34 @@ ifconfig eth0 inet up "ip" netmask "subnet"
 route add -net default gw "gateway" dev eth0
 echo nameserver dns > /etc/resolv.conf 
 	
-MST -> CMT: http://tongcucthue.org/tra-cuu-ma-thue-thu-nhap-ca-nhan-online-tncnonline/
-CMT -> MBHXH: http://thue.dianam.vn/Huong-dan-nghiep-vu/Tim-so-so-bhxh-bang-cmnd-7422
-			  https://baohiemxahoi.gov.vn/tracuu/Pages/tra-cuu-ho-gia-dinh.aspx
-TTBHXH: https://baohiemxahoi.gov.vn/tracuu/Pages/tra-cuu-dong-bao-hiem.aspx			  
+/*************************************************************************
+ * Network knowledge
+ *************************************************************************/
+
+iwconfig
+ "for k in `ps | grep -v 'sh -c' | awk '/'udhcpc'/' | awk '/'eth0'/{print $1}'`; do kill $k 2>/dev/null; done\n"
+ ps 
+ -v : except
+ http://clfs.org/view/clfs-embedded/mips/bootscripts/network.html
+/** Sequence udhcpc **/
+ 1. Deconfig
+ 	ip addr flush dev "interface ". examp eth0, wlan0
+ 2. Bound
+ 	ip addr add dev "interface" local "ip/subnet". examp 192.168.173.52/24.
+ 	ip route del default 2>/dev/null. --> delete default route.
+ 	ip route add default via "route add" metric "metric value". example route add is 192.168.173.1; metric is 0.
+ 	echo -n nameserver "dns" > /etc/resolv.conf. Examp dns is 10.116.16.13
+ 3. 	
+	
+/*****************************************************/
+ route add default gw 192.168.173.1
+/****************************************************************
+ * Configure network : IP, route, name server. https://p5r.uk/blog/2010/ifconfig-ip-comparison.html 
+ ***********************************************************************************/
+ To add/del Ip addr: ip addr add/dell
+ sudo ifconfig eth0 192.168.0.1 netmask 255.255.255.0
+ sudo route add default gw 192.168.0.253 eth0
+ echo "nameserver 4.2.2.2" > /etc/resolv.conf
 
 /*****************************************************************************
  * Network acronym& terminology
@@ -1831,10 +1841,7 @@ ip route add metric "" via "" dev $interface
 
 
 Flag G indicates path to route packets via a gateway.
-/************************************************************************************
- * Diagram 
- * https://www.uml-diagrams.org/uml-25-diagrams.html
- ************************************************************************************/
+
 ====================== UHDC ==========================
 // set eth0: udhcpc -n -t 3 -i eth0 -F "(none)" -x "hostname:(none)" > /dev/null
 # deconfig -> change router
@@ -1913,13 +1920,39 @@ rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
  
  
  
- 
- for k in ''
- 
- ~/TZCS/poky/meta-tzcs/meta-intel-vdi/common vi recipes-core/packagegroups/packagegroup-intel-vdi.bb
- 
+/*
+ * How does roaming wifi works.
+ * http://www.rfwireless-world.com/Terminology/How-wifi-roaming-works.html
+ * http://w1.fi/cgit/hostap/plain/wpa_supplicant/wpa_supplicant.conf
+ */ 
+ WLAN network typically consists of STA (i.e.Station or client), AP (i.e. Access Point or router or hotspot)
+ and AAS (Authentication Server). The WLAN network is also referred as wifi network.
+ - 
+ The solution is to configure the upstairs Express in precisely the same way as the downstairs Extreme—i.e. 
+ you “create a wireless network” with the same name (“Hacienda” in my case) and the same password, 
+ and set the device to operate in “bridge mode”. Doing that, and everything works as expected. 
+ # bgscan: Background scanning
+ # wpa_supplicant behavior for background scanning can be specified by
+ # configuring a bgscan module. These modules are responsible for requesting
+ # background scans for the purpose of roaming within an ESS (i.e., within a
+ # single network block with all the APs using the same SSID). The bgscan
+ # parameter uses following format: "<bgscan module name>:<module parameters>"
+ # Following bgscan modules are available:
+ # simple - Periodic background scans based on signal strength
+ # bgscan="simple:<short bgscan interval in seconds>:<signal strength threshold>:
+ # <long interval>"
+ # bgscan="simple:30:-45:300"
+ # learn - Learn channels used by the network and try to avoid bgscans on other
+ # channels (experimental)
+ # bgscan="learn:<short bgscan interval in seconds>:<signal strength threshold>:
+ # <long interval>[:<database file name>]"
+ # bgscan="learn:30:-45:300:/etc/wpa_supplicant/network1.bgscan" 
 /************************************************************************************
- * Build cross compile: select target and host.
+ * Diagram_tut 
+ * https://www.uml-diagrams.org/uml-25-diagrams.html
+ ************************************************************************************/ 
+/************************************************************************************
+ * Build cross_compile_tut: select target and host.
  ************************************************************************************/ 
  get environment variable: env.-> show sdk environment.
  Ex: CONFIGURE_FLAGS=--target=x86_64-tzcs-linux --host=x86_64-tzcs-linux --build=x86_64-linux --with-libtool-sysroot=/opt/tzcs-vdi/8.0/sysroots/x86_64-tzcs-linux
@@ -1983,3 +2016,114 @@ aplay -l
 pactl info 
 pactl list cards 
 pactl list cards short 
+
+
+============================== 
+pactl set-card-profile 1 output:hdmi-stereo
+pactl set-card-profile 1 output:hdmi-surround
+pactl set-card-profile 1 output:hdmi-surround71
+output:hdmi-stereo output:hdmi-surround output:hdmi-surround71
+
+service pulseaudio restart
+git config --global --unset core.gitproxy
+/******************************************************************
+ * https://onlinepdfspace.com/
+ ******************************************************************/
+ 
+/**************** Sound control ***************/ 
+#Sink
+#    An output device 
+#Source
+#    An input device 
+#Sink input
+#    A stream that is connected to an output device, i.e. an input for a sink. 
+#Source output
+#    A stream that is connected to an input device, i.e. an output of a source. 
+#Client
+#    An active client of the PA server, something that can create none/one/many sink inputs/source outputs 
+#	on any sink/source the PA server has. A sink input/source output can thus be "owned" by a specific client. 
+#	Sink inputs/sources however can also be "unowned", i.e. not owned by any client. 
+#	Generally we can consider a client to be a collection of sink inputs/source outputs. 
+#Card
+#    A collection of sinks/sources that belong to a single hardware device. 
+#	Not all sinks/sources must be assigned to a card. Usually this combines one source (for recording) 
+#	and one sink (for playback) into a single object. 
+#	
+#- To list available input sources (The * in front of the index indicates the current default input.)
+#	pacmd list-sources [| grep -e 'index:' -e device.string -e 'name:']
+#	pactl list sources [short]
+#
+#- To list the output sources available (The * in front of the index indicates the current default output)	
+#	pacmd list-sinks [| grep -e 'name:' -e 'index:']
+#	pactl list sinks [short]
+#	
+#- To set the default output device to use by pulseaudio
+#	pacmd set-default-sink {SINKNAME}
+#	pactl set-default-sink SINK
+#
+#- To set the default input device to use by pulseaudio
+#	pacmd set-default-source {SOURCENAME} 
+#	pactl set-default-source SOURCE
+
+/**********************************************************************
+ * Debug_shell_tut
+ **********/ 
+ echo "==> Enter ${FUNCNAME[ 0 ]}, line $LINENO">>log_HDMI_common
+ echo "  pactl move-sink-input $i $dest_card">>log_HDMI_common
+ echo "">>log_HDMI_common
+ echo "<== Exit ${FUNCNAME[ 0 ]}, line $LINENO">>log_HDMI_common
+
+/******/ 
+find -name *.rules 
+vi /lib/udev/rules.d/120-disable-usb.rules
+/etc/init.d/udev restart 
+== create mknod ===//udev will run all .rules file.
+//change rule 
+udevadm control --reload-rules
+mknod /dev/sda b 8 0 --> creat device node "mknod [OPTION]... NAME TYPE [MAJOR MINOR]"
+// after create device node: device not contain number, partition contain number, must mount partition to read device.
+/*************************************/
+startx -> run ./root/.xinit
+export LANG=en_US.UTF-8
+
+gdk-pixbuf-query-loaders  --update-cache.
+/***********************************/
+~/TZCS/build/intel-8265/small/tmp-uclibc/work/intel-tzcs-linux-uclibc/core-image-tzcs-initramfs/1.0-r0/rootfs
+/*
+ * Personal_tut
+ **/
+ MST -> CMT: http://tongcucthue.org/tra-cuu-ma-thue-thu-nhap-ca-nhan-online-tncnonline/
+ CMT -> MBHXH: http://thue.dianam.vn/Huong-dan-nghiep-vu/Tim-so-so-bhxh-bang-cmnd-7422
+ 			  https://baohiemxahoi.gov.vn/tracuu/Pages/tra-cuu-ho-gia-dinh.aspx
+ TTBHXH: https://baohiemxahoi.gov.vn/tracuu/Pages/tra-cuu-dong-bao-hiem.aspx			  
+/** Build pulseaudio **/
+https://ubuntuforums.org/showthread.php?t=2210602
+1: sudo apt-get build-dep pulseaudio && sudo apt-get install checkinstall git libpulse-dev
+2: ./bootstrap.sh 
+3: make/make clean.
+
+PATH: --> add bin.
+LD_LIBRARY_PATH=LD_LIBRARY_PATH:<lib .so path>
+
+
+pactl list sink-inputs short
+ID	Sink	Client 	Driver	Sample-Specification
+
+pactl list sinks short 
+ID	Name 	Driver 	Sample-Specification	State
+/***********************************************************************
+ *	vi_tut
+ ***********************************************************************/
+ - Delete from current line to end of file: [d] [G]
+ - Delete from current cursor to end of file: [d] [Ctrl] [End]
+ - Delete from current cursor to end of line: [shift][d]
+ - Select a block: [Ctrl][v]
+ - Insert multi-line: [Select block] [Shift] [i] [add text] [Esc]
+ - Redo in vim -> ctrl r 
+
+/*
+ * udev: http://www.reactivated.net/writing_udev_rules.html#builtin
+ **/
+ 2018-07-23
+ Radius_server: 10.116.224.177
+ romlinux :admin123
