@@ -1164,7 +1164,7 @@ ABI: Application Binary Interface
 	make modules SUBDIRS=drivers/gpu/drm/i915 clean
 	
  https://stackoverflow.com/questions/11408041/how-to-debug-the-linux-kernel-with-gdb-and-qemu
-
+ https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
   
 /************************************************************************************
  * Debug_kernel with gdb
@@ -2127,3 +2127,10 @@ ID	Name 	Driver 	Sample-Specification	State
  2018-07-23
  Radius_server: 10.116.224.177
  romlinux :admin123
+ "romlinux"      Cleartext-Password := "Tsdv#2016"
+ Cisco LinksysX1000: admin:1234567890
+ 
+ extract initrd file: https://access.redhat.com/solutions/24029
+ zcat initrd.img-3.16.0-4-amd64 | cpio -idmv
+ 
+ https://bash.cyberciti.biz/guide/Sending_signal_to_Processes

@@ -29,7 +29,8 @@ echo -n "text"|sha1sum
 /** Digital signing */	
 Sender A does the following:-
     1. Creates a message digest of the information to be sent.
-    2. Represents this digest as an integer m between 1 and n-1. [See note 5].
+    2. Represents this digest as an integer m between 1 and n-1. [See note 5]
+		m=(m^e mod n)^d mod n=(m^d mod n)^e mod n.
     3. Uses her private key (n, d) to compute the signature s = m^d mod n.
     4. Sends this signature s to the recipient, B.
 
@@ -96,6 +97,12 @@ OUTPUT: An RSA key pair ((N,e), d) where N is the modulus, the product of two pr
 
 5.  Output OB.
 
+
+6. Decryption:
+	c = StringToInteger(OB)
+	d = e-1 mod n
+	m = c^d mod n
+	-> D
 /** Example */
 1. Bob's 1024-bit RSA encryption key in hex format:
 	n=
@@ -130,6 +137,9 @@ OUTPUT: An RSA key pair ((N,e), d) where N is the modulus, the product of two pr
 
 /*************************************************************************
  * Algorithm: Signing using PKCS#1v1.5 
+ * IntegerToString(i, n) is an n-byte encoding of the integer i with the most significant byte first (i.e. in "big-endian" order). So, for example
+ * 		IntegerToString(1,4)="00000001"; IntegerToString(7658,3)="001DEA"
+ * StringToInteger(S) is the integer represented by the byte string S with the most significant byte first.
  *************************************************************************/
  INPUT: Sender's RSA private key, (n, d) of length k = |n| bytes; message, M, to be signed; message digest algorithm, Hash.
  OUTPUT: Signed data block of length k bytes
@@ -167,7 +177,7 @@ OUTPUT: An RSA key pair ((N,e), d) where N is the modulus, the product of two pr
 7.  Output OB.
  
 /** Example */ 
-1. Alice's 1024-bit RSA signing key in hex format:
+0. Alice's 1024-bit RSA signing key in hex format:
    n=
    E08973398DD8F5F5E88776397F4EB005BB5383DE0FB7ABDC7DC775290D052E6D 
    12DFA68626D4D26FAA5829FC97ECFA82510F3080BEB1509E4644F12CBBD832CF 
@@ -180,25 +190,71 @@ OUTPUT: An RSA key pair ((N,e), d) where N is the modulus, the product of two pr
    F439906F34D86E085BD5656AD841F313D72D395EFE33CBFF29E4030B3D05A28F
    B7F18EA27637B07957D32F2BDE8706227D04665EC91BAF8B1AC3EC9144AB7F21
 
-2. The message to be signed is, of course,
+1. The message to be signed is, of course,
 	M="abc"
 	that is, the 3 bytes in hex format,
 	PT=616263
 
-3.  The message digest algorithm is SHA-1, so //ex: echo -n "abc"|sha1sum
+2.  The message digest algorithm is SHA-1, so //ex: echo -n "abc"|sha1sum
 	H = Hash("abc") = A9993E364706816ABA3E25717850C26C9CD0D89D
 
-4.  The DigestInfo value for SHA-1 is
+2.1  The DigestInfo value for SHA-1 is
 	T= 3021300906052B0E03021A05000414|A9993E364706816ABA3E25717850C26C9CD0D89D
 
-5.  The encoded message block, EB, after encoding but before signing is
+3.  The encoded message block, EB, after encoding but before signing is
+	m = 
 	0001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 	FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 	FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00302130
 	0906052B0E03021A05000414A9993E364706816ABA3E25717850C26C9CD0D89D
 
-6.  After RSA signing, the output is
+4.  After RSA signing, the output is
+	s=m^d mod n
 	60AD5A78FB4A4030EC542C8974CD15F55384E836554CEDD9A322D5F4135C6267
 	A9D20970C54E6651070B0144D43844C899320DD8FA7819F7EBC6A7715287332E
 	C8675C136183B3F8A1F81EF969418267130A756FDBB2C71D9A667446E34E0EAD
 	9CF31BFB66F816F319D0B7E430A5F2891553986E003720261C7E9022C0D9F11F
+
+	
+/*************************************************************/
+send M;
+H = hash(M);
+send sequence:
+(M+H)~(s_a)~(p_b)-> (r_b)~(p_a): M+H. hash(M)-> authen: compare hash(M) with H.	
+
+/*************************************************************************
+ * Digital Signature Scheme: 
+ * http://clem.dii.unisi.it/~vipp/files/MultimediaSecurity/MS_cryptoMISC.pdf
+ *************************************************************************/
+  It consists of 3 algorithms: 
+ • A CA uses a key generation algorithm G to produce a "key pair" (PK, SK) for the signer. 
+ • PK is the verifying key, which is to be public, and SK is the signing key, to be kept private. 
+ • Authenticity of the key is ensured by a certificate 
+
+/**************************************************************************
+ * Deploy system using openssl 
+ */
+ mkdir CA
+ mkdir CA/signed_certs
+ mkdir CA/private
+ cp /etc/ssl/openssl.cnf CA
+ touch index.txt
+ #========= create ca_req and ca_key
+ openssl req -new -keyout private/cakey.pem -out careq.pem -config ./openssl.cnf
+ # signed for req: out cacert
+ openssl ca -create_serial -out cacert.pem -keyfile private/cakey.pem -selfsign -extensions v3_ca -config ./openssl.cnf -in careq.pem
+ 
+ #========= generate server key
+ openssl req -new -config ./openssl.cnf -keyout server_key.pem -out server_req.pem
+ # signe for server req:
+ openssl ca -config ./openssl.cnf -in server_req.pem -out server_cert.pem
+ 
+ #========= generate client key
+ openssl req -new -config ./openssl.cnf -keyout linux_laptop_key.pem -out linux_laptop_req.pem
+ # signed for client req
+ openssl ca -config ./openssl.cnf -in linux_laptop_req.pem -out linux_laptop_cert.pem
+ 
+ # PKCS12
+ openssl pkcs12 -export -clcerts -in linux_laptop_cert.pem -inkey linux_laptop_key.pem -out linux_laptop.p12
+ # Server need file: cacert.pem server_cert.pem server_key.pem 
+ # Client need file: cacert.pem linux_laptop.p12
