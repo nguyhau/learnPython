@@ -1,6 +1,17 @@
 /**/
 echo -n "text"|sha1sum
 // ref https://www.di-mgt.com.au/rsa_alg.html#decryption
+* The Extended Euclidean Algorithm
+ INPUT: Two non-negative integers a and b with a ≥ b.
+ OUTPUT: d = gcd(a, b) and integers x and y satifying ax + by = d.
+ 
+     If b = 0 then set d = a, x = 1, y = 0, and return(d, x, y).
+     Set x2 = 1, x1 = 0, y2 = 0, y1 = 1
+     While b > 0, do
+         q = floor(a/b), r = a - qb, x = x2 - qx1, y = y2 - q y1.
+         a = b, b = r, x2 = x1, x1 = x, y2 = y1, y1 = y.
+     Set d = a, x = x2, y = y2, and return(d, x, y).
+ 
 /** Original RSA */
 
 1. Generate two large random primes, p and q, of approximately equal size such that their product n = pq is of the required bit length, e.g. 1024 bits. [See note 1].

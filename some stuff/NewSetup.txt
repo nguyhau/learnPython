@@ -2134,3 +2134,4 @@ ID	Name 	Driver 	Sample-Specification	State
  zcat initrd.img-3.16.0-4-amd64 | cpio -idmv
  
  https://bash.cyberciti.biz/guide/Sending_signal_to_Processes
+ https://kipalog.com/posts/Build-va-chay-mot-ban-Linux-don-gian-tren-QEMU-ARM
