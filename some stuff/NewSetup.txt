@@ -2074,19 +2074,21 @@ git config --global --unset core.gitproxy
  echo "<== Exit ${FUNCNAME[ 0 ]}, line $LINENO">>log_HDMI_common
 
 /******/ 
-find -name *.rules 
-vi /lib/udev/rules.d/120-disable-usb.rules
-/etc/init.d/udev restart 
-== create mknod ===//udev will run all .rules file.
-//change rule 
-udevadm control --reload-rules
-mknod /dev/sda b 8 0 --> creat device node "mknod [OPTION]... NAME TYPE [MAJOR MINOR]"
-// after create device node: device not contain number, partition contain number, must mount partition to read device.
-/*************************************/
-startx -> run ./root/.xinit
-export LANG=en_US.UTF-8
-
-gdk-pixbuf-query-loaders  --update-cache.
+ find -name *.rules 
+ vi /lib/udev/rules.d/120-disable-usb.rules
+ /etc/init.d/udev restart 
+ == create mknod ===//udev will run all .rules file.
+ //change rule 
+ udevadm control --reload-rules
+ mknod /dev/sda b 8 0 --> creat device node "mknod [OPTION]... NAME TYPE [MAJOR MINOR]"
+ // Major and Minor can refer from rich OS.
+ // after create device node: device not contain number, partition contain number, 
+ must mount partition to read device.
+ /*************************************/
+ startx -> run ./root/.xinit
+ export LANG=en_US.UTF-8
+ 
+ gdk-pixbuf-query-loaders  --update-cache.
 /***********************************/
 ~/TZCS/build/intel-8265/small/tmp-uclibc/work/intel-tzcs-linux-uclibc/core-image-tzcs-initramfs/1.0-r0/rootfs
 /*
@@ -2129,9 +2131,72 @@ ID	Name 	Driver 	Sample-Specification	State
  romlinux :admin123
  "romlinux"      Cleartext-Password := "Tsdv#2016"
  Cisco LinksysX1000: admin:1234567890
- 
+ 192.168.1.1
+ 192.168.173.1 
  extract initrd file: https://access.redhat.com/solutions/24029
  zcat initrd.img-3.16.0-4-amd64 | cpio -idmv
  
  https://bash.cyberciti.biz/guide/Sending_signal_to_Processes
  https://kipalog.com/posts/Build-va-chay-mot-ban-Linux-don-gian-tren-QEMU-ARM
+ http://www.broadhurst-family.co.uk/Clock/index.htm
+ 
+/***********************************************************************
+ * Router_tut: https://www.quora.com/What-is-a-router-How-does-it-work-1
+ * https://www.grandmetric.com/blog/2018/01/04/how-does-router-work/
+ ***********************************************************************/ 
+ A router simply a computing device which receives data and forwards it to another router 
+	as per a lookup table called routing table.
+ Components of a router:
+	--- Central Processing Unit (CPU)
+	--- Flash Memory
+	--- Non-Volatile RAM
+	--- RAM
+	--- Network Interfaces
+	--- Console
+ How does routers work?
+	Routers have ports or more precisely interfaces that are interfacing with 
+	other network devices. Interfaces connect the links that are used in packet forwarding. 
+	Links can be cable, fiber or even wireless.
+ Routing process:
+    1. When packet is coming on interface (ingress interface), the router needs to know 
+		which interface has to use to send out the packet (egress interface).
+    2. Router checks this against the ROUTING TABLE which has entries related to each known DESTINATION.
+		- Router analyses the destination IP, lookup into its routing entries to find the best matching destination.
+		- Checks that interface to accessible to best matching destination.
+    3. Each Routing ENTRY stores Destination ADDRESS and address of next device on the path called NEXT HOP device
+    4. Now, having NEXT HOP address, router can determine the outgoing interface and sends the packet!!!	
+ ** Contents of routing tables *
+ The routing table consists of at least three information fields:
+    - Network ID: The destination subnet
+    - Metric (distances): The routing metric of the path through which the packet is to be sent. The route will go in the direction of the gateway with the lowest metric.
+    - Next hop: The next hop, or gateway, is the address of the next station to which the packet is to be sent on the way to its final destination
+
+ Depending on the application and implementation, it can also contain additional values that refine path selection:
+    - Quality of service associated with the route. For example, the U flag indicates that an IP route is up.
+    - Links to filtering criteria/access lists associated with the route
+    - Interface: such as eth0 for the first Ethernet card, eth1 for the second Ethernet card, etc. 
+ Ex: route command show following information:Destination, Gateway, Genmask, Flags, Metric, Ref,Use, Iface	
+	- Network Destination and Netmask together describe the Network ID
+	- Gateway column contains the same information as the Next hop
+	- the Metric indicates the associated cost of using the indicated route. This is useful for determining the efficiency of a certain route 
+	from two points in a network
+	- The Interface indicates what locally available interface is responsible for reaching the gateway. (use ifconfig command
+	to get more information of interface: IP address, ..)
+	
+ /**
+ * https://www.homenethowto.com/advanced-topics/traffic-example-the-full-picture/
+ */	
+ /proc/net/arp                                                                                                                                                
+ /etc/networks                                                                                                                                                
+ /etc/hosts                                                                                                                                                   
+ /etc/ethers
+  arp: ARP  stands  for  Address  Resolution  Protocol, manipulates or displays the kernel's IPv4 network neighbor cache.
+  domain name -> IP address -> hardware address associated that IP add (MAC).
+  1. domain name -> IP address: /etc/host, /etc/networks, cache /proc/net/arp. DNS server.
+		IP address of PC is in /etc/resolv.conf.
+  2. IP address -> MAC address: /proc/net/arp, Router.
+  
+  PC network information: IP, Subnet Mask, Gateway, DNS Server, MAC.
+  Router information: WAN IP, WAN MAC, LAN IP, LAN MAC, DNS Server.
+  ARP message:   
+  NAT: network address translation.
