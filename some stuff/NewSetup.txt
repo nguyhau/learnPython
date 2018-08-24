@@ -1084,30 +1084,30 @@ Redirect both standard error and standard out messages to a log file: command > 
  https://stackoverflow.com/questions/28774830/retrieve-physical-screen-size
  
 /** Create ssh_tut key **/ 
-ssh-keygen -t rsa
+ ssh-keygen -t rsa
 
-git config --global --unset core.gitproxy
+ git config --global --unset core.gitproxy
 /***** IoTT ****/
-Thing: piaREST lib.
-Platform: dweet.io  <Hadoop, big Data>
-Analytics: ifttt.com <Tensor Flow>
-App: freeboard.io  
-/*** Japanese Citrix Server ***/
-https://tgtca0002.vc.toshiba.co.jp/Citrix/StoreWeb/
-Account: t0533950
-Pass: Tsdv2018
-
-romlinuxAP-WEP: nonpass
-romlinuxAP: 1-0
-testAP_5GHz:romlinux:
-testAP(WEP-pass):12345
+ Thing: piaREST lib.
+ Platform: dweet.io  <Hadoop, big Data>
+ Analytics: ifttt.com <Tensor Flow>
+ App: freeboard.io  
+ /*** Japanese Citrix Server ***/
+ https://tgtca0002.vc.toshiba.co.jp/Citrix/StoreWeb/
+ Account: t0533950
+ Pass: Tsdv2018
+ 
+ romlinuxAP-WEP: nonpass
+ romlinuxAP: 1-0
+ testAP_5GHz:romlinux:
+ testAP(WEP-pass):12345
 
 //
-"iwconfig wlan0 essid \"%s\" channel auto > /dev/null 2>&1"
-sprintf(buffer, "udhcpc -n -t %d -i wlan0 > /dev/null%s", retry_cnt, eos);
-"ip route flush dev eth0"
+ "iwconfig wlan0 essid \"%s\" channel auto > /dev/null 2>&1"
+ sprintf(buffer, "udhcpc -n -t %d -i wlan0 > /dev/null%s", retry_cnt, eos);
+ "ip route flush dev eth0"
 
-udevadm monitor -u -s "drm"
+ udevadm monitor -u -s "drm"
 
 
 /home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi/common/recipes-tzcs/indicator/indicator
@@ -1122,8 +1122,8 @@ udevadm monitor -u -s "drm"
  
 
 /** Use usb in linux */
-df -h -> show mount point of usb. Maniputation on mount point -> ok.
-mount /dev/sdb1 /mnt.
+ df -h -> show mount point of usb. Manipulation on mount point -> ok.
+ mount /dev/sdb1 /mnt.
 
 /*** Diff a folder from two commit **/
 git diff c5ae3a6aa1a3ff20830852ab0cd9b8c2fba56d4c 1cb8570bf04ab12a03c31c397a4d158f24895d9c drivers/gpu/drm/i915/intel_hotplug.c >hot-plug.patch
@@ -1198,31 +1198,31 @@ ABI: Application Binary Interface
 /***
  *
  */ 
-make distclean                                         
-make mrproper                                                                                                          
-make menuconfig                                                                                                        
-sudo apt-get install libncurses5 
-libncurses5-dev                                                                                                   
-make menuconfig                                                                                                        
-make -j4                                                                                                               
-sudo apt-get install build-essential                                                                                                   
-sudo apt-get upgrade                                                                                                           
-sudo apt-get update                                                                                                            
-make -j4                                                                                                               
-sudo apt-get install bc                                                                                                                
-make -j4                                                                                                               
-                                         
-ls                                                                                                                
-sudo make modules_install install                                                                                                           
-sudo update-grub2                                                                                                      
-sudo reboot
-
-/etc/udhcpc/50default
-udhcpc -n -t 20 -i wlan0
+ make distclean                                         
+ make mrproper                                                                                                          
+ make menuconfig                                                                                                        
+ sudo apt-get install libncurses5 
+ libncurses5-dev                                                                                                   
+ make menuconfig                                                                                                        
+ make -j4                                                                                                               
+ sudo apt-get install build-essential                                                                                                   
+ sudo apt-get upgrade                                                                                                           
+ sudo apt-get update                                                                                                            
+ make -j4                                                                                                               
+ sudo apt-get install bc                                                                                                                
+ make -j4                                                                                                               
+                                          
+ ls                                                                                                                
+ sudo make modules_install install                                                                                                           
+ sudo update-grub2                                                                                                      
+ sudo reboot
+ 
+ /etc/udhcpc/50default
+ udhcpc -n -t 20 -i wlan0
 
 /*** Remote_indi **/
-Apricot: /home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi/common/recipes-tzcs/indicator/indicator
-Common:  /home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-tzcs/indicator/indicator
+ Apricot: /home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi/common/recipes-tzcs/indicator/indicator
+ Common:  /home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-tzcs/indicator/indicator
 
 /** Machine learning **/
 https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471
@@ -1770,34 +1770,34 @@ iwconfig
 /*****************************************************************************
  * Network acronym& terminology
  *****************************************************************************/
-ip: RTNETLINK answer: File exists.
+ ip: RTNETLINK answer: File exists.
 
-IEEE:  Institute of Electrical and Electronics Engineers
-IEEE-SA: Institute of Electrical and Electronics Engineers Standards Association                                                                                                                   +        //
-VLANs: Virtual LANs
-PKI: Public Key Infrastructure 
-EAP: Extensible Authentication Protocol 
-EAPoLAN: EAP over LAN 
-EAPoWLAN: EAP over WLAN
-NPS: Network Policy Server 
-RADIUS: Remote Authentication Dial-In User Service
-AD: Active Directory
-PEAP: Protect EAP.
-DS: Domain Services
-CA: Certification Authority
-Active Directory Domain Controller
-EAP-TLS: EAP Transport Layer Security
-CRL: Certificate Revocation List 
-MAC: Medium Access Control 
-WEP: Wired Equivalent Privacy
-WPA: Wi-Fi Protected Access 
-SSID: Service Set Identifier
-Wi-Fi: Wireless Fidelity, a wireless technology association. 
-ESS: Extended Service Set
-DNS: Domain Name System, convert Internet addresses to numeric IP addresses
-LAN: Local Area Network
-http://tutorial.wmlcloud.com/windows_7/Understanding-Network-Connectivity-in-an-Enterprise-(part-1)---Unicast,-Multicast,-and-Broadcast---Using-IPConfig.aspx
-wget ftp://trungnt:1@10.116.224.88/goo*
+ IEEE:  Institute of Electrical and Electronics Engineers
+ IEEE-SA: Institute of Electrical and Electronics Engineers Standards Association                                                                                                                   +        //
+ VLANs: Virtual LANs
+ PKI: Public Key Infrastructure 
+ EAP: Extensible Authentication Protocol 
+ EAPoLAN: EAP over LAN 
+ EAPoWLAN: EAP over WLAN
+ NPS: Network Policy Server 
+ RADIUS: Remote Authentication Dial-In User Service
+ AD: Active Directory
+ PEAP: Protect EAP.
+ DS: Domain Services
+ CA: Certification Authority
+ Active Directory Domain Controller
+ EAP-TLS: EAP Transport Layer Security
+ CRL: Certificate Revocation List 
+ MAC: Medium Access Control 
+ WEP: Wired Equivalent Privacy
+ WPA: Wi-Fi Protected Access 
+ SSID: Service Set Identifier
+ Wi-Fi: Wireless Fidelity, a wireless technology association. 
+ ESS: Extended Service Set
+ DNS: Domain Name System, convert Internet addresses to numeric IP addresses
+ LAN: Local Area Network
+ http://tutorial.wmlcloud.com/windows_7/Understanding-Network-Connectivity-in-an-Enterprise-(part-1)---Unicast,-Multicast,-and-Broadcast---Using-IPConfig.aspx
+ wget ftp://trungnt:1@10.116.224.88/goo*
 /**********************************************************************************
  * Routing table 
  * https://manpages.debian.org/stretch/iproute2/ip-route.8.en.html
@@ -1947,6 +1947,10 @@ rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
  # bgscan="learn:<short bgscan interval in seconds>:<signal strength threshold>:
  # <long interval>[:<database file name>]"
  # bgscan="learn:30:-45:300:/etc/wpa_supplicant/network1.bgscan" 
+ 
+/*
+ * net_proxy: https://medium.com/@codedraken/how-to-setup-a-proxy-server-on-linux-free-76f3c465ee5e
+ */
 /************************************************************************************
  * Diagram_tut 
  * https://www.uml-diagrams.org/uml-25-diagrams.html
@@ -1962,108 +1966,108 @@ rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
  /***********************************************************************************/
 
 /******************/
-cat /sys/class/drm/card0-HDMI*/status
+ cat /sys/class/drm/card0-HDMI*/status
 /******************/
-aplay: sound player for ALSA sound card driver
-	-l: list all sound cards and digital audio devices.
-	
-pactl: Control a running PulseAudio sound server
-	info: Dump some info about the PulseAudio daemon
-	
-	set-default-sink SINK: Make the specified sink (identified by its symbolic name) the default sink.
-	
-	move-sink-input ID SINK: Move the specified playback stream (identified by its numerical index) to the specified sink (identified by its symbolic name or numerical index).
-	
-	set-card-profile CARD PROFILE: Set the specified card (identified by its symbolic name or numerical index) to the specified profile (identified by its symbolic name)
-	
-	list [short] [TYPE]: Dump all currently loaded modules, available sinks, sources, streams.
-		TYPE must be one of: modules, sinks, sources, sink-inputs, source-outputs, clients, samples, cards
-		If short is given, output is in a tabular format, for easy parsing by scripts
-		ex: list cards, list sinks short
-		
-amixer: mixer for ALSA soundcard driver
-	info: Shows the information about a mixer device.
-	
-	scontrols: Shows a complete list of simple mixer controls.	
-	
-	set or sset <SCONTROL> <PARAMETER>
-		The PARAMETER can be the volume either as a percentage from 0% to 100% with % suffix.
-		The PARAMETER cap, nocap, mute, unmute, toggle are used to change capture (recording) and muting for the group specified.
-		Ex: amixer sset Master 1%+ unmute
-			amixer sset Speaker unmute
-			amixer sset Headphone unmute
-			
-card: 
-	- id:
-	- name: 
-	- type:
-
-    interface:card,device,subdevice
-    interface:CARD=1,DEV=3,SUBDEV=2.
-	
-#/** set to internal */
-#*pactl list cards | grep "Active" | grep "hdmi-stereo" &>/dev/null
-#ANALOG_PROFILE='output:analog-stereo+input:analog-stereo'
-#pactl set-card-profile 0 output:analog-stereo+input:analog-stereo	
-#/** set to hdmi */
-#// get hdmi id
-#pactl list cards | grep "Active" | grep "hdmi-stereo" &>/dev/null
-#// get hdmi card 
-#pactl list cards | awk '/device.product.name/{getline; print}' | awk '{print $5}' | tr -d ','
-#pactl set-card-profile 0 output:hdmi-stereo+input:analog-stereo
-
-aplay -l 
-pactl info 
-pactl list cards 
-pactl list cards short 
+ aplay: sound player for ALSA sound card driver
+ 	-l: list all sound cards and digital audio devices.
+ 	
+ pactl: Control a running PulseAudio sound server
+ 	info: Dump some info about the PulseAudio daemon
+ 	
+ 	set-default-sink SINK: Make the specified sink (identified by its symbolic name) the default sink.
+ 	
+ 	move-sink-input ID SINK: Move the specified playback stream (identified by its numerical index) to the specified sink (identified by its symbolic name or numerical index).
+ 	
+ 	set-card-profile CARD PROFILE: Set the specified card (identified by its symbolic name or numerical index) to the specified profile (identified by its symbolic name)
+ 	
+ 	list [short] [TYPE]: Dump all currently loaded modules, available sinks, sources, streams.
+ 		TYPE must be one of: modules, sinks, sources, sink-inputs, source-outputs, clients, samples, cards
+ 		If short is given, output is in a tabular format, for easy parsing by scripts
+ 		ex: list cards, list sinks short
+ 		
+ amixer: mixer for ALSA soundcard driver
+ 	info: Shows the information about a mixer device.
+ 	
+ 	scontrols: Shows a complete list of simple mixer controls.	
+ 	
+ 	set or sset <SCONTROL> <PARAMETER>
+ 		The PARAMETER can be the volume either as a percentage from 0% to 100% with % suffix.
+ 		The PARAMETER cap, nocap, mute, unmute, toggle are used to change capture (recording) and muting for the group specified.
+ 		Ex: amixer sset Master 1%+ unmute
+ 			amixer sset Speaker unmute
+ 			amixer sset Headphone unmute
+ 			
+ card: 
+ 	- id:
+ 	- name: 
+ 	- type:
+ 
+     interface:card,device,subdevice
+     interface:CARD=1,DEV=3,SUBDEV=2.
+ 	
+ #/** set to internal */
+ #*pactl list cards | grep "Active" | grep "hdmi-stereo" &>/dev/null
+ #ANALOG_PROFILE='output:analog-stereo+input:analog-stereo'
+ #pactl set-card-profile 0 output:analog-stereo+input:analog-stereo	
+ #/** set to hdmi */
+ #// get hdmi id
+ #pactl list cards | grep "Active" | grep "hdmi-stereo" &>/dev/null
+ #// get hdmi card 
+ #pactl list cards | awk '/device.product.name/{getline; print}' | awk '{print $5}' | tr -d ','
+ #pactl set-card-profile 0 output:hdmi-stereo+input:analog-stereo
+ 
+ aplay -l 
+ pactl info 
+ pactl list cards 
+ pactl list cards short 
 
 
 ============================== 
-pactl set-card-profile 1 output:hdmi-stereo
-pactl set-card-profile 1 output:hdmi-surround
-pactl set-card-profile 1 output:hdmi-surround71
-output:hdmi-stereo output:hdmi-surround output:hdmi-surround71
-
-service pulseaudio restart
-git config --global --unset core.gitproxy
+ pactl set-card-profile 1 output:hdmi-stereo
+ pactl set-card-profile 1 output:hdmi-surround
+ pactl set-card-profile 1 output:hdmi-surround71
+ output:hdmi-stereo output:hdmi-surround output:hdmi-surround71
+ 
+ service pulseaudio restart
+ git config --global --unset core.gitproxy
 /******************************************************************
  * https://onlinepdfspace.com/
  ******************************************************************/
  
 /**************** Sound control ***************/ 
-#Sink
-#    An output device 
-#Source
-#    An input device 
-#Sink input
-#    A stream that is connected to an output device, i.e. an input for a sink. 
-#Source output
-#    A stream that is connected to an input device, i.e. an output of a source. 
-#Client
-#    An active client of the PA server, something that can create none/one/many sink inputs/source outputs 
-#	on any sink/source the PA server has. A sink input/source output can thus be "owned" by a specific client. 
-#	Sink inputs/sources however can also be "unowned", i.e. not owned by any client. 
-#	Generally we can consider a client to be a collection of sink inputs/source outputs. 
-#Card
-#    A collection of sinks/sources that belong to a single hardware device. 
-#	Not all sinks/sources must be assigned to a card. Usually this combines one source (for recording) 
-#	and one sink (for playback) into a single object. 
-#	
-#- To list available input sources (The * in front of the index indicates the current default input.)
-#	pacmd list-sources [| grep -e 'index:' -e device.string -e 'name:']
-#	pactl list sources [short]
-#
-#- To list the output sources available (The * in front of the index indicates the current default output)	
-#	pacmd list-sinks [| grep -e 'name:' -e 'index:']
-#	pactl list sinks [short]
-#	
-#- To set the default output device to use by pulseaudio
-#	pacmd set-default-sink {SINKNAME}
-#	pactl set-default-sink SINK
-#
-#- To set the default input device to use by pulseaudio
-#	pacmd set-default-source {SOURCENAME} 
-#	pactl set-default-source SOURCE
+ #Sink
+ #    An output device 
+ #Source
+ #    An input device 
+ #Sink input
+ #    A stream that is connected to an output device, i.e. an input for a sink. 
+ #Source output
+ #    A stream that is connected to an input device, i.e. an output of a source. 
+ #Client
+ #    An active client of the PA server, something that can create none/one/many sink inputs/source outputs 
+ #	on any sink/source the PA server has. A sink input/source output can thus be "owned" by a specific client. 
+ #	Sink inputs/sources however can also be "unowned", i.e. not owned by any client. 
+ #	Generally we can consider a client to be a collection of sink inputs/source outputs. 
+ #Card
+ #    A collection of sinks/sources that belong to a single hardware device. 
+ #	Not all sinks/sources must be assigned to a card. Usually this combines one source (for recording) 
+ #	and one sink (for playback) into a single object. 
+ #	
+ #- To list available input sources (The * in front of the index indicates the current default input.)
+ #	pacmd list-sources [| grep -e 'index:' -e device.string -e 'name:']
+ #	pactl list sources [short]
+ #
+ #- To list the output sources available (The * in front of the index indicates the current default output)	
+ #	pacmd list-sinks [| grep -e 'name:' -e 'index:']
+ #	pactl list sinks [short]
+ #	
+ #- To set the default output device to use by pulseaudio
+ #	pacmd set-default-sink {SINKNAME}
+ #	pactl set-default-sink SINK
+ #
+ #- To set the default input device to use by pulseaudio
+ #	pacmd set-default-source {SOURCENAME} 
+ #	pactl set-default-source SOURCE
 
 /**********************************************************************
  * Debug_shell_tut
@@ -2099,20 +2103,20 @@ git config --global --unset core.gitproxy
  			  https://baohiemxahoi.gov.vn/tracuu/Pages/tra-cuu-ho-gia-dinh.aspx
  TTBHXH: https://baohiemxahoi.gov.vn/tracuu/Pages/tra-cuu-dong-bao-hiem.aspx			  
 /** Build pulseaudio **/
-https://ubuntuforums.org/showthread.php?t=2210602
-1: sudo apt-get build-dep pulseaudio && sudo apt-get install checkinstall git libpulse-dev
-2: ./bootstrap.sh 
-3: make/make clean.
-
-PATH: --> add bin.
-LD_LIBRARY_PATH=LD_LIBRARY_PATH:<lib .so path>
-
-
-pactl list sink-inputs short
-ID	Sink	Client 	Driver	Sample-Specification
-
-pactl list sinks short 
-ID	Name 	Driver 	Sample-Specification	State
+ https://ubuntuforums.org/showthread.php?t=2210602
+ 1: sudo apt-get build-dep pulseaudio && sudo apt-get install checkinstall git libpulse-dev
+ 2: ./bootstrap.sh 
+ 3: make/make clean.
+ 
+ PATH: --> add bin.
+ LD_LIBRARY_PATH=LD_LIBRARY_PATH:<lib .so path>
+ 
+ 
+ pactl list sink-inputs short
+ ID	Sink	Client 	Driver	Sample-Specification
+ 
+ pactl list sinks short 
+ ID	Name 	Driver 	Sample-Specification	State
 /***********************************************************************
  *	vi_tut
  ***********************************************************************/
@@ -2183,8 +2187,9 @@ ID	Name 	Driver 	Sample-Specification	State
 	- The Interface indicates what locally available interface is responsible for reaching the gateway. (use ifconfig command
 	to get more information of interface: IP address, ..)
 	
- /**
+/**
  * https://www.homenethowto.com/advanced-topics/traffic-example-the-full-picture/
+ * https://www.homenethowto.com
  */	
  /proc/net/arp                                                                                                                                                
  /etc/networks                                                                                                                                                
@@ -2200,3 +2205,11 @@ ID	Name 	Driver 	Sample-Specification	State
   Router information: WAN IP, WAN MAC, LAN IP, LAN MAC, DNS Server.
   ARP message:   
   NAT: network address translation.
+  
+  
+  
+/****
+ * Machine_learning
+ * https://github.com/tiepvupsu/tiepvupsu.github.io/tree/master/assets/kmeans
+ * https://machinelearningcoban.com/2017/01/08/knn/
+ ***************/  
