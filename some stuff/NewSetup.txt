@@ -989,7 +989,7 @@ TARGET_CFLAGS=" -O2 -pipe -g -feliminate-unused-debug-types"
 10.116.114.70
 bitbake -g -u depexp recipename ->  view build-time and runtime dependencies for the recipes
 /******************************************************************
- * Test 
+ * Test_STS 
  ****/
  vmware server: 41.126| 224.173
  user: 			viewuser1|vuser1
@@ -2118,7 +2118,7 @@ rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
  pactl list sinks short 
  ID	Name 	Driver 	Sample-Specification	State
 /***********************************************************************
- *	vi_tut
+ *	vi_tut: https://www.cs.oberlin.edu/~kuperman/help/vim/windows.html
  ***********************************************************************/
  - Delete from current line to end of file: [d] [G]
  - Delete from current cursor to end of file: [d] [Ctrl] [End]
@@ -2126,6 +2126,8 @@ rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
  - Select a block: [Ctrl][v]
  - Insert multi-line: [Select block] [Shift] [i] [add text] [Esc]
  - Redo in vim -> ctrl r 
+ - :vsplit file name -> open a vertical split to vi a file 
+ - ctrl w + negative -> switch windown.
 
 /*
  * udev: http://www.reactivated.net/writing_udev_rules.html#builtin
@@ -2200,16 +2202,91 @@ rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
   1. domain name -> IP address: /etc/host, /etc/networks, cache /proc/net/arp. DNS server.
 		IP address of PC is in /etc/resolv.conf.
   2. IP address -> MAC address: /proc/net/arp, Router.
+	Router store a ARP List that binding IP address and MAC address.
   
   PC network information: IP, Subnet Mask, Gateway, DNS Server, MAC.
   Router information: WAN IP, WAN MAC, LAN IP, LAN MAC, DNS Server.
   ARP message:   
   NAT: network address translation.
+  AAA: the authentication, authorization, and accounting
   
-  
-  
+ A proxy server has two main advantages. It improves web surfing speed when returning
+cached data to clients, and it reduces the required bandwidth (cost) to the internet. 
+/*
+ * ifconfig command http://www.aboutlinux.info/2006/11/ifconfig-dissected-and-demystified.html
+ * http://www.steves-internet-guide.com/category/internet/
+ **/
+ Ex: Link encap:Ethernet  HWaddr 00:1C:C0:AE:B5:E6  
+          inet addr:192.168.0.1  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::21c:c0ff:feae:b5e6/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:41620 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:40231 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:21601203 (20.6 MiB)  TX bytes:6145876 (5.8 MiB)
+          Interrupt:21 Base address:0xe000
+		  
+    Link encap:Ethernet - This denotes that the interface is an Ethernet related device.
+    HWaddr 00:70:40:42:8A:60 - This is the hardware address or MAC address which is unique to each Ethernet card which is manufactured. Usually, the first half part of this address will contain the manufacturer code which is common for all the Ethernet cards manufactured by the same manufacturer and the rest will denote the device Id which should not be the same for any two devices manufactured at the same place.
+    inet addr - indicates the machine IP address
+    Bcast - denotes the broadcast address
+    Mask - is the network mask which we passed using the netmask option (see above).
+    UP - This flag indicates that the kernel modules related to the Ethernet interface has been loaded.
+    BROADCAST - Denotes that the Ethernet device supports broadcasting - a necessary characteristic to obtain IP address via DHCP.
+    NOTRAILERS - indicate that trailer encapsulation is disabled. Linux usually ignore trailer encapsulation so this value has no effect at all.
+    RUNNING - The interface is ready to accept data.
+    MULTICAST - This indicates that the Ethernet interface supports multicasting. Multicasting can be best understood by relating to a radio station. Multiple devices can capture the same signal from the radio station but if and only if they tune to a particular frequency. Multicast allows a source to send a packet(s) to multiple machines as long as the machines are watching out for that packet.
+    MTU - short form for Maximum Transmission Unit is the size of each packet received by the Ethernet card. The value of MTU for all Ethernet devices by default is set to 1500. Though you can change the value by passing the necessary option to the ifconfig command. Setting this to a higher value could hazard packet fragmentation or buffer overflows. Do compare the MTU value of your Ethernet device and the loopback device and see if they are same or different. Usually, the loopback device will have a larger packet length.
+    Metric - This option can take a value of 0,1,2,3... with the lower the value the more leverage it has. The value of this property decides the priority of the device. This parameter has significance only while routing packets. For example, if you have two Ethernet cards and you want to forcibly make your machine use one card over the other in sending the data. Then you can set the Metric value of the Ethernet card which you favor lower than that of the other Ethernet card. I am told that in Linux, setting this value using ifconfig has no effect on the priority of the card being chosen as Linux uses the Metric value in its routing table to decide the priority.
+    RX Packets, TX Packets - The next two lines show the total number of packets received and transmitted respectively. As you can see in the output, the total errors are 0, no packets are dropped and there are no overruns. If you find the errors or dropped value greater than zero, then it could mean that the Ethernet device is failing or there is some congestion in your network.
+    collisions - The value of this field should ideally be 0. If it has a value greater than 0, it could mean that the packets are colliding while traversing your network - a sure sign of network congestion.
+    txqueuelen - This denotes the length of the transmit queue of the device. You usually set it to smaller values for slower devices with a high latency such as modem links and ISDN.
+    RX Bytes, TX Bytes - These indicate the total amount of data that has passed through the Ethernet interface either way. Taking the above example, I can fairly assume that I have used up 31.6 MB in downloading and 2.5 MB uploading which is a total of 37.1 MB of bandwidth. As long as there is some network traffic being generated via the Ethernet device, both the RX and TX bytes will go on increasing.
+    Interrupt - From the data, I come to know that my network interface card is using the interrupt number 9. This is usually set by the system.
+	
+	Level 1 = physical e.g. media i.e. cable devices = Repeater
+	Level 2 = Data Link= Ethernet -devices are hubs,switches and bridges
+		Bridges and switches do very similar functions. Bridges were used to join network segments i.e. LAN to LAN, whereas switch connected devices.
+		Hubs operate at the physical level, and were once the primary mechanism for connecting computers together.
+		Hubs do not create a separate collision domain they just repeat packets.
+	Level 3= Network= IP protocol – devices are routers
+	
+/*
+ * dhcp server: https://www.tecmint.com/install-dhcp-server-in-ubuntu-debian/
+ **/
+/*
+ * wire shark: http://www.linuxandubuntu.com/home/how-to-use-wireshark-to-inspect-network-traffic
+ **/ 
 /****
  * Machine_learning
  * https://github.com/tiepvupsu/tiepvupsu.github.io/tree/master/assets/kmeans
  * https://machinelearningcoban.com/2017/01/08/knn/
  ***************/  
+ char message[CMD_BUF_SIZE];
+        memset(message,  '\0', sizeof(message));
+ 
+ 
+ 192.168.173.51
+ 255.255.255.0
+ 192.168.173.1
+ 10.116.16.13
+/*
+ * symlink_tut
+ */
+ Find all symlinks of a given 'original' file:
+ find -L . -samefile init.d/rsyslog
+ 
+ meta-intel-vdi/common/recipes-debian/base-files/files/dot.xinitrc -> add rsyslog to service list.
+ service --status-all -> list all running service
+ disable services on startup: systemctl disable <service>| update-rc.d -f <service> remove
+/********
+ * using acpid: https://wiki.archlinux.org/index.php/acpid#Example_events
+ ***********************/ 
+ check event key by using run acpi_listen [key press]. Example: [Fn+F2]   ->
+	button/battery ... -> event name is button/battery.
+ ls /etc/acpi/events -> list all register events. 
+	Ex for a event: event=button/battery                                                                                                                                         
+					action=/etc/acpi/handlers/license
+ ls /etc/acpi/handlers -> list all handler event. Handler is a shell script.
+ 
+ 
