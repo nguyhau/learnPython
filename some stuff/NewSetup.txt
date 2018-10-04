@@ -1335,6 +1335,8 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
 /*********************************************
  * Git_tut rebase
  **********************************************/ 
+ /*** list all branch on remote repository **/
+ git branch -r.
  /***************************************
  * Check commitID from kernel source. 
  ****************************************/
@@ -2289,4 +2291,48 @@ cached data to clients, and it reduces the required bandwidth (cost) to the inte
 					action=/etc/acpi/handlers/license
  ls /etc/acpi/handlers -> list all handler event. Handler is a shell script.
  
+/*****/
+ Router: - radio AP mode: 11b/g/a/n(144Mbp/300Mbp); RateSet 1Mbp
+		 - security: WEP 64bit/WPA-PSK-TKIP
+		 11n (144Mbps) mode It reaches. 11n (300Mbps) mode
+				WEP(64bit)
+				WEP(128bit)
+				WPA-PSK-TKIP
+				WPA-EAP-TKIP
+				WPA2-PSK-TKIP
+				WPA2-EAP-TKIP
  
+ TP_Link Router mode:b/g/n/bg/bgn.
+ A DHCP server tracks and manages IP address assignments on the network.
+ When a device without a permanent assignment requests an IP address, 
+ the DHCP server assigns an address to the device for a certain period of time, 
+ such as one day. If the device is using the IP address halfway through the lease period, 
+ it requests a renewal and the DHCP server extends the lease. 
+ If the lease expires and the device hasn't contacted the DHCP server, the server recycles the IP address.
+ 
+ DHCP Recv DISCOVER from client 
+ DHCPS: no ip addresses to give, OFFER abandoned.
+ DHCPS: recv REQUEST from a Mac
+ DHCPS send ACK to IP that corresponding to Mac
+ // New 
+ Client send DISCOVER
+ DHCPS recv DISCOVER from a Mac Add 
+ DHCPS: lease host name not found 
+ DHCPS send OFFER with a IP xxxx
+ DHCPS recv REQUEST from Mac 
+ DHCPS send ACK to IP xxx 
+ 5'48->7'13 ->1'30
+ 
+ http://tve-4u.org/threads/bo-sach-tam-tinh-cua-ernst-muldashev.16669/
+ 
+/*******************************************************************
+ * Visual_tut
+ *******************************************************************/ 
+ /* Create GDB remote project */
+ New project -> Visual GDB -> Linux project -> Import project with cmd tool -> 
+		linux-computer select -> Build project under Linux
+		source locatinon -> select remote location 
+		source access -> copy source locally and upload ...
+		build and debug -> stick on "I don't .."
+ /* Show block statement */
+ Tool -> Option -> TextEditor-> C/C++-> Fomating-> Outling-> OutlineStatement 
