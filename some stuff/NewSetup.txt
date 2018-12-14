@@ -1,4 +1,45 @@
 http://www.brendangregg.com/
+super_tut
+Redirect_tut
+config_tut
+bitbake_tut
+ssh_tut
+patch_tut
+module_tut
+Debug_kernel
+Debug_makefile
+Flush_log
+firmware_tut
+Git_tut
+xrandr_command
+Measure_c_time
+xrandr_tut
+Network_tut
+Diagram_tut
+pulse_audio
+Debug_shell_tut
+vi_tut
+transfer_note
+Router_tut
+Visual_tut
+tick_symbol
+Resize_VM
+/**********************************************
+ * super_tut 
+ ************************************/
+ suid: (superuser ID)
+ * fix /dev/null: permission denied
+   sudo chroot chroot-haund/
+   rm -f /dev/null; mknod -m 666 /dev/null c 1 3
+ * passwd -> setpass.
+  unmount all
+ * sed -i -e 's/chroot/chroot1/g' *
+ * sed -i -e "<line number>s/<search pattern>/<replacement string>/"
+ * replace whole line: sed -i -e "s/.*/<content>"
+ * remove all "\" character: sed -i -e 's/\\/\ /g' list_patch
+/** **/
+ $(tail -1 cmd) -> run last line of cmd file 
+ $(sed '3q;d' cmd) -> run 3th line of cmd file  
 /**********************************************************************
  * Redirect_tut
  ************/
@@ -41,19 +82,7 @@ i>&j
    # Redirects, by default, file descriptor 1 (stdout) to j.
    # All stdout gets sent to file pointed to by j.
 
-/** super_tut */
- suid: (superuser ID)
- * fix /dev/null: permission denied
-   sudo chroot chroot-haund/
-   rm -f /dev/null; mknod -m 666 /dev/null c 1 3
- * passwd -> setpass.
-  unmount all
- * sed -i -e 's/chroot/chroot1/g' *
- * sed -i -e "<line number>s/<search pattern>/<replacement string>/"
- * replace whole line: sed -i -e "s/.*/<content>"
-/** **/
- $(tail -1 cmd) -> run last line of cmd file 
- $(sed '3q;d' cmd) -> run 3th line of cmd file  
+
 /*************************************************************************
  *   config_tut network and proxy
  *************************************************************************/
@@ -736,11 +765,28 @@ https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-comman
  * Flush_log : https://stackoverflow.com/questions/12450066/flushing-buffers-in-c
  ********************/
  /*** C ***/
- #include <stdio.h>
- FILE *fd = fopen("log.txt","a"); 
- fprintf(fd, "Buffered, will be flushed");
- fflush(fd);  //Prints to a file
- fclose(fd);
+#include <stdio.h>
+#include <iostream>
+#include "stdlib.h"
+
+ #define _printf(fmt, ...) \
+            do { if (DEBUG) fprintf(stderr, fmt, __VA_ARGS__); } while (0)
+ 
+ #define _printf(fmt, ...) \
+    do {                                            \
+        FILE *fd = fopen("/var/log_ice.txt","a");   \
+        fprintf(fd, fmt, __VA_ARGS__);              \
+        fflush(fd);                                 \
+        fclose(fd);                                 \
+    } while (0)
+	
+ #define _printf( msg )
+ {
+	 FILE *fd = fopen("/var/log_ice.txt","a"); 
+	 fprintf(fd, msg);
+	 fflush(fd);  //Prints to a file
+	 fclose(fd);
+}	 
  /*** C++ ***/
  #include <fstream>
  std::ofstream outfile;
@@ -1087,6 +1133,7 @@ Redirect both standard error and standard out messages to a log file: command > 
  ssh-keygen -t rsa
 
  git config --global --unset core.gitproxy
+ ssh-copy-id -i ~/.ssh/id_rsa.pub nguyhau@127.0.0.1 ---> for remote.
 /***** IoTT ****/
  Thing: piaREST lib.
  Platform: dweet.io  <Hadoop, big Data>
@@ -1113,7 +1160,7 @@ Redirect both standard error and standard out messages to a log file: command > 
 /home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi/common/recipes-tzcs/indicator/indicator
 /home/nguyhau/TZCS/poky/meta-tzcs/meta-intel-vdi-common/recipes-tzcs/indicator/indicator
 /********************************************************
- * Create patch file https://www.thegeekstuff.com/2014/12/patch-command-examples
+ * Create patch_tut file https://www.thegeekstuff.com/2014/12/patch-command-examples
  *******************************************************/
  diff from original file with new file:  diff -u a.txt b.txt >a.patch
  apply patch file on original file and create backup file: patch -b <a.patch		(-b: backup option)
@@ -1149,7 +1196,7 @@ ABI: Application Binary Interface
 		How exceptions propagate.
 
 /**********************************************************************************
- * Build only module in linux_kernel: 
+ * Build only module_tut in linux_kernel: 
  * https://stackoverflow.com/questions/8744087/how-to-recompile-just-a-single-kernel-module
  *************************************************************************************/
  1. Download source.
@@ -1245,7 +1292,7 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  
  $ bitbake –ccleanall meta-toolchain      /* if necessary */
  $ bitbake meta-toolchain
-
+// remove ${LIBC_DEPENDENCIES} in meta/recipes-core/packagegroups/packagegroup-core-standalone-sdk-target.bb
 
 /** How to use **/
  •	Copy debian-eglibc-x86_64-meta-toolchain-x86_64-toolchain-8.0.sh to your PC
@@ -1254,7 +1301,7 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  https://lists.yoctoproject.org/pipermail/yocto/2017-April/035792.html
 
 /**********************************************************
- * Debug in makefile
+ * Debug_makefile
  ********************************/
  Assumption make file contain SOURCES variable. Need print out that value:
  --> 
@@ -1417,7 +1464,7 @@ v4.4.2: 1cb8570bf04ab12a03c31c397a4d158f24895d9c 	17/21016
 	
 xfce_displays_helper_channel_property_changed 	
 /*
- * xrandr command
+ * xrandr_command
  */
  # Using xrandr -> list all connected monitor: monitor name, status, resolution , ...
 	xrandr -q 
@@ -1679,6 +1726,8 @@ pOutputs get_screen_info ()
  * https://p5r.uk/blog/2010/ifconfig-ip-comparison.html
  * https://www.blackmoreops.com/2014/09/18/connect-to-wifi-network-from-command-line-in-linux/ 
  * https://www.linuxjournal.com/content/wi-fi-command-line 
+ * https://askubuntu.com/questions/16584/how-to-connect-and-disconnect-to-a-network-manually-in-terminal
+ * https://wiki.archlinux.org/index.php/WPA_supplicant
  *  iwconfig - configure a wireless network interface
  *  iwlist - Get more detailed wireless information from a wireless interface
  *  iwpriv - configure optionals (private) parameters of a wireless network interface
@@ -1969,7 +2018,9 @@ rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
 
 /******************/
  cat /sys/class/drm/card0-HDMI*/status
-/******************/
+/**************
+ * pulse_audio
+ ***/
  aplay: sound player for ALSA sound card driver
  	-l: list all sound cards and digital audio devices.
  	
@@ -2132,7 +2183,7 @@ rm -rf /etc/wpa_supplicant/wired.log > /dev/null 2>&1
  - ctrl w + negative -> switch windown.
 
 /*
- * udev: http://www.reactivated.net/writing_udev_rules.html#builtin
+ * transfer_note udev: http://www.reactivated.net/writing_udev_rules.html#builtin
  **/
  2018-07-23
  Radius_server: 10.116.224.177
@@ -2336,3 +2387,64 @@ cached data to clients, and it reduces the required bandwidth (cost) to the inte
 		build and debug -> stick on "I don't .."
  /* Show block statement */
  Tool -> Option -> TextEditor-> C/C++-> Fomating-> Outling-> OutlineStatement 
+/**
+ * bash_on_win 10: cd C:\windows\system32; run lxrun /install.
+ * https://stackoverflow.com/questions/44829878/trying-to-use-bash-on-windows-and-got-no-installed-distributions-message
+ * 
+ ****/ 
+ 
+/**
+ * tick_symbol: Wingdings -> character code 252
+ **/
+/*
+ * Resize_VM for virtualbox harddisk.
+ ***/ 
+ 1. create new harddisk with new size by virtual box.
+ 2. add "C:\Program Files\Oracle\VirtualBox" path to environment 
+ 3. run VBoxManage list hdds to get uuid of hard-disk.
+ 4. VBoxManage clonemedium <old-guid> <new-guid> --existing
+ 
+ Remove and re-create swap partition:
+ 1. sudo mkswap /dev/sda4
+ 2. sudo swapon /dev/sda4
+ 3. vi /etc/fstab
+	/dev/sda4  swap  swap  defaults  0 0
+ 4. check: swapon --show
+ 
+ sudo apt-get install build-essential linux-headers-$(uname -r)
+ 
+diff --git a/classes/debian-package.bbclass b/classes/debian-package.bbclass                                                                                 
+index 20e62ff..1aff3b6 100644                                                                                                                                
+--- a/classes/debian-package.bbclass                                                                                                                         
++++ b/classes/debian-package.bbclass                                                                                                                         
+@@ -20,7 +20,9 @@ SRC_URI = "${DEBIAN_SRC_URI}"                                                                                                               
+# By default, always use latest version of the default branch                                                                                                
+SRCREV = "${AUTOREV}"                                                                                                                                                                                                                                                                                                    
+-PV = "git${SRCPV}"                                                                                                                                          +                                                                                                                                                            
++#PV = "git${SRCPV}"                                                                                                                                         
++PV = "git" 
+
+
+========================================================================================
+if (strcmp(trim(get_cmd_result(state_network_wired, p_output, DATA_SIZE)), "up")!= 0) {
+        error_code = WIRE_DHCP_FAIL;
+    }
+	
+if (strcmp(trim(get_cmd_result(get_ip_wired, p_output, DATA_SIZE)), "")== 0) {
+        error_code = WIRE_DHCP_FAIL;
+    }	
+========================================================================================
+~/TZCS/poky/meta-tzcs/common/recipes-tzcs git log ./tzcslib/files/TzcsNetwork.c
+
+30b5fd1a57c2b7e1cb63cad1be62310ab8338500 
+
+5deace0b88aa4ce5524915a2d2129ac22d704112 
+	
+	
+	
+	
+Case 1:When current status is supporting 3 screens(plug Internal monitor and 2 external monitors(A display is displayed, B display is not displayed.)),  
+			if you unplug B display, do nothing.(Internal monitor and A external monitor are displayed.)
+Case 2:When 2 external monitor are displayed(Not use(set on Control Panel) Internal monitor), 
+		If you unplug the A external monitor(primary), primary monitor moves to from A external monitor to B external monitor. 
+		then, if you unplug 2 external monitor(A and B external monitor), monitor mode will switch to internal mode.
