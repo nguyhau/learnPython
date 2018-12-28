@@ -2,6 +2,7 @@ http://www.brendangregg.com/
 super_tut
 Redirect_tut
 config_tut
+Check_hard_soft_ware
 bitbake_tut
 ssh_tut
 patch_tut
@@ -21,9 +22,18 @@ Debug_shell_tut
 vi_tut
 transfer_note
 Router_tut
-Visual_tut
+VisualGDB_tut
 tick_symbol
 Resize_VM
+Valgrind
+Search_package
+Apache_tut
+code_coverage
+Trace_binary
+Build_dynamic
+Device_tut
+Debug_segment_fault
+Config_VisualGDB
 /**********************************************
  * super_tut 
  ************************************/
@@ -176,7 +186,7 @@ Tell git ignore permission: git config core.filemode false
  *************************************************************************/ 
 
 /**********************************************************************************
- * Some utilities command 
+ * Check_hard_soft_ware 
  **********************************************************************************/
  1. check mount device: df -h 
  2. check partition : -fdisk -l <device> /dev/hda.
@@ -699,7 +709,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
   /usr/share/X11/xorg.conf.d/10-evdev.conf
   
 /*************************************************************************
- * Device in Linux 
+ * Device_tut in Linux 
  * http://www.reactivated.net/writing_udev_rules.html
  * http://www.linuxfromscratch.org/lfs/view/development/chapter07/udev.html 
  *************************************************************************/ 
@@ -942,7 +952,7 @@ struct BtObject {
  CXXFLAGS += "-Os -fdata-sections -ffunction-sections -Wl,--gc-sections"
  gcc -Os -fdata-sections -ffunction-sections test.cpp -o test -Wl,--gc-sections
 /********************************************************************
- * Apache: https://linode.com/docs/web-servers/apache/apache-web-server-debian-8/
+ * Apache_tut: https://linode.com/docs/web-servers/apache/apache-web-server-debian-8/
  * https://www.tecmint.com/check-apache-modules-enabled/
  * https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-debian-8#step-1-%E2%80%94-install-apache
  ********************************************************************/
@@ -1238,10 +1248,29 @@ ABI: Application Binary Interface
  7. n (next)
  8. q (quit)
  9. bt (backtrace)
+ 10. b filename:line -> set break point at "line" line of "filename" file.
+ 11. redirect source directory:
+ -> gdb app -d path.
+ 12. Ignore signal on gdb: <ftp://ftp.gnu.org/old-gnu/Manuals/gdb/html_node/gdb_38.html>
+ handle "SIG" nostop.
+ 13 print var -> print value of var.
+ 14.generate-core-file corename -> generate corefile. <https://sourceware.org/gdb/onlinedocs/gdb/Core-File-Generation.html>
  /*
   * Quit qemu: ctrl a c 
   **/
-  
+  /** gdb_tut */
+  run gdb:
+    1. gdb app 
+	2. gdb app core 
+	3. gdb app -d path (redirect source directory:)
+  under gdb environment:
+    4. <set break point > https://sourceware.org/gdb/onlinedocs/gdb/Linespec-Locations.html#Linespec-Locations 
+    5. c (continue)
+    6. s (step in)
+    7. n (next)
+    8. q (quit)
+    9. bt (backtrace)
+    10. b filename:line -> set break point at "line" line of "filename" file.
 /***
  *
  */ 
@@ -2377,7 +2406,7 @@ cached data to clients, and it reduces the required bandwidth (cost) to the inte
  http://tve-4u.org/threads/bo-sach-tam-tinh-cua-ernst-muldashev.16669/
  
 /*******************************************************************
- * Visual_tut
+ * VisualGDB_tut
  *******************************************************************/ 
  /* Create GDB remote project */
  New project -> Visual GDB -> Linux project -> Import project with cmd tool -> 
