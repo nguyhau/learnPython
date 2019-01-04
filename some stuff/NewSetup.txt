@@ -897,20 +897,35 @@ https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-comman
  **************************************************************************/
 --coverage: This option is used to compile and link code instrumented for coverage analysis. 
 The option is a synonym for -fprofile-arcs -ftest-coverage (when compiling) and -lgcov (when linking).
- 1. g++ -fprofile-arcs -ftest-coverage -fPIC -O0 tmp.cpp -o program| gcc -fprofile-arcs -ftest-coverage tmp.c -o program
- 2. ./program -> generate tmp.gcno and tmp.gcda
- 3. gcov tmp.cpp -m 	
- 4. gcovr -p -r . --html --html-details -o tmp.html
+ 1. Compile with coverage option 
+	g++ -fprofile-arcs -ftest-coverage -fPIC -O0 tmp.cpp -o program| gcc -fprofile-arcs -ftest-coverage tmp.c -o program
+ 2. Run program for generate coverage info.
+	./program -> generate tmp.gcno and tmp.gcda
+ 3. Create coverage from source 
+	gcov tmp.cpp -m 	
+ 3'. Create html for visualize information 
+	gcovr -p -r . --html --html-details -o tmp.html
  
  /*** Configure for aria ***/
  ./configure CFLAGS='-g -O2 -fprofile-arcs -ftest-coverage' CXXFLAGS='-g -O2 -fprofile-arcs -ftest-coverage'
  ./configure --disable-option-checking --disable-silent-rules --disable-dependency-tracking --disable-libtool-lock --disable-metalink --disable-epoll --disable-xmltest --disable-nls --disable-rpath CFLAGS='-g -fprofile-arcs -ftest-coverage' CXXFLAGS='-g -fprofile-arcs -ftest-coverage -fPIC'
  ./configure --without-gnutls --without-libxml2 --without-libexpat --without-libsqlite3 --without-wintls --without-libnettle --without-libgcrypt --disable-metalink --without-libnettle --without-libgmp --without-libssh2 --without-libz --without-libcares --disable-epoll --disable-websocket --disable-libtool-lock --disable-ssl --disable-xmltest --disable-largefile --disable-nls --disable-rpath --without-appletls --without-openssl --without-sqlite3
  
- / ignore
- UnknownOptionException.cc
- 
- ls /lib/firmware/iw \t
+ /**
+ * Code_coverage using SquishCoco 
+ ******/
+ #Install                                                                                                                                             
+    Copy SquishCocoSetup_3.4.1_Linux_x86_64.run from \\10.116.16.22\public\software\CoverageTool\Squish Coco\V3.4.1
+	Run ./SquishCocoSetup_3.4.1_Linux_x86_64.run
+	Select "Local", Register License on Server 10.116.16.22:49344                                                                                        
+ # How to use                                                                                                                                                 
+	# Refer https://doc.froglogic.com/squish-coco/latest/tutorial.html#sec16
+	<copy file instrumented and getcoco.sh from /opt/SquishCoco/samples/parser/parser_v1/>
+	./instrumented make main                                                                                                                                     
+	export $PATH=/opt/SquishCoco/bin/:$PATH  
+	run app: ./main 
+	coveragebrowser -m main.csmes -e main.csexe
+	
  http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/#makedep
 //======
 rounte -n -> show default gateway
@@ -947,6 +962,7 @@ struct BtObject {
 
   BtObject();
 };
+
 //****** Option for optimize size CXXFLAGS='-Os -fdata-sections -ffunction-sections -Wl,--gc-sections'
  CFLAGS += "-O2 -fdata-sections -ffunction-sections -Wl,--gc-sections"
  CXXFLAGS += "-Os -fdata-sections -ffunction-sections -Wl,--gc-sections"
@@ -2442,38 +2458,19 @@ cached data to clients, and it reduces the required bandwidth (cost) to the inte
  
  sudo apt-get install build-essential linux-headers-$(uname -r)
  
-diff --git a/classes/debian-package.bbclass b/classes/debian-package.bbclass                                                                                 
-index 20e62ff..1aff3b6 100644                                                                                                                                
---- a/classes/debian-package.bbclass                                                                                                                         
-+++ b/classes/debian-package.bbclass                                                                                                                         
-@@ -20,7 +20,9 @@ SRC_URI = "${DEBIAN_SRC_URI}"                                                                                                               
-# By default, always use latest version of the default branch                                                                                                
-SRCREV = "${AUTOREV}"                                                                                                                                                                                                                                                                                                    
--PV = "git${SRCPV}"                                                                                                                                          +                                                                                                                                                            
-+#PV = "git${SRCPV}"                                                                                                                                         
-+PV = "git" 
-
-
-========================================================================================
-if (strcmp(trim(get_cmd_result(state_network_wired, p_output, DATA_SIZE)), "up")!= 0) {
-        error_code = WIRE_DHCP_FAIL;
-    }
+/**
+ * Code_coverage
+ ******/
+ #Install                                                                                                                                             
+    Copy SquishCocoSetup_3.4.1_Linux_x86_64.run from \\10.116.16.22\public\software\CoverageTool\Squish Coco\V3.4.1
+	Run ./SquishCocoSetup_3.4.1_Linux_x86_64.run
+	Select "Local", Register License on Server 10.116.16.22:49344                                                                                        
+ # How to use                                                                                                                                                 
+	# Refer https://doc.froglogic.com/squish-coco/latest/tutorial.html#sec16
+	<copy file instrumented and getcoco.sh from /opt/SquishCoco/samples/parser/parser_v1/>
+	./instrumented make main                                                                                                                                     
+	export $PATH=/opt/SquishCoco/bin/:$PATH  
+	run app: ./main 
+	coveragebrowser -m main.csmes -e main.csexe
 	
-if (strcmp(trim(get_cmd_result(get_ip_wired, p_output, DATA_SIZE)), "")== 0) {
-        error_code = WIRE_DHCP_FAIL;
-    }	
-========================================================================================
-~/TZCS/poky/meta-tzcs/common/recipes-tzcs git log ./tzcslib/files/TzcsNetwork.c
-
-30b5fd1a57c2b7e1cb63cad1be62310ab8338500 
-
-5deace0b88aa4ce5524915a2d2129ac22d704112 
-	
-	
-	
-	
-Case 1:When current status is supporting 3 screens(plug Internal monitor and 2 external monitors(A display is displayed, B display is not displayed.)),  
-			if you unplug B display, do nothing.(Internal monitor and A external monitor are displayed.)
-Case 2:When 2 external monitor are displayed(Not use(set on Control Panel) Internal monitor), 
-		If you unplug the A external monitor(primary), primary monitor moves to from A external monitor to B external monitor. 
-		then, if you unplug 2 external monitor(A and B external monitor), monitor mode will switch to internal mode.
+smb://10.116.16.22	
