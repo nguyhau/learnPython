@@ -34,6 +34,7 @@ Build_dynamic
 Device_tut
 Debug_segment_fault
 Config_VisualGDB
+Fuego_tut
 /**********************************************
  * super_tut 
  ************************************/
@@ -1090,7 +1091,12 @@ Or your personal user: CITRIX\{ldap_username}   |    Pass: Abcd1234  (exp: user:
  -> use textedit to run log of leak
  valgrind --tool=callgrind --callgrind-out-file=callgrind.out.A_10305_German_Page0002-D182
  -> use kcachegrind to view performance result of valgrind
-
+ 
+ valgrind --tool=callgrind ./xfce4-display-settings  -> generate out file.
+ kcachegrind callgrind.out.5161
+ valgrind --leak-check=full --tool=memcheck --show-leak-kinds=all --log-file=memcheck.out ./xfce4-display-settings -> generate memory log to memcheck.out.
+ 
+ ./configure --enable-maintainer-mode --disable-debug --disable-upower-glib --disable-libnotify --disable-xorg-libinput --disable-libxklavier --disable-gio-unix
 
 /******************************************************************
  * NTP: Re: [TZCS][Apricot]Network Time Protocol(NTP) (29/11)
@@ -2474,3 +2480,57 @@ cached data to clients, and it reduces the required bandwidth (cost) to the inte
 	coveragebrowser -m main.csmes -e main.csexe
 	
 smb://10.116.16.22	
+
+/*
+ * Change number of virtual screen -> change monitor count in Display of Setting virtual machine.
+ ***
+ https://www.linuxtopia.org/online_books/gui_toolkit_guides/gtk+_gnome_application_development/sec-mainloop_4.html
+/****
+ * Fuego_tut
+ ****/
+ Fuego Manual 
+
+- Host OS: Ubuntu 16.04 LTS 64-bit (or any other 64-bit OS that supports docker)
+- Install docker (follow instructions at https://docs.docker.com/install/linux/docker-ce/debian/)
+    If your network is under proxy, please configure proxy for Docker
+    ∘ Create a systemd drop-in directory:
+        #mkdir /etc/systemd/system/docker.service.d
+	∘ Add proxy in /etc/systemd/system/docker.service.d/http-proxy.conf file:
+	    # cat /etc/systemd/system/docker.service.d/http-proxy.conf
+
+	    [Service]
+	    Environment="HTTP_PROXY=https://web-proxy.corp.xxxxxx.com:8080/"
+	    Environment="HTTPS_PROXY=https://web-proxy.corp.xxxxxx.com:8080/"
+	    Environment="NO_PROXY=localhost,127.0.0.1,localaddress,.localdomain.com"
+	∘ Flush changes:
+	    #systemctl daemon-reload
+	∘ Restart Docker:
+	    #systemctl restart docker
+
+- Clone Fuego repositories and checkout the 'next' branch
+    host$ mkdir fuego-project
+	host$ cd fuego-project/
+	host$ git clone https://bitbucket.org/tbird20d/fuego-core
+	host$ git clone https://bitbucket.org/tbird20d/fuego
+	host$ cd fuego-core; git checkout next; cd ..
+	host$ cd fuego; git checkout next; cd ..
+- Install Fuego
+	host$ cd fuego
+	host$ ./install
+- Start Fuego
+	host$ ./start.sh 
+- Check Jenkins interface on a browser (e.g. firefox)
+	host$ firefox http://localhost:8080/fuego/
+- Initial test
+You can use the docker container as a fuego target in order to confirm that
+the installation was successful.
+
+	container# ftc add-nodes -b docker (If Node 'docker' already exists, please go to next step )
+	container# ftc add-jobs -b docker -p testplan_docker
+- Execute Benchmark.Dhrystone from the Jenkins interface
+	+ Click on Benchmark.Dhrystone
+	+ Click on "Build Now"
+  	[Alt] you can also click on the clock to the right
+- Make sure the test is successful
+  	+ BLUE circle
+  	+ You should be able to see a plot if you click Benchmark.Dhrystone
