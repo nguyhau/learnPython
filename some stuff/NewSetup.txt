@@ -35,6 +35,9 @@ Device_tut
 Debug_segment_fault
 Config_VisualGDB
 Fuego_tut
+unsecure_pdf
+Solve_git_conflict
+auto_capture
 /**********************************************
  * super_tut 
  ************************************/
@@ -700,6 +703,7 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
   add "ulimit -c unlimited" to ~/.bashrc.
   /**/
   Make file: add flag "-g"
+  
   Run --> create core file.
   trace segment: gdb core_file binary_file.
   
@@ -2534,3 +2538,148 @@ the installation was successful.
 - Make sure the test is successful
   	+ BLUE circle
   	+ You should be able to see a plot if you click Benchmark.Dhrystone
+
+/****
+ * unsecure_pdf file 
+ ***/
+gs -sPDFPassword=$PASS -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=%stdout% -c .setpdfwrite -f locked.pdf > unlocked.pdf	
+
+/** build xfce4 **/
+./configure --enable-maintainer-mode --disable-debug --disable-upower-glib --disable-libnotify --disable-xorg-libinput --disable-libxklavier --disable-gio-unix
+
+This xfce4-settings version is the code that already apply 28 patchs file.
+To trace the modification of 28 patchs, please checkout commit 0e889086d5d00e812af9a606c0fe0897a55ff370
+
+
+. 
+/*
+ * Solve_git_conflict
+ */
+ git fetch ssh://haund@10.116.224.177:29418/meta-tzcs refs/changes/18/2118/1 && git cherry-pick FETCH_HEAD
+ git add .
+ git cherry-pick --continue
+ git commit --amend
+ git push origin HEAD:refs/for/ApricotJam
+ 
+/** set active for a button */ 
+    GObject *check;
+    check = gtk_builder_get_object (builder, "mirror-displays");
+    /* Block the "changed" signal to avoid triggering the confirmation dialog */
+    g_signal_handlers_block_by_func (check, display_setting_mirror_displays_toggled,
+                                     builder);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), TRUE);
+
+    /* Unblock the signal */
+    g_signal_handlers_unblock_by_func (check, display_setting_mirror_displays_toggled,
+                                       builder);                                            
+/*
+ * auto_capture book
+ */                                       
+ #!/bin/bash
+nloop=0;
+i=0;
+name="pic";
+dir="image/";
+while [ $nloop -lt 5 ];
+do
+	echo "loop number $i"
+	sleep 1;
+	scrot -s ${dir}${name}-${nloop}.jpg & 
+	xdotool mousemove 1683 519 
+	xdotool click 1
+	sleep 1;
+	xdotool click 1
+	nloop=`expr $nloop + 1`;
+	i=`expr $i + 1`;
+done
+#https://www.systutorials.com/docs/linux/man/1-xdotool/
+# Save current mouse position to $X and $Y variable
+#eval $(xdotool getmouselocation --shell)
+# Move to position $X SY
+#xdotool mousemove $X $Y
+# Click left mouse 
+#xdotool click 1
+# Send Enter event
+#xdotool key KP_Enter
+# Get window id
+#WIN_ID=`xdotool search --title MyWindow`
+# Activate window with title MyWindow
+#xdotool windowactivate $WIN_ID
+# Use scrot for capture a window
+#scrot -s a.jpg
+## Script for collabor a terminal with other window 
+###!/bin/bash
+##sleep 10;
+##xdotool mousemove 559 64;
+##xdotool click 1;
+##xdotool key KP_Enter;
+##sleep 1;
+##nloop=5;
+##while [ $nloop -gt 0 ];
+##do
+###	eval $(xdotool getmouselocation --shell)
+##	echo "scr2 loop $nloop"
+##	xdotool mousemove 1659 570
+##	xdotool click 1 
+##	sleep 1
+##	xdotool click 1 
+##	nloop=`expr $nloop - 1`
+##done
+
+//============================
+/home/nguyhau/TZCS/build-ApricotJam/intel-vmware/tmp/work/x86_64-tzcs-linux/xfce4-settings/4.12.0-r0/xfce4-settings-4.12.0
+TZCS/poky/meta-tzcs/meta-intel-vdi/common/recipes-debian/xfce4-settings/files/xfce4-settings-4.12.0
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=733396
+
+/**
+ ***== opal
+ http://wiki.opalvoip.org/
+ http://wiki.opalvoip.org/index.php?n=Main.BuildingPTLibUnix
+ http://wiki.opalvoip.org/index.php?n=Main.BuildingOpalUnix
+ https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=733396
+ ***/
+1. install 
+sudo apt-get install autotools-dev doxygen pkg-config bison flex libssl-dev libldap2-dev libsasl2-dev libkrb5-dev libexpat1-dev libsdl1.2-dev libdv4-dev libv4l-dev libasound2-dev g++ git make autoconf libpcap-dev unixodbc-dev libv8-dev libncurses5-dev libavformat-dev libswscale-dev
+sudo apt-get install libcelt-dev libtheora-dev libgsm1-dev libspeex-dev libspeexdsp-dev libcapi20-dev libvpx-dev libx264-dev libvpx-dev libspandsp-dev capiutils dahdibasound2-dev g++ git make
+
+2. get source 
+wget http://ftp.gnome.org/pub/gnome/sources/ptlib/2.10/ptlib-2.10.10.tar.xz
+wget http://ftp.gnome.org/pub/gnome/sources/ptlib/2.10/ptlib-2.10.10.tar.xz
+tar -xz ptlib-2.10.10.tar.xz
+wget http://ftp.gnome.org/pub/gnome/sources/opal/3.10/opal-3.10.10.tar.xz
+tar -xf opal-3.10.10.tar.xz
+tar -xf ptlib-2.10.10.tar.xz
+wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.4/wxWidgets-3.0.4.tar.bz2
+tar xjf wxWidgets-3.0.4.tar.bz2
+ 
+3. build
+cd ptlib-2.10.10/
+sudo apt-get install libwxbase3.0-dev
+sudo apt-get install libgtk2.0-dev
+mkdir build
+./configure --prefix=/home/nguyhau/project/opal/ptlib-2.10.10/build
+wget https://sourceforge.net/p/opalvoip/patches/259/attachment/ptlib-2.10.10-mga-bison-parameter.patch
+patch -b <ptlib-2.10.10-mga-bison-parameter.patch
+make clean; make; make install 
+add LD_LIBRARY_PATH in ~/.bashrc:
+export PTLIBDIR=/home/nguyhau/project/opal/ptlib-2.10.10
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${PTLIBDIR}/lib_linux_x86_64
+export PTLIBPLUGINDIR=${PTLIBDIR}/lib_linux_x86
+export OPALDIR=/home/nguyhau/project/opal/opal-3.10.10
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:${PTLIBDIR}/linux_x86:${OPALDIR}/lib_linux_x86_64
+export PTLIBPLUGINDIR=${PTLIBDIR}/lib_linux_x86:${OPALDIR}/lib_linux_x86
+
+cd ../wxWidgets-3.0.4/
+./configure --with-gtk=2
+make && sudo make install 
+ 
+cd ../opal-3.10.10/ 
+mkdir build
+./configure --prefix=/home/nguyhau/project/opal/opal-3.10.10/build
+cd samples/openphone/
+make clean; make;
+
+./configure --prefix=/home/nguyhau/project/opal/opal-3.10.10/build PTLIB_CFLAGS="/home/nguyhau/project/opal/ptlib-2.10.10/include" PTLIB_LIBS="/home/nguyhau/project/opal/ptlib-2.10.10/lib_linux_x86_64"
+./configure --prefix=/home/nguyhau/project/opal/opal-3.10.10/build PTLIB_CFLAGS="/home/nguyhau/project/opal/ptlib-2.10.10/build/include" PTLIB_LIBS="/home/nguyhau/project/opal/ptlib-2.10.10/build/lib"
+
+ 
