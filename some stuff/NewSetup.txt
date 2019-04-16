@@ -2683,3 +2683,100 @@ make clean; make;
 ./configure --prefix=/home/nguyhau/project/opal/opal-3.10.10/build PTLIB_CFLAGS="/home/nguyhau/project/opal/ptlib-2.10.10/build/include" PTLIB_LIBS="/home/nguyhau/project/opal/ptlib-2.10.10/build/lib"
 
  
+indicator:
++ support synchronize vertical extend on indicatr.
++ support three screen: add new layout, synchronizing audio sound when monitor switched by xfce.
++ disable brightness layout when not using internal screen.
+
+xfce:
++ investigate xfce design
++ fix xfce4-display-settings issue.
+
+
+
+
+display_channel = xfconf_channel_new ("displays");
+
+//
+/* open the channel */
+helper->channel = xfconf_channel_get ("displays");
+
+/* remove any leftover apply property before setting the monitor */
+xfconf_channel_reset_property (helper->channel, APPLY_SCHEME_PROP, FALSE);
+
+/* monitor channel changes */
+helper->handler = g_signal_connect (G_OBJECT (helper->channel),
+                                    "property-changed",
+                                    G_CALLBACK (xfce_displays_helper_channel_property_changed),
+                                    helper);
+
+/*
+ * OCR: https://github.com/tesseract-ocr/tesseract
+ * https://github.com/tesseract-ocr/tesseract/wiki/Compiling                                    
+ * https://github.com/tesseract-ocr/tesseract/wiki/APIExample#compiling-c-api-programs-on-linux
+ */
+ sudo apt install tesseract-ocr
+ sudo apt install libtesseract-dev
+ sudo apt-get install libleptonica-dev
+ 
+ using tesseract -v for get version:
+ get corresponding data: https://github.com/tesseract-ocr/tesseract/wiki/Data-Files
+ .                                                                                                                       
+ ├── data                                                                                                                
+ │   └── tessdata                                                                                                        
+ │       ├── eng.traineddata                                                                                             
+ │       ├── hin.traineddata                                                                                             
+ │       └── vie.traineddata                                                                                             
+ ├── main.c                                                                                                              
+ ├── myprogram                                                                                                           
+ ├── out.txt                                                                                                             
+ └── test.jpg 
+ main.c:
+#include <dirent.h> 
+#include <tesseract/baseapi.h>
+#include <leptonica/allheaders.h>
+void convert_images()
+{
+    DIR *dir;
+    struct dirent *ent;
+    if ((dir = opendir ("c:\\src\\")) != NULL) {
+      /* print all the files and directories within directory */
+      while ((ent = readdir (dir)) != NULL) {
+        if (ent->d_type == DT_REG){
+            printf ("%s\n", ent->d_name);
+        }        
+      }
+      closedir (dir);
+    } else {
+      /* could not open directory */
+      perror ("could not open directory");
+      return;
+    }
+}
+int main()
+{
+    char *outText;
+
+    tesseract::TessBaseAPI *api = new tesseract::TessBaseAPI();
+    // Initialize tesseract-ocr with English, without specifying tessdata path
+    if (api->Init("./data", "vie")) {
+        fprintf(stderr, "Could not initialize tesseract.\n");
+        exit(1);
+    }
+
+    // Open input image with leptonica library
+    Pix *image = pixRead("/usr/src/tesseract/testing/phototest.tif");
+    api->SetImage(image);
+    // Get OCR result
+    outText = api->GetUTF8Text();
+    printf("OCR output:\n%s", outText);
+
+    // Destroy used object and release memory
+    api->End();
+    delete [] outText;
+    pixDestroy(&image);
+
+    return 0;
+}    
+g++ -o myprogram main.c -llept -ltesseract 
+ 
