@@ -1439,6 +1439,16 @@ https://machinelearningmastery.com/handwritten-digit-recognition-using-convoluti
  **********************************************/ 
  /*** list all branch on remote repository **/
  git branch -r.
+ /* First time init */
+ git branch -a -> list all remote branch 
+ git fetch branch name.
+ git checkout branch name.
+ git add file.
+ git commit -s.
+ git push origin HEAD:refs/for/[branch name].
+ //after fix some issue: 
+ git commit --amend.
+ re-push: git push origin HEAD:refs/for/[branch name].
  /***************************************
  * Check commitID from kernel source. 
  ****************************************/
@@ -2710,7 +2720,8 @@ helper->handler = g_signal_connect (G_OBJECT (helper->channel),
                                     G_CALLBACK (xfce_displays_helper_channel_property_changed),
                                     helper);
 
-/*
+gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
+                                    /*
  * OCR: https://github.com/tesseract-ocr/tesseract
  * https://github.com/tesseract-ocr/tesseract/wiki/Compiling                                    
  * https://github.com/tesseract-ocr/tesseract/wiki/APIExample#compiling-c-api-programs-on-linux
@@ -2780,3 +2791,106 @@ int main()
 }    
 g++ -o myprogram main.c -llept -ltesseract 
  
+//=======================================
+git config --global url."https://github.com/".insteadOf git@github.com:
+git config --global url."https://".insteadOf git://
+
+
+
+
+
+
+git config --global http.proxy http://user@host:port 
+git config --global https.proxy http://user@host:port 
+npm config set proxy http://user@host:port 
+npm config set https-proxy http://user@host:port 
+
+===================================================================
+https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback
+https://www.tutorialspoint.com/nodejs/nodejs_web_module.htm
+http://guides.beanstalkapp.com/version-control/git-on-windows.html
+
+// Deploy Maven & Eclipse
+https://www.tutorialspoint.com/spring_boot/spring_boot_tomcat_deployment.htm
+fix warning: https://stackoverflow.com/questions/28192761/spring-maven-clean-error-the-requested-profile-pom-xml-could-not-be-activate
+https://stackoverflow.com/questions/47908312/create-war-file-from-springboot-project-in-eclipse
+https://stackoverflow.com/questions/19655184/no-compiler-is-provided-in-this-environment-perhaps-you-are-running-on-a-jre-ra
+
+https://stackoverflow.com/questions/30803048/what-to-do-when-you-want-to-create-your-first-java-web-application
+
+Frameworks
+
+    Spring
+    Hibernate
+    Maven
+    JDBC
+
+Server
+
+    Tomcat
+
+Database
+
+    MySql
+
+Readings & Tutorials
+
+    How to connect Tomcat with JDBC and MySql
+    Spring MVC hibernate
+    Spring Tutorial
+
+//
+//========= MSE ===============
+First, encode your file into different qualities, 
+and second, divide those files into segments and create the manifest that will link to the files.
+
+
+ffmpeg -y -i inputfile -c:a libfdk_aac -ac 2 -ab 128k -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -b:v 1500k -maxrate 1500k -bufsize 1000k -vf "scale=-1:720" outputfile720.mp4
+
+ffmpeg -y -i inputfile -c:a libfdk_aac -ac 2 -ab 128k -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -b:v 800k -maxrate 800k -bufsize 500k -vf "scale=-1:540" outputfile540.mp4
+
+ffmpeg -y -i inputfile -c:a libfdk_aac -ac 2 -ab 128k -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -b:v 400k -maxrate 400k -bufsize 400k -vf "scale=-1:360" outputfile360.mp4
+
+Second, Chunk mp4 file to multi chunks.
+.\ffmpeg.exe -y -i .\frag_bunny.mp4 -ac 2 -ab 128k -c:v libx264 -x264opts 'keyint=24:min-keyint=24:no-scenecut' -b:v 1500k -maxrate 1500k -bufsize 1000k -vf "scale=-1:720" chunk.mp4
+mp4box -dash 2000 -rap -frag-rap -profile live -out .\out .\chunk.mp4
+===========
+MP4Box -dash 2000 -rap -frag-rap -profile onDemand -out [path/to/outpout.file] vid1.mp4 vid2.mp4 aud1.mp4 aud2.mp4
+//Set it to onDemand for VOD videos, and live for live streams.
+-dash [DURATION]: enables MPEG-DASH segmentation, creating segments of the given duration (in milliseconds). We advise you to set the duration to 2 seconds for Live and short VOD files, and 5 seconds for long VOD videos.
+-rap -frag-rap: forces segments to begin with Random Access Points. Mandatory to have a working playback.
+–profile [PROFILE]: MPEG-DASH profile. Set it to onDemand for VOD videos, and live for live streams.
+-out [path/to/outpout.file]: output file location. This parameter is optional: by default, MP4box will create an output.mpd file and the corresponding output.mp4 files in the current directory.
+[path/to/input1.file]…: indicates where your input mp4 files are. They can be video or audio files.
+    
+    
+    
+    
+// convert h264 raw to h264 video 
+ffmpeg -i yourfile.h264 -codec copy video.mp4
+
+// read codec 
+mp4file --dump movie.mp4
+
+
+    
+//=========== Set host name.
+# Windows
+Add following line in host file (C:\windows\system32\drivers\etc\hosts)
+127.0.0.1 testserver test.domain.com    
+# Ubuntu
+vi /etc/hostname: add test.domain.com
+vi /etc/hosts: add 127.0.0.1 test.domain.com
+ping test.domain.com 
+/************************************************
+ *          Java
+ ************************************************/
+ 
+//=========== Maven command ========
+mvn --version -> check version.
+mvn clean:package:install
+//=========== Tomcat =============
+** Deploy war file on Tomcat:**
+1. Copy war file to webapps folder of installed Tomcat folder.
+2. Run "catalina.bat run" on terminal of bin folder.
+

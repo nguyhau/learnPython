@@ -8,7 +8,7 @@ git config --list -> show all config.
 git config --global proxy.http <"http://account:pass@serverIp:port">
 #user
 git config --global user.name <name>
-git config --global user.mail <mail>
+git config --global user.email <mail>
 /etc/profile
 
 /*********************** Common command ****************************/
@@ -149,3 +149,15 @@ git pull
  
 git push origin HEAD:refs/for/Apricot
  
+ 
+// git config core.fileMode false 
+
+
+primay
+HDMI 
+
+
+GdkRectangle viewport;
+foo_scroll_area_get_viewport (FOO_SCROLL_AREA (randr_gui_area), &viewport);
+
+
