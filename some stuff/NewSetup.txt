@@ -2894,3 +2894,39 @@ mvn clean:package:install
 1. Copy war file to webapps folder of installed Tomcat folder.
 2. Run "catalina.bat run" on terminal of bin folder.
 
+//============ Create JNI ==============
++ create java file (JNI declare as native properties. Ex: private native void print(); )
++ build java file using javac command.
++ create header file with javah: javah -jni -classpath [object name] 
+    ex: javah -jni -classpath . HelloWorld -> create HelloWorl.h file.
++ create implement of header file.
++ Build native file to library:
+    - Buil object file:
+        g++ -I"<đường_dẫn_thư_mục_header" -c <tên_file_cpp> -o <tên_file_object>
+        Ex: x86_64-w64-mingw32-g++.exe -I"$JAVA_HOME\include" -I"$JAVA_HOME\include\win32" -c HelloWorld.cpp -o hello.o
+    - Create share lib:
+        g++ -Wl,--add-stdcall-alias -shared -o <tên_file_dll> <tên_file_object>
+        Ex: x86_64-w64-mingw32-g++.exe -shared -o HelloWorld.dll hello.o
++ Run 
+    java class_name.
+    Ex: java HelloWorld
+
+//============= Export JNI java package ============
++ create eclip project.
++ export -> Java -> JAR file:
++ jump to bin director of project:
+    javah [full class name] 
++ implement Native source.
+    
+//============= Import JNI java package ============
++ create eclip project.
++ Build Path -> Add External Archive..: select jar file.
++ include external package:
+ -> use "jar xf [jar file]" to know which class has exported.
+ 
+git rm --cached file : rm on remote but keep on local. 
+
+
+
+<scope>system</scope>
+            <systemPath>${project.basedir}/resources/CameraIF-0.0.1.jar</systemPath>

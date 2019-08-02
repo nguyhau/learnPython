@@ -1,0 +1,13 @@
+{
+  "name": "moduletutorial",
+  "version": "1.0.0",
+  "description": "Demo use module in Node.js",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "stackjava.com",
+  "license": "ISC"
+}

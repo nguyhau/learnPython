@@ -153,11 +153,11 @@ git push origin HEAD:refs/for/Apricot
 // git config core.fileMode false 
 
 
-primay
-HDMI 
+
+===== class="mx-3 px-0" 
 
 
-GdkRectangle viewport;
-foo_scroll_area_get_viewport (FOO_SCROLL_AREA (randr_gui_area), &viewport);
-
-
+git fetch origin 
+git rebase origin/[branch]
+git reset --hard origin/develop_tsdv_mediasourceextension
+git push origin HEAD:refs/for/develop_tsdv_mediasourceextension
