@@ -2872,7 +2872,8 @@ ffmpeg -i yourfile.h264 -codec copy video.mp4
 // read codec 
 mp4file --dump movie.mp4
 
-
+// merge m4s chunks file to mp4:
+cat chunk_dashinit.mp4 $(ls -vx chunk_dash*.m4s) > source.mp4
     
 //=========== Set host name.
 # Windows
@@ -2927,6 +2928,7 @@ mvn clean:package:install
 git rm --cached file : rm on remote but keep on local. 
 
 
+https://www.mkyong.com/maven/how-to-create-a-jar-file-with-maven/
 
 <scope>system</scope>
             <systemPath>${project.basedir}/resources/CameraIF-0.0.1.jar</systemPath>
