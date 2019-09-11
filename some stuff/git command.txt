@@ -152,12 +152,50 @@ git push origin HEAD:refs/for/Apricot
  
 // git config core.fileMode false 
 
-
+https://www.atlassian.com/git/tutorials/comparing-workflows
 
 ===== class="mx-3 px-0" 
 
 
 git fetch origin 
-git rebase origin/[branch]
+git rebase origin/develop_tsdv_mediasourceextension
 git reset --hard origin/develop_tsdv_mediasourceextension
 git push origin HEAD:refs/for/develop_tsdv_mediasourceextension
+
+==== working with tag ===
+create a tag: [-a for annotated tag]
+    git tag -a TSDV_DSD_MSE_ST_20190905_v1.0 -m "For 1st testing" 
+list all tag:
+    git tag -l 
+push a tag:
+    git push origin TSDV_DSD_MSE_ST_20190905_v1
++ separate issues
++ merge admin vs user 
++ consisten architecture and diagram.
++ update IPNet in Proxy Server.
++ add description for use case.
+
+ -Djava.library.path="E:\E\Project\TELI\bk\SampleWeb\resources"
+ 
+[MSE] [Add demonstration in 20190822]
+
+- To demonstrate the sequence playing h264 video stream on browser.
+
+[refs #2426]
+
++ Add description for sequence 
++ Add glassfish issues 
++ Separate diagram.
+
+c6b04ec8967bf87b7d96059c5bcf5f159f4938a3
+
++ Remove control action in html.
++ install safari
++ create test plan.
+================================================
+tcpdump -r old_file -w new_files -C 10git
+
++ add test case no run colasoft, run wrong card on colasoft.
++ add server log to expected output.
+
+
