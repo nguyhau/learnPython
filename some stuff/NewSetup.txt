@@ -2980,3 +2980,25 @@ tmux attach -t sessionID to attach a session.
     - Test result of 2nd
     
 [refs #2432]
+
+// Monitor process performance on win10 
+Open "Device Manager"
+Select "Performance"
+Select subItem "Data Collector Sets" -> UserDefined:
+Right click to add new item: choose manual -> Create data logs.
+-> Tick Performance counter: -> Add 
+Expand　Process
+Select "Handle Count","Thread Count", "Private Bytes" and "Virtual Bytes" corresponding process name in below table.
+Select interval to count.
+Finish and save config.
+Start config.-> stop config.
+Performance counter log will be logged.
+
+copy DataCollector01.blg into work folder. 
+in Command Prompt, execute following
+    cd <work folder>
+    relog DataCollector01.blg -f CSV
+then csv file will be created.
+open csv file by excel and plot graph.
+
+// mvn checkstyle:checkstyle
