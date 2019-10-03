@@ -943,7 +943,7 @@ public class DemoProxy{
         }
         public String gotApplication()
         {
-            return "We already got your application.";
+            return "We already got your application. ";
         }
         public String checkApplication()
         {
