@@ -873,6 +873,7 @@ public class DemoProxy{
             System.out.println(state.rentApartment());
             System.out.println(state.dispenseKeys());
         }
+
         public State getGotApplication()
         {
             return gotApplication;
@@ -881,6 +882,7 @@ public class DemoProxy{
         {
             return waitingState;
         }
+
         public State getApartmentRentedState()
         {
             return apartmentRentedState;
@@ -925,10 +927,12 @@ public class DemoProxy{
         {
             return "You have to submit an application.";
         }
+
         public String rentApartment()
         {
             return "You have to submit an application."
         }
+
         public String dispenseKeys()
         {
             return "You have to submit an application.";
@@ -943,7 +947,9 @@ public class DemoProxy{
         }
         public String gotApplication()
         {
-            return "We already got your application. ";
+
+            return "We already got your application.";
+
         }
         public String checkApplication()
         {
@@ -981,9 +987,11 @@ public class DemoProxy{
         }
         public String dispenseKeys() {
             if (automat.getCount() <= 0) {
-                automat.setState(automat.getFullRentedState());
+
+                automat.setState(automat.getFullyRentedState());
             } else {
-                automat.setCount(automat.getCount() - 1);
+                automat.setCount(automat.getWaitingState());
+
             }
             return "Here are your keys!";
         }
@@ -999,12 +1007,14 @@ public class DemoProxy{
         public String checkApplication() {
             return "Sorry, we're fully rented.";
         }
+
         public String rentApartment() {
             return "Sorry, we're fully rented.";
         }
         public String dispenseKeys() {
             return "Sorry, we're fully rented.";
         }
+
     }
     public static void main(String args[])
     {
@@ -1265,3 +1275,4 @@ public class DemoMediator {
         mediator.getWelcome().go();
     }
 }
+
