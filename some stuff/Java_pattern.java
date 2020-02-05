@@ -1015,3 +1015,253 @@ public class DemoProxy{
         automat.rentApartment();
     }
 }
+/*
+ * Command pattern
+ **/
+public class DemoCommand { 
+    public interface Receiver {
+        public void connect();
+        public void diagnostics();
+        public void reboot();
+        public void shutdown();
+        public void disconnect();
+    }
+    public class AsiaServer implements Receiver {
+        public AsiaServer() {
+            
+        }
+        public void connect() {
+            System.out.println("You're connected to the Asia server.");
+        }
+        public void diagnostics() {
+            System.out.println("The Asia server diagnostics check out OK.");
+        }
+        public void reboot() {
+            System.out.println("Rebooting the Asia server.");
+        }
+        public void shutdown() {
+            System.out.println("Shutting down the Asia server.");
+        }
+        public void disconnect() {
+            System.out.println("You're disconnected from the Asia server.");
+        }   
+    }
+    public class EuroServer implements Receiver {
+        public EuroServer() {
+            
+        }
+        public void connect() {
+            System.out.println("You're connected to the Euro server.");
+        }
+        public void diagnostics() {
+            System.out.println("The Euro server diagnostics check out OK.");
+        }
+        public void reboot() {
+            System.out.println("Rebooting the Euro server.");
+        }
+        public void shutdown() {
+            System.out.println("Shutting down the Euro server.");
+        }
+        public void disconnect() {
+            System.out.println("You're disconnected from the Euro server.");
+        }
+    }
+    public class USServer implements Receiver {
+        public USServer() {
+            
+        }
+        public void connect() {
+            System.out.println("You're connected to the US server.");
+        }
+        public void diagnostics() {
+            System.out.println("The US server diagnostics check out OK.");
+        }
+        public void reboot() {
+            System.out.println("Rebooting the US server.");
+        }
+        public void shutdown() {
+            System.out.println("Shutting down the US server.");
+        }
+        public void disconnect() {
+            System.out.println("You're disconnected from the US server.");
+        }
+    }
+    public interface Command {
+        public void execute();
+    } 
+    public class ShutDownCommand implements Command {
+        Receiver receiver;
+        public ShutDownCommand(Receiver r) {
+            receiver = r;
+        }
+        public void execute() {
+            receiver.connect();
+            receiver.shutdown();
+            receiver.disconnect();
+            System.out.println();
+        }
+    }
+    public class RunDiagnosticsCommand implements Command {
+        Receiver receiver;
+        RunDiagnosticsCommand(Receiver r) {
+            receiver = r;
+        }
+        public void execute() {
+            receiver.connect();
+            receiver.diagnostics();
+            receiver.disconnect();
+            System.out.println();
+        }
+    } 
+    public class RebootCommand implements Command {
+        Receiver receiver;
+        public RebootCommand(Receiver r) {
+            receiver = r;
+        }
+        public void execute() {
+            receiver.connect();
+            receiver.reboot();
+            receiver.disconnect();
+            System.out.println();
+        }
+    }
+    public class Invoker {
+        Command command;
+        public Invoker() {}
+        public void setCommand(Command c) {
+            command = c;
+        }
+        public void run() {
+            command.execute();
+        }
+    }
+    public static void main(String args[])
+    {
+        DemoCommand dm = new DemoCommand();
+        DemoCommand.Invoker invoker = dm.new Invoker();
+        DemoCommand.AsiaServer asiaServer = dm.new AsiaServer();
+        DemoCommand.EuroServer euroServer = dm.new EuroServer();        
+        DemoCommand.USServer usServer = dm.new USServer();
+        
+        DemoCommand.ShutDownCommand shutdownAsia = dm.new ShutDownCommand(asiaServer);
+        DemoCommand.RunDiagnosticsCommand diagnosticsAsia = dm.new RunDiagnosticsCommand(asiaServer);
+        DemoCommand.RebootCommand rebootAsia = dm.new RebootCommand(asiaServer);
+        
+        invoker.setCommand(shutdownAsia);
+        invoker.run();
+        invoker.setCommand(diagnosticsAsia);
+        invoker.run();
+        invoker.setCommand(rebootAsia);
+        invoker.run();
+    }
+}
+/*
+ * Mediator pattern
+ **/
+import java.io.*;
+public class DemoMediator {
+    public class Welcome {
+        Mediator mediator;
+        String response = "n";
+        public Welcome (Mediator m) {
+            mediator = m;
+        }
+        public void go() {
+            System.out.print("Do you want to shop? [y/n]? ");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                response = reader.readLine();            
+            } catch (IOException e) {
+                System.err.println("Error");
+            }
+            if (response.equals("y")) {
+                mediator.handle("welcome.shop");
+            } else {
+                mediator.handle("welcome.exit");
+            }
+        }
+    }
+    public class Shop {
+        Mediator mediator;
+        String response = "n";
+        public Shop(Mediator m) {
+            mediator = m;
+        }
+        public void go() {
+            System.out.print("Are you ready to purchase? [y/n]? ");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                response = reader.readLine();
+            } catch (IOException e) {
+                System.err.println("Error");
+            }
+            if (response.equals("y")) {
+                mediator.handle("shop.purchase");
+            } else {
+                mediator.handle("shop.exit");
+            }
+        }
+    }
+    public class Purchase {
+        Mediator mediator;
+        String response = "n";
+        public Purchase(Mediator m) {
+            mediator = m;
+        }
+        public void go() {
+            System.out.print("Buy the item now? [y/n]? ");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                response = reader.readLine();
+            } catch (IOException e) {
+                System.err.println("Error");
+            }
+            if (response.equals("y")) {
+                System.out.println("Thanks for your purchase.");
+            }
+            mediator.handle("purchase.exit");
+        }
+    }
+    public class Exit {
+        Mediator mediator;
+        public Exit (Mediator m) {
+            mediator = m;
+        }
+        public void go() {
+            System.out.println("Please come again sometime.");
+        }
+    }
+    public class Mediator {
+        Welcome welcome;
+        Shop shop;
+        Purchase purchase;
+        Exit exit;
+        public Mediator() {
+            welcome = new Welcome(this);
+            shop = new Shop(this);
+            purchase = new Purchase(this);
+            exit = new Exit(this);
+        }
+        public void handle(String state) {
+            if(state.equals("welcome.shop")) {
+                shop.go();
+            } else if (state.equals("shop.purchase")) {
+                purchase.go();
+            } else if (state.equals("welcome.exit")) {
+                exit.go();
+            } else if (state.equals("shop.exit")) {
+                exit.go();
+            } else if (state.equals("purchase.exit")) {
+                exit.go();
+            }
+        }
+        public Welcome getWelcome() {
+            return welcome;
+        }
+    }
+    public static void main(String args[]) {
+        DemoMediator dm = new DemoMediator();
+        DemoMediator.Mediator mediator = dm.new Mediator();
+        mediator.getWelcome().go();
+    }
+}

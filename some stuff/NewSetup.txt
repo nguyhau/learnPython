@@ -1,3 +1,126 @@
+git cherry-pick -n 0884f2b0079078fe4255cfae66c415c1f83e42fd
+== git stash -> merge stashed change with current changes
+git add specific file.
+git stash apply.
+
+astah 15/4
+Makefile 347.
+sqlite3_column_ to converting engine data for user
+
+
+struct VdbeOp {
+// Recover sqlite database:
+sqlite> .mode insert
+sqlite> .output dump_all.sql
+sqlite> .dump
+--> exports all content (as INSERTs) with schema into “dump_all.sql” file
+sqlite> .read dump_all.sql
+--> got a new database file with all content from the corrupted file
+// rowlock.c: showValueOfCursors
+//git stash
+git stash push -m "aa" file list
+git stash push -m "change make file and print vdbe opcode" Makefile.msc ext/rtree/rtree.c src/tclsqlite.c src/vdbe.c
+// git cherry pick without commit
+git cherry-pick -n 4fd7b378b342dfc5e25415c9815cc2ca5902dbb6
+// creat and checkout new branch
+git checkout -b new-demo-branch
+// reset merge
+git reset --merge ORIG_HEAD
+// show log to get commit ID
+git reflog
+// unmerge
+git reset --hard commit ID
+
+git cherry-pick -n d380d1391b3d48d73134b9c4638c322729858bf6
+rowlock_btree rowlock btree
+/************** sqlite command *************/
+.tables ?TABLE? 	List names of tables. If TABLE specified, only list tables matching LIKE pattern TABLE.
+.databases 	List names and files of attached databases
+.dump ?TABLE? ... 	Dump the database in an SQL text format. If TABLE specified, only dump tables matching LIKE pattern TABLE.
+
+sqlite3 some.db .schema > schema.sql
+sqlite3 some.db .dump > dump.sql
+
+/***************************
+ *
+ ****/
+git checkout master
+git pull
+-- create fix branch.
+git checkout -b fix-blob-issues
+-- do some fix and pust to origin --
+git push origin fix-blob-issues (-f)
+-- create branch for test.
+git checkout -b test-fix-blob-issue
+-- merge to fix test file and push to origin.
+git merge origin/fix-test-file
+git pull
+git log
+git fetch --all
+git push origin test-fix-blob-issue
+ //============ Check branch ============\
+http://10.116.224.14:8080/
+master: get last result from tinybrace-win-release-master
+get result from tinybrace-win-release: select id corresponding fix branch.
+compare archive\result\report.csv.
+compare error: total,
+/************************************
+ *
+ ******/
+   gitk
+   ./run_test.sh test/tkt2332.test
+   gitk
+   git status -uno
+   git stash push  src/btree.c  src/os_win.c  src/tclsqlite.c  src/vdbe.c  src/wal.c   test/corruptC.test   test/savepoint6.test  test/sharedA.test
+   git stash push  src/rowlock.c
+   git remote update origin --prune
+   git status -uno
+   git checkout master
+   git pull
+   git checkout fix-blob
+   git pull
+   git stash pop
+   git status -uno
+   git stash push   src/rowlock.c
+   git checkout master
+   git pull
+   git checkout -b fix-blob-issues
+   git diff fix-blob fix-test-file
+   git diff fix-test-file fix-blob
+   git checkout fix-blob
+   git log
+   git checkout fix-blob-issues
+   git checkout fix-blob
+   git format-patch -5
+   git log
+   git checkout fix-blob-issues
+   git am 0001-Fix-Wrong-wrflag-value-when-reopen-blob.patch
+   git am 0002-Fix-Recusive-loop-when-close-blob-as-a-user-function.patch
+   git am 0003-Fix-Crash-problem-in-e_blobwrite.patch
+   git am 0004-Fix-Blob-write-functionality.patch
+   git am 0005-Fix-Try-to-exclude-blob-close-reopen-for-vdbe_halt.patch
+   git log
+   git stash pop
+   git status -uno
+   git diff src/rowlock.c
+   gitk
+   git add src/rowlock.c
+   git commit -s
+   git log
+   git checkout -b test-fix-blob-issue
+   git merge origin/fix-test-file
+   git pull
+   git log
+   git fetch --all
+   git log
+   git checkout fix-blob-issues
+   git push origin fix-blob-issues (-f)
+   git checkout test-fix-blob-issue
+   git push origin test-fix-blob-issue
+   nano ~/.gitconfig
+   unset http_proxy
+   git push --mirror http://vc1.tsdv.com.vn/git/tinybrace/sqlumdash.git
+
 http://www.brendangregg.com/
 super_tut
 Redirect_tut
@@ -3002,3 +3125,310 @@ then csv file will be created.
 open csv file by excel and plot graph.
 
 // mvn checkstyle:checkstyle
+/***********************
+ * Config for visual studio code
+ ******************************************/
+ * Install extensions for C/C++ in VSCode.
+    * C/C++ (Microsoft)
+    * C++ Intellisense (austin)
+    * Project Manager (Alessandro Fragnani)
+    * Material Theme
+    * Indent Rainbow
+    * Bracket Pair Colorizer
+    * Tcl (bkromhout)
+    * MscGen (mscgenjs)
+ * Setting for debugging:
+    * Open Source directory in VSCode
+      * File -> Open Folder...
+      * Select Source folder.
+      * Choose `Project Manager` extension icon in `Activity Bar`
+      * Press `Save Project` button, input project name `XXX`, press Enter. Now we can use `Project Manager` to switch among projects very fast.
+    * Add C++ compiler config:
+      * Press Ctrl+Shift+P, input `C/C++`, choose `C/C++: Edit Configurations (UI)`, modify suitable config for the project, such as C standard: c99, 
+    * Add build task config:
+      * Press Ctrl+Shift+P, input `task`, choose `Tasks: Configure Task`, choose `Others`
+      * Modify tasks.json
+
+/***************************************************************
+ * Tinybrace
+ ***************************************************************/ 
+* Server
+    Create server: ./initdb serverPath
+    start/stop server: ./pg_ctl -D serverPath start 
+    Create database: ./createdb -p port dbName
+    Connect database to query: ./psql -p port dbName 
+    -> to quit: \q. 
+    -> to list db: 
+    -> to list table: \dt
+* Database
+    List database: \l [./psql -l]
+    Delete database: drop database dbName;
+    Create database: create database dbName;
+    Connect database: \c dbName;
+    Location: show data_directory;
+* Table:
+    Create schema ...
+    List table: \dt
+    Create table: create table tbName(Attribute attrType, ..);
+        Ex: CREATE TABLE Books(BookId int, BookName text, BookCost int);
+    Insert query: insert into tbName(att1, att2,..) values(vl1, vl2, ..);
+    Select query: select att1, att2, .. from tbName;
+    Update query: update tbName set att1 = vl1, att2 = vl2, .. where [condition]
+    Delete query: delete from tbName where [condition]
+    
+    Condition:  - expression: equal, in, ..
+                - and, or, like, limit clause
+** Create Foreign Data Wrapper:
+- Create extension: CREATE EXTENSION postgres_fdw;
+- Create foreign server
+    CREATE SERVER foreign_server 
+            FOREIGN DATA WRAPPER postgres_fdw
+            OPTIONS(host 'ip', post 'vl', dbname 'foreign_db');
+- Create mapping:
+    CREATE USER MAPPING FOR local_server
+            SERVER foreign_server
+            OPTIONS(user 'foreign_user', password 'pass');
+- Create foreign table:
+    CREATE FOREIGN TABLE foreign_table( attr attrType, ..)
+            SERVER foreign_server
+            OPTIONS (schema_name 'scname', table_name 'tbname');
+            (data type of foreign_table must match to tbname)
+- List foreign server: \des+ 
+- List foreign table: \det            
+
+
+
+=================
+create sever 'postgres': with port 5432
+create table 'databases' in postgres server
+run postgres server.
+=== create remote wrapper
+* create extension
+create extension spd_fdw;
+create extension pgspider_core_fdw;
+* create server object
+create server pgspider1 foreign data wrapper pgspider_core_fdw option(host '127.0.0.1');
+create server rmtpostgre1 foreign data wrapper postgres_fdw options(host '127.0.0.1', port '5432', dbname 'postgres');
+* create mapping
+create user mapping for public server rmt_postgre1 options(user 'haund', password '1');
+* create rmt table.
+create foreign table test1 (dbid int, dbname text) server pgspider1 ;//pg_core
+create foreign table test1__rmtpostgre1__0 (dbid int, dbname text) server rmtpostgre1 options (table_name 'databases') ; //specific foreign
+=== query from remote 
+query: select * from test1;
+    select * from test1__rmtpostgre1__0;
+    
+    
+- create Eclipse project. Attach to process.    
+
+/*
+ * Fix bug for pgspider_core_fdw
+ *********************/
+Query without option:
+
+Create a ticket explain about bug on redmin. Update status: https://tccloud2.toshiba.co.jp/accio/redmine/issues/280
+contrib/pgspider_core_fdw:
+    - init -> to init data base.: run ported_portgres_setup.sh: to create data base to initialize database.    
+    - sql: -> fix ported portgres: testcase in ported_postgres_fdw.sql.
+    
+
+
+/**/
+query string -> Query structure -> querytree_list -> plantree_list;
+portal contain querytree_list & plantree_list (Portal DefineQuery);
+
+- PortalStart.
+- PortalSetResultFormat;
+- PortalRun;
+- PortalDrop;
+
+
+InitPlan -> ExecInitNode -> ExecInitResult -> ExecInitNode -> ExecInitSort -> ExecInitNode -> ExecInitForeignScan -> spd_BeginForeignScan-> .. -> postgresBeginScan -> .. -> spd_EndForeignScan.
+
+InitPlan -> ExecInitNode -> ExecInitResult -> ExecInitNode -> ExecInitSort -> ExecInitNode -> ExecInitForeignScan -> postgresBeginScan -> 
+-> ExecEndPlan -> ExecEndNode -> ExecEndResult-> ExecEndNode -> ExecEndNode -> ExecEndForeignScan -> postgresEndForeignScan.
+
+
+
+print TupleTableSlot.    
+
+select count(c6), sum(c1), avg(c1), min(c2), max(c1), stddev(c2), sum(c1) * (random() <= 1)::int as sum2 from ft1__postgres_srv__0 where c2 < 5 group by c2 order by 1     , 2;
+\q
+
+
+============== window 
++ tcl from source.
++ add environment variabl
+sqlite-src: testfixtrue.exe test\amatch1.test -> run a test case.
+
+
+//============================================
+sqlite3_enable_shared_cache
+
+
+
+
+tam1.tranvan@toshiba.co.jp:Tsdv0405.
+tam1.tranvan@toshiba.co.jp
+toshiba\t9963275                              
+
+tclsqlite:1583.
+vdbe:593, 647
+
+  for(pOp=&aOp[p->pc]; 1; pOp++){ //loop opcodes.
+  switch case:{}
+  print opcodes information.
+  }
+  
+
+===================================================
+DDL (Data Definition Language) :  
+    - CREATE : to create objects in database
+    - ALTER : alters the structure of database
+    - DROP : delete objects from database
+    - RENAME : rename an objects
+    - TRUNCATE:
+    - COMMENT:
+DML (Data Manipulation Language) :
+    - SELECT: retrieve data from the database
+    - INSERT: insert data into a table
+    - UPDATE: update existing data within a table
+    - DELETE: deletes all records from a table, space for the records remain
+    - MERGE:
+TCL (Transaction Control Language) :
+    - COMMIT: Commit command is used to permanently save any transaction
+            into the database.
+    - ROLLBACK: This command restores the database to last committed state.
+            It is also used with savepoint command to jump to a savepoint
+            in a transaction.
+    - SAVEPOINT: Savepoint command is used to temporarily save a transaction so
+            that you can rollback to that point whenever necessary.
+    - SET TRANSACTION 
+DCL (Data Control Language) :
+    - GRANT: allow specified users to perform specified tasks.
+    - REVOKE: cancel previously granted or denied permissions.    
+//========================================
+
+//========= 4260
+btree_from_db -> process in btree_from_db function in test3.c file.
+btree_pager_stats -> process in btree_pager_stats function in test3.c file.
+stats(page) return value of page cache number.
+
+sqlite3BtreePager(pBt) return return p->pBt->pPager;// Return the pager associated with a BTree
+sqlite3PagerStats(Pager *pPager)
+    sqlite3PcachePagecount(PCache *pCache)
+        pcache1Pagecount(sqlite3_pcache *p): return ((PCache1*)p)->nPage
+    
+zName[] = {
+      "ref", "page", "max", "size", "state", "err",
+      "hit", "miss", "ovfl", "read", "write"
+    };
+stats(page) return value of page cache number.                            
+PRAGMA lock_status;
+https://www.oreilly.com/library/view/using-sqlite/9781449394592/re190.html
+//========================== Dataversion1==> 6405
+
+
+    sqlite3PagerDataVersion(Pager *pPager);
+    sqlite3_file_control(sqlite3 *db, const char *zDbName, int op, void *pArg);
+    file_control_data_version(<error-type> clientData, <error-type> *interp, int objc, <error-type> *const *objv)
+
+1.1.1.1             return pPager->iDataVersion;
+1.1.2           rc = SQLITE_OK;
+1.2         }
+
+sqlite3PagerDataVersion(Pager *pPager){
+        return pPager->iDataVersion;
+  
+create, update and insert -> create write transaction, increase iDataVersion.  
+select -> create read transaction.
+
+"http.proxyStrictSSL": false
+
+
+Trans-> TransAll -> TransOriginal: bShare.
+Trans-> TransAll -> Trans -> TransOriginal: bTrans.
+sqlite3BtreeBeginTrans
+sqlite3TransBtreeBeginTrans
+
+Transaction:
+    btree bShare: p->inTrans to TRANS_READ
+    btree bTrans: p->inTrans to TRANS_READ            
+OpenRead:
+    testfixture.exe!sqlite3BtreeBeginTransOriginal(Btree * p, int wrflag, int * pSchemaVersion) Line 3473	C
+ 	testfixture.exe!sqlite3TransBtreeBeginTrans(Btree * p, int wrflag) Line 275	C
+ 	testfixture.exe!sqlite3TransBtreeCreateTable(Btree * p, int iTable, KeyInfo * pKeyInfo, TransRootPage * * ppRootPage) Line 351	C
+        regardless to wrflag
+ 	testfixture.exe!transBtreeCursor(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 686	C
+ 	testfixture.exe!sqlite3BtreeCursorAll(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur, int flag) Line 758	C
+ 	testfixture.exe!sqlite3BtreeCursor(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 50	C
+    btree bTrans: p->inTrans to TRANS_WRITE            
+Halt:
+        Fisrtly, p->inTrans of Shared btree is setted to TRANS_WRITE
+         
+            testfixture.exe!sqlite3BtreeBeginTransOriginal(Btree * p, int wrflag, int * pSchemaVersion) Line 3473	C
+            testfixture.exe!sqlite3BtreeBeginTransForCommit(sqlite3 * db) Line 2011	C
+                Btree *pBt = db->aDb[0].pBt;
+                int readOnly = (pBt->pBt->btsFlags & BTS_READ_ONLY)==1;
+                rc = sqlite3BtreeBeginTransOriginal(pBt, !readOnly, 0); // readOnly = 0;
+            testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2931	C
+        ==    btree bShare: p->inTrans to TRANS_WRITE
+        Second, p->inTrans of Transaction tree from TRANS_WRITE to TRANS_NONE regardless p->inTrans of Shared btree 
+            testfixture.exe!btreeEndTransaction(Btree * p) Line 4027	C
+            testfixture.exe!sqlite3BtreeRollbackOriginal(Btree * p, int tripCode, int writeOnly) Line 4215	C
+            testfixture.exe!sqlite3TransBtreeRollback(Btree * p, int tripCode, int writeOnly) Line 1613	C
+                BtreeTrans *pBtTrans = &p->btTrans;
+                sqlite3BtreeRollbackOriginal(pBtTrans->pBtree, tripCode, writeOnly);
+            testfixture.exe!sqlite3TransBtreeCommit(Btree * p) Line 2492	C        
+            testfixture.exe!sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3975	C
+                ROWLOCK_TRANS_BTREE_COMMIT(p);
+            testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2528	C
+            testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2939	C
+        ==  btree bTrans:    p->inTrans = TRANS_NONE;
+        Then, p->inTrans of Shared btree is setted to TRANS_NONE after data version increase
+            testfixture.exe!sqlite3BtreeCommitPhaseTwo(Btree * p, int bCleanup) Line 4069	C
+            testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2540	C
+                Btree *pBt = db->aDb[0].pBt;
+        >	testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2939	C
+            p->inTrans==TRANS_WRITE??    
+
+            testfixture.exe!btreeEndTransaction(Btree * p) Line 4027	C
+            testfixture.exe!sqlite3BtreeCommitPhaseTwo(Btree * p, int bCleanup) Line 4085	C
+            testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2540	C
+            testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2939	C
+==> p->inTrans = TRANS_NONE;
+
+
+e_wal.test, e_walauto.test, wal2.test, wal6.test, // skip
+malloc3.test, walfault.test,walro2.test
+
+
+
+Every SQLite database has an SQLITE_MASTER table that defines the schema for the database
+
+The uplevel command executes a command (or in fact a script) in another scope than that of the current procedure. In particular, in this case it is uplevel 1 which means “execute in caller”. (You can also execute in the global scope with uplevel #0, or in other places too such as the caller's caller with uplevel 2 but that's really rare.)
+
+hau1.nguydinh@toshiba.co.jp:Tiny2019.
+hau1.nguydinh@toshiba.co.jp
+toshiba\t9826850
+
+//================== Investigate about blob case.
+9999999999999999999999999999
+
+>	testfixture.exe!sqlite3BtreePutData(BtCursor * pCsr, unsigned int offset, unsigned int amt, void * z) Line 10319	C
+ 	testfixture.exe!blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 427	C
+ 	testfixture.exe!sqlite3_blob_write(sqlite3_blob * pBlob, const void * z, int n, int iOffset) Line 453	C
+ 	testfixture.exe!incrblobOutput(void * instanceData, const char * buf, int toWrite, int * errorCodePtr) Line 316	C
+    
+    
+[
+if( (pCsr->curFlags & BTCF_WriteFlag)==0 ){// pCsr->curFlags = 18.
+    return SQLITE_READONLY;
+  }
+]
+
+
+
+
+    
+    
