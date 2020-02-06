@@ -66,10 +66,36 @@ git pull
  check patch file -> where apply patch file.
  copy patch file to apply directory
  git am < "patch file"
- git commit -am "" -> save state after apply patch file.
- 
- 
+ git commit -am "" -> save state after apply patch file. 
  git show HEAD
+ 
+/********************* cherry pick + git stash ***********************/
+//git stash
+git stash push -m "aa" file list
+git stash push -m "change make file and print vdbe opcode" Makefile.msc ext/rtree/rtree.c src/tclsqlite.c src/vdbe.c
+// git cherry pick without commit
+git cherry-pick -n 4fd7b378b342dfc5e25415c9815cc2ca5902dbb6
+// creat and checkout new branch
+git checkout -b new-demo-branch
+// reset merge
+git reset --merge ORIG_HEAD
+// show log to get commit ID
+git reflog
+// unmerge
+git reset --hard commit ID
+//==== merge stashed change with current changes
+git cherry-pick -n 0884f2b0079078fe4255cfae66c415c1f83e42fd
+== git stash -> merge stashed change with current changes
+git add specific file.
+git stash apply
+//
+git stash push: add a stash to stash list.
+git stash pop stash{...}: pop a the stash
+git stash apply stash{...}
+git stash list: list all stash
+git stash show stash{..}: show changed file name.
+git stash show -p stash{...}: show change of that stash.
+
 /******************************************************************************
  *      SSH tool
  ******************************************************************************/
@@ -177,21 +203,7 @@ push a tag:
 
  -Djava.library.path="E:\E\Project\TELI\bk\SampleWeb\resources"
  
-[MSE] [Add demonstration in 20190822]
 
-- To demonstrate the sequence playing h264 video stream on browser.
-
-[refs #2426]
-
-+ Add description for sequence 
-+ Add glassfish issues 
-+ Separate diagram.
-
-c6b04ec8967bf87b7d96059c5bcf5f159f4938a3
-
-+ Remove control action in html.
-+ install safari
-+ create test plan.
 ================================================
 tcpdump -r old_file -w new_files -C 10git
 

@@ -1,0 +1,82 @@
+//[Source Code Management] Repository URL 
+http://vc1.tsdv.com.vn/git/tinybrace/sqlumdash.git
+// Branches to build
+*/test-*
+// Build Triggers
+PollSCM
+// Execue Windows batch
+@call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\VsDevCmd.bat"
+
+nmake /f Makefile.msc "TCLSUFFIX=t" "TCLDIR=C:\tcl" testfixture.exe
+// Execute shell
+#!C:/Users/TestManhND-PC/AppData/Local/Programs/Git/bin/bash
+
+
+#test_path=result/${date}
+test_path=result
+rm -rf ${test_path}
+mkdir -p ${test_path}
+date=`date +'%Y%m%d%H%M%S'`
+
+# Create csv file
+echo "file name, report file, error, total, time, leak, failures" > ${test_path}/report.csv
+sum_error=0
+sum_total=0
+sum_crash=0
+sum_timeout=0
+
+longtime_files='backup_ioerr ioerr malloc pagerfault sortfault sqlumdash_huge_mmap_testsuite walcrash2 walcrash3'
+loop_files='corruptC e_blobclose e_blobopen incrblob sharedA thread002 tkt4018 window1 window2 window3 window4 window6 window8 windowfault walprotocol2'
+
+#mkdir -p ${test_path}
+for file in `find test -name *.test ! -name all.test ! -name async.test ! -name quick.test  ! -name veryquick.test ! -name memleak.test ! -name   permutations.test ! -name soak.test ! -name  fts3.test ! -name walcrash2.test ! -name mallocAll.test ! -name rtree.test !  -name full.test ! -name extraquick.test ! -name session.test ! -name rbu.test`; do
+    base_name=`basename "$file" .test`
+    to=15m
+    if [[ "${longtime_files}" == *"${base_name}"* ]]; then
+        to=60m
+    fi
+    if [[ "${loop_files}" == *"${base_name}"* ]]; then
+        to=5m
+    fi
+    out_file=${test_path}/`basename "$file" .test`.log
+    echo "Executing $file --> $out_file"
+    rm -rf testdir/*
+    SECONDS=0
+    timeout -s KILL $to ./testfixture $file > $out_file 2>&1
+    retval=$?
+    if [ $retval -gt 1 ]; then
+    	echo "test case timeout...$retval"
+        sleep 10
+        sum_timeout=$((${sum_timeout} + 1))
+        echo "${file}, ${out_file}, timeout,,${SECONDS}," >> ${test_path}/report.csv
+    else
+    	# Get error
+        errors=($(grep --binary-files=text ".* errors out of .* tests" ${out_file} | sed -e "s/\(.*\) errors out of \(.*\) tests.*/\1 \2/"))
+        if [ ${#errors[@]} -eq 0 ]; then
+            echo "${file}, ${out_file}, crash,,${SECONDS},," >> ${test_path}/report.csv
+            sum_crash=$((${sum_crash} + 1))
+            sleep 10
+        else
+            failures=$(grep --binary-files=text "^\!Failures on these" ${out_file} |sed -e "s/\!Failures on these tests: //")
+            leak="leaked"
+            if grep -q "^All memory allocations freed - no leaks" ${out_file}; then
+                leak=""
+            else
+                leak=$(grep --binary-files=text "^Unfreed memory: " ${out_file} | sed -e "s/Unfreed memory: \(.*\) bytes.*/\1/")
+            fi
+            sum_error=$((${sum_error} + ${errors[0]}))
+            sum_total=$((${sum_total} + ${errors[1]}))
+            echo "${file}, ${out_file}, ${errors[0]}, ${errors[1]}, ${SECONDS}, ${leak}, ${failures}" >> ${test_path}/report.csv
+            
+            # Remove last segment
+            sed -i '/^SQLite /,$d' ${out_file}
+        fi
+    fi
+    echo "Finishing $file --> $out_file"
+done
+
+# Write the summary
+echo ",, ${sum_error}, ${sum_total}, ${sum_crash}, ${sum_timeout}," >> ${test_path}/report.csv
+
+echo "Finish testing... $(date +'%Y%m%d%H%M%S')"
+exit 0

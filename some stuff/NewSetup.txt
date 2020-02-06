@@ -1,3 +1,24 @@
+// Visual_Leak_Detector
+download from: https://kinddragon.github.io/vld/
+Add to makefile:
+    !IFNDEF VLDDIR
+    VLDDIR = "C:\Program Files (x86)\Visual Leak Detector"
+    !ENDIF
+
+    !IFNDEF VLDINCDIR
+    VLDINCDIR = $(VLDDIR)\include
+    !ENDIF
+
+    !IFNDEF VDLLIBDIR
+    VDLLIBDIR = $(VLDDIR)\lib\Win32
+    !ENDIF
+
+    !IFNDEF VLDLIBPATHS
+    VLDLIBPATHS = $(VLDLIBPATHS) /LIBPATH:$(VDLLIBDIR)
+    !ENDIF
+    
+    target: -I$(VLDINCDIR) /link $(LDFLAGS) $(LTLINKOPTS) $(VLDLIBPATHS)
+
 git cherry-pick -n 0884f2b0079078fe4255cfae66c415c1f83e42fd
 == git stash -> merge stashed change with current changes
 git add specific file.
@@ -41,9 +62,9 @@ rowlock_btree rowlock btree
 sqlite3 some.db .schema > schema.sql
 sqlite3 some.db .dump > dump.sql
 
-/***************************
- *
- ****/
+/************************************************
+ * SQLumdash process 
+ ************************************************/
 git checkout master
 git pull
 -- create fix branch.
