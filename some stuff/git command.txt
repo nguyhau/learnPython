@@ -68,7 +68,10 @@ git pull
  git am < "patch file"
  git commit -am "" -> save state after apply patch file. 
  git show HEAD
- 
+ == diff two branch
+ git diff fix-blob fix-test-file
+ == creat package
+ git format-patch -5: create 5 patch from 5 recently commit.
 /********************* cherry pick + git stash ***********************/
 //git stash
 git stash push -m "aa" file list
@@ -80,7 +83,7 @@ git checkout -b new-demo-branch
 // reset merge
 git reset --merge ORIG_HEAD
 // show log to get commit ID
-git reflog
+git reflog show [branch]
 // unmerge
 git reset --hard commit ID
 //==== merge stashed change with current changes
