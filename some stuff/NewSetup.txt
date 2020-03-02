@@ -1,3 +1,10 @@
+git checkout stash@{0} Makefile.msc ext/rtree/rtree.c
+git diff stash@{0}^! file name.
+
+>	testfixture.exe!sqlite3TransBtreeCommit(Btree * p) Line 2550	C: move data from bt trans to bt share.
+rm testdir/* && ./testfixture.exe test/incrblob.test
+
+orderby7; trace2.
 // Visual_Leak_Detector
 download from: https://kinddragon.github.io/vld/
 Add to makefile:
@@ -25,7 +32,12 @@ git add specific file.
 git stash apply.
 
 astah 15/4
-Makefile 347.
+hau1.nguydinh@toshiba.co.jp:Tiny2019.
+hau1.nguydinh@toshiba.co.jp
+toshiba\t9826850
+
+***** Makefile 234.
+***** Makefile 347.
 sqlite3_column_ to converting engine data for user
 
 
@@ -47,14 +59,14 @@ git cherry-pick -n 4fd7b378b342dfc5e25415c9815cc2ca5902dbb6
 git checkout -b new-demo-branch
 // reset merge
 git reset --merge ORIG_HEAD
-// show log to get commit ID
+// show log to get commit ID: 1096e89c9a3f757b660bc8c1473955039f80a834
 git reflog
 // unmerge
 git reset --hard commit ID
 
 git cherry-pick -n d380d1391b3d48d73134b9c4638c322729858bf6
 rowlock_btree rowlock btree
-/************** sqlite command *************/
+/************** sqlite_command *************/
 .tables ?TABLE? 	List names of tables. If TABLE specified, only list tables matching LIKE pattern TABLE.
 .databases 	List names and files of attached databases
 .dump ?TABLE? ... 	Dump the database in an SQL text format. If TABLE specified, only dump tables matching LIKE pattern TABLE.
@@ -143,6 +155,7 @@ compare error: total,
    git push --mirror http://vc1.tsdv.com.vn/git/tinybrace/sqlumdash.git
 
 http://www.brendangregg.com/
+visual_code_tut
 super_tut
 Redirect_tut
 config_tut
@@ -3147,7 +3160,7 @@ open csv file by excel and plot graph.
 
 // mvn checkstyle:checkstyle
 /***********************
- * Config for visual studio code
+ * Config visual_code_tut
  ******************************************/
  * Install extensions for C/C++ in VSCode.
     * C/C++ (Microsoft)
@@ -3169,13 +3182,130 @@ open csv file by excel and plot graph.
     * Add build task config:
       * Press Ctrl+Shift+P, input `task`, choose `Tasks: Configure Task`, choose `Others`
       * Modify tasks.json
-
+      [
+      "version": "2.0.0",
+      "options": {
+        "shell": {
+            "executable": "C:\\WINDOWS\\System32\\cmd.exe",
+            "args": [
+                "/d", "/c",
+                "C:\\Program^ Files^ ^(x86^)\\Microsoft^ Visual^ Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat",
+                "x86",
+                "&&"
+            ]
+        }
+      },
+      "tasks": [
+          {
+              "label": "msvc build",
+              "type": "shell",
+              "command": "nmake.exe",
+              "args": [
+                  "/f",
+                  "Makefile.msc",
+                  "testfixture.exe"
+              ],
+              "group": {
+                  "kind": "build",
+                  "isDefault": true
+              },
+              "presentation": {
+                  "reveal": "always"
+              },
+              "problemMatcher": "$msCompile"
+          },
+      ]
+    ]
+  * hotkey: 
+  - Ctrl+Shift+P for open config.
+  - Ctrl+T for search a function name.
+  - Alt + ->/<- for navigate source code
+  - Ctrl + K + C/U for comment/uncomment source code
+  ================ For disable SSL verifies ====================[setting.json file]
+  "http.proxy": "http://haund:Abcd1234@proxy1.tsdv.com.vn:3128",
+  "http.proxyStrictSSL": false,
+/*
+ * Config for remote debug:
+ ***/
+ 1. Create ssh-key and copy to remote host.
+  - ssh-keygen
+  - $ ssh-copy-id -f -i ~/.ssh/id_rsa.pub haund@10.116.41.167
+ 2. Config for visual code:
+  - Install Remote-SSH extension
+  - Config to remote:
+    [Ctrl+Shift+P], search for Remote-SSH: Open Configuration Files
+    Add configuration information:
+    [   Host centos7
+        HostName 10.116.41.167
+        Port 22
+        User haund
+        IdentityFile ~/.ssh/id_rsa
+    ]
+  - Connect to remote host, select source folder.
+  - Install C/C++ ()
+  - Create task.json [Press Ctrl+Shift+P, search for “Tasks: Configure Task” > Create tasks.json file from template > Others] as below
+  [
+    "tasks": [
+        {
+            "label": "first build",
+            "type": "shell",
+            "command": "./build.sh"
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "make -j16 && make install"
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make clean"
+        }
+    ]
+  ]
+  - Install gdb on remote host.
+  - Create debug configuration [Press Ctrl+Shift+P, search for “Debug: Open launch.json” ] as below 
+  (Or create by go Debug-> Add configuration )
+  [
+    {
+        "version": "0.2.0",
+        "configurations": [     
+    //  For start new instance case
+    //     {
+    //         "name": "(gdb)Launch",
+    //         "type": "cppdbg",
+    //         "request": "launch",
+    //         "program": "/home/haund/Project/TinyBrace/SQLumdashCS/SQLumDashCS/sqlumdash/bin/sqlumdash",
+    //         "cwd": "${workspaceRoot}"
+    //     },
+    //  For attach case       
+        {
+                "name": "(gdb) Attach",
+                "type": "cppdbg",
+                "request": "attach",
+                "program": "/home/haund/Project/TinyBrace/SQLumdashCS/SQLumDashCS/sqlumdash/bin/sqlumdash",
+                "processId": "${command:pickProcess}",
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    }
+                ]
+            },
+        ],
+        // "preLaunchTask": "rebuild"
+    }
+  ]
 /***************************************************************
  * Tinybrace
  ***************************************************************/ 
-* Server
+* Server [jump to build/bin folder]
     Create server: ./initdb serverPath
+        config port for server: vi serverPath/postgresql.conf.
     start/stop server: ./pg_ctl -D serverPath start 
+
     Create database: ./createdb -p port dbName
     Connect database to query: ./psql -p port dbName 
     -> to quit: \q. 
@@ -3193,7 +3323,9 @@ open csv file by excel and plot graph.
     Create table: create table tbName(Attribute attrType, ..);
         Ex: CREATE TABLE Books(BookId int, BookName text, BookCost int);
     Insert query: insert into tbName(att1, att2,..) values(vl1, vl2, ..);
+        Ex: insert into Employ(code, Name, age) values(1, 'ManhND', 26);
     Select query: select att1, att2, .. from tbName;
+    
     Update query: update tbName set att1 = vl1, att2 = vl2, .. where [condition]
     Delete query: delete from tbName where [condition]
     
@@ -3217,6 +3349,7 @@ open csv file by excel and plot graph.
 - List foreign server: \des+ 
 - List foreign table: \det            
 
+CREATE TABLE department1(department_id int primary key, department_name text);
 
 
 =================
@@ -3330,22 +3463,8 @@ DCL (Data Control Language) :
     - REVOKE: cancel previously granted or denied permissions.    
 //========================================
 
-//========= 4260
-btree_from_db -> process in btree_from_db function in test3.c file.
-btree_pager_stats -> process in btree_pager_stats function in test3.c file.
-stats(page) return value of page cache number.
 
-sqlite3BtreePager(pBt) return return p->pBt->pPager;// Return the pager associated with a BTree
-sqlite3PagerStats(Pager *pPager)
-    sqlite3PcachePagecount(PCache *pCache)
-        pcache1Pagecount(sqlite3_pcache *p): return ((PCache1*)p)->nPage
-    
-zName[] = {
-      "ref", "page", "max", "size", "state", "err",
-      "hit", "miss", "ovfl", "read", "write"
-    };
-stats(page) return value of page cache number.                            
-PRAGMA lock_status;
+
 https://www.oreilly.com/library/view/using-sqlite/9781449394592/re190.html
 //========================== Dataversion1==> 6405
 
@@ -3429,28 +3548,827 @@ Every SQLite database has an SQLITE_MASTER table that defines the schema for the
 
 The uplevel command executes a command (or in fact a script) in another scope than that of the current procedure. In particular, in this case it is uplevel 1 which means “execute in caller”. (You can also execute in the global scope with uplevel #0, or in other places too such as the caller's caller with uplevel 2 but that's really rare.)
 
-hau1.nguydinh@toshiba.co.jp:Tiny2019.
-hau1.nguydinh@toshiba.co.jp
-toshiba\t9826850
 
-//================== Investigate about blob case.
-9999999999999999999999999999
 
->	testfixture.exe!sqlite3BtreePutData(BtCursor * pCsr, unsigned int offset, unsigned int amt, void * z) Line 10319	C
+//============= e_blobwrite ====
+e_blobwrite-3.0... Ok
+e_blobwrite-3.1.2...
+! e_blobwrite-3.1.2 expected: [1 .....0123456789......................... xyz]
+! e_blobwrite-3.1.2 got:      [1 ........................................ xyz]
+e_blobwrite-3.1.4...
+! e_blobwrite-3.1.4 expected: [1 .....0123456789......................... xyz]
+! e_blobwrite-3.1.4 got:      [1 ........................................ xyz]
+e_blobwrite-3.2.2... Ok
+e_blobwrite-3.2.4... Ok
+
+//===============
+=== Start open blob handle
+blobSeekToRow => rc = sqlite3_step(p->pStmt);
+   0 Init             0    1    0               00 Start at 1
+   1 Transaction      0    1    1 0             01
+   2 TableLock        0    2    1 t3            00 iDb=0 root=2 write=1
+   3 OpenWrite        0    2    0 4             00 root=2 iDb=0   
+   4 NotExists        0    7    1               00 intkey=r[1]
+   5 Column           0    3    1               00 r[1]=
+   6 ResultRow        1    0    0               00 output=r[1]
+//=======
+>	testfixture.exe!sqlite3_blob_open(sqlite3 * db, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int wrFlag, sqlite3_blob * * ppBlob) Line 331	C
+    blobSeekToRow: set for ppBlob->pCsr.
+ 	testfixture.exe!test_blob_open(void * clientData, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 134	C
+
+//==========================
+>	testfixture.exe!sqlite3BtreePutData(BtCursor * pCsr, unsigned int offset, unsigned int amt, void * z) Line 10312	C
+    if( pCsr->eState!=CURSOR_VALID ){ //(CURSOR_VALID = 0 )
+        return SQLITE_ABORT;
+    }
+ 	testfixture.exe!blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 427	C
+        [****]
+        [rc = xCall(p->pCsr, iOffset+p->iOffset, n, z);]
+ 	testfixture.exe!sqlite3_blob_write(sqlite3_blob * pBlob, const void * z, int n, int iOffset) Line 453	C
+ 	testfixture.exe!test_blob_write(void * clientData, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 300	C
+
+//==========================
+[***]
+p->wantToLock = 1; p->locked = 0;
+>	testfixture.exe!btreeLockCarefully(Btree * p) Line 131	C
+ 	testfixture.exe!sqlite3BtreeEnter(Btree * p) Line 96	C
+ 	testfixture.exe!sqlite3BtreeEnterCursor(BtCursor * pCur) Line 299	C
+ 	testfixture.exe!blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 402	C
+ 	testfixture.exe!sqlite3_blob_write(sqlite3_blob * pBlob, const void * z, int n, int iOffset) Line 453	C
+ 	testfixture.exe!test_blob_write(void * clientData, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 300	C
+
+    
+//==================================
+[UPDATE t3 SET k = 'xyz' WHERE i=1;]
+   0 Init             0   14    0               00 Start at 14
+  14 Transaction      0    1    1 0             01 usesStmtJournal=0
+  15 TableLock        0    2    1 t3            00 iDb=0 root=2 write=1
+  16 Goto             0    1    0               00
+   1 Null             0    1    2               00 r[1..2]=NULL
+   2 OpenWrite        0    2    0 3             00 root=2 iDb=0; t3
+   3 Explain          3    0    0 SEARCH TABLE t3 USING INTEGER PRIMARY KEY (rowid=?) 00
+   4 Integer          1    6    0               00 r[6]=1
+   5 SeekRowid        0    7    6               00 intkey=r[6]
+   6 Rowid            0    2    0               00 r[2]=rowid
+   7 IsNull           2   13    0               00 if r[2]==NULL goto 13
+   8 Null             0    3    0               00 r[3]=NULL
+   9 Column           0    1    4               00 r[4]=t3.j
+  10 String8          0    5    0 xyz           00 r[5]='xyz'
+  11 MakeRecord       3    3    7 DBB           00 r[7]=mkrec(r[3..5])
+  12 Insert           0    7    2 t3            05 intkey=r[2] data=r[7]
+
+>	testfixture.exe!saveCursorPosition(BtCursor * pCur) Line 714	C
+   ===> p->pCsr->eState = 3;
+ 	testfixture.exe!saveCursorsOnList(BtCursor * p, unsigned int iRoot, BtCursor * pExcept) Line 767	C
+ 	testfixture.exe!saveAllCursors(BtShared * pBt, unsigned int iRoot, BtCursor * pExcept) Line 749	C
+ 	testfixture.exe!sqlite3BtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 8577	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 4664	C
+ 	testfixture.exe!sqlite3Step(Vdbe * p) Line 635	C
+ 	testfixture.exe!sqlite3_step(sqlite3_stmt * pStmt) Line 701	C
+
+>	testfixture.exe!invalidateIncrblobCursors(Btree * pBtree, unsigned int pgnoRoot, __int64 iRow, int isClearTable) Line 547	C
+   ===> p->pCsr->eState = 1;
+ 	testfixture.exe!sqlite3BtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 8585	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 4664	C
+ 	testfixture.exe!sqlite3Step(Vdbe * p) Line 635	C
+ 	testfixture.exe!sqlite3_step(sqlite3_stmt * pStmt) Line 701	C
+
+
+    
+//======================================
+/*
+** Legal values for BtCursor.curFlags
+*/
+#define BTCF_WriteFlag    0x01   /* True if a write cursor */
+#define BTCF_ValidNKey    0x02   /* True if info.nKey is valid */
+#define BTCF_ValidOvfl    0x04   /* True if aOverflow is valid */
+#define BTCF_AtLast       0x08   /* Cursor is pointing ot the last entry */
+#define BTCF_Incrblob     0x10   /* True if an incremental I/O handle */
+#define BTCF_Multiple     0x20   /* Maybe another cursor on the same btree */
+    
+e_blobwrite-3.0... Ok
+e_blobwrite-3.1.1.1... Ok
+e_blobwrite-3.1.1.2... Ok
+e_blobwrite-3.1.1.3... Ok
+e_blobwrite-3.1.2... Ok
+e_blobwrite-3.1.3.1...
+! e_blobwrite-3.1.3.1 expected: [1 SQLITE_ABORT]
+! e_blobwrite-3.1.3.1 got:      [0 {}]
+e_blobwrite-3.1.3.2...
+! e_blobwrite-3.1.3.2 expected: [SQLITE_ABORT]
+! e_blobwrite-3.1.3.2 got:      [SQLITE_OK]
+e_blobwrite-3.1.3.3...
+! e_blobwrite-3.1.3.3 expected: [query aborted]
+! e_blobwrite-3.1.3.3 got:      [not an error]
+e_blobwrite-3.1.4...
+! e_blobwrite-3.1.4 expected: [1 .....0123456789......................... xyz]
+! e_blobwrite-3.1.4 got:      [1 .....0123456789 0123456789............... xyz]
+e_blobwrite-3.2.1.1... Ok
+e_blobwrite-3.2.1.2... Ok
+e_blobwrite-3.2.1.3... Ok
+e_blobwrite-3.2.2... Ok
+e_blobwrite-3.2.3.1...
+! e_blobwrite-3.2.3.1 expected: [1 SQLITE_ABORT]
+! e_blobwrite-3.2.3.1 got:      [0 {}]
+e_blobwrite-3.2.3.2...
+! e_blobwrite-3.2.3.2 expected: [SQLITE_ABORT]
+! e_blobwrite-3.2.3.2 got:      [SQLITE_OK]
+e_blobwrite-3.2.3.3...
+! e_blobwrite-3.2.3.3 expected: [query aborted]
+! e_blobwrite-3.2.3.3 got:      [not an error]
+e_blobwrite-3.2.4...
+! e_blobwrite-3.2.4 expected: [2 xyz ........................................]
+! e_blobwrite-3.2.4 got:      [2 xyz ............0123456789..................]
+SQLite 2019-04-16 19:49:53 e857012a20625f6fc2fe77ab3f8f7d24b9661d69a176ca6184cf3f9c86cealt1
+8 errors out of 58 tests on HAUND-PC Windows NT 32-bit little-endian
+!Failures on these tests: e_blobwrite-3.1.3.1 e_blobwrite-3.1.3.2 e_blobwrite-3.1.3.3 e_blobwrite-3.1.4 e_blobwrite-3.2.3.1 e_blobwr
+
+
+
+/=======================================================================
+saveAllCursors 3-4
+sqlite3BtreePutData
+
+>	testfixture.exe!saveCursorPosition(BtCursor * pCur) Line 710	C
+ 	testfixture.exe!saveCursorsOnList(BtCursor * p, unsigned int iRoot, BtCursor * pExcept) Line 767	C
+ 	testfixture.exe!saveAllCursors(BtShared * pBt, unsigned int iRoot, BtCursor * pExcept) Line 749	C
+ 	testfixture.exe!sqlite3BtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 8596	C
+ 	testfixture.exe!sqlite3TransBtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 1039	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 4711	C
+    
+    
+    invalidateIncrblobCursors: p->eState = CURSOR_INVALID;
+ 	testfixture.exe!sqlite3BtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 8596	C
+ 	testfixture.exe!sqlite3TransBtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 1039	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 4711	C
+    
+//==== Temp solution ====
++ rowlock.c
+void sqlite3BtreeIncrblobCursorAll(BtCursor *pCur){
+  sqlite3BtreeIncrblobCursorOriginal(pCur);
+  if( !transBtreeCursorIsUsed(pCur) ){
+    return;
+  }
+  BtCursorTrans *pCurTrans = &pCur->btCurTrans;
+  BtCursor *pCurIns = pCurTrans->pCurIns;
+  BtCursor *pCurDel = pCurTrans->pCurDel;
+  sqlite3BtreeIncrblobCursorOriginal(pCurIns); -> change pCur->curFlags |= BTCF_Incrblob;
+  sqlite3BtreeIncrblobCursorOriginal(pCurDel);
+}
+
+=> invalidateIncrblobCursors(...)
+    if( (p->curFlags & BTCF_Incrblob)!=0 ){
+      pBtree->hasIncrblobCur = 1;
+      if( p->pgnoRoot==pgnoRoot && (isClearTable || p->info.nKey==iRow) ){
+        p->eState = CURSOR_INVALID;
+      }
+   }
+    // ====== Day 11/02 =========
+    static const VdbeOpList openBlob[] = {
+        {OP_TableLock,      0, 0, 0},  /* 0: Acquire a read or write lock */
+        {OP_OpenRead,       0, 0, 0},  /* 1: Open a cursor */
+        /* blobSeekToRow() will initialize r[1] to the desired rowid */
+        {OP_NotExists,      0, 5, 1},  /* 2: Seek the cursor to rowid=r[1] */
+        {OP_Column,         0, 0, 1},  /* 3  */
+        {OP_ResultRow,      1, 0, 0},  /* 4  */
+        {OP_Halt,           0, 0, 0},  /* 5  */
+    };
+    
+    db => sParse.db = db; pTab = sqlite3LocateTable(&sParse, 0, zTable, zDb);
+    zTable => pTab = sqlite3LocateTable(&sParse, 0, zTable, zDb);
+    zColumn => pTab->aCol[iCol].zName.
+    // can't write index or foreign key.
+    pBlob->pTab = pTab;
+    pBlob->zDb = db->aDb[sqlite3SchemaToIndex(db, pTab->pSchema)].zDbSName;
+    pBlob->pStmt = (sqlite3_stmt *)sqlite3VdbeCreate(&sParse);
+    pBlob->iCol = iCol;
+    pBlob->db = db;
+    iRow => blobSeekToRow(pBlob, iRow, &zErr);
+    //p
+        p->iOffset = pC->aType[p->iCol + pC->nField];
+        p->nByte = sqlite3VdbeSerialTypeLen(type);
+        p->pCsr =  pC->uc.pCursor;
+        sqlite3BtreeIncrblobCursor(p->pCsr);//
+            pCur->curFlags |= BTCF_Incrblob;
+            pCur->pBtree->hasIncrblobCur = 1;
+            
+            
+            
+/====   sqlite3BtreeMovetoUppacked: 
+**     *pRes<0      The cursor is left pointing at an entry that
+**                  is smaller than intKey/pIdxKey or if the table is empty
+**                  and the cursor is therefore left point to nothing.
+**
+**     *pRes==0     The cursor is left pointing at an entry that
+**                  exactly matches intKey/pIdxKey.
+**
+**     *pRes>0      The cursor is left pointing at an entry that
+**                  is larger than intKey/pIdxKey.
+int sqlite3BtreeMovetoUnpacked(
+  BtCursor *pCur,          /* The cursor to be moved */
+  UnpackedRecord *pIdxKey, /* Unpacked index key */
+  i64 intKey,              /* The table key */
+  int biasRight,           /* If true, bias the search to the high end */
+  int *pRes                /* Write search results here */
+  )
+  
+    pCur->curFlags |= BTCF_ValidNKey;
+    pCur->info.nKey = nCellKey;
+    pCur->info.nSize = 0;
+    *pRes = 0;
+
+pCur->info.nKey: table key (intKey).
+pIdxKey: UnpackedRecord , /* Unpacked index key */
+pCur->ix: index of a cell in page (idx). // ix = 0 => start cell.
+Get cell from index: pCell = findCellPastPtr(pPage, idx);
+Get intKey from cell: getVarint(pCell, (u64*)&nCellKey);// intKey is nCellKey
+Btree search base on intKey: from a page: leftindex = 0; upindex=pPage->nCell-1;
+    { 1: get cell from leftindex; 2 get intKey from cell; 3: compare intKey with inputIntKey; change search area}
+    If pIdxKey not is intKey, other compared algorithm invoke for comparison 
+
+pCur->aiIdx[pCur->iPage] = pCur->ix;//aiIdx[BTCURSOR_MAX_DEPTH-1];  /* Current index in apPage[i] */
+pCur->apPage[pCur->iPage] = pCur->pPage;//*apPage[BTCURSOR_MAX_DEPTH-1]; /* Stack of parents of current page */
+                                        // *pPage;                        /* Current page */
+pCur->ix = 0; //ix;                   /* Current index for apPage[iPage] */
+pCur->iPage++;//
+        curIntKey;             /* Value of apPage[0]->intKey *///
+        
+//======== Day 12/02 ===============
+/*
+** Potential values for BtCursor.eState.
+**
+** CURSOR_INVALID:
+**   Cursor does not point to a valid entry. This can happen (for example) 
+**   because the table is empty or because BtreeCursorFirst() has not been
+**   called.
+**
+** CURSOR_VALID:
+**   Cursor points to a valid entry. getPayload() etc. may be called.
+**
+** CURSOR_SKIPNEXT:
+**   Cursor is valid except that the Cursor.skipNext field is non-zero
+**   indicating that the next sqlite3BtreeNext() or sqlite3BtreePrevious()
+**   operation should be a no-op.
+**
+** CURSOR_REQUIRESEEK:
+**   The table that this cursor was opened on still exists, but has been 
+**   modified since the cursor was last used. The cursor position is saved
+**   in variables BtCursor.pKey and BtCursor.nKey. When a cursor is in 
+**   this state, restoreCursorPosition() can be called to attempt to
+**   seek the cursor to the saved position.
+**
+** CURSOR_FAULT:
+**   An unrecoverable error (an I/O error or a malloc failure) has occurred
+**   on a different connection that shares the BtShared cache with this
+**   cursor.
+
+
+//============= incrblob.test ===========
+! incrblob-1.2.4 expected: [49 50 51 52 53 54 55 56 57 48]
+! incrblob-1.2.4 got:      [1 2 3 4 5 6 7 8 9 10]
+read/write blob
+! incrblob-1.3.4 expected: [....123456]
+! incrblob-1.3.4 got:      [..........]
+read/write blob on overflow page.
+! incrblob-2.0.6 expected: [2]
+! incrblob-2.0.6 got:      [30]
+operations use ptrmap pages -> involve pages cache.
+! incrblob-2.1.5 expected: [4]
+! incrblob-2.1.5 got:      [30]
+! incrblob-2.1.6 expected: [2]
+! incrblob-2.1.6 got:      [31]
+! incrblob-2.1.9 expected: [4]
+! incrblob-2.1.9 got:      [5]
+! incrblob-6.3 expected: [1 {database is locked}]
+! incrblob-6.3 got:      [0 incrblob_12]
+! incrblob-6.4 expected: [1 {database is locked}]
+! incrblob-6.4 got:      [0 incrblob_13]
+opening a blob for write-access is impossible if another connection has the database RESERVED lock (in transaction): multi user.
+8 errors out of 59 tests on HAUND-PC Windows NT 32-bit little-endian
+!Failures on these tests: incrblob-1.2.4 incrblob-1.3.4 incrblob-2.0.6 incrblob-2.1.5 incrblob-2.1.6 incrblob-2.1.9 incrblob-6.3 incrblob-6.4
+ignor 6.7 -> 6.15.
+
+/**/
+! incrblob-2.0.6 expected: [2]
+! incrblob-2.0.6 got:      [30]
+! incrblob-2.1.5 expected: [4]
+! incrblob-2.1.5 got:      [30]
+! incrblob-2.1.6 expected: [2]
+! incrblob-2.1.6 got:      [31]
+! incrblob-2.1.9 expected: [4]
+! incrblob-2.1.9 got:      [5]
+incrblob-6.3...
+! incrblob-6.3 expected: [1 {database is locked}]
+! incrblob-6.3 got:      [0 incrblob_10]
+incrblob-6.4...
+! incrblob-6.4 expected: [1 {database is locked}]
+! incrblob-6.4 got:      [0 incrblob_11]
+6 errors out of 65 tests on HAUND-PC Windows NT 32-bit little-endian
+!Failures on these tests: incrblob-2.0.6 incrblob-2.1.5 incrblob-2.1.6 incrblob-2.1.9 incrblob-6.3 incrblob-6.4
+-> cache mechanism -> update test case.
+/** Release */
+10 errors out of 67 tests on HAUND-PC Windows NT 32-bit little-endian
+!Failures on these tests: incrblob-1.2.4 incrblob-1.3.4 incrblob-2.0.6 incrblob-2.1.5 incrblob-2.1.6 incrblob-2.1.9 incrblob-6.3 incrblob-6.4    incrblob-6.7 incrblob-6.8
+incrblob-6.7... (assert fail.)
+Error: error reading "incrblob_15": argument list too long
+! incrblob-6.8 expected: [10]
+! incrblob-6.8 got:      [0]
+! incrblob-6.8 got:      [0]
+
+incrblob-7.1.0...
+Error: database table is locked
+E:\E\Project\TinyBrace\SQLumDash\SQLumDash\testfixture.e
+//===================== SQLite shared cache
+incrblob-6.2...
+Error: database table is locked: blobs
+incrblob-6.3...
+! incrblob-6.3 expected: [1 {database is locked}]
+! incrblob-6.3 got:      [1 {database table is locked}]
+incrblob-6.4...
+! incrblob-6.4 expected: [1 {database is locked}]
+! incrblob-6.4 got:      [1 {database table is locked}]
+incrblob-6.5...
+Error: database table is locked: blobs
+incrblob-6.6...
+Error: can not find channel named "incrblob_10"
+incrblob-6.12...
+Error: database table is locked: blobs
+//=====================
++ forcecopy test.db testerr.db
+btree_from_db  DB-HANDLE returns the btree handle for the main database
+
+//============= Day 14 =======
+sqlite3_blob_read $::b 5000 5
+>	testfixture.exe!blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 391	C
+ 	testfixture.exe!sqlite3_blob_read(sqlite3_blob * pBlob, void * z, int n, int iOffset) Line 446	C
+ 	testfixture.exe!test_blob_read(void * clientData, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 248	C
+++
+>	testfixture.exe!accessPayload(BtCursor * pCur, unsigned int offset, unsigned int amt, unsigned char * pBuf, int eOp) Line 4729	C
+ 	testfixture.exe!sqlite3BtreePayloadChecked(BtCursor * pCur, unsigned int offset, unsigned int amt, void * pBuf) Line 4959	C
+ 	testfixture.exe!blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 427	C
+ 	testfixture.exe!sqlite3_blob_read(sqlite3_blob * pBlob, void * z, int n, int iOffset) Line 446	C
+ 	testfixture.exe!test_blob_read(void * clientData, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 248	C
+++ abort 
+>	testfixture.exe!accessPayloadChecked(BtCursor * pCur, unsigned int offset, unsigned int amt, void * pBuf) Line 4947	C
+        if ( pCur->eState==CURSOR_INVALID ){
+            return SQLITE_ABORT;
+        }
+ 	testfixture.exe!sqlite3BtreePayloadChecked(BtCursor * pCur, unsigned int offset, unsigned int amt, void * pBuf) Line 4961	C
+ 	testfixture.exe!blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 427	C
+ 	testfixture.exe!sqlite3_blob_read(sqlite3_blob * pBlob, void * z, int n, int iOffset) Line 446	C
+ 	testfixture.exe!test_blob_read(void * clientData, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 248	C
+
+    SQLite:
+>	testfixture.exe!saveCursorPosition(BtCursor * pCur) Line 714	C
+ 	testfixture.exe!saveCursorsOnList(BtCursor * p, unsigned int iRoot, BtCursor * pExcept) Line 767	C
+ 	testfixture.exe!saveAllCursors(BtShared * pBt, unsigned int iRoot, BtCursor * pExcept) Line 749	C
+ 	testfixture.exe!sqlite3BtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 8582	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 4664	C
+
+//==== wrapper saveCursorPosition
+
+
+>	testfixture.exe!sqlite3BtreePayloadCheckedOriginal(BtCursor * pCur, unsigned int offset, unsigned int amt, void * pBuf) Line 4958	C
+ 	testfixture.exe!sqlite3BtreePayloadChecked(BtCursor * pCur, unsigned int offset, unsigned int amt, void * pBuf) Line 2738	C
+ 	testfixture.exe!blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 427	C
+ 	testfixture.exe!sqlite3_blob_read(sqlite3_blob * pBlob, void * z, int n, int iOffset) Line 446	C
+ 	testfixture.exe!test_blob_read(void * clientData, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 248	C
+
+    aaaaaaaaaaaaaa pCurDel
+>	testfixture.exe!saveCursorsOnList(BtCursor * p, unsigned int iRoot, BtCursor * pExcept) Line 773	C
+ 	testfixture.exe!saveAllCursors(BtShared * pBt, unsigned int iRoot, BtCursor * pExcept) Line 749	C
+    === save pCur.nKey (table key)
+ 	testfixture.exe!sqlite3BtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 8599	C
+ 	testfixture.exe!sqlite3TransBtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 1036	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 4711	C
+ 	testfixture.exe!sqlite3StepOriginal(Vdbe * p) Line 637	C
+
+    aaaaaa pCurIns
+    testfixture.exe!saveCursorsOnList(BtCursor * p, unsigned int iRoot, BtCursor * pExcept) Line 766	C
+ 	testfixture.exe!saveAllCursors(BtShared * pBt, unsigned int iRoot, BtCursor * pExcept) Line 749	C
+ 	testfixture.exe!sqlite3BtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 8599	C
+ 	testfixture.exe!sqlite3TransBtreeInsert(BtCursor * pCur, const BtreePayload * pX, int flags, int seekResult) Line 1040	C
+>	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 4711	C
+
+
+
+
+
+read ::blob
+>	accessPayload(BtCursor * pCur, unsigned int offset, unsigned int amt, unsigned char * pBuf, int eOp) Line 4747	C
+ 	sqlite3BtreePayloadChecked(BtCursor * pCur, unsigned int offset, unsigned int amt, void * pBuf) Line 4956	C
+ 	blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 427	C
+ 	sqlite3_blob_read(sqlite3_blob * pBlob, void * z, int n, int iOffset) Line 446	C
+ 	incrblobInput(void * instanceData, char * buf, int bufSize, int * errorCodePtr) Line 283	C
+
+write ::blob
+>	accessPayload(BtCursor * pCur, unsigned int offset, unsigned int amt, unsigned char * pBuf, int eOp) Line 4731	C
+ 	sqlite3BtreePutDataOriginal(BtCursor * pCsr, unsigned int offset, unsigned int amt, void * z) Line 10361	C
+ 	sqlite3BtreePutDataAll(BtCursor * pCur, unsigned int offset, unsigned int amt, void * z) Line 2793	C
+ 	sqlite3BtreePutData(BtCursor * pCsr, unsigned int offset, unsigned int amt, void * z) Line 84	C
+ 	blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 427	C
+ 	sqlite3_blob_write(sqlite3_blob * pBlob, const void * z, int n, int iOffset) Line 453	C
+ 	incrblobOutput(void * instanceData, const char * buf, int toWrite, int * errorCodePtr) Line 318	C
+
+    
+int sqlite3BtreePayloadChecked(BtCursor *pCur, u32 offset, u32 amt, void *pBuf){
+  //return sqlite3BtreePayloadCheckedOriginal(pCur, offset, amt, pBuf);
+  if( !transBtreeCursorIsUsed(pCur) ){
+    return sqlite3BtreePayloadCheckedOriginal(pCur, offset, amt, pBuf);
+  } else {
+    int rc = SQLITE_OK;
+    BtCursorTrans *pCurTrans = &pCur->btCurTrans;
+    BtCursor *pCurIns = pCurTrans->pCurIns;
+    rc = sqlite3BtreePayloadCheckedOriginal(pCurIns, offset, amt, pBuf);
+    if (rc) return sqlite3BtreePayloadCheckedOriginal(pCur, offset, amt, pBuf);
+    return rc;
+  }
+}
+
+#define BTCF_WriteFlag    0x01   /* True if a write cursor */
+#define BTCF_ValidNKey    0x02   /* True if info.nKey is valid */
+#define BTCF_ValidOvfl    0x04   /* True if aOverflow is valid */
+#define BTCF_AtLast       0x08   /* Cursor is pointing ot the last entry */
+#define BTCF_Incrblob     0x10   /* True if an incremental I/O handle */
+#define BTCF_Multiple     0x20   /* Maybe another cursor on the same btree */
+
+
+
+>	testfixture.exe!saveCursorPosition(BtCursor * pCur) Line 715	C
+ 	testfixture.exe!saveCursorsOnList(BtCursor * p, unsigned int iRoot, BtCursor * pExcept) Line 768	C
+ 	testfixture.exe!saveAllCursors(BtShared * pBt, unsigned int iRoot, BtCursor * pExcept) Line 750	C
+ 	testfixture.exe!sqlite3BtreeDelete(BtCursor * pCur, unsigned char flags) Line 8892	C
+ 	testfixture.exe!transBtreeCommitTableDelete(BtCursor * pCur, TransRootPage * pRootPage) Line 2330	C
+ 	testfixture.exe!sqlite3TransBtreeCommit(Btree * p) Line 2600	C
+ 	testfixture.exe!sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3976	C
+ 	testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2528	C
+ 	testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2934	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 1061	C
+
+    
+>	testfixture.exe!invalidateIncrblobCursors(Btree * pBtree, unsigned int pgnoRoot, __int64 iRow, int isClearTable) Line 545	C
+ 	testfixture.exe!sqlite3BtreeDelete(BtCursor * pCur, unsigned char flags) Line 8899	C
+ 	testfixture.exe!transBtreeCommitTableDelete(BtCursor * pCur, TransRootPage * pRootPage) Line 2330	C
+** 	testfixture.exe!sqlite3TransBtreeCommit(Btree * p) Line 2600	C
+ 	testfixture.exe!sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3976	C
+ 	testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2528	C
+ 	testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2934	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 1061	C
+
+    
+    insert cusor.
+ 	testfixture.exe!btreeCursor(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 4400	C
+ 	testfixture.exe!sqlite3BtreeCursorOriginal(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 4414	C
+ 	testfixture.exe!sqlite3BtreeCursorAll(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur, int flag) Line 793	C =====
+ 	testfixture.exe!exclusiveLockTables(Btree * p) Line 2486	C
+>	testfixture.exe!sqlite3TransBtreeCommit(Btree * p) Line 2550	C: move data from bt trans to bt share.
+ 	testfixture.exe!sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3976	C
+ 	testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2528	C
+ 	testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2934	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 1061	C
+
+    
+    delete cursor
+     	testfixture.exe!btreeCursor(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 4400	C
+ 	testfixture.exe!sqlite3BtreeCursorOriginal(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 4414	C
+>	testfixture.exe!transBtreeCursor(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 743	C
+ 	testfixture.exe!sqlite3BtreeCursorAll(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur, int flag) Line 805	C =====
+ 	testfixture.exe!exclusiveLockTables(Btree * p) Line 2486	C
+ 	testfixture.exe!sqlite3TransBtreeCommit(Btree * p) Line 2550	C
+ 	testfixture.exe!sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3976	C
+ 	testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2528	C
+ 	testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2934	C
+
+    
+    
+//
+=== Start open blob handle
+blobSeekToRow => rc = sqlite3_step(p->pStmt);
+   0 Init             0    1    0               00 Start at 1
+   1 Transaction      0    1    1 0             01
+   2 TableLock        0    2    1 t3            00 iDb=0 root=2 write=1
+   3 OpenWrite        0    2    0 4             00 root=2 iDb=0   
+   4 NotExists        0    7    1               00 intkey=r[1]
+   5 Column           0    3    1               00 r[1]=
+   6 ResultRow        1    0    0               00 output=r[1]
+//=======
+>	testfixture.exe!sqlite3_blob_open(sqlite3 * db, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int wrFlag, sqlite3_blob * * ppBlob) Line 331	C
+    blobSeekToRow: set for ppBlob->pCsr.
+ 	testfixture.exe!test_blob_open(void * clientData, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 134	C
+// incrblob.
+== open ==
+>	testfixture.exe!sqlite3BtreeIncrblobCursor(BtCursor * pCur) Line 141	C
+ 	testfixture.exe!blobSeekToRow(Incrblob * p, __int64 iRow, char * * pzErr) Line 92	C
+ 	testfixture.exe!sqlite3_blob_open(sqlite3 * db, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int wrFlag, sqlite3_blob * * ppBlob) Line 330	C
+ 	testfixture.exe!createIncrblobChannel(Tcl_Interp * interp, SqliteDb * pDb, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int isReadonly) Line 411	C
+ 	testfixture.exe!DbObjCmd(void * cd, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 2862	C
+
+    ==== Enter to function sqlite3_blob_open
+=== Arguments wrflag=1, blob=17823768
+    
+==
+>	sqlite3_blob_open_original(sqlite3 * db, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int wrFlag, sqlite3_blob * * ppBlob) Line 155	C
+ 	sqlite3_blob_open(sqlite3 * db, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int wrFlag, sqlite3_blob * * ppBlob) Line 2634	C
+ 	createIncrblobChannel(Tcl_Interp * interp, SqliteDb * pDb, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int isReadonly) Line 411	C
+ 	DbObjCmd(void * cd, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 2862	C
+    
+    
+//================= Day 21/02 ===================
+fprintf(stdout, "=== Enter to function %s\n", __FUNCTION__);
+fprintf(stdout, " == pPager->nwrite = %d\n", pPager->aStat[PAGER_STAT_WRITE]);
+fflush(stdout);
+
+! incrblob-2.0.6 expected: [2]
+! incrblob-2.0.6 got:      [30]
+a[10] = pPager->aStat[PAGER_STAT_WRITE]; -> page cache mechanism.
+Number of dirty cache is different: pager_write_pagelist_original
+! incrblob-2.1.5 expected: [4]
+! incrblob-2.1.5 got:      [30]
+--> Same as autovacum = 0, may be autovacum only affect on bt trans.
+! incrblob-2.1.6 expected: [2]
+! incrblob-2.1.6 got:      [31]
+a[10] = pPager->aStat[PAGER_STAT_WRITE]; -> page cache mechanism.
+! incrblob-2.1.9 expected: [4]
+! incrblob-2.1.9 got:      [5]
+--> Select on sqlumdash different on sqlite.
+
+sqlite3_db_status
+**  set bt [btree_from_db $db]
+>	testfixture.exe!btree_from_db(void * NotUsed, Tcl_Interp * interp, int argc, const char * * argv) Line 547	C
+    sqlite3_snprintf(sizeof(zBuf), zBuf, "%p", pBt); -> transform pBt pointer to str, return to bt.
+
+**  array set stats [btree_pager_stats $bt]
+    // a = return p->pBt->pPager;
+>	testfixture.exe!sqlite3PagerStats(Pager * pPager) Line 6769	C
+ 	testfixture.exe!btree_pager_stats(void * NotUsed, Tcl_Interp * interp, int argc, const char * * argv) Line 177	C
+    
+  a[6] = pPager->aStat[PAGER_STAT_HIT];
+  a[7] = pPager->aStat[PAGER_STAT_MISS];
+  a[8] = 0;  /* Used to be pPager->nOvfl */
+  a[9] = pPager->nRead;
+  a[10] = pPager->aStat[PAGER_STAT_WRITE]; // PAGER_STAT_WRITE = 2
+
+  
+>	testfixture.exe!sqlite3PagerCacheStat(Pager * pPager, int eStat, int reset, int * pnVal) Line 6809	C
+ 	testfixture.exe!sqlite3_db_status(sqlite3 * db, int op, int * pCurrent, int * pHighwater, int resetFlag) Line 354	C
+ 	testfixture.exe!test_db_status(void * clientData, Tcl_Interp * interp, int objc, Tcl_Obj * const * objv) Line 1427	C
+
+  int aStat[4];               /* Total cache hits, misses, writes, spills */
+  
+incrblob 2.0.3:
+>	testfixture.exe!readDbPage(PgHdr * pPg) Line 3086	C
+ 	testfixture.exe!getPageNormal(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5553	C
+ 	testfixture.exe!sqlite3PagerGet(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5668	C
+ 	testfixture.exe!btreeGetPage(BtShared * pBt, unsigned int pgno, MemPage * * ppPage, int flags) Line 2105	C
+ 	testfixture.exe!lockBtree(BtShared * pBt) Line 3063	C
+ 	testfixture.exe!sqlite3BtreeBeginTransOriginal(Btree * p, int wrflag, int * pSchemaVersion) Line 3436	C
+ 	testfixture.exe!sqlite3BtreeBeginTransAll(Btree * p, int wrflag, int * pSchemaVersion) Line 2103	C
+ 	testfixture.exe!sqlite3BtreeBeginTrans(Btree * p, int wrflag, int * pSchemaVersion) Line 31	C
+ 	testfixture.exe!sqlite3InitOne(sqlite3 * db, int iDb, char * * pzErrMsg, unsigned int mFlags) Line 212	C
+ 	testfixture.exe!sqlite3Init(sqlite3 * db, char * * pzErrMsg) Line 397	C
+ 	testfixture.exe!sqlite3ReadSchema(Parse * pParse) Line 423	C
+ 	testfixture.exe!sqlite3LocateTable(Parse * pParse, unsigned int flags, const char * zName, const char * zDbase) Line 355	C
+ 	testfixture.exe!sqlite3_blob_open(sqlite3 * db, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int wrFlag, sqlite3_blob * * ppBlob) Line 160	C
+ 	testfixture.exe!createIncrblobChannel(Tcl_Interp * interp, SqliteDb * pDb, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int isReadonly) Line 409	C
+
+    
+>	testfixture.exe!readDbPage(PgHdr * pPg) Line 3086	C
+ 	testfixture.exe!getPageNormal(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5553	C
+ 	testfixture.exe!sqlite3PagerGet(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5668	C
+ 	testfixture.exe!getAndInitPage(BtShared * pBt, unsigned int pgno, MemPage * * ppPage, BtCursor * pCur, int bReadOnly) Line 2170	C
+ 	testfixture.exe!moveToRoot(BtCursor * pCur) Line 5157	C
+ 	testfixture.exe!sqlite3BtreeLast(BtCursor * pCur, int * pRes) Line 5320	C
+ 	testfixture.exe!sqlite3BtreeLastAll(BtCursor * pCur, int * pRes) Line 1285	C
+ 	testfixture.exe!sqlite3BtreeCachedRowidSetByOpenCursor(BtCursor * pCur) Line 2044	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 3618	C
+ 	testfixture.exe!sqlite3StepOriginal(Vdbe * p) Line 637	C
+ 	testfixture.exe!sqlite3Step(Vdbe * p) Line 19	C
+ 	testfixture.exe!sqlite3_step(sqlite3_stmt * pStmt) Line 703	C
+ 	testfixture.exe!blobSeekToRow(Incrblob * p, __int64 iRow, char * * pzErr) Line 74	C
+ 	testfixture.exe!sqlite3_blob_open(sqlite3 * db, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int wrFlag, sqlite3_blob * * ppBlob) Line 330	C
+ 	testfixture.exe!createIncrblobChannel(Tcl_Interp * interp, SqliteDb * pDb, const char * zDb, const char * zTable, const char * zColumn, __int64 iRow, int isReadonly) Line 409	C
+
+4    >	testfixture.exe!readDbPage(PgHdr * pPg) Line 3086	C
+ 	testfixture.exe!getPageNormal(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5553	C
+ 	testfixture.exe!sqlite3PagerGet(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5668	C
+ 	testfixture.exe!btreeGetPage(BtShared * pBt, unsigned int pgno, MemPage * * ppPage, int flags) Line 2105	C
+ 	testfixture.exe!getOverflowPage(BtShared * pBt, unsigned int ovfl, MemPage * * ppPage, unsigned int * pPgnoNext) Line 4648	C
+ 	testfixture.exe!accessPayload(BtCursor * pCur, unsigned int offset, unsigned int amt, unsigned char * pBuf, int eOp) Line 4837	C
+ 	testfixture.exe!sqlite3BtreePayloadOriginal(BtCursor * pCur, unsigned int offset, unsigned int amt, void * pBuf) Line 4930	C
+ 	testfixture.exe!sqlite3BtreePayloadAll(BtCursor * pCur, unsigned int offset, unsigned int amt, void * pBuf) Line 1924	C
+ 	testfixture.exe!sqlite3BtreePayloadChecked(BtCursor * pCur, unsigned int offset, unsigned int amt, void * pBuf) Line 200	C
+ 	testfixture.exe!blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 427	C
+ 	testfixture.exe!sqlite3_blob_read(sqlite3_blob * pBlob, void * z, int n, int iOffset) Line 446	C
+ 	testfixture.exe!incrblobInput(void * instanceData, char * buf, int bufSize, int * errorCodePtr) Line 283	C
+
+    
+    
+/*************************
+ * 2.0.6||2.1.6: close blob handle:
+ * nwrite is get from pPager->aStat[PAGER_STAT_WRITE], that increment in pager_write_pagelist function(),
+ when commit action ocurs, pPager->aStat[PAGER_STAT_WRITE] increment a mount corresponding
+ to number of dirty page in pCache.
+ Because the mechanism accessing cache has been changed, so number of dirty page also changed.
+ So, I think that isn't bugs.
+ **************************
+// SQLite 
+>	testfixture.exe!pager_write_pagelist(Pager * pPager, PgHdr * pList) Line 4493	C
+ 	testfixture.exe!sqlite3PagerCommitPhaseOne(Pager * pPager, const char * zMaster, int noSync) Line 6564	C
+ 	testfixture.exe!sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3987	C
+ 	testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2525	C [LOOP 2]
+ 	testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2926	C
+ 	testfixture.exe!sqlite3VdbeReset(Vdbe * p) Line 3101	C
+ 	testfixture.exe!sqlite3VdbeFinalize(Vdbe * p) Line 3183	C
+    
+    
+    
+    >	testfixture.exe!pager_write_pagelist(Pager * pPager, PgHdr * pList) Line 4493	C
+ 	testfixture.exe!sqlite3PagerCommitPhaseOne(Pager * pPager, const char * zMaster, int noSync) Line 6564	C
+ 	testfixture.exe!sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3987	C
+ 	testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2525	C
+ 	testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2926	C
+ 	testfixture.exe!sqlite3VdbeReset(Vdbe * p) Line 3101	C
+ 	testfixture.exe!sqlite3VdbeFinalize(Vdbe * p) Line 3183	C
+ 	testfixture.exe!sqlite3_finalize(sqlite3_stmt * pStmt) Line 111	C
+ 	testfixture.exe!sqlite3_blob_close(sqlite3_blob * pBlob) Line 360	C
+
+// SQLumdash: number of dirty page:p->pDirty
+
+>	testfixture.exe!pager_write_pagelist_original(Pager * pPager, PgHdr * pList) Line 4505	C
+ 	testfixture.exe!pager_write_pagelist(Pager * pPager, PgHdr * pList) Line 50	C
+ 	testfixture.exe!sqlite3PagerCommitPhaseOne(Pager * pPager, const char * zMaster, int noSync) Line 6572	C
+ 	testfixture.exe!sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3988	C
+ 	testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2528	C
+ 	testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2934	C
+ 	testfixture.exe!sqlite3VdbeReset(Vdbe * p) Line 3113	C
+ 	testfixture.exe!sqlite3VdbeFinalize(Vdbe * p) Line 3195	C
+ 	testfixture.exe!sqlite3_finalize(sqlite3_stmt * pStmt) Line 113	C
+ 	testfixture.exe!sqlite3_blob_close(sqlite3_blob * pBlob) Line 360	C
+
+    
+    
+    
+    testfixture.exe!pager_write_pagelist_original(Pager * pPager, PgHdr * pList) Line 4505	C
+ 	testfixture.exe!pager_write_pagelist(Pager * pPager, PgHdr * pList) Line 50	C
+ 	testfixture.exe!sqlite3PagerCommitPhaseOne(Pager * pPager, const char * zMaster, int noSync) Line 6572	C
+ 	testfixture.exe!sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3988	C
+>	testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2528	C
+ 	testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2934	C
+ 	testfixture.exe!sqlite3VdbeReset(Vdbe * p) Line 3113	C
+ 	testfixture.exe!sqlite3VdbeFinalize(Vdbe * p) Line 3195	C
+ 	testfixture.exe!sqlite3_finalize(sqlite3_stmt * pStmt) Line 113	C
+ 	testfixture.exe!sqlite3_blob_close(sqlite3_blob * pBlob) Line 360	C
+
+    
+    
+>	
+    pager_write_pagelist_original(Pager * pPager, PgHdr * pList) Line 4505	C
+        while( rc==SQLITE_OK && pList ) { nwrite++;
+        }
+ 	pager_write_pagelist(Pager * pPager, PgHdr * pList) Line 50	C
+ 	sqlite3PagerCommitPhaseOne(Pager * pPager, const char * zMaster, int noSync) Line 6572	C
+ 	sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3988	C
+ 	vdbeCommit(sqlite3 * db, Vdbe * p) Line 2528	C
+ 	sqlite3VdbeHalt(Vdbe * p) Line 2934	C
+ 	sqlite3VdbeReset(Vdbe * p) Line 3113	C
+ 	sqlite3VdbeFinalize(Vdbe * p) Line 3195	C
+ 	sqlite3_finalize(sqlite3_stmt * pStmt) Line 113	C
+ 	sqlite3_blob_close(sqlite3_blob * pBlob) Line 360	C
+
+    
+    
+    
+    
+testfixture.exe!btreeCursor(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 4400	C
+ 	testfixture.exe!sqlite3BtreeCursorOriginal(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 4414	C
+ 	testfixture.exe!sqlite3BtreeCursorAll(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur, int flag) Line 793	C =====
+ 	testfixture.exe!exclusiveLockTables(Btree * p) Line 2486	C
+>	testfixture.exe!sqlite3TransBtreeCommit(Btree * p) Line 2550	C: move data from bt trans to bt share.
+ 	testfixture.exe!sqlite3BtreeCommitPhaseOne(Btree * p, const char * zMaster) Line 3976	C
+ 	testfixture.exe!vdbeCommit(sqlite3 * db, Vdbe * p) Line 2528	C
+ 	testfixture.exe!sqlite3VdbeHalt(Vdbe * p) Line 2934	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 1061	C
+    
+    
+/// write blob access to page.
+>	testfixture.exe!readDbPage(PgHdr * pPg) Line 3086	C
+ 	testfixture.exe!getPageNormal(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5559	C
+ 	testfixture.exe!sqlite3PagerGet(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5674	C
+ 	testfixture.exe!accessPayload(BtCursor * pCur, unsigned int offset, unsigned int amt, unsigned char * pBuf, int eOp) Line 4881	C
+ 	testfixture.exe!sqlite3BtreePayloadOriginal(BtCursor * pCur, unsigned int offset, unsigned int amt, void * pBuf) Line 4930	C
+ 	testfixture.exe!sqlite3BtreePutDataAll(BtCursor * pCur, unsigned int offset, unsigned int amt, void * z) Line 2700	C
+ 	testfixture.exe!sqlite3BtreePutData(BtCursor * pCsr, unsigned int offset, unsigned int amt, void * z) Line 88	C
  	testfixture.exe!blobReadWrite(sqlite3_blob * pBlob, void * z, int n, int iOffset, int(*)(BtCursor *, unsigned int, unsigned int, void *) xCall) Line 427	C
  	testfixture.exe!sqlite3_blob_write(sqlite3_blob * pBlob, const void * z, int n, int iOffset) Line 453	C
- 	testfixture.exe!incrblobOutput(void * instanceData, const char * buf, int toWrite, int * errorCodePtr) Line 316	C
-    
-    
-[
-if( (pCsr->curFlags & BTCF_WriteFlag)==0 ){// pCsr->curFlags = 18.
-    return SQLITE_READONLY;
-  }
-]
-
-
-
+ 	testfixture.exe!incrblobOutput(void * instanceData, const char * buf, int toWrite, int * errorCodePtr) Line 318	C
 
     
     
+    
+#if defined(SQLITE_DEBUG)
+    sqlite3PcacheIterateDirty(PCache *pCache, void (*xIter)(PgHdr *));
+#endif
 
+
+
+Transaction 
+
+
+>	testfixture.exe!sqlite3PcacheList(PCache * pCache) Line 927	C
+ 	testfixture.exe!sqlite3PcacheFetch(PCache * pCache, unsigned int pgno, int createFlag) Line 399	C
+ 	testfixture.exe!getPageNormal(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5497	C
+ 	testfixture.exe!sqlite3PagerGet(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5676	C
+ 	testfixture.exe!btreeGetPage(BtShared * pBt, unsigned int pgno, MemPage * * ppPage, int flags) Line 2105	C
+ 	testfixture.exe!lockBtree(BtShared * pBt) Line 3063	C
+ 	testfixture.exe!sqlite3BtreeBeginTransOriginal(Btree * p, int wrflag, int * pSchemaVersion) Line 3436	C
+ 	testfixture.exe!sqlite3BtreeBeginTransAll(Btree * p, int wrflag, int * pSchemaVersion) Line 2103	C
+ 	testfixture.exe!sqlite3BtreeBeginTrans(Btree * p, int wrflag, int * pSchemaVersion) Line 31	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 3293	C
+ 	testfixture.exe!sqlite3StepOriginal(Vdbe * p) Line 637	C
+ 	testfixture.exe!sqlite3Step(Vdbe * p) Line 19	C
+ 	testfixture.exe!sqlite3_step(sqlite3_stmt * pStmt) Line 703	C
+ 	testfixture.exe!dbEvalStep(DbEvalContext * p) Line 1670	C
+
+    
+    
+    
+    
+>	testfixture.exe!sqlite3PcacheList(PCache * pCache) Line 927	C
+ 	testfixture.exe!sqlite3PcacheFetch(PCache * pCache, unsigned int pgno, int createFlag) Line 399	C
+ 	testfixture.exe!getPageNormal(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5497	C
+ 	testfixture.exe!sqlite3PagerGet(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5676	C
+ 	testfixture.exe!btreeGetPage(BtShared * pBt, unsigned int pgno, MemPage * * ppPage, int flags) Line 2105	C
+ 	testfixture.exe!lockBtree(BtShared * pBt) Line 3063	C
+ 	testfixture.exe!sqlite3BtreeBeginTransOriginal(Btree * p, int wrflag, int * pSchemaVersion) Line 3436	C
+ 	testfixture.exe!sqlite3TransBtreeBeginTrans(Btree * p, int wrflag) Line 313	C
+ 	testfixture.exe!sqlite3BtreeBeginTransAll(Btree * p, int wrflag, int * pSchemaVersion) Line 2107	C
+ 	testfixture.exe!sqlite3BtreeBeginTrans(Btree * p, int wrflag, int * pSchemaVersion) Line 31	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 3293	C
+ 	testfixture.exe!sqlite3StepOriginal(Vdbe * p) Line 637	C
+ 	testfixture.exe!sqlite3Step(Vdbe * p) Line 19	C
+ 	testfixture.exe!sqlite3_step(sqlite3_stmt * pStmt) Line 703	C
+ 	testfixture.exe!dbEvalStep(DbEvalContext * p) Line 1670	C
+================================================================
+
+>	testfixture.exe!sqlite3PcacheFetch(PCache * pCache, unsigned int pgno, int createFlag) Line 378	C
+ 	testfixture.exe!getPageNormal(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5497	C
+ 	testfixture.exe!sqlite3PagerGet(Pager * pPager, unsigned int pgno, PgHdr * * ppPage, int flags) Line 5676	C
+ 	testfixture.exe!btreeGetPage(BtShared * pBt, unsigned int pgno, MemPage * * ppPage, int flags) Line 2105	C
+ 	testfixture.exe!btreeGetUnusedPage(BtShared * pBt, unsigned int pgno, MemPage * * ppPage, int flags) Line 2249	C
+ 	testfixture.exe!allocateBtreePage(BtShared * pBt, MemPage * * ppPage, unsigned int * pPgno, unsigned int nearby, unsigned char eMode) Line 6154	C
+ 	testfixture.exe!btreeCreateTable(Btree * p, int * piTable, int createTabFlags) Line 9132	C
+ 	testfixture.exe!sqlite3BtreeCreateTableOriginal(Btree * p, int * piTable, int flags) Line 9151	C
+ 	testfixture.exe!sqlite3TransBtreeCreateTable(Btree * p, int iTable, KeyInfo * pKeyInfo, TransRootPage * * ppRootPage) Line 393	C
+ 	testfixture.exe!transBtreeCursor(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 727	C
+ 	testfixture.exe!sqlite3BtreeCursorAll(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur, int flag) Line 808	C
+ 	testfixture.exe!sqlite3BtreeCursor(Btree * p, int iTable, int wrFlag, KeyInfo * pKeyInfo, BtCursor * pCur) Line 50	C
+ 	testfixture.exe!sqlite3VdbeExec(Vdbe * p) Line 3603	C
+ 	testfixture.exe!sqlite3StepOriginal(Vdbe * p) Line 637	C
+ 	testfixture.exe!sqlite3Step(Vdbe * p) Line 19	C
+
+    
+    
+    rc = btreeGetUnusedPage(pBt, *pPgno, ppPage, bNoContent);
+    if( rc ) return rc;
+    rc = sqlite3PagerWrite((*ppPage)->pDbPage);
+    
+    
+>	testfixture.exe!sqlite3PcacheMakeDirty(PgHdr * p) Line 577	C
+ 	testfixture.exe!pager_write(PgHdr * pPg) Line 6010	C
+ 	testfixture.exe!sqlite3PagerWrite(PgHdr * pPg) Line 6176	C
+ 	testfixture.exe!allocateBtreePage(BtShared * pBt, MemPage * * ppPage, unsigned int * pPgno, unsigned int nearby, unsigned char eMode) Line 6156	C
+ 	
+    
+    
+    
+    
+    
+    
+    
+  fprintf(stdout, "============== Before commit table insert ==============\n");
+  fprintf(stdout, " ==== Cache of bt share ===\n");
+  getCacheInformation((Pager*)pCur->pBt->pPager);
+  fprintf(stdout, " ==== Cache of bt trans ===\n");
+  getCacheInformation((Pager*)pCurIns->pBt->pPager);
+  
+  
+/*
+ * 2.1.5: issue about nread of ptr page map that get from pPager->nRead.
+ * The value of pPager->nReader is the same in both auto_vacum = 0 and auto_vacum = 1.
+ * because auto_vacum no op on sqlumdash??
+ ********/
+ btree_from_db -> process in btree_from_db function in test3.c file.
+ btree_pager_stats -> process in btree_pager_stats function in test3.c file.
+ stats(page) return value of page cache number.
+ 
+ sqlite3BtreePager(pBt) return return p->pBt->pPager;// Return the pager associated with a BTree
+ sqlite3PagerStats(Pager *pPager)
+     sqlite3PcachePagecount(PCache *pCache)
+         pcache1Pagecount(sqlite3_pcache *p): return ((PCache1*)p)->nPage
+     
+ zName[] = {
+       "ref", "page", "max", "size", "state", "err",
+       "hit", "miss", "ovfl", "read", "write"
+     };
+ stats(page) return value of page cache number.                            
+ PRAGMA lock_status;

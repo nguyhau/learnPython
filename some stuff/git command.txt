@@ -99,6 +99,8 @@ git stash list: list all stash
 git stash show stash{..}: show changed file name list.
 git stash show -p stash{...}: show change of that stash.
 git checkout stash@{0} -- <filename>: checkout specific file from stash{0}
+git stash drop or git stash drop stash@{n}: drop a stash.
+git diff stash@{0}^! -- <filename>: show the change on a specific file on a stash {0}
 /******************************************************************************
  *      SSH tool
  ******************************************************************************/
