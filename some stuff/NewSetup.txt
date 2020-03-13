@@ -155,6 +155,7 @@ compare error: total,
    git push --mirror http://vc1.tsdv.com.vn/git/tinybrace/sqlumdash.git
 
 http://www.brendangregg.com/
+link_library
 visual_code_tut
 super_tut
 Redirect_tut
@@ -194,7 +195,12 @@ Config_VisualGDB
 Fuego_tut
 unsecure_pdf
 Solve_git_conflict
-auto_capture
+auto_capture 
+/**********************************************
+ * link_library 
+ ************************************/
+ Create lib:
+ 
 /**********************************************
  * super_tut 
  ************************************/
@@ -346,6 +352,12 @@ Tell git ignore permission: git config core.filemode false
  *   config git proxy: http://shrek.tsdv.com.vn/wiki/index.php/Howto
  *************************************************************************/ 
 
+/***** 
+ * svn_tut
+ ******************************/
+ - config diff tool: https://blog.tplus1.com/blog/2007/08/29/how-to-use-vimdiff-as-the-subversion-diff-tool/
+ - command: https://backlog.com/git-tutorial/reference/commands/
+ - check out specific version: svn up -r versionID
 /**********************************************************************************
  * Check_hard_soft_ware 
  **********************************************************************************/
@@ -906,13 +918,19 @@ Determines the recovery behavior of the NFS client after an NFS request times ou
   
 https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-command-line
 /********************************************************************************
- * Build_dynamic library in linux
+ * Build_dynamic library in linux: https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_C_libraries.html
  ********************************************************************************/  
   gcc -fPIC -c TzcsUtil.c //-> create TzcsUtil.o with dynamic flag
   gcc -fPIC -c TzcsDisplay.c  //-> create TzcsDisplay.o with dynamic flag
   gcc -shared -Wl,-soname=libtzcs.so.1 -o libtzcs.so.1.0.0 TzcsUtil.o TzcsDisplay.o //-> create so file from object
   ln -snf libtzcs.so.1.0.0 libtzcs.so.1    //-> create softlink
   ln -snf libtzcs.so.1 libtzcs.so          //-> create softlink.
+  
+  Use share library:
+      -L{path to file containing library} -l${library name}
+   Ex: For example, if I have a library named libmine.so in /home/newhall/lib/ then I'd do the following to link it into my program: $ gcc -o myprog myprog.c  -L/home/newhall/lib -lmine 
+
+  
 /**/  
  kill -9 PID
  remove swap file (ls -la)
@@ -1067,7 +1085,7 @@ The option is a synonym for -fprofile-arcs -ftest-coverage (when compiling) and 
 	gcov tmp.cpp -m 	
  3'. Create html for visualize information 
 	gcovr -p -r . --html --html-details -o tmp.html
- 
+ gcc -EHM
  /*** Configure for aria ***/
  ./configure CFLAGS='-g -O2 -fprofile-arcs -ftest-coverage' CXXFLAGS='-g -O2 -fprofile-arcs -ftest-coverage'
  ./configure --disable-option-checking --disable-silent-rules --disable-dependency-tracking --disable-libtool-lock --disable-metalink --disable-epoll --disable-xmltest --disable-nls --disable-rpath CFLAGS='-g -fprofile-arcs -ftest-coverage' CXXFLAGS='-g -fprofile-arcs -ftest-coverage -fPIC'
@@ -1321,6 +1339,67 @@ Redirect both standard error and standard out messages to a log file: command > 
  -DDEBUG_GUI -DDEBUG_GUI
  indicator &>/dev/null &
  https://stackoverflow.com/questions/28774830/retrieve-physical-screen-size
+#	gcc -o mock test.c -I/home/haund/sqlumdash/include -lsqlumdashcl -L/home/haund/sqlumdash/lib
+CC = gcc
+IDIR = "../sqlumdash/include"
+CFLAGS = -I$(IDIR) -g -O0
+LIBS = -lsqlumdashcl
+LDIR = "../sqlumdash/lib"
+OBJ = src/utility.o src/shell.o
+
+%.o: %.c 
+	$(CC) -c -o $@ $< $(CFLAGS) -DSQLUMDASH -DHAVE_READLINE 
+
+shellcs: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS) -L$(LDIR) -lreadline
+clean:
+	rm -f src/*.o shellcs
+install: shellcs
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	cp $< $(DESTDIR)$(PREFIX)/bin/shellcs
+uninstall:
+	rm -f $(DESTDIR)$(PREFIX)/bin/shellcs
+
+    =IF($F15<>"",WORKDAY($H15,$F15),"")
+ 
+ 
+ 
+#gcc -g src/*.c -o indicator -I include -lpthread -lX11 -lXrandr -ltzcs -ltzcs-security -ludev `pkg-config --cflags --libs gtk+-2.0`
+# Set app name
+	TARGET=indicator
+# Compiler
+	#CC = gcc
+# Debug
+# Warnings
+	WARN=-Wall -g -DENABLE_CTRLPANEL -DMAKE_FULLSCREEN -DDEBUG_MONITOR -std=gnu99 -DDEBUG_GUI 
+# Linker
+	INCLUDE_DIRS= include
+	VPATH = src include
+	LD_TZCS= pthread X11 Xrandr tzcs tzcs-security udev rt
+	CFLAGS += $(addprefix -I $(PWD)/,$(INCLUDE_DIRS))
+	LDFLAGS+= $(addprefix -l,$(LD_TZCS)) 
+# Add gtk package to linker
+	LINUX_PACKAGES:= gtk+-2.0
+	PACKAGE_CFLAGS := $(foreach pkg,$(LINUX_PACKAGES),$(shell pkg-config --cflags $(pkg)))
+	PACKAGE_LDFLAGS := $(foreach pkg,$(LINUX_PACKAGES),$(shell pkg-config --libs $(pkg)))
+	CFLAGS += $(PACKAGE_CFLAGS)
+	LDFLAGS += $(PACKAGE_LDFLAGS)
+# Config
+	MKDIR_P = mkdir -p
+	BINARYDIR= build
+	SOURCES = $(shell ls 'src'|grep '.c')
+	OBJECTS = $(subst .c,.o,$(SOURCES))
+	DEPS = helper.h
+	ALL_OBJS:= $(addprefix $(BINARYDIR)/, $(OBJECTS))
+# Create
+$(BINARYDIR)/$(TARGET): $(ALL_OBJS) 
+	$(CC) -o $@ $^ $(LDFLAGS)
+$(BINARYDIR)/%.o: %.c $(DEPS)
+	@mkdir -p $(@D)
+	$(CC) -c -o $@ $< $(CFLAGS) $(WARN)
+clean:
+	rm -rf $(BINARYDIR)
+    
  
 /** Create ssh_tut key **/ 
  ssh-keygen -t rsa
@@ -2849,7 +2928,15 @@ make clean; make;
 ./configure --prefix=/home/nguyhau/project/opal/opal-3.10.10/build PTLIB_CFLAGS="/home/nguyhau/project/opal/ptlib-2.10.10/include" PTLIB_LIBS="/home/nguyhau/project/opal/ptlib-2.10.10/lib_linux_x86_64"
 ./configure --prefix=/home/nguyhau/project/opal/opal-3.10.10/build PTLIB_CFLAGS="/home/nguyhau/project/opal/ptlib-2.10.10/build/include" PTLIB_LIBS="/home/nguyhau/project/opal/ptlib-2.10.10/build/lib"
 
- 
+
+/***************
+ * Add library_tut: ./configure CFLAGS="-I/usr/local/include" LDFLAGS="-L/usr/local/lib"
+ **********************************/ 
+ or:
+ export CPATH=/usr/local/include
+ export LIBRARY_PATH=/usr/local/lib
+ export LD_LIBRARY_PATH=/usr/local/lib
+
 indicator:
 + support synchronize vertical extend on indicatr.
 + support three screen: add new layout, synchronizing audio sound when monitor switched by xfce.
@@ -3222,8 +3309,10 @@ open csv file by excel and plot graph.
   - Alt + ->/<- for navigate source code
   - Ctrl + K + C/U for comment/uncomment source code
   ================ For disable SSL verifies ====================[setting.json file]
+  
   "http.proxy": "http://haund:Abcd1234@proxy1.tsdv.com.vn:3128",
   "http.proxyStrictSSL": false,
+  
 /*
  * Config for remote debug:
  ***/
@@ -3277,6 +3366,12 @@ open csv file by excel and plot graph.
     //         "request": "launch",
     //         "program": "/home/haund/Project/TinyBrace/SQLumdashCS/SQLumDashCS/sqlumdash/bin/sqlumdash",
     //         "cwd": "${workspaceRoot}"
+    //         "environment": [
+    //                     {
+    //                         "name":  "LD_LIBRARY_PATH",
+    //                         "value": "/home/haund/sqlumdash/lib"
+    //                     }
+    //                 ],
     //     },
     //  For attach case       
         {
@@ -3309,7 +3404,7 @@ open csv file by excel and plot graph.
     Create database: ./createdb -p port dbName
     Connect database to query: ./psql -p port dbName 
     -> to quit: \q. 
-    -> to list db: 
+    -> to list db: \l
     -> to list table: \dt
 * Database
     List database: \l [./psql -l]
@@ -3358,16 +3453,16 @@ create table 'databases' in postgres server
 run postgres server.
 === create remote wrapper
 * create extension
-create extension spd_fdw;
-create extension pgspider_core_fdw;
+ create extension spd_fdw;
+ create extension pgspider_core_fdw;
 * create server object
-create server pgspider1 foreign data wrapper pgspider_core_fdw option(host '127.0.0.1');
-create server rmtpostgre1 foreign data wrapper postgres_fdw options(host '127.0.0.1', port '5432', dbname 'postgres');
+ create server pgspider1 foreign data wrapper pgspider_core_fdw option(host '127.0.0.1');
+ create server rmtpostgre1 foreign data wrapper postgres_fdw options(host '127.0.0.1', port '5432', dbname 'postgres');
 * create mapping
-create user mapping for public server rmt_postgre1 options(user 'haund', password '1');
+ create user mapping for public server rmt_postgre1 options(user 'haund', password '1');
 * create rmt table.
-create foreign table test1 (dbid int, dbname text) server pgspider1 ;//pg_core
-create foreign table test1__rmtpostgre1__0 (dbid int, dbname text) server rmtpostgre1 options (table_name 'databases') ; //specific foreign
+ create foreign table test1 (dbid int, dbname text) server pgspider1 ;//pg_core
+ create foreign table test1__rmtpostgre1__0 (dbid int, dbname text) server rmtpostgre1 options (table_name 'databases') ; //specific foreign
 === query from remote 
 query: select * from test1;
     select * from test1__rmtpostgre1__0;
@@ -3387,7 +3482,7 @@ contrib/pgspider_core_fdw:
     
 
 
-/**/
+/**/ PostgresMain -> exec_simple_query
 query string -> Query structure -> querytree_list -> plantree_list;
 portal contain querytree_list & plantree_list (Portal DefineQuery);
 
@@ -4372,3 +4467,5 @@ Transaction
      };
  stats(page) return value of page cache number.                            
  PRAGMA lock_status;
+ 
+sed -i -e 's/tinybrace/sqlumdash/g' sqlumdash_fdw--1.0.sql

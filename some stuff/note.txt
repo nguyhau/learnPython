@@ -1,0 +1,211 @@
+1, Cài Postgres12
+2. Cài TiyBrace FDW
+    svn co https://tccloud2.toshiba.co.jp/accio/svn/accio/branches/tinybrace_fdw
+    cd tinybrace_fdw
+    make clean && make && make install
+SQLite FDW
+    
+--> done
+3. run test TinyBrace FDW, SQLite FDW
+4. Run test postgres fdw
+5. Build Test SQLumDashCS
+http://vc1.tsdv.com.vn/2019B/opendb-dev/trunk/other/fromTSDV/TransferPlan/SQLumDashCS/Configure, build and execute SQLumDashCS test.pptx 
+6. Code SQLumDash CS FDW sử dụng SQLumDash CS API
+code mẫu là TinyBrace FDW
+em tìm hàm API của TinyBrace tương ứng với SQLumDashCS 
+rồi thay thế
+
+Đọc qua tài liệu SRS để hiểu những phần cần sửa gồm Connection, Option validation, Parser, Routines
+Đọc qua tài liệu SRS để hiểu những phần cần sửa gồm Connection, Option validation, Parser, Routines
+7. Debug & Test thì trước đây anh có giới thiệu rồi
+
+========================================================
+/*
+ * Create foreign table:
+ */
+ CREATE EXTENSION tinybrace_fdw;
+ create server tinybrace_svr foreign data wrapper tinybrace_fdw OPTIONS ( host '127.0.0.1',port '5100',dbname 'test.db');
+ CREATE USER MAPPING FOR PUBLIC SERVER tinybrace_svr OPTIONS ( username 'user', password 'testuser');
+ 
+/*
+ * Buil SQLumDashCS
+ */
+ sudo yum install openssl-devel.i686
+ sudo yum install tcl tcl-devel.x86_64
+ sudo yum install sqlite sqlite-devel.i686
+ apply fix-build.patch.
+ 
+ export LD_LIBRARY_PATH before make tinybrace_fdw
+ create prepare.sh file to prepare for SQLumCS run.
+ 
+ /* build sqlite3.28*/
+ ./configure --prefix=/usr CFLAGS='-DSQLITE_ENABLE_COLUMN_METADATA=1'
+ make && sudo make install
+
+ /**/
+ apply fix-build2.patch.
+
+/*************************************************
+ * Testing
+ *************************************************/
+=== prepage sqlumdash server ===
+test_sqlumdash_test
+
+#!/bin/bash
+cp SQLumDashUtility/test/client.crt SQLumDashUtility/test/client.key sqlumdash/bin/
+cp SQLumDashUtility/test/server.crt SQLumDashUtility/test/server.key sqlumdash/conf/
+mkdir -p sqlumdash/test/
+cp SQLumDashUtility/test/client.crt SQLumDashUtility/test/client.key SQLumDashUtility/test/server.crt SQLumDashUtility/test/server.key sqlumdash/test/
+cd sqlumdash/bin/
+./database_management create test.db
+./database_management create test1.db
+./database_management create test2.db
+./database_management create test3.db
+./database_management create test4.db
+./user_account_management add user test
+./user_account_management add user1 test1
+./user_account_management add user2 test2
+
+== prepare data for server using Shell console ==
+./shellcs.exe  -host 10.116.41.167 -port 12345 -user user -pwd test -db test1.db
+create table employ2(code int, name text, age int);
+sqlumdash> insert into employ2 values(246, 'ThanhPH', 27);
+sqlumdash> insert into employ2 values(276, 'HuanLV', 29);
+sqlumdash> select * from employ2;
+insert into employ2 values(476, 'ManhND', 25);
+
+=== run postgres ===
+** Prepare server: create server -> create db -> create table -> create data for table
+** Create server: ./initdb serverPath
+**        config port for server: vi serverPath/postgresql.conf.
+**    start/stop server: ./pg_ctl -D serverPath start
+** Create db outer terminal: ./createdb -p port dbName
+**To connect server : ./psql -p port.
+*** In connect terminal:
+***  List database: \l [./psql -l]
+***  Delete database: drop database dbName;
+***  Create database: create database dbName;
+***  Connect database: \c dbName;
+***  Location: show data_directory;
+** To connect existing db: ./psql -p port dbName
+**** After connect db
+****  List table: \dt
+****  Create table: create table tbName(Attribute attrType, ..);
+****      Ex: CREATE TABLE Books(BookId int, BookName text, BookCost int);
+****  Insert query: insert into tbName(att1, att2,..) values(vl1, vl2, ..);
+****      Ex: insert into Employ(code, Name, age) values(1, 'ManhND', 26);
+****  Select query: select att1, att2, .. from tbName;
+****  
+****  Update query: update tbName set att1 = vl1, att2 = vl2, .. where [condition]
+****  Delete query: delete from tbName where [condition]
+****  [Create foreign table]
+
+./pg_ctl -D ../server1 restart
+./psql -p 5432 sv1db1
+** Check firewall: sudo firewall-cmd --state
+** turnoff firewall: sudo systemctl stop firewalld
+
+=== Create extension ====
+CREATE EXTENSION tinybrace_fdw;
+create server tinybrace_svr2 foreign data wrapper tinybrace_fdw OPTIONS ( host '127.0.0.1',port '12345',dbname 'test.db');
+CREATE USER MAPPING FOR PUBLIC SERVER tinybrace_svr2 OPTIONS ( username 'user', password 'test');
+CREATE FOREIGN TABLE employ2(code int, name text, age int) SERVER tinybrace_svr2;
+== Run query ==
+select * from employ2;
+
+
+=====
+CREATE FOREIGN TABLE numbers(a int OPTIONS (key 'true'), b varchar(255)) SERVER tinybrace_svr2;
+CREATE TABLE numbers(a int primary key, b varchar(255) unique);
+INSERT INTO numbers VALUES(1, 'One');
+INSERT INTO numbers VALUES(2, 'Two');
+INSERT INTO numbers VALUES(3, 'Three');
+INSERT INTO numbers VALUES(4, 'Four');
+
+
++ Create branches
+
+
+
+
+
+Connection, Convert data, Scanning foreign table,Pushdown scanning foreign table, Updating foreign table, Analyzing a foreign table, Importing a foreign table, Importing a foreign schema
+
+
+Inserting foreign table
+Updating foreign table
+Deleting foreign table
+
+
+=============================================
+I. Build SqlumdashCS
+1. Prepare
+    sudo yum install openssl-devel
+    sudo yum install tcl tcl-devel
+
+2. Build sqlite-version-3.28.0
+    ./configure --prefix=/usr CFLAGS='-DSQLITE_ENABLE_COLUMN_METADATA=1'
+    make && sudo make install
+
+3. Build QLumDashCS.
+    /* Get SQLumDashCS.tar.gz file from \\10.116.16.22\public1\temp\HauND */
+    build.sh
+
+II. build sqlumdash_fdw
+1. get postgre12.0
+    ./configure --prefix=XXX --enable-cassert --enable-debug CFLAGS="-ggdb -Og -g3 -fno-omit-frame-pointer"
+    make && make install
+
+2. get sqlumdash_fdw
+    cd postgres12/contrib/
+    git clone http://vc1.tsdv.com.vn/git/tinybrace/fdw/sqlumdash_fdw.git
+    cd sqlumdash_fdw
+    make && make install
+
+III. Manual test
+1. Prepate SqlumdashCS
+  1.1  create prepare.sh in SQLumDashCS contain following content:
+  #!/bin/bash
+  cp SQLumDashUtility/test/client.crt SQLumDashUtility/test/client.key sqlumdash/bin/
+  cp SQLumDashUtility/test/server.crt SQLumDashUtility/test/server.key sqlumdash/conf/
+  mkdir -p sqlumdash/test/
+  cp SQLumDashUtility/test/client.crt SQLumDashUtility/test/client.key SQLumDashUtility/test/server.crt SQLumDashUtility/test/server.key sqlumdash/test/
+  cd sqlumdash/bin/
+  ./database_management create test.db
+  ./database_management create test1.db
+  ./database_management create test2.db
+  ./database_management create test3.db
+  ./database_management create test4.db
+  ./user_account_management add user test
+  ./user_account_management add user1 test1
+  ./user_account_management add user2 test2
+
+ 1.2 Config IP [SQLumDashCS/sqlumdash vi conf/sqlumdash.conf]
+  For create database: set IP for connect
+  For debug: config IP to locallhost
+
+2. Create database using shellcs.
+   2.1 shellcs build from SQLumDashClientTool
+    (or get binary file from SonPN: \\10.116.16.22\public1\temp\HauND\SQLumDash CS)
+   2.2 Run shellcs
+    ./shellcs.exe  -host xxx -port 12345 -user user -pwd test -db test1.db
+    create table employ2(code int, name text, age int);
+    sqlumdash> insert into employ2 values(246, 'ThanhPH', 27);
+    sqlumdash> insert into employ2 values(276, 'HuanLV', 29);
+   
+3. Prepare postgre server
+    - cd [install postgres]
+    - ./initdb serverPath
+    - ./pg_ctl -D serverPath start
+    - ./createdb -p port dbName
+
+4. Run sqlumdash_fdw
+    - ./psql -p port dbName
+    - Create sqlumdash_fdw extension and run query as following
+    === Create extension ====
+    CREATE EXTENSION sqlumdash_fdw;
+    create server fr_sqlumcs foreign data wrapper sqlumdash_fdw OPTIONS ( host '127.0.0.1',port '12345',dbname 'test.db');
+    CREATE USER MAPPING FOR PUBLIC SERVER fr_sqlumcs OPTIONS ( username 'user', password 'test');
+    CREATE FOREIGN TABLE employ_cs(code int, name text, age int) SERVER fr_sqlumcs;
+    == Run query ==
+    select * from employ_cs;

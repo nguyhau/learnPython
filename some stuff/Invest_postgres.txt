@@ -1,0 +1,112 @@
+/**/
+query string -> Query structure -> querytree_list -> plantree_list;
+portal contain querytree_list & plantree_list (Portal DefineQuery);
+
+- PortalStart.
+- PortalSetResultFormat;
+- PortalRun;
+- PortalDrop;
+
+
+InitPlan -> ExecInitNode -> ExecInitResult -> ExecInitNode -> ExecInitSort -> ExecInitNode -> ExecInitForeignScan -> spd_BeginForeignScan-> .. -> postgresBeginScan -> .. -> spd_EndForeignScan.
+
+InitPlan -> ExecInitNode -> ExecInitResult -> ExecInitNode -> ExecInitSort -> ExecInitNode -> ExecInitForeignScan -> postgresBeginScan -> 
+-> ExecEndPlan -> ExecEndNode -> ExecEndResult-> ExecEndNode -> ExecEndNode -> ExecEndForeignScan -> postgresEndForeignScan.
+
+
+PostgreSQL
+Parser
+Query_rewrite
+Create_paths
+Base: main() -> PostmasterMain() -> ServerLoop()-> BackendStartup()->BackendRun()->PostgresMain()->exec_simple_query()
+
+FDW Routines:
+
+1. GetForeignRelSize: 
+    Estimates relation size
+Call stack:
+    exec_simple_query()-> pg_plan_queries()-> planner -> standard_planner-> subquery_plannder
+    -> grouping_planner-> query_planner -> make_one_rel -> set_base_rel_sizes-> set_rel_size -> set_foreign_size-> this
+    ...spd_CreateDummyRoot.
+    tinybraceGetForeignRelSize: NA
+    
+2. GetForeignPaths: 
+    Create foreign scan path (create plan-tree from most low-cost path)
+Call stack:
+    exec_simple_query()-> pg_plan_queries()-> planner -> standard_planner-> subquery_plannder
+    -> grouping_planner-> query_planner -> make_one_rel -> set_base_rel_pathlists->set_rel_pathlist -> this
+    tinybraceGetForeignPaths
+        [tinybraceEstimateCosts-> tinybrace_get_options]
+    
+3. GetForeignUpperPaths: [use for aggregation case]
+    This like GetForeignPaths, but it add another paths with include aggregation and grouping.
+    It need to implement make_agg function and implem execAgg function (call when run BeginForeignScan).
+Call stack:
+    exec_simple_query()-> pg_plan_queries()-> planner -> standard_planner-> subquery_plannder
+    -> grouping_planner-> this
+    
+
+4. GetForeignPlan
+    Create foreign plan from best path, create SQL for executin in foreign server.
+Call stack:
+    exec_simple_query()-> pg_plan_queries()-> planner -> standard_planner-> create_plan->create_plan_recurse->create_scan_plan
+    -> create_foreignscan_plan-> this.
+    tinybraceGetForeignPlan
+
+5. BeginForeignScan
+    Usually foregin server executes SQL.
+Call stack:
+    exec_simple_query()->PortalStart() ->ExecutorStart()->standard_ExecutorStart()->InitPlan()->ExecInitNode()->ExecInitLimit()
+    ->ExecInitNode()->ExecInitForeignScan()-> this.
+    tinybraceBeginForeignScan
+    
+    => tinybrace_get_connection
+    
+6. IterateForeignScan.
+    Usually FDW gets 1 record from result set, set PostgreSQL's slot, this function will called repeatedly.
+Call stack:
+    exec_simple_query-> PortalRun() -> PortalRunSelect() -> ExecutorRun()->standard_ExecutorRun()->ExecutePlan()->ExecProcNode()
+    -> ExecProcNodeFirst()->ExecLimit()->ExecProcNode()->ExecProcNodeFirst()->ExecForeignScan()->ExecScan()->ExecScanFetch()
+    ->ForeignNext()->this
+    ... spd_createtable_sql -> spd_spi_ddl_table ->spd_AddSpdUrl()->spd_spi_insert_table->spd_spi_select_table
+    tinybraceIterateForeignScan
+    
+7. EndForeignScan
+    Destruct foreign scan.
+Call stack:
+    exec_simple_query-> PortalDrop()-> PortalCleanup()->ExecutorEnd()->standard_ExecutorEnd()->ExecEndPlan()->ExecEndNode()
+    ->ExecEndLimit()->ExecEndNode()->ExecEndForeignScan()->EndForeignScan()
+    
+    tinybraceEndForeignScan
+
+    
+    
+    
+typedef struct TupleTableSlot
+{
+	NodeTag		type;
+#define FIELDNO_TUPLETABLESLOT_FLAGS 1
+	uint16		tts_flags;		/* Boolean states */
+#define FIELDNO_TUPLETABLESLOT_NVALID 2
+	AttrNumber	tts_nvalid;		/* # of valid values in tts_values */
+	const TupleTableSlotOps *const tts_ops; /* implementation of slot */
+#define FIELDNO_TUPLETABLESLOT_TUPLEDESCRIPTOR 4
+	TupleDesc	tts_tupleDescriptor;	/* slot's tuple descriptor */
+#define FIELDNO_TUPLETABLESLOT_VALUES 5
+	Datum	   *tts_values;		/* current per-attribute values */
+#define FIELDNO_TUPLETABLESLOT_ISNULL 6
+	bool	   *tts_isnull;		/* current per-attribute isnull flags */
+	MemoryContext tts_mcxt;		/* slot itself is in this context */
+	ItemPointerData tts_tid;	/* stored tuple's tid */
+	Oid			tts_tableOid;	/* table oid of tuple */
+} TupleTableSlot;
+
+
+//
+ 	pg_detoast_datum_packed()	C/C++
+ 	text_to_cstring()	C/C++
+ 	textout()	C/C++
+ 	FunctionCall1Coll()	C/C++
+ 	OutputFunctionCall()	C/C++
+ 	printtup()	C/C++
+>	ExecutePlan()	C/C++
