@@ -1,3 +1,10 @@
+As Ha-san has explained in #212#note-3:
+The progressing of logging an error divide into two-phase:
+- errstart: It will take a slot in error stack and input the detail information
+- errfinish(and related function): It will release the slot on the stack and free the memory.
+
+When run test script, if number of error is 
+
 git checkout stash@{0} Makefile.msc ext/rtree/rtree.c
 git diff stash@{0}^! file name.
 
@@ -4469,3 +4476,129 @@ Transaction
  PRAGMA lock_status;
  
 sed -i -e 's/tinybrace/sqlumdash/g' sqlumdash_fdw--1.0.sql
+
+unset http_proxy
+// SQLumdashCS: ~/temp/SQLumCSFake/SQLumDashCS/sqlumdash
+// postgre ~/Project/TinyBrace/postgresql-12.0/postgre/bin
+// pdw: ~/Project/TinyBrace/postgresql-12.0/contrib/sqlumdash_fdw
+// origin: /home/haund/Project/TinyBrace/postgresql-12.0/contrib/tinybrace_fdw 
+
+List all account: list 
+shellcs -host 127.0.0.1 -port 12345 -user user -pwd testuser -db test.db
+
+grep "ERROR"  result.txt | tee /dev/tty | wc -l
+
+grep "ERROR"  results/sqlumdash_fdw_post.out | tee /dev/tty | wc -l
++ \dS to show descrip table
+
+
+
+create schema app;
+import foreign schema public from server tinybrace_svr2 into app;
+select * from app.employ2;
+
+
+IMPORT FOREIGN SCHEMA public FROM SERVER sqlumdash_svr INTO "S 1";
+.header on;
+select * from sqlite_master;
+** type|name|tbl_name|rootpage|sql **
+
+
+
+CREATE TABLE "T 3" (
+	c1 int,
+	c2 int NOT NULL,
+	c3 text,
+	CONSTRAINT t3_pkey PRIMARY KEY (c1)
+);
+
+CREATE FOREIGN TABLE ft4 (
+	c1 int OPTIONS (key 'true'), 
+	c2 int NOT NULL,
+	c3 text 
+) SERVER sqlumdash_svr OPTIONS (table_name 'T 3');
+
+
+
+CREATE TABLE "T 3" (
+c1 int,
+c2 int NOT NULL,
+c3 text,
+CONSTRAINT t3_pkey PRIMARY KEY (c1)
+)
+
+SELECT sql FROM sqlite_master WHERE tbl_name = 'employ2';
+\dS test_ft1
+ALTER FOREIGN TABLE ft1 ALTER COLUMN c1 OPTIONS (key 'true');
+
+//==========================
+/** Query to get number of tables **/
+SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' AND name NOT LIKE 'tbe_%';
+/** Query to get schema of tables **/
+PRAGMA table_info(employ2)
+
+
+
+===============================
+** Shell
+./database_management create test_mn.db
+./shellcs.exe  -host 127.0.0.1 -port 12345 -user user -pwd test -db test_mn.db
+
+CREATE TABLE "T 4" (
+	c1 int,
+	c2 int NOT NULL,
+	c3 text,
+	CONSTRAINT t4_pkey PRIMARY KEY (c1)
+);
+** postgres
+CREATE SERVER sqlumdash_svr FOREIGN DATA WRAPPER sqlumdash_fdw
+            OPTIONS (host '127.0.0.1',port '12345',dbname 'test_mn.db');
+
+CREATE USER MAPPING FOR CURRENT_USER SERVER sqlumdash_svr OPTIONS ( username 'user', password 'test');
+
+CREATE SCHEMA "S 1";
+IMPORT FOREIGN SCHEMA public FROM SERVER sqlumdash_svr INTO "S 1";
+
+INSERT INTO "S 1"."T 4"
+	SELECT id,
+	       id + 1,
+	       'AAA' || to_char(id, 'FM000')
+	FROM generate_series(1, 100) id;
+DELETE FROM "S 1"."T 4" WHERE c1 % 3 != 0;
+
+CREATE FOREIGN TABLE ft5 (
+	c1 int OPTIONS (key 'true'),
+	c2 int NOT NULL,
+	c3 text
+) SERVER sqlumdash_svr OPTIONS (table_name 'T 4');
+
+UPDATE ft5 SET c3 = null where c1 % 9 = 0;
+
+-- different server, not pushed down. No result expected.
+-- Start issue area
+EXPLAIN (VERBOSE, COSTS OFF)
+SELECT t1.c1, t2.c1 FROM ft5 t1 JOIN ft6 t2 ON (t1.c1 = t2.c1) ORDER BY t1.c1, t2.c1 OFFSET 100 LIMIT 10;
+SELECT t1.c1, t2.c1 FROM ft5 t1 JOIN ft6 t2 ON (t1.c1 = t2.c1) ORDER BY t1.c1, t2.c1 OFFSET 100 LIMIT 10;
+-- End issue area
+
+
+Postgre12: https://github.com/postgres/postgres/archive/REL_12_0.tar.gz
+
+SQlumdash_FDW: commitID d10564372f414bc774990e12aaccc5f0de8c7da1 
+
+SQLumdashCS: provide SQLumdashclient-server and Shell.
+    branch  SQLumDashCS-ClientTool | commitID 48f9aa9f54733c1ec7f6becb3c282499864062c7 
+    
+    "http://haund:Abcd1234@proxy.tsdv.com.vn:3128/";
+    
+    
+    
+/home/manhnd/HauND/SQLumDashCS/SQLumDashShell
+/home/manhnd/HauND/SQLumDashCS/sqlumdash/lib
+/home/manhnd/HauND/SQLumDashCS/sqlumdash/include
+
+./shellcs.exe  -host 127.0.0.1 -port 12345 -user user -pwd test -db test_mn.db < init_post.sql
+drop schema "S 1" cascade;
+
+
+git cherry-pick -n 6f7a7cc8111559a4fcade48f3bd6a8a711e57337

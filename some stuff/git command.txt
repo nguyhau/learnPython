@@ -10,7 +10,23 @@ git config --global proxy.http <"http://account:pass@serverIp:port">
 git config --global user.name <name>
 git config --global user.email <mail>
 /etc/profile
-
+/************** Create branch *************/
+git checkout master
+git pull
+-- create fix branch.
+git checkout -b fix-blob-issues
+-- do some fix and pust to origin --
+git push origin fix-blob-issues (-f)
+-- create branch for test.
+git checkout -b test-fix-blob-issue
+-- merge to fix test file and push to origin.
+git merge origin/fix-test-file
+git pull
+git log
+git fetch --all
+git push origin test-fix-blob-issue
+unset http_proxy
+git push --mirror http://vc1.tsdv.com.vn/git/tinybrace/sqlumdash.git
 /*********************** Common command ****************************/
 git blame join.sh -> show author.
 git log -> show all log.
@@ -101,6 +117,8 @@ git stash show -p stash{...}: show change of that stash.
 git checkout stash@{0} -- <filename>: checkout specific file from stash{0}
 git stash drop or git stash drop stash@{n}: drop a stash.
 git diff stash@{0}^! -- <filename>: show the change on a specific file on a stash {0}
+
+git config --global credential.helper store
 /******************************************************************************
  *      SSH tool
  ******************************************************************************/
