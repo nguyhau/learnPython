@@ -1,3 +1,14 @@
+========= Fragmentation page result ==========
+select 
+*
+from (select 
+rownum rown, rpt_sys_cd, rpt_start_dt, disp_val
+from ds_rpt_cell_val
+where rpt_sys_cd like 'F00244%')
+where ceil(rown/10) = 3
+order by rown
+;
+==============================================
 As Ha-san has explained in #212#note-3:
 The progressing of logging an error divide into two-phase:
 - errstart: It will take a slot in error stack and input the detail information
