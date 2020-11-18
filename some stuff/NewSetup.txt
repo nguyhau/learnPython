@@ -1,28 +1,9 @@
-========= Fragmentation page result ==========
-select 
-*
-from (select 
-rownum rown, rpt_sys_cd, rpt_start_dt, disp_val
-from ds_rpt_cell_val
-where rpt_sys_cd like 'F00244%')
-where ceil(rown/10) = 3
-order by rown
-;
-==============================================
-As Ha-san has explained in #212#note-3:
-The progressing of logging an error divide into two-phase:
-- errstart: It will take a slot in error stack and input the detail information
-- errfinish(and related function): It will release the slot on the stack and free the memory.
 
-When run test script, if number of error is 
 
+====== git command ========
 git checkout stash@{0} Makefile.msc ext/rtree/rtree.c
 git diff stash@{0}^! file name.
 
->	testfixture.exe!sqlite3TransBtreeCommit(Btree * p) Line 2550	C: move data from bt trans to bt share.
-rm testdir/* && ./testfixture.exe test/incrblob.test
-
-orderby7; trace2.
 // Visual_Leak_Detector
 download from: https://kinddragon.github.io/vld/
 Add to makefile:
@@ -4613,3 +4594,112 @@ drop schema "S 1" cascade;
 
 
 git cherry-pick -n 6f7a7cc8111559a4fcade48f3bd6a8a711e57337
+============= fix ========================
+Issue:  ORA-29273: HTTP request failed, ORA-06512: at "SYS.UTL_HTTP", line 1130, ORA-24247: network access denied by access control list (ACL)
+
+==> Login as sysdba, run following commands to grand privilege:
+  BEGIN
+    DBMS_NETWORK_ACL_ADMIN.create_acl (
+    acl => 'test_acl_file.xml',
+    description => 'Testing ACL functionality',
+    principal => 'SBV_SG4',
+    is_grant => TRUE,
+    privilege => 'connect',
+    start_date => SYSTIMESTAMP,
+    end_date => NULL);
+    COMMIT;
+END;
+
+BEGIN
+    DBMS_NETWORK_ACL_ADMIN.assign_acl (
+    acl => 'test_acl_file.xml',
+    host => 'localhost',
+    lower_port => NULL,
+    upper_port => NULL);
+    COMMIT;
+END;
+=============== Query SOAP using SQL ==============
+CREATE OR REPLACE PROCEDURE SOAP_TEST IS
+    req UTL_HTTP.REQ;
+    resp UTL_HTTP.RESP;
+    soap_req VARCHAR2(32767);
+    return_text VARCHAR2(32767); 
+BEGIN
+    UTL_HTTP.set_detailed_excp_support(TRUE);
+    soap_req := '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <soapenv:Body>
+                        <sayHello xmlns="http://gpcoder.com">
+                            <name>Xuan</name>
+                        </sayHello>
+                    </soapenv:Body>
+                </soapenv:Envelope>';
+    --10.0.98.24
+    req := UTL_HTTP.BEGIN_REQUEST(    
+          url => 'http://localhost:9090/SoapWebServiceExample/services/Hello'    
+        , method => 'POST'    
+        , http_version => 'HTTP/1.1'    
+        );    
+    --  UTL_HTTP.SET_HEADER(req, 'Accept-Encoding', 'gzip,deflate');    
+    UTL_HTTP.SET_HEADER(req, 'Content-Type', 'text/xml;charset=UTF-8');    
+    UTL_HTTP.SET_HEADER(req, 'Content-Length', length(soap_req));    
+    UTL_HTTP.SET_HEADER(req, 'SOAPAction', '');    
+    --  UTL_HTTP.SET_HEADER(req, 'Host', 'www.webservicex.net');    
+    UTL_HTTP.SET_HEADER(req, 'Connection', 'Keep-Alive');    
+    UTL_HTTP.SET_HEADER(req, 'User-Agent', 'Apache-HttpClient/4.1.1 (java 1.5)');    
+    UTL_HTTP.write_text (req, soap_req);    
+    resp := UTL_HTTP.GET_RESPONSE(req);
+    BEGIN    
+      LOOP    
+        UTL_HTTP.READ_TEXT(resp, return_text, 50767);    
+        dbms_output.put(return_text);  
+        dbms_output.new_line;
+        --dbms_output.put_line(return_text);
+      END LOOP;
+        dbms_output.new_line;
+      EXCEPTION
+        WHEN utl_http.end_of_body THEN
+        utl_http.end_response(resp);
+        dbms_output.put_line('Error ');
+    END;
+  --NULL;
+END SOAP_TEST; 
+=======================================
+telnet_tut
+========================================
+LOGIN [username] [password]
+LIST [flags] [folder separator] [search term]
+STATUS [mailbox] [flags]
+SELECT [mailbox]
+FETCH [first]:[last] flags
+FETCH [mail number] body[header]
+FETCH [mail number] body[text]
+LOGOUT
+
+telnet willbesolution.hanbiro.net imap
+telnet: > open imapserver.example.com imap
+telnet: Trying 192.0.2.2...
+telnet: Connected to imapserver.example.com.
+telnet: Escape character is '^]'.
+server: * OK Dovecot ready.
+client: a1 LOGIN haund@willbesolution.vn MyPassword
+server: a1 OK Logged in
+client: a5 LOGOUT
+server: * BYE Logging out
+server: a5 OK Logout completed.
+=================================================
+- install more command to git bash: https://gist.github.com/evanwill/0207876c3243bbb6863e65ec5dc3f058
+=================================================
+Down binary file then copy to bin folder (C:\Program Files\Git\mingw64\bin)
+========= Fragmentation page result ==========
+select 
+*
+from (select 
+rownum rown, rpt_sys_cd, rpt_start_dt, disp_val
+from ds_rpt_cell_val
+where rpt_sys_cd like 'F00244%')
+where ceil(rown/10) = 3
+order by rown
+;
+==============================================
